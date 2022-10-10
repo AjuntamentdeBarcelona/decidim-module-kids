@@ -1,0 +1,32 @@
+# frozen_string_literal: true
+
+if ENV["SIMPLECOV"]
+  test_env = ENV.fetch("TEST_ENV_NUMBER", "")
+  test_env = "1" if test_env.empty?
+
+  SimpleCov.start do
+    # `ENGINE_ROOT` holds the name of the engine we're testing.
+    # This brings us to the main Decidim folder.
+    root File.expand_path("..", ENV.fetch("ENGINE_ROOT", nil))
+
+    # We make sure we track all Ruby files, to avoid skipping unrequired files
+    # We need to include the `../` section, otherwise it only tracks files from the
+    # `ENGINE_ROOT` folder for some reason.
+    track_files "../**/*.rb"
+
+    # We ignore some of the files because they are never tested
+    add_filter "/config/"
+    add_filter "/db/"
+    add_filter "/vendor/"
+    add_filter "/spec/"
+    add_filter "/test/"
+  end
+
+  SimpleCov.merge_timeout 1800
+  SimpleCov.coverage_dir "coverage/#{test_env}/"
+
+  if ENV["CI"]
+    require "simplecov-cobertura"
+    SimpleCov.formatter = SimpleCov::Formatter::CoberturaFormatter
+  end
+end
