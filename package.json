@@ -1,0 +1,32 @@
+{
+  "name": "decidim-module-kids",
+  "description": "A module for promoting kids participation in Decidim.",
+  "private": true,
+  "scripts": {
+    "lint": "eslint -c .eslintrc.json --no-error-on-unmatched-pattern --ext .js,.jsx app/packs",
+    "lint-fix": "eslint -c .eslintrc.json --no-error-on-unmatched-pattern --ext .js,.jsx app/packs --fix",
+    "markdownlint": "markdownlint '**/*.md'",
+    "stylelint": "stylelint **/*.scss",
+    "stylelint-fix": "stylelint **/*.scss --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AjuntamentdeBarcelona/decidim-module-kids.git"
+  },
+  "keywords": [
+    "decidim"
+  ],
+  "author": "ivan@pokecode.net",
+  "license": "AGPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/AjuntamentdeBarcelona/decidim-module-kids/issues"
+  },
+  "homepage": "https://github.com/AjuntamentdeBarcelona/decidim-module-kids#readme",
+  "stylelint": {
+    "extends": "@decidim/stylelint-config"
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+  }
+}
