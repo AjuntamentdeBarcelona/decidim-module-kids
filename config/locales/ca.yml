@@ -1,0 +1,6 @@
+---
+ca:
+  decidim:
+    components:
+      kids:
+        name: Kids
