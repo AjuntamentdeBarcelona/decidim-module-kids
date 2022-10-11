@@ -28,5 +28,7 @@
   "dependencies": {
   },
   "devDependencies": {
+    "eslint": "^8.18.0",
+    "stylelint": "13.11.0"
   }
 }
