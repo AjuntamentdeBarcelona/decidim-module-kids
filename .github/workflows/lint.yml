@@ -38,5 +38,6 @@ jobs:
       - run: bundle exec rubocop -P
         name: Lint Ruby files
 
-      - run: bundle exec erblint app/**/*.erb
-        name: Lint ERB files
+      # NOTE: activate when ERB files are introduced
+      # - run: bundle exec erblint app/**/*.erb
+      #   name: Lint ERB files
