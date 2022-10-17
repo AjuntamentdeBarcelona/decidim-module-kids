@@ -1,0 +1,15 @@
+<div class="fieldset">
+	<div class="field">
+	  <h5><%= t "minors_participation", scope: "decidim.kids" %></h5>
+	  <%= f.check_box :enable_minors_participation %>
+	</div>
+
+	<div class="field">
+	  <%= f.number_field :minimum_minor_age %>
+	</div>
+
+	<div class="field">
+	  <%= f.number_field :minimum_adult_age %>
+	</div>
+</div>
+

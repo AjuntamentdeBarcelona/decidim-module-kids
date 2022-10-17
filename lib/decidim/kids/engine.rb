@@ -2,6 +2,7 @@
 
 require "rails"
 require "decidim/core"
+require "deface"
 
 module Decidim
   module Kids
@@ -15,7 +16,19 @@ module Decidim
         # root to: "kids#index"
       end
 
-      initializer "Kids.webpacker.assets_path" do
+      config.to_prepare do
+        # Non-controller overrides here
+        Decidim::System::RegisterOrganizationForm.include(Decidim::Kids::System::OrganizationFormOverride)
+        Decidim::System::UpdateOrganizationForm.include(Decidim::Kids::System::OrganizationFormOverride)
+      end
+
+      # initializer "decidim_kids.overrides", after: "decidim.action_controller" do
+      #   config.to_prepare do
+      #     # Controller overrides here
+      #   end
+      # end
+
+      initializer "decidim_kids.webpacker.assets_path" do
         Decidim.register_assets_path File.expand_path("app/packs", root)
       end
     end

@@ -1,6 +1,18 @@
 ---
 en:
+  activemodel:
+    attributes:
+      organization:
+        enable_minors_participation: Enable minors participation
+        minimum_adult_age: Legal age of consent to create a minor account without
+          parental permission
+        minimum_minor_age: Minimum age to create a minor account
+    errors:
+      models:
+        organization:
+          attributes:
+            minimum_minor_age:
+              bigger_than_adult: The minor age must be lower than the adult age
   decidim:
-    components:
-      kids:
-        name: Kids
+    kids:
+      minors_participation: Decidim Minors Participation
