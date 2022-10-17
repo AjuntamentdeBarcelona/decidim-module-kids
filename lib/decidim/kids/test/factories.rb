@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "decidim/core/test/factories"
+require "decidim/system/test/factories"
 
 FactoryBot.define do
   factory :minors_organization_config, class: "Decidim::Kids::OrganizationConfig" do

@@ -56,7 +56,6 @@ shared_examples "saves minors configuration" do
     expect(organization.minimum_minor_age).not_to eq(minimum_minor_age)
     command.call
     organization.reload_minors_config
-    organization.instance_variable_set(:@minimum_minor_age, nil)
     expect(organization.minimum_minor_age).to eq(minimum_minor_age)
   end
 
@@ -64,7 +63,6 @@ shared_examples "saves minors configuration" do
     expect(organization.minimum_adult_age).not_to eq(minimum_adult_age)
     command.call
     organization.reload_minors_config
-    organization.instance_variable_set(:@minimum_adult_age, nil)
     expect(organization.minimum_adult_age).to eq(minimum_adult_age)
   end
 end

@@ -29,6 +29,18 @@ module Decidim::System
 
       it_behaves_like "valid command"
       it_behaves_like "saves minors configuration"
+
+      context "when minors config already exists" do
+        let!(:minors_organization_config) do
+          create(:minors_organization_config,
+                 organization:,
+                 enable_minors_participation: false,
+                 minimum_minor_age: 10,
+                 minimum_adult_age: 14)
+        end
+
+        it_behaves_like "saves minors configuration"
+      end
     end
   end
 end

@@ -12,16 +12,20 @@ module Decidim
                 inverse_of: :organization,
                 dependent: :destroy
 
-        def minors_participation_enabled?
-          @minors_participation_enabled ||= minors_config&.enable_minors_participation || Decidim::Kids.enable_minors_participation
+        def enable_minors_participation
+          return minors_config.enable_minors_participation if minors_config
+
+          Decidim::Kids.enable_minors_participation
         end
 
+        alias_method :minors_participation_enabled?, :enable_minors_participation
+
         def minimum_minor_age
-          @minimum_minor_age ||= minors_config&.minimum_minor_age || Decidim::Kids.minimum_minor_age
+          minors_config&.minimum_minor_age || Decidim::Kids.minimum_minor_age
         end
 
         def minimum_adult_age
-          @minimum_adult_age ||= minors_config&.minimum_adult_age || Decidim::Kids.minimum_adult_age
+          minors_config&.minimum_adult_age || Decidim::Kids.minimum_adult_age
         end
       end
     end

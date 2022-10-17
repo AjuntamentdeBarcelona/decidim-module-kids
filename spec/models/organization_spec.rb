@@ -78,9 +78,15 @@ module Decidim
       it_behaves_like "minors disabled", 12, 16
 
       context "when minors participation is enabled as default" do
-        let(:enable_minors_participation) { true }
+        let(:default_minors_participation) { true }
 
-        it_behaves_like "minors enabled", 12, 16
+        it_behaves_like "minors disabled", 12, 16
+
+        context "and enabled in config" do
+          let(:enable_minors_participation) { true }
+
+          it_behaves_like "minors enabled", 12, 16
+        end
       end
     end
   end
