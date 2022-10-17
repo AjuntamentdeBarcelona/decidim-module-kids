@@ -23,14 +23,42 @@ module Decidim::System
     let(:minimum_minor_age) { 10 }
     let(:minimum_adult_age) { 14 }
 
-    context "when everything is OK" do
+    context "when minor participation is inactive" do
       it { is_expected.to be_valid }
+
+      it "matches ages" do
+        expect(subject.minimum_minor_age).to eq(minimum_minor_age)
+        expect(subject.minimum_adult_age).to eq(minimum_adult_age)
+      end
+
+      context "and minor age is wrong" do
+        let(:minimum_minor_age) { 0 }
+
+        it { is_expected.to be_valid }
+      end
+
+      context "and adult age is wrong" do
+        let(:minimum_adult_age) { 0 }
+
+        it { is_expected.to be_valid }
+      end
+
+      context "and adult is lower than minor" do
+        let(:minimum_adult_age) { 9 }
+
+        it { is_expected.to be_valid }
+      end
     end
 
     context "when minor participation is active" do
       let(:enable_minors_participation) { true }
 
       it { is_expected.to be_valid }
+
+      it "matches ages" do
+        expect(subject.minimum_minor_age).to eq(minimum_minor_age)
+        expect(subject.minimum_adult_age).to eq(minimum_adult_age)
+      end
 
       context "and minor age is wrong" do
         let(:minimum_minor_age) { 0 }
