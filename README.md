@@ -22,16 +22,35 @@ And then execute:
 
 ```
 bundle
+bundle exec rails decidim_kids:install:migrations
 ```
 
 ## Usage
 
-TODO...
+This module should work out of the box jut by adding it to your Gemfile.
+
+However, if you wish to customize some of the default values, you can create an initializer and configure
+any of the variables listed below:
+
 
 ```ruby
 # config/initializers/decidim_kids.rb
 
 Decidim::Kids.configure do |config|
+  # If true, minor participation is enabled by default in any newly created organization
+  config_accessor :enable_minors_participation do
+    false
+  end
+
+  # Default value for the minimum age required for a minor in order to create an account
+  config_accessor :minimum_minor_age do
+    10
+  end
+
+  # Default value for the legal age of consent to create a minor account without parental permission
+  config_accessor :minimum_adult_age do
+    14
+  end
 end
 ```
 

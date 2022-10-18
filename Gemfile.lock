@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/decidim/decidim
-  revision: 62478dace26b421cc6d8775bd9df3a019d6e9cd1
+  revision: 39401c618581bbc86321fe82d76d723a54961a31
   branch: develop
   specs:
     decidim (0.28.0.dev)
@@ -176,6 +176,8 @@ PATH
   specs:
     decidim-kids (0.1.0)
       decidim-core (>= 0.28.0.dev, < 0.29)
+      decidim-system (>= 0.28.0.dev, < 0.29)
+      deface (>= 1.5)
 
 GEM
   remote: https://rubygems.org/
@@ -311,6 +313,12 @@ GEM
     declarative-builder (0.1.0)
       declarative-option (< 0.2.0)
     declarative-option (0.1.0)
+    deface (1.9.0)
+      actionview (>= 5.2)
+      nokogiri (>= 1.6)
+      polyglot
+      railties (>= 5.2)
+      rainbow (>= 2.1.0)
     devise (4.8.1)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -391,7 +399,7 @@ GEM
     hashie (5.0.0)
     highline (2.0.3)
     hkdf (0.3.0)
-    html-pipeline (2.14.2)
+    html-pipeline (2.14.3)
       activesupport (>= 2)
       nokogiri (>= 1.4)
     html_tokenizer (0.0.7)
@@ -511,10 +519,11 @@ GEM
       parallel
     parser (3.1.2.1)
       ast (~> 2.4.1)
-    pg (1.4.3)
+    pg (1.4.4)
     pg_search (2.3.6)
       activerecord (>= 5.2)
       activesupport (>= 5.2)
+    polyglot (0.3.5)
     premailer (1.18.0)
       addressable
       css_parser (>= 1.12.0)

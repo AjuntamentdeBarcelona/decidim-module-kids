@@ -1,0 +1,2 @@
+<!-- insert_before ".actions" -->
+<%= render "decidim/system/organizations/minors_form", f: f %>
