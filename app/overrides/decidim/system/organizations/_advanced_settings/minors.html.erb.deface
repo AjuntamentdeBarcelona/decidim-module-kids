@@ -1,2 +1,2 @@
-<!-- insert_before ".actions" -->
+<!-- insert_top ".collapsible" -->
 <%= render "decidim/system/organizations/minors_form", f: f %>
