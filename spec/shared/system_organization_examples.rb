@@ -9,9 +9,6 @@ shared_examples "updates organization" do |uncheck_minors|
     check "Example authorization (Direct)"
 
     click_button "Show advanced settings"
-    check "organization_omniauth_settings_facebook_enabled"
-    fill_in "organization_omniauth_settings_facebook_app_id", with: "facebook-app-id"
-    fill_in "organization_omniauth_settings_facebook_app_secret", with: "facebook-app-secret"
 
     if uncheck_minors
       expect(page).to have_checked_field "organization_enable_minors_participation"
@@ -52,6 +49,8 @@ shared_examples "creates organization" do
     choose "organization_default_locale_en"
     choose "Allow participants to register and login"
     check "Example authorization (Direct)"
+
+    click_button "Show advanced settings"
 
     check "organization_enable_minors_participation"
     fill_in "Minimum age to create a minor account", with: "11"

@@ -31,6 +31,7 @@ describe "Updates an organization", type: :system do
   end
 
   it "has default properties" do
+    click_button "Show advanced settings"
     expect(page).not_to have_checked_field "organization_enable_minors_participation"
     expect(page).to have_field "Minimum age to create a minor account", with: "10"
     expect(page).to have_field "Legal age of consent to create a minor account without parental permission", with: "14"
@@ -42,6 +43,7 @@ describe "Updates an organization", type: :system do
     let(:another_organization) { organization }
 
     it "has defined properties" do
+      click_button "Show advanced settings"
       expect(page).not_to have_checked_field "organization_enable_minors_participation"
       expect(page).to have_field "Minimum age to create a minor account", with: "9"
       expect(page).to have_field "Legal age of consent to create a minor account without parental permission", with: "13"
@@ -56,6 +58,7 @@ describe "Updates an organization", type: :system do
     let(:minimum_adult_age) { 15 }
 
     it "has defined properties" do
+      click_button "Show advanced settings"
       expect(page).to have_checked_field "organization_enable_minors_participation"
       expect(page).to have_field "Minimum age to create a minor account", with: "11"
       expect(page).to have_field "Legal age of consent to create a minor account without parental permission", with: "15"
