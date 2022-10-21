@@ -20,4 +20,5 @@ en:
       system:
         organizations:
           minors_form:
-            minors_authorization_help: "Warning: Make sure this verification method checks for the age of the minor is in between the ranges defined here"
+            minors_authorization_help: 'Warning: Make sure this verification method
+              checks for the age of the minor is in between the ranges defined here'
