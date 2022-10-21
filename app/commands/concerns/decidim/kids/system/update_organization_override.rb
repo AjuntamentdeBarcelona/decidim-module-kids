@@ -16,6 +16,7 @@ module Decidim
             conf.enable_minors_participation = form.enable_minors_participation
             conf.minimum_minor_age = form.minimum_minor_age
             conf.minimum_adult_age = form.minimum_adult_age
+            conf.authorization = form.minors_authorization
             conf.save!
           end
         end

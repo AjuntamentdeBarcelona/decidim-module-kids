@@ -27,6 +27,10 @@ module Decidim
         def minimum_adult_age
           minors_config&.minimum_adult_age || Decidim::Kids.minimum_adult_age
         end
+
+        def minors_authorization
+          minors_config&.authorization
+        end
       end
     end
   end

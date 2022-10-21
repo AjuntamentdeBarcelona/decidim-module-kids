@@ -20,12 +20,14 @@ module Decidim::System
           file_upload_settings: Decidim::OrganizationSettings.default(:upload),
           enable_minors_participation:,
           minimum_minor_age:,
-          minimum_adult_age:
+          minimum_adult_age:,
+          minors_authorization:
         }
       end
       let(:enable_minors_participation) { true }
       let(:minimum_minor_age) { 9 }
       let(:minimum_adult_age) { 15 }
+      let(:minors_authorization) { "id_documents" }
 
       it_behaves_like "valid command"
       it_behaves_like "saves minors configuration"
@@ -36,7 +38,8 @@ module Decidim::System
                  organization:,
                  enable_minors_participation: false,
                  minimum_minor_age: 10,
-                 minimum_adult_age: 14)
+                 minimum_adult_age: 14,
+                 authorization: "another_authorization")
         end
 
         it_behaves_like "saves minors configuration"

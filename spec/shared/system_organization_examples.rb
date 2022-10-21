@@ -20,6 +20,9 @@ shared_examples "updates organization" do |uncheck_minors|
     fill_in "Minimum age to create a minor account", with: "11"
     fill_in "Legal age of consent to create a minor account without parental permission", with: "15"
 
+    expect(page).to have_select("organization_minors_authorization", selected: "Identity documents (Multi-Step)")
+    select "Example authorization (Direct)", from: "organization_minors_authorization"
+
     click_button "Save"
 
     expect(page).to have_css("div.flash.success")
@@ -56,6 +59,9 @@ shared_examples "creates organization" do
     fill_in "Minimum age to create a minor account", with: "11"
     fill_in "Legal age of consent to create a minor account without parental permission", with: "15"
 
+    expect(page).to have_select("organization_authorization", selected: "Identity documents (Multi-Step)")
+    select "Example authorization (Direct)", from: "organization_authorization"
+
     click_button "Create organization & invite admin"
 
     expect(page).to have_css("div.flash.success")
@@ -65,5 +71,6 @@ shared_examples "creates organization" do
     expect(organization).to be_minors_participation_enabled
     expect(organization.minimum_minor_age).to eq(11)
     expect(organization.minimum_adult_age).to eq(15)
+    expect(organization.minors_authorization).to eq("example_authorization")
   end
 end

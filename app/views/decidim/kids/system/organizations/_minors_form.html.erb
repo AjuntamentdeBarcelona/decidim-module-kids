@@ -11,4 +11,9 @@
   <div class="field">
     <%= f.number_field :minimum_adult_age %>
   </div>
+
+  <div class="field">
+    <%= f.select :minors_authorization, Decidim.authorization_workflows.pluck(:description, :name) %>
+    <p class="help-text"><%= t ".minors_authorization_help" %></p>
+  </div>
 </div>

@@ -11,10 +11,11 @@ module Decidim
           attribute :enable_minors_participation, Boolean, default: Decidim::Kids.enable_minors_participation.present?
           attribute :minimum_minor_age, Integer, default: Decidim::Kids.minimum_minor_age.to_i
           attribute :minimum_adult_age, Integer, default: Decidim::Kids.minimum_adult_age.to_i
-          attribute :authorization, String
+          attribute :minors_authorization, String
 
-          # validates :authorization, presence: true, if: ->(form) { form.enable_minors_participation.present? }
-          validates :authorization, inclusion: { in: Decidim.authorization_workflows.pluck(:name) }, allow_blank: false, if: ->(form) { form.enable_minors_participation.present? }
+          validates :minors_authorization, inclusion: { in: Decidim.authorization_workflows.pluck(:name) }, allow_blank: false, if: lambda { |form|
+                                                                                                                                      form.enable_minors_participation.present?
+                                                                                                                                    }
           validates :minimum_minor_age, numericality: { greater_than: 0 }, if: ->(form) { form.enable_minors_participation.present? }
           validates :minimum_adult_age, numericality: { greater_than: 0 }, if: ->(form) { form.enable_minors_participation.present? }
           validate :minor_lower_than_adult, if: ->(form) { form.enable_minors_participation.present? }

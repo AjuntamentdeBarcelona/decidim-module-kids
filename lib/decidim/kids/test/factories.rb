@@ -9,5 +9,6 @@ FactoryBot.define do
     enable_minors_participation { true }
     minimum_minor_age { 10 }
     minimum_adult_age { 14 }
+    authorization { "id_documents" }
   end
 end

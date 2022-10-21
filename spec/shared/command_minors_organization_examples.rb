@@ -30,10 +30,27 @@ shared_examples "valid command" do
     end
   end
 
+  context "when missing authorization" do
+    let(:minors_authorization) { "" }
+
+    it "returns a invalid response" do
+      expect { command.call }.to broadcast(:invalid)
+    end
+  end
+
+  context "when incorrect authorization" do
+    let(:minors_authorization) { "funny_verificator" }
+
+    it "returns a invalid response" do
+      expect { command.call }.to broadcast(:invalid)
+    end
+  end
+
   context "when minors is not enabled" do
     let(:enable_minors_participation) { false }
     let(:minimum_minor_age) { 11 }
     let(:minimum_adult_age) { 10 }
+    let(:minors_authorization) { "" }
 
     it "returns a valid response on incorrect ages" do
       expect { command.call }.to broadcast(:ok)
@@ -44,6 +61,7 @@ end
 shared_examples "saves minors configuration" do
   let(:minimum_minor_age) { 11 }
   let(:minimum_adult_age) { 15 }
+  let(:minors_authorization) { "dummy_authorization_workflow" }
 
   it "saves the enabled status" do
     expect(organization).not_to be_minors_participation_enabled
@@ -65,11 +83,19 @@ shared_examples "saves minors configuration" do
     organization.reload_minors_config
     expect(organization.minimum_adult_age).to eq(minimum_adult_age)
   end
+
+  it "saves the authorization" do
+    expect(organization.minors_authorization).not_to eq(minors_authorization)
+    command.call
+    organization.reload_minors_config
+    expect(organization.minors_authorization).to eq(minors_authorization)
+  end
 end
 
 shared_examples "creates minors configuration" do
   let(:minimum_minor_age) { 11 }
   let(:minimum_adult_age) { 15 }
+  let(:minors_authorization) { "dummy_authorization_workflow" }
   let(:organization) { Decidim::Organization.last }
 
   it "saves the enabled status" do
@@ -86,5 +112,10 @@ shared_examples "creates minors configuration" do
   it "saves the adult age" do
     command.call
     expect(organization.minimum_adult_age).to eq(minimum_adult_age)
+  end
+
+  it "saves the authorization" do
+    command.call
+    expect(organization.minors_authorization).to eq(minors_authorization)
   end
 end

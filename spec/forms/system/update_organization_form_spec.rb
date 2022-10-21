@@ -18,14 +18,14 @@ module Decidim::System
         enable_minors_participation:,
         minimum_minor_age:,
         minimum_adult_age:,
-        authorization:
+        minors_authorization:
       )
     end
 
     let(:enable_minors_participation) { false }
     let(:minimum_minor_age) { 10 }
     let(:minimum_adult_age) { 14 }
-    let(:authorization) { "dummy_authorization_workflow" }
+    let(:minors_authorization) { "dummy_authorization_workflow" }
 
     context "when minor participation is inactive" do
       it { is_expected.to be_valid }
@@ -54,7 +54,7 @@ module Decidim::System
       end
 
       context "and no verification is specified" do
-        let(:authorization) { "" }
+        let(:minors_authorization) { "" }
 
         it { is_expected.to be_valid }
       end
@@ -71,7 +71,7 @@ module Decidim::System
       end
 
       it "authorization is registered" do
-        expect(Decidim.authorization_workflows.pluck(:name)).to include(subject.authorization)
+        expect(Decidim.authorization_workflows.pluck(:name)).to include(subject.minors_authorization)
       end
 
       context "and minor age is wrong" do
@@ -93,13 +93,13 @@ module Decidim::System
       end
 
       context "and no verification is specified" do
-        let(:authorization) { "" }
+        let(:minors_authorization) { "" }
 
         it { is_expected.to be_invalid }
       end
 
       context "and verification is not registered" do
-        let(:authorization) { "funny_verificator" }
+        let(:minors_authorization) { "funny_verificator" }
 
         it { is_expected.to be_invalid }
       end

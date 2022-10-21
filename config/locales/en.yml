@@ -7,6 +7,7 @@ en:
         minimum_adult_age: Legal age of consent to create a minor account without
           parental permission
         minimum_minor_age: Minimum age to create a minor account
+        minors_authorization: Auhorization method for validating the minor account
     errors:
       models:
         organization:
@@ -16,3 +17,7 @@ en:
   decidim:
     kids:
       minors_participation: Decidim Minors Participation
+      system:
+        organizations:
+          minors_form:
+            minors_authorization_help: "Warning: Make sure this verification method checks for the age of the minor is in between the ranges defined here"
