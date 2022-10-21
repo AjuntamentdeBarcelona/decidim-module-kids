@@ -24,5 +24,6 @@ Gem::Specification.new do |s|
 
   s.add_dependency "decidim-core", Decidim::Kids::COMPAT_DECIDIM_VERSION
   s.add_dependency "decidim-system", Decidim::Kids::COMPAT_DECIDIM_VERSION
+  s.add_dependency "decidim-verifications", Decidim::Kids::COMPAT_DECIDIM_VERSION
   s.add_dependency "deface", ">= 1.5"
 end
