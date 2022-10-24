@@ -6,7 +6,7 @@ module Decidim
       extend ActiveSupport::Concern
 
       included do
-        # todo: extract this value from the database
+        # TODO: extract this value from the database
         def minor?
           false
         end

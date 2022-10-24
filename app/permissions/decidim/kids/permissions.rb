@@ -4,7 +4,8 @@ module Decidim
   module Kids
     class Permissions < Decidim::DefaultPermissions
       def permissions
-        return Decidim::Kids::Admin::Permissions.new(user, permission_action, context).permissions if permission_action.scope == :admin
+        # return Decidim::Kids::Admin::Permissions.new(user, permission_action, context).permissions if permission_action.scope == :admin
+        return permission_action if permission_action.scope == :admin
 
         return permission_action unless user
 
