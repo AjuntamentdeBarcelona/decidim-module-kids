@@ -23,4 +23,4 @@ en:
             minors_authorization_help: 'Warning: Make sure this verification method
               checks for the age of the minor is in between the ranges defined here'
       user:
-        menu: Minor accounts
+        menu: My minor accounts

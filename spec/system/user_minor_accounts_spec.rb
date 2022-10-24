@@ -34,4 +34,6 @@ describe "User manages minor accounts", type: :system do
 
     it_behaves_like "user minors enabled"
   end
+
+  # TODO: when the user itself is a minor, the link should not be shown
 end
