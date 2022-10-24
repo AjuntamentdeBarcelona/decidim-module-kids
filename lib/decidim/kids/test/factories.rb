@@ -11,4 +11,13 @@ FactoryBot.define do
     minimum_adult_age { 14 }
     authorization { "id_documents" }
   end
+
+  factory :minor, parent: :user do
+    # TODO: see what to do with the user table to define it as a minor account
+  end
+
+  factory :minor_account, class: "Decidim::Kids::MinorAccount" do
+    user
+    minor
+  end
 end
