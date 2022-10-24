@@ -6,9 +6,17 @@ module Decidim
       extend ActiveSupport::Concern
 
       included do
-        # TODO: extract this value from the database
+        has_many :minor_accounts, class_name: "Decidim::Kids::MinorAccount", foreign_key: :decidim_tutor_id
+        has_many :tutor_accounts, class_name: "Decidim::Kids::MinorAccount", foreign_key: :decidim_minor_id
+        has_many :minors, through: :minor_accounts, class_name: "Decidim::User", foreign_key: :decidim_minor_id
+        has_many :tutors, through: :tutor_accounts, class_name: "Decidim::User", foreign_key: :decidim_tutor_id
+
         def minor?
-          false
+          tutor_accounts.exists?
+        end
+
+        def tutor?
+          minor_accounts.exists?
         end
       end
     end

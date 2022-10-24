@@ -13,11 +13,27 @@ FactoryBot.define do
   end
 
   factory :minor, parent: :user do
-    # TODO: see what to do with the user table to define it as a minor account
+    transient do
+      tutor { create(:user, :confirmed, organization:) }
+    end
+
+    after(:create) do |minor, evaluator|
+      create(:minor_account, tutor: evaluator.tutor, minor:)
+    end
+  end
+
+  factory :tutor, parent: :user do
+    transient do
+      minor { create(:user, :confirmed, organization:) }
+    end
+
+    after(:create) do |minor, evaluator|
+      create(:minor_account, minor: evaluator.minor, tutor: minor)
+    end
   end
 
   factory :minor_account, class: "Decidim::Kids::MinorAccount" do
-    user
-    minor
+    tutor { create(:user, :confirmed) }
+    minor { create(:user, :confirmed, organization: tutor.organization) }
   end
 end
