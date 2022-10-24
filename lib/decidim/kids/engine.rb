@@ -11,9 +11,9 @@ module Decidim
       isolate_namespace Decidim::Kids
 
       routes do
-        # Add engine routes here
-        # resources :kids
-        # root to: "kids#index"
+        authenticate(:user) do
+          resources :user_minors
+        end
       end
 
       config.to_prepare do
@@ -34,6 +34,24 @@ module Decidim
       initializer "decidim_kids.webpacker.assets_path" do
         Decidim.register_assets_path File.expand_path("app/packs", root)
       end
+
+      initializer "decidim_kids.user_menu" do
+        Decidim.menu :user_menu do |menu|
+          menu.add_item :minor_accounts,
+                        t("menu", scope: "decidim.kids.user"),
+                        decidim_kids.user_minors_path,
+                        position: 1.4,
+                        if: current_organization.minors_participation_enabled?
+        end
+      end
     end
   end
 end
+
+# Engines to handle logic unrelated to participatory spaces or components need to be registered independently
+Decidim.register_global_engine(
+  :decidim_kids, # this is the name of the global method to access engine routes,
+  # can't use decidim_donations as is the one assigned by the verification engine
+  ::Decidim::Kids::Engine,
+  at: "/decidim_kids"
+)
