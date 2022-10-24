@@ -5,8 +5,16 @@ module Decidim
     class UserMinorsController < ApplicationController
       include Decidim::UserProfile
 
+      helper_method :minors
+
       def index
         enforce_permission_to :index, :user_minors
+      end
+
+      private
+
+      def minors
+        current_user.minors
       end
     end
   end

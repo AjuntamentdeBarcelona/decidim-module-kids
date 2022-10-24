@@ -64,6 +64,10 @@ module Decidim::Kids
           expect(subject).to be_invalid
         end
       end
+
+      # TODO: invalid if:
+      # minor is an admin
+      # tutor is unconfirmed
     end
   end
 end
