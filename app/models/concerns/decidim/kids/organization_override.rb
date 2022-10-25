@@ -29,7 +29,11 @@ module Decidim
         end
 
         def minors_authorization
-          minors_config&.authorization
+          minors_config&.minors_authorization
+        end
+
+        def tutors_authorization
+          minors_config&.tutors_authorization
         end
       end
     end

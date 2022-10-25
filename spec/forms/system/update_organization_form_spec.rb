@@ -18,7 +18,8 @@ module Decidim::System
         enable_minors_participation:,
         minimum_minor_age:,
         minimum_adult_age:,
-        minors_authorization:
+        minors_authorization:,
+        tutors_authorization:
       )
     end
 
@@ -26,6 +27,7 @@ module Decidim::System
     let(:minimum_minor_age) { 10 }
     let(:minimum_adult_age) { 14 }
     let(:minors_authorization) { "dummy_authorization_workflow" }
+    let(:tutors_authorization) { "dummy_authorization_workflow" }
 
     context "when minor participation is inactive" do
       it { is_expected.to be_valid }
@@ -53,8 +55,14 @@ module Decidim::System
         it { is_expected.to be_valid }
       end
 
-      context "and no verification is specified" do
+      context "and no minor verification is specified" do
         let(:minors_authorization) { "" }
+
+        it { is_expected.to be_valid }
+      end
+
+      context "and no tutor verification is specified" do
+        let(:tutors_authorization) { "" }
 
         it { is_expected.to be_valid }
       end
@@ -72,6 +80,7 @@ module Decidim::System
 
       it "authorization is registered" do
         expect(Decidim.authorization_workflows.pluck(:name)).to include(subject.minors_authorization)
+        expect(Decidim.authorization_workflows.pluck(:name)).to include(subject.tutors_authorization)
       end
 
       context "and minor age is wrong" do
@@ -92,14 +101,26 @@ module Decidim::System
         it { is_expected.to be_invalid }
       end
 
-      context "and no verification is specified" do
+      context "and no minor verification is specified" do
         let(:minors_authorization) { "" }
 
         it { is_expected.to be_invalid }
       end
 
-      context "and verification is not registered" do
+      context "and minor verification is not registered" do
         let(:minors_authorization) { "funny_verificator" }
+
+        it { is_expected.to be_invalid }
+      end
+
+      context "and no tutor verification is specified" do
+        let(:tutors_authorization) { "" }
+
+        it { is_expected.to be_invalid }
+      end
+
+      context "and tutor verification is not registered" do
+        let(:tutors_authorization) { "funny_verificator" }
 
         it { is_expected.to be_invalid }
       end
