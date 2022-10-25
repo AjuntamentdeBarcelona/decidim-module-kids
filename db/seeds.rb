@@ -5,8 +5,8 @@ if !Rails.env.production? || ENV.fetch("SEED", nil)
   print "Creating seeds for decidim_kids...\n" unless Rails.env.test?
 
   Decidim::Kids::OrganizationConfig.create!(
-     organization: Decidim::Organization.first,
-     enable_minors_participation: true
+    organization: Decidim::Organization.first,
+    enable_minors_participation: true
   )
 
   Decidim::User.where(email: ["admin@example.org", "user@example.org"]).each do |user|

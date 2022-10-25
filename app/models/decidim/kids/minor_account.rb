@@ -14,8 +14,8 @@ module Decidim
                  class_name: "Decidim::User"
 
       validate :same_organization
-      validate :tutor_is_not_a_minor
-      validate :minor_is_not_a_tutor
+      validate :can_be_tutor
+      validate :can_be_minor
 
       private
 
@@ -26,14 +26,14 @@ module Decidim
         errors.add(:minor, :invalid)
       end
 
-      def tutor_is_not_a_minor
-        return unless tutor.minor?
+      def can_be_tutor
+        return unless tutor.minor? || !tutor.confirmed?
 
         errors.add(:tutor, :invalid)
       end
 
-      def minor_is_not_a_tutor
-        return unless minor.tutor?
+      def can_be_minor
+        return unless minor.tutor? || minor.admin?
 
         errors.add(:minor, :invalid)
       end

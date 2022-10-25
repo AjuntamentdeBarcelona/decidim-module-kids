@@ -33,9 +33,10 @@ module Decidim::Kids
     end
 
     describe "validations" do
+      subject { build(:minor_account, tutor:, minor:) }
       let(:organization) { create(:organization) }
-      let(:minor) { create :minor, organization: }
-      let(:tutor) { create :tutor, organization: }
+      let(:minor) { create :user, organization: }
+      let(:tutor) { create :user, :confirmed, organization: }
 
       context "when tutor is already a minor" do
         let(:another_minor) { create(:minor, organization:) }
@@ -65,9 +66,21 @@ module Decidim::Kids
         end
       end
 
-      # TODO: invalid if:
-      # minor is an admin
-      # tutor is unconfirmed
+      context "when user is an admin" do
+        let(:minor) { create :user, :admin, organization: }
+
+        it "cannot be a minor" do
+          expect(subject).to be_invalid
+        end
+      end
+
+      context "when user is unconfirmed" do
+        let(:tutor) { create :user, organization: }
+
+        it "cannot be a tutor" do
+          expect(subject).to be_invalid
+        end
+      end
     end
   end
 end

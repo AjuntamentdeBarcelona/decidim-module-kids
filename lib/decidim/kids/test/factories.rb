@@ -17,8 +17,8 @@ FactoryBot.define do
       tutor { create(:user, :confirmed, organization:) }
     end
 
-    after(:create) do |minor, evaluator|
-      create(:minor_account, tutor: evaluator.tutor, minor:)
+    after(:create) do |user, evaluator|
+      create(:minor_account, tutor: evaluator.tutor, minor: user)
     end
   end
 
@@ -27,8 +27,10 @@ FactoryBot.define do
       minor { create(:user, :confirmed, organization:) }
     end
 
-    after(:create) do |minor, evaluator|
-      create(:minor_account, minor: evaluator.minor, tutor: minor)
+    confirmed_at { Time.current }
+
+    after(:create) do |user, evaluator|
+      create(:minor_account, minor: evaluator.minor, tutor: user)
     end
   end
 
