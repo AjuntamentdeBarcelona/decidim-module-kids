@@ -6,14 +6,14 @@ module Decidim::Kids
   describe Permissions do
     subject { described_class.new(user, permission_action, context).permissions.allowed? }
 
-    let(:user) { create :user, organization: }
+    let(:user) { create :user, :confirmed, organization: }
     let(:organization) { create :organization }
     let(:context) do
       {}
     end
     let(:permission_action) { Decidim::PermissionAction.new(**action) }
     let(:action_name) { :index }
-    let(:action_subject) { :user_minors }
+    let(:action_subject) { :minor_accounts }
     let(:action) do
       { scope: :public, action: action_name, subject: action_subject }
     end
@@ -45,6 +45,12 @@ module Decidim::Kids
       let(:user) { nil }
 
       it_behaves_like "permission is not set"
+    end
+
+    context "when user is not confirmed" do
+      let(:user) { create :user, organization: }
+
+      it { is_expected.to be false }
     end
 
     context "when organization has minors disabled" do
