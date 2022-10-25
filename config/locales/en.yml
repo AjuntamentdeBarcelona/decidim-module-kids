@@ -16,3 +16,8 @@ en:
   decidim:
     kids:
       minors_participation: Decidim Minors Participation
+    devise:
+      registrations:
+        new:
+          minors_title: Minors Participation
+          minors_description: Are you under %{minimum_adult_age}? Call your parents and check with them how you can create an account
