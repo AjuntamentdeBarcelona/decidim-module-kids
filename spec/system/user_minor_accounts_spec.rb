@@ -33,7 +33,11 @@ describe "User manages minor accounts", type: :system do
     end
 
     it_behaves_like "user minors enabled"
-  end
 
-  # TODO: when the user itself is a minor, the link should not be shown
+    context "when the user is a minor" do
+      let(:user) { create :minor, :confirmed }
+
+      it_behaves_like "user minors disabled"
+    end
+  end
 end

@@ -8,7 +8,7 @@ module Decidim
       helper_method :minors
 
       def index
-        enforce_permission_to :index, :user_minors
+        enforce_permission_to :index, :minor_accounts
       end
 
       private

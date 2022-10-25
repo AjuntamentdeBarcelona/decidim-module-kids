@@ -2,6 +2,7 @@
 
 shared_examples "user minors enabled" do
   it "has a link to minors accounts" do
+    expect(page).to have_content("My account")
     expect(page).to have_content("My minor accounts")
   end
 
@@ -13,6 +14,7 @@ end
 
 shared_examples "user minors disabled" do
   it "doesn't have a link to minors accounts" do
+    expect(page).to have_content("My account")
     expect(page).not_to have_content("My minor accounts")
   end
 

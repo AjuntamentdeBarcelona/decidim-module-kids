@@ -42,7 +42,7 @@ module Decidim
                         t("menu", scope: "decidim.kids.user"),
                         decidim_kids.user_minors_path,
                         position: 1.4,
-                        if: current_organization.minors_participation_enabled?
+                        if: allowed_to?(:index, :minor_accounts, {}, [::Decidim::Kids::Permissions], current_user)
         end
       end
     end
