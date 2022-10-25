@@ -23,4 +23,5 @@ en:
           minors_form:
             minors_authorization_help: 'Warning: Make sure this verification method
               checks for the age of the minor is in between the ranges defined here'
-            tutors_authorization_help: 'The user will have to be authorized using this method before being able to create a minor account'
+            tutors_authorization_help: The user will have to be authorized using this
+              method before being able to create a minor account
