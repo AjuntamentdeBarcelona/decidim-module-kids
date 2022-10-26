@@ -5,7 +5,7 @@ class AddDecidimKidsMinorAccounts < ActiveRecord::Migration[6.1]
     create_table :decidim_kids_minor_accounts do |t|
       t.references :decidim_tutor, null: false, index: true, foreign_key: { to_table: "decidim_users" }
       t.references :decidim_minor, null: false, index: true, foreign_key: { to_table: "decidim_users" }
-
+      t.jsonb :personal_data, null: false, default: {}
       t.timestamps
     end
 
