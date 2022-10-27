@@ -3,14 +3,17 @@
 shared_examples "requires authorization" do
   it "requires user to verify himself as a tutor" do
     visit decidim_kids.user_minors_path
+    expect(page).to have_content("Participant settings - My minor accounts")
     expect(page).to have_content("You need to verify your identity as a tutor to access this page")
   end
 end
 
 shared_examples "user minors enabled" do
-  it "has a link to minors accounts" do
-    expect(page).to have_content("My account")
-    expect(page).to have_content("My minor accounts")
+  it "has menu items" do
+    within "#user-settings-tabs" do
+      expect(page).to have_content("Account")
+      expect(page).to have_content("My minor accounts")
+    end
   end
 
   it_behaves_like "requires authorization"
@@ -26,6 +29,7 @@ shared_examples "user minors enabled" do
 
     it "minors path can be accessed" do
       visit decidim_kids.user_minors_path
+      expect(page).to have_content("Participant settings - My minor accounts")
       expect(page).to have_content("list my kids")
     end
 
@@ -49,14 +53,30 @@ shared_examples "user minors enabled" do
 end
 
 shared_examples "user minors disabled" do
-  it "doesn't have a link to minors accounts" do
-    expect(page).to have_content("My account")
-    expect(page).not_to have_content("My minor accounts")
+  it "doesn't have a link to minor accounts" do
+    within "#user-settings-tabs" do
+      expect(page).to have_content("Account")
+      expect(page).not_to have_content("My minor accounts")
+    end
   end
 
   it "minors path cannot be accessed" do
     visit decidim_kids.user_minors_path
     expect(page).to have_content("You are not authorized to perform this action")
+    expect(page).not_to have_content("list my kids")
+  end
+end
+
+shared_examples "user minors misconfigured" do
+  it "minors path cannot be accessed" do
+    visit decidim_kids.user_minors_path
+    expect(page).to have_content("Minors module is misconfigured, please contact the administrator")
+
+    within "#user-settings-tabs" do
+      expect(page).to have_content("Account")
+      expect(page).to have_content("My minor accounts")
+    end
+
     expect(page).not_to have_content("list my kids")
   end
 end
