@@ -18,6 +18,22 @@ module Decidim
       it "has a tutor" do
         expect(subject.tutors.first).to be_tutor
       end
+
+      it "has personal data" do
+        expect(subject.minor_data).to be_a(Decidim::Kids::MinorData)
+      end
+
+      it "has a name" do
+        expect(subject.minor_data_name).to eq(minor.minor_data.name)
+      end
+
+      it "has a birthday" do
+        expect(subject.minor_data_birthday).to eq(minor.minor_data.birthday)
+      end
+
+      it "has a email" do
+        expect(subject.minor_data_email).to eq(minor.minor_data.email)
+      end
     end
 
     context "when user is a tutor" do
