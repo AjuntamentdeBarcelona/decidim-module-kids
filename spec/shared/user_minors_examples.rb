@@ -39,6 +39,12 @@ shared_examples "user minors enabled" do
         expect(page).to have_content(another_minor.name)
       end
     end
+
+    context "and is another verification method" do
+      let!(:authorization) { create(:authorization, user:) }
+
+      it_behaves_like "requires authorization"
+    end
   end
 end
 
