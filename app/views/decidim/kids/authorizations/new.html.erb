@@ -1,0 +1,25 @@
+<% add_decidim_page_title(t("menu", scope: "decidim.kids.user")) %>
+<% content_for(:subtitle) { t("menu", scope: "decidim.kids.user") } %>
+
+<div class="callout secondary">
+<%= minor_user.name %>
+<%= link_to "cancel", :back, class: "button secondary small float-right" %>
+</div>
+      <div class="columns large-8 large-centered text-center page-title">
+        <h2><%= t("decidim.verifications.authorizations.new.authorize_with", authorizer: t("#{handler.handler_name}.name", scope: "decidim.authorization_handlers")) %></h2>
+      </div>
+        <div class="card">
+          <div class="card__content">
+            <%= authorization_form_for(handler, url: authorizations_path(redirect_url: redirect_url)) do |form| %>
+              <% if lookup_context.exists?(handler.to_partial_path, [], true) %>
+                <%= render partial: handler.to_partial_path, locals: { handler: handler, form: form } %>
+              <% else %>
+                <%= form.all_fields %>
+              <% end %>
+
+              <div class="actions">
+                <%= form.submit t("decidim.verifications.authorizations.new.authorize"), class: "button expanded" %>
+              </div>
+            <% end %>
+          </div>
+        </div>

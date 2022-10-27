@@ -11,8 +11,8 @@ module Decidim
         @tutor_adapter ||= Decidim::Verifications::Adapter.from_element(current_organization.tutors_authorization)
       end
 
-      def minors_authorizations(user)
-        granted_authorizations(user).where(name: current_organization.minors_authorization)
+      def minor_authorization(user)
+        granted_authorizations(user).find_by(name: current_organization.minors_authorization)
       end
 
       def granted_authorizations(user)

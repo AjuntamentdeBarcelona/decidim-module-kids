@@ -3,21 +3,34 @@
 module Decidim
   module Kids
     class AuthorizationsController < Decidim::Verifications::AuthorizationsController
+      include Decidim::UserProfile
       include AuthorizationMethods
 
-      helper_method :authorizations_path
+      layout "layouts/decidim/user_profile"
+
+      helper_method :authorizations_path, :minor_user
 
       def authorizations_path(prs = {})
         decidim_kids.user_minor_authorizations_path(prs)
       end
 
       def index
-        if minors_authorizations(minor_user).any?
+        if minor_user_authorized?
+          # todo: unblock user, update personal data
           flash[:notice] = "minor authorized"
         else
           flash[:alert] = "minor not authorized"
         end
         redirect_to decidim_kids.user_minors_path
+      end
+
+      def new
+        if minor_authorized?
+          flash[:notice] = "minor already authorized"
+          redirect_to decidim_kids.user_minors_path
+        else
+          super
+        end
       end
 
       def handler_params
@@ -30,6 +43,10 @@ module Decidim
 
       def minor_user
         current_user.minors.find(params[:user_minor_id])
+      end
+
+      def minor_authorized?
+        minor_authorization(minor_user).present?
       end
     end
   end

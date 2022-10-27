@@ -5,9 +5,9 @@ require "spec_helper"
 module Decidim::Kids
   describe MinorAccount do
     subject { minor_account }
-    let(:birth_date) { Date.new(2001, 1, 1) }
+    let(:birthday) { Date.new(2001, 1, 1) }
 
-    let(:minor_account) { create(:minor_account, personal_data: { birthdate: birth_date }) }
+    let(:minor_account) { create(:minor_account, personal_data: { birthday: }) }
 
     it "is valid" do
       expect(subject).to be_valid
@@ -90,8 +90,8 @@ module Decidim::Kids
       it "encrypts sensible data" do
         encrypted_settings = subject.attributes["personal_data"]
 
-        expect(subject.personal_data["birthdate"]).to eq(birth_date.to_s)
-        expect(ae.decrypt(encrypted_settings["birthdate"])).to eq("\"#{birth_date}\"")
+        expect(subject.personal_data["birthday"]).to eq(birthday.to_s)
+        expect(ae.decrypt(encrypted_settings["birthday"])).to eq("\"#{birthday}\"")
       end
     end
   end

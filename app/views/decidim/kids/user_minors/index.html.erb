@@ -1,5 +1,12 @@
+<% add_decidim_page_title(t("menu", scope: "decidim.kids.user")) %>
+<% content_for(:subtitle) { t("menu", scope: "decidim.kids.user") } %>
+
 list my kids
 
 <% minors.each do |user| %>
-<li><%= link_to user.name, decidim_kids.new_user_minor_authorization_path(user_minor_id: user.id) %></li>
+<li>
+<%= link_to user.name, decidim_kids.new_user_minor_authorization_path(user_minor_id: user.id) %>
+
+<% user.minor_age %>
+</li>
 <% end %>

@@ -39,7 +39,11 @@ FactoryBot.define do
     tutor { create(:user, :confirmed) }
     minor { create(:user, :confirmed, organization: tutor.organization) }
     personal_data do
-      { birthdate: rand(11..14).years.ago }
+      {
+        name: Faker::Name.name,
+        email: Faker::Internet.email,
+        birthday: rand(11..14).years.ago
+      }
     end
   end
 end
