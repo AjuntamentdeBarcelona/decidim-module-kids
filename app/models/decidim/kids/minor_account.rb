@@ -4,8 +4,6 @@ module Decidim
   module Kids
     # Abstract class from which all models in this engine inherit.
     class MinorAccount < ApplicationRecord
-      include Decidim::RecordEncryptor
-
       self.table_name = "decidim_kids_minor_accounts"
 
       belongs_to :tutor,
@@ -18,8 +16,6 @@ module Decidim
       validate :same_organization
       validate :can_be_tutor
       validate :can_be_minor
-
-      encrypt_attribute :personal_data, type: :hash
 
       private
 

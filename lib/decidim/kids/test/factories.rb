@@ -20,6 +20,7 @@ FactoryBot.define do
 
     after(:create) do |user, evaluator|
       create(:minor_account, tutor: evaluator.tutor, minor: user)
+      create(:minor_data, user:)
     end
   end
 
@@ -38,12 +39,12 @@ FactoryBot.define do
   factory :minor_account, class: "Decidim::Kids::MinorAccount" do
     tutor { create(:user, :confirmed) }
     minor { create(:user, :confirmed, organization: tutor.organization) }
-    personal_data do
-      {
-        name: Faker::Name.name,
-        email: Faker::Internet.email,
-        birthday: rand(11..14).years.ago
-      }
-    end
+  end
+
+  factory :minor_data, class: "Decidim::Kids::MinorData" do
+    user { create(:minor) }
+    name { Faker::Name.name }
+    email { Faker::Internet.email }
+    birthday { rand(11..14).years.ago }
   end
 end
