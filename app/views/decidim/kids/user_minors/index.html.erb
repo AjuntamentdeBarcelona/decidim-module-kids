@@ -1,3 +1,5 @@
 list my kids
 
-<%= minors.pluck :name %>
+<% minors.each do |user| %>
+<li><%= link_to user.name, decidim_kids.new_user_minor_authorization_path(user_minor_id: user.id) %></li>
+<% end %>

@@ -13,12 +13,12 @@
   </div>
 
   <div class="field">
-    <%= f.select :minors_authorization, Decidim.authorization_workflows.pluck(:description, :name) %>
+    <%= f.select :minors_authorization, Decidim::Kids.valid_minor_workflows.pluck(:description, :name) %>
     <p class="help-text"><%= t ".minors_authorization_help" %></p>
   </div>
 
   <div class="field">
-    <%= f.select :tutors_authorization, Decidim.authorization_workflows.pluck(:description, :name) %>
+    <%= f.select :tutors_authorization, Decidim::Kids.valid_tutor_workflows.pluck(:description, :name) %>
     <p class="help-text"><%= t ".tutors_authorization_help" %></p>
   </div>
 </div>

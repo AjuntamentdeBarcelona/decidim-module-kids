@@ -14,12 +14,12 @@ module Decidim
           attribute :minors_authorization, String
           attribute :tutors_authorization, String
 
-          validates :minors_authorization, inclusion: { in: Decidim.authorization_workflows.pluck(:name) }, allow_blank: false, if: lambda { |form|
-                                                                                                                                      form.enable_minors_participation.present?
-                                                                                                                                    }
-          validates :tutors_authorization, inclusion: { in: Decidim.authorization_workflows.pluck(:name) }, allow_blank: false, if: lambda { |form|
-                                                                                                                                      form.enable_minors_participation.present?
-                                                                                                                                    }
+          validates :minors_authorization, inclusion: { in: Decidim::Kids.valid_minor_workflows.pluck(:name) }, allow_blank: false, if: lambda { |form|
+                                                                                                                                          form.enable_minors_participation.present?
+                                                                                                                                        }
+          validates :tutors_authorization, inclusion: { in: Decidim::Kids.valid_tutor_workflows.pluck(:name) }, allow_blank: false, if: lambda { |form|
+                                                                                                                                          form.enable_minors_participation.present?
+                                                                                                                                        }
           validates :minimum_minor_age, numericality: { greater_than: 0 }, if: ->(form) { form.enable_minors_participation.present? }
           validates :minimum_adult_age, numericality: { greater_than: 0 }, if: ->(form) { form.enable_minors_participation.present? }
           validate :minor_lower_than_adult, if: ->(form) { form.enable_minors_participation.present? }

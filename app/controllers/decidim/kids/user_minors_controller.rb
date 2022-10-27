@@ -4,6 +4,7 @@ module Decidim
   module Kids
     class UserMinorsController < ApplicationController
       include Decidim::UserProfile
+      include AuthorizationMethods
 
       before_action except: [:unverified] do
         enforce_permission_to :index, :minor_accounts
@@ -22,18 +23,6 @@ module Decidim
 
       def minors
         current_user.minors
-      end
-
-      def tutor_verified?
-        @tutor_verified ||= granted_authorizations(current_user).where(name: current_organization.tutors_authorization).any?
-      end
-
-      def tutor_adapter
-        @tutor_adapter ||= Decidim::Verifications::Adapter.from_element(current_organization.tutors_authorization)
-      end
-
-      def granted_authorizations(user)
-        Decidim::Verifications::Authorizations.new(organization: current_organization, user:, granted: true).query
       end
     end
   end

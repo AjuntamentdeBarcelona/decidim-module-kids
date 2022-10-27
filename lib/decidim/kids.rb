@@ -27,5 +27,14 @@ module Decidim
     config_accessor :minimum_adult_age do
       14
     end
+
+    # Only one-step authorization workflows are supported
+    def self.valid_minor_workflows
+      Decidim.authorization_workflows.filter(&:form)
+    end
+
+    def self.valid_tutor_workflows
+      Decidim.authorization_workflows
+    end
   end
 end
