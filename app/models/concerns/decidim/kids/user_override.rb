@@ -26,16 +26,10 @@ module Decidim
           minor_accounts.exists?
         end
 
-        def minor_personal_data
-          return {} unless minor?
-
-          MinorAccount.find_by(decidim_minor_id: id, decidim_tutor_id: tutor_account_ids).personal_data
-        end
-
         def minor_age
           return unless minor?
 
-          Date.today.year - minor_personal_data[:birthday].year
+          Date.today.year - minor_data_birthday.year
         end
       end
     end
