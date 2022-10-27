@@ -38,5 +38,8 @@ FactoryBot.define do
   factory :minor_account, class: "Decidim::Kids::MinorAccount" do
     tutor { create(:user, :confirmed) }
     minor { create(:user, :confirmed, organization: tutor.organization) }
+    personal_data do
+      { birthdate: rand(11..14).years.ago }
+    end
   end
 end

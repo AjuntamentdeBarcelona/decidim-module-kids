@@ -12,7 +12,11 @@ module Decidim
 
       routes do
         authenticate(:user) do
-          resources :user_minors
+          resources :user_minors do
+            collection do
+              get :unverified
+            end
+          end
         end
       end
 
