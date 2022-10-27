@@ -177,6 +177,7 @@ PATH
     decidim-kids (0.1.0)
       decidim-core (>= 0.28.0.dev, < 0.29)
       decidim-system (>= 0.28.0.dev, < 0.29)
+      decidim-verifications (>= 0.28.0.dev, < 0.29)
       deface (>= 1.5)
 
 GEM
