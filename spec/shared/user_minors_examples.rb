@@ -4,7 +4,7 @@ shared_examples "requires authorization" do
   it "requires user to verify himself as a tutor" do
     visit decidim_kids.user_minors_path
     expect(page).to have_content("Participant settings - My minor accounts")
-    expect(page).to have_content("You need to verify your identity as a tutor to access this page")
+    expect(page).to have_content('In order to create a minor account, you must be verified using the "Example authorization (Direct)" method')
   end
 end
 

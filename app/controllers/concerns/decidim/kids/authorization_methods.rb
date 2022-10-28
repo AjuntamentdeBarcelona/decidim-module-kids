@@ -9,6 +9,8 @@ module Decidim
 
       def tutor_adapter
         @tutor_adapter ||= Decidim::Verifications::Adapter.from_element(current_organization.tutors_authorization)
+      rescue Decidim::Verifications::UnregisteredVerificationManifest
+        nil
       end
 
       def minor_authorization(user)

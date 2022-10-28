@@ -28,8 +28,9 @@ module Decidim
 
         def minor_age
           return unless minor?
+          return if minor_data_birthday.blank?
 
-          Date.today.year - minor_data_birthday.year
+          Time.zone.today.year - minor_data_birthday.year
         end
       end
     end

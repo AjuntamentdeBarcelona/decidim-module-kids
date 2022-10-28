@@ -15,21 +15,40 @@ module Decidim
       end
 
       def index
-        if minor_user_authorized?
-          # todo: unblock user, update personal data
-          flash[:notice] = "minor authorized"
+        if minor_authorized?
+          # TODO: unblock user, update personal data
+          flash[:notice] = t("authorizations.authorize.success", scope: "decidim.kids")
         else
-          flash[:alert] = "minor not authorized"
+          flash[:alert] = t("authorizations.authorize.error", scope: "decidim.kids")
         end
         redirect_to decidim_kids.user_minors_path
       end
 
       def new
         if minor_authorized?
-          flash[:notice] = "minor already authorized"
+          flash[:notice] = t("authorizations.authorize.already_authorized", scope: "decidim.kids")
           redirect_to decidim_kids.user_minors_path
         else
           super
+        end
+      end
+
+      def create
+        AuthorizeUser.call(handler, current_organization) do
+          on(:ok) do
+            flash[:notice] = t("authorizations.create.success", scope: "decidim.verifications")
+            redirect_to redirect_url || authorizations_path
+          end
+
+          on(:invalid_age) do
+            flash[:alert] = t("authorizations.create.invalid_age", scope: "decidim.kids")
+            render action: :new
+          end
+
+          on(:invalid) do
+            flash[:alert] = t("authorizations.create.error", scope: "decidim.verifications")
+            render action: :new
+          end
         end
       end
 

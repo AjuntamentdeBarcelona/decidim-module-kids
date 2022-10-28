@@ -124,6 +124,18 @@ module Decidim::System
 
         it { is_expected.to be_invalid }
       end
+
+      context "and tutor's verification is not Direct" do
+        let(:tutors_authorization) { "id_documents" }
+
+        it { is_expected.to be_valid }
+      end
+
+      context "and minor's verification is not Direct" do
+        let(:minors_authorization) { "id_documents" }
+
+        it { is_expected.to be_invalid }
+      end
     end
   end
 end

@@ -28,7 +28,7 @@ module Decidim::System
       let(:enable_minors_participation) { true }
       let(:minimum_minor_age) { 9 }
       let(:minimum_adult_age) { 15 }
-      let(:minors_authorization) { "id_documents" }
+      let(:minors_authorization) { "dummy_authorization_handler" }
       let(:tutors_authorization) { "id_documents" }
 
       it_behaves_like "valid command"
@@ -41,8 +41,8 @@ module Decidim::System
                  enable_minors_participation: false,
                  minimum_minor_age: 10,
                  minimum_adult_age: 14,
-                 minors_authorization: "another_authorization",
-                 tutors_authorization: "another_authorization")
+                 minors_authorization: "another_dummy_authorization_handler",
+                 tutors_authorization: "another_dummy_authorization_handler")
         end
 
         it_behaves_like "saves minors configuration"

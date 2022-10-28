@@ -13,6 +13,13 @@ checksums = [
     }
   },
   {
+    package: "decidim-verifications",
+    files: {
+      "/app/controllers/decidim/verifications/authorizations_controller.rb" => "00a17a88af53ed0ee657b5e450895c68",
+      "/app/commands/decidim/verifications/authorize_user.rb" => "bfc4a94c5649d64a66cac2734230da88"
+    }
+  },
+  {
     package: "decidim-system",
     files: {
       "/app/forms/decidim/system/register_organization_form.rb" => "10667bf365ae7df36ed5d4628d1d4972",

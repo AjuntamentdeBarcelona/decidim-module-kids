@@ -1,6 +1,10 @@
 <% add_decidim_page_title(t("menu", scope: "decidim.kids.user")) %>
 <% content_for(:subtitle) { t("menu", scope: "decidim.kids.user") } %>
 
-<div class="callout warning">You need to verify your identity as a tutor to access this page</div>
+<div class="callout warning"><%= t ".needs_to_be_verified", method: tutor_adapter.description %></div>
 
-verify yourself sir please with <a href="<%= tutor_adapter.root_path %>"><%= tutor_adapter.description %></a>
+<div class="row">
+  <div class="column end">
+  	<%= link_to t(".authorize"), tutor_adapter.root_path(redirect_url: decidim_kids.user_minors_path), class: "button" %> 		
+  </div>
+</div>

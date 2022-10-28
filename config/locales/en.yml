@@ -17,6 +17,15 @@ en:
               bigger_than_adult: The minor age must be lower than the adult age
   decidim:
     kids:
+      authorizations:
+        authorize:
+          already_authorized: The minor account is already authorized.
+          error: There was an error authorizing the minor account.
+          success: The minor account has been successfully authorized.
+        create:
+          invalid_age: We could not verify the minor account because the authorization
+            method does not provde the birthday or this one is not in the accepted
+            range.
       minors_participation: Decidim Minors Participation
       system:
         organizations:
@@ -30,3 +39,7 @@ en:
       user_minors:
         no_tutor_authorization: Minors module is misconfigured, please contact the
           administrator.
+        unverified:
+          authorize: Authorize my account
+          needs_to_be_verified: In order to create a minor account, you must be verified
+            using the "%{method}" method
