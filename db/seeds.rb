@@ -6,7 +6,9 @@ if !Rails.env.production? || ENV.fetch("SEED", nil)
 
   Decidim::Kids::OrganizationConfig.create!(
     organization: Decidim::Organization.first,
-    enable_minors_participation: true
+    enable_minors_participation: true,
+    tutors_authorization: "dummy_authorization_handler",
+    minors_authorization: "dummy_authorization_handler"
   )
 
   Decidim::User.where(email: ["admin@example.org", "user@example.org"]).each do |user|

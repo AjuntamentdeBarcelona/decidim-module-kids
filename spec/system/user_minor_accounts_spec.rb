@@ -9,12 +9,16 @@ describe "User manages minor accounts", type: :system do
   let(:enable_minors_participation) { false }
   let(:minimum_minor_age) { 10 }
   let(:minimum_adult_age) { 14 }
+  let(:tutors_authorization) { "dummy_authorization_handler" }
+  let(:minors_authorization) { "dummy_authorization_handler" }
   let!(:minors_organization_config) do
     create(:minors_organization_config,
            organization:,
            enable_minors_participation:,
            minimum_minor_age:,
-           minimum_adult_age:)
+           minimum_adult_age:,
+           tutors_authorization:,
+           minors_authorization:)
   end
 
   before do
@@ -38,6 +42,12 @@ describe "User manages minor accounts", type: :system do
       let(:user) { create :minor, :confirmed }
 
       it_behaves_like "user minors disabled"
+    end
+
+    context "when organization has no tutors authorization" do
+      let(:tutors_authorization) { "" }
+
+      it_behaves_like "user minors misconfigured"
     end
   end
 end

@@ -26,8 +26,8 @@ module Decidim::System
     let(:enable_minors_participation) { false }
     let(:minimum_minor_age) { 10 }
     let(:minimum_adult_age) { 14 }
-    let(:minors_authorization) { "dummy_authorization_workflow" }
-    let(:tutors_authorization) { "dummy_authorization_workflow" }
+    let(:minors_authorization) { "dummy_authorization_handler" }
+    let(:tutors_authorization) { "dummy_authorization_handler" }
 
     context "when minor participation is inactive" do
       it { is_expected.to be_valid }
