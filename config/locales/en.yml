@@ -7,6 +7,8 @@ en:
         minimum_adult_age: Legal age of consent to create a minor account without
           parental permission
         minimum_minor_age: Minimum age to create a minor account
+        minors_authorization: Auhorization method for validating the minor's account
+        tutors_authorization: Auhorization method for validating the tutor's account
     errors:
       models:
         organization:
@@ -14,11 +16,19 @@ en:
             minimum_minor_age:
               bigger_than_adult: The minor age must be lower than the adult age
   decidim:
-    kids:
-      minors_participation: Decidim Minors Participation
     devise:
       registrations:
         new:
-          minors_title: Minors Participation
-          minors_description: Are you under %{minimum_adult_age}? Call your parents and check with them how you can %{link}
           create_an_account: create an account
+          minors_description: Are you under %{minimum_adult_age}? Call your parents
+            and check with them how you can %{link}
+          minors_title: Minors Participation
+    kids:
+      minors_participation: Decidim Minors Participation
+      system:
+        organizations:
+          minors_form:
+            minors_authorization_help: 'Warning: Make sure this verification method
+              checks for the age of the minor is in between the ranges defined here'
+            tutors_authorization_help: The user will have to be authorized using this
+              method before being able to create a minor account

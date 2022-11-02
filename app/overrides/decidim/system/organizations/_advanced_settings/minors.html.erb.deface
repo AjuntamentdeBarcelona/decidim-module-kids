@@ -1,2 +1,2 @@
 <!-- insert_top ".collapsible" -->
-<%= render "decidim/system/organizations/minors_form", f: f %>
+<%= render "decidim/kids/system/organizations/minors_form", f: f %>
