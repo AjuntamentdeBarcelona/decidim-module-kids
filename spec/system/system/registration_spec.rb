@@ -31,7 +31,7 @@ describe "Registration", type: :system do
     describe "on first sight" do
       it "shows minors url" do
         expect(page).to have_content("Are you under #{minors_organization_config.minimum_adult_age}")
-        expect(page).to have_link(href: "/pages/minors-account")
+        expect(page).to have_link(href: "/pages/minors")
       end
     end
   end

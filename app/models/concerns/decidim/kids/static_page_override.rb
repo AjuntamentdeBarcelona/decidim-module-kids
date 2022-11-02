@@ -6,7 +6,7 @@ module Decidim
       extend ActiveSupport::Concern
 
       included do
-        MINORS_DEFAULT_PAGES = %w(minors-account).freeze
+        MINORS_DEFAULT_PAGES = %w(minors).freeze
         Decidim::StaticPage::DEFAULT_PAGES = (Decidim::StaticPage::DEFAULT_PAGES + MINORS_DEFAULT_PAGES).uniq.freeze
       end
     end
