@@ -32,7 +32,10 @@ module Decidim
       end
 
       def tutor_verified?
-        @tutor_verified ||= granted_authorizations(current_user).where(name: current_organization.tutors_authorization).any?
+        @tutor_verified ||= begin
+          authorization = granted_authorizations(current_user).where(name: current_organization.tutors_authorization)
+          authorization.any? && !authorization.first.expired?
+        end
       end
 
       def tutor_adapter

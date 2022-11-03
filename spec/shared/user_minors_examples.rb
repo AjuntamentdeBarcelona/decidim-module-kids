@@ -24,6 +24,13 @@ shared_examples "user minors enabled" do
     it_behaves_like "requires authorization"
   end
 
+  context "when tutor's verification is expired", with_authorization_workflows: ["dummy_authorization_handler"] do
+    let(:tutors_authorization) { "dummy_authorization_handler" }
+    let!(:authorization) { create(:authorization, granted_at: 2.months.ago, user:, name: "dummy_authorization_handler") }
+
+    it_behaves_like "requires authorization"
+  end
+
   context "when tutor's verification is granted" do
     let!(:authorization) { create(:authorization, user:, name: organization.tutors_authorization) }
 
