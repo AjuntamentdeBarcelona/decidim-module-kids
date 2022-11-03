@@ -7,7 +7,10 @@ module Decidim
 
       included do
         MINORS_DEFAULT_PAGES = %w(minors).freeze
-        Decidim::StaticPage::DEFAULT_PAGES = (Decidim::StaticPage::DEFAULT_PAGES + MINORS_DEFAULT_PAGES).uniq.freeze
+
+        def self.minors_default?(slug, organization)
+          (organization&.enable_minors_participation && MINORS_DEFAULT_PAGES.include?(slug))
+        end
       end
     end
   end

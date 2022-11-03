@@ -7,6 +7,12 @@ require "spec_helper"
 # file should be updated to match any change/bug fix introduced in the core
 checksums = [
   {
+    package: "decidim-admin",
+    files: {
+      "/app/permissions/decidim/admin/permissions.rb" => "2b696daa9da8dd687ff2824cae9cf209"
+    }
+  },
+  {
     package: "decidim-core",
     files: {
       "/app/models/decidim/organization.rb" => "e0b67b906f0ad3db84226914f07a05e7",

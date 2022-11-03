@@ -18,6 +18,7 @@ module Decidim
 
       config.to_prepare do
         # Non-controller overrides here
+        Decidim::Admin::Permissions.include(Decidim::Kids::Admin::PermissionsOverride)
         Decidim::Organization.include(Decidim::Kids::OrganizationOverride)
         Decidim::StaticPage.include(Decidim::Kids::StaticPageOverride)
         Decidim::System::RegisterOrganizationForm.include(Decidim::Kids::System::OrganizationFormOverride)

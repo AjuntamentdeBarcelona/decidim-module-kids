@@ -1,2 +1,2 @@
 <!-- insert_after ".login__form" -->
-<%= render "decidim/devise/registrations/minors" %>
+<%= render "decidim/kids/devise/registrations/minors" %>
