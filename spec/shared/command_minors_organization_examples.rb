@@ -124,6 +124,7 @@ shared_examples "creates minors configuration" do
   let(:tutors_authorization) { "postal_letter" }
   let(:organization) { Decidim::Organization.last }
   let(:minors_page) { Decidim::StaticPage.where(organization:, slug: "minors") }
+  let(:minors_terms_page) { Decidim::StaticPage.where(organization:, slug: "minors-terms") }
 
   it "saves the enabled status" do
     command.call
@@ -154,5 +155,6 @@ shared_examples "creates minors configuration" do
   it "saves the static page" do
     command.call
     expect(minors_page).to exist
+    expect(minors_terms_page).to exist
   end
 end
