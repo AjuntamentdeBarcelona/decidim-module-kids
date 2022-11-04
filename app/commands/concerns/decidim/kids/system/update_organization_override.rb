@@ -19,6 +19,8 @@ module Decidim
             conf.minors_authorization = form.minors_authorization
             conf.tutors_authorization = form.tutors_authorization
             conf.save!
+
+            Decidim::Kids::System::CreateMinorsDefaultPages.call(organization) if form.enable_minors_participation
           end
         end
       end
