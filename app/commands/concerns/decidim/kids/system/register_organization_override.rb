@@ -23,6 +23,7 @@ module Decidim
             end
 
             Decidim::Kids::System::CreateMinorsDefaultPages.call(organization) if form.enable_minors_participation
+            Decidim::Kids::System::CreateMinorsTermsPages.call(organization) if form.enable_minors_participation
 
             organization
           end
