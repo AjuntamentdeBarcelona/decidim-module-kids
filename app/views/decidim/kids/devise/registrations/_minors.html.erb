@@ -1,0 +1,6 @@
+<% if current_organization.minors_participation_enabled? %>
+  <div id="card__minors" class="login__form-block">
+    <h4><%= t("decidim.devise.registrations.new.minors_title") %></h4>
+    <p><%= raw t("decidim.devise.registrations.new.minors_description", minimum_adult_age: current_organization.minimum_adult_age, link: link_to(t("decidim.devise.registrations.new.create_an_account"), page_path("minors"), target: "_blank")) %></p>
+  </div>
+<% end %>

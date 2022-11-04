@@ -7,9 +7,17 @@ require "spec_helper"
 # file should be updated to match any change/bug fix introduced in the core
 checksums = [
   {
+    package: "decidim-admin",
+    files: {
+      "/app/permissions/decidim/admin/permissions.rb" => "2b696daa9da8dd687ff2824cae9cf209"
+    }
+  },
+  {
     package: "decidim-core",
     files: {
-      "/app/models/decidim/organization.rb" => "e0b67b906f0ad3db84226914f07a05e7"
+      "/app/models/decidim/organization.rb" => "e0b67b906f0ad3db84226914f07a05e7",
+      "/app/models/decidim/static_page.rb" => "23b8d77f1893d11af189001cbaa008c8",
+      "/app/views/decidim/devise/registrations/new.html.erb" => "593710b9c75fc90f1322871f231f0b5f"
     }
   },
   {

@@ -16,6 +16,13 @@ en:
             minimum_minor_age:
               bigger_than_adult: The minor age must be lower than the adult age
   decidim:
+    devise:
+      registrations:
+        new:
+          create_an_account: create an account
+          minors_description: Are you under %{minimum_adult_age}? Call your parents
+            and check with them how you can %{link}
+          minors_title: Minors Participation
     kids:
       minors_participation: Decidim Minors Participation
       system:

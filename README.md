@@ -99,8 +99,8 @@ defining these in the commands shown above.
 
 As latests versions of Decidim, this repository uses Webpacker for Rails. This means that compilation
 of assets is required everytime a Javascript or CSS file is modified. Usually, this happens
-automatically, but in some cases (specially when actively changes that type of files) you want to 
-speed up the process. 
+automatically, but in some cases (specially when actively changes that type of files) you want to
+speed up the process.
 
 To do that, start in a separate terminal than the one with `bin/rails s`, and BEFORE it, the following command:
 
