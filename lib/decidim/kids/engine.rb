@@ -22,12 +22,14 @@ module Decidim
 
       config.to_prepare do
         # Non-controller overrides here
+        Decidim::Admin::Permissions.include(Decidim::Kids::Admin::PermissionsOverride)
         Decidim::Organization.include(Decidim::Kids::OrganizationOverride)
-        Decidim::User.include(Decidim::Kids::UserOverride)
+        Decidim::StaticPage.include(Decidim::Kids::StaticPageOverride)
         Decidim::System::RegisterOrganizationForm.include(Decidim::Kids::System::OrganizationFormOverride)
         Decidim::System::UpdateOrganizationForm.include(Decidim::Kids::System::OrganizationFormOverride)
         Decidim::System::UpdateOrganization.include(Decidim::Kids::System::UpdateOrganizationOverride)
         Decidim::System::RegisterOrganization.include(Decidim::Kids::System::RegisterOrganizationOverride)
+        Decidim::User.include(Decidim::Kids::UserOverride)
       end
 
       # initializer "decidim_kids.overrides", after: "decidim.action_controller" do
