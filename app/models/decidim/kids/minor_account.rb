@@ -2,7 +2,6 @@
 
 module Decidim
   module Kids
-    # Abstract class from which all models in this engine inherit.
     class MinorAccount < ApplicationRecord
       self.table_name = "decidim_kids_minor_accounts"
 
