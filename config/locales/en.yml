@@ -9,6 +9,7 @@ en:
         minimum_minor_age: Minimum age to create a minor account
         minors_authorization: Auhorization method for validating the minor's account
         tutors_authorization: Auhorization method for validating the tutor's account
+        maximum_minors_accounts: Maximum number of minors that can be assigned to a tutor
     errors:
       models:
         organization:

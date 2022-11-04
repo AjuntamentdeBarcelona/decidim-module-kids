@@ -35,6 +35,10 @@ module Decidim
         def tutors_authorization
           minors_config&.tutors_authorization
         end
+
+        def maximum_minors_accounts
+          minors_config&.maximum_minors_accounts || Decidim::Kids.maximum_minors_accounts
+        end
       end
     end
   end

@@ -28,6 +28,11 @@ module Decidim
       14
     end
 
+    # Default value maximum number of minors that can be assigned to a tutor
+    config_accessor :maximum_minors_accounts do
+      3
+    end
+
     # Only one-step authorization workflows are supported
     def self.valid_minor_workflows
       Decidim.authorization_workflows.filter(&:form)
