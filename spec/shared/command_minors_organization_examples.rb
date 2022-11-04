@@ -78,7 +78,7 @@ end
 shared_examples "saves minors configuration" do
   let(:minimum_minor_age) { 11 }
   let(:minimum_adult_age) { 15 }
-  let(:minors_authorization) { "dummy_authorization_workflow" }
+  let(:minors_authorization) { "dummy_authorization_handler" }
   let(:tutors_authorization) { "postal_letter" }
 
   it "saves the enabled status" do
@@ -120,7 +120,7 @@ end
 shared_examples "creates minors configuration" do
   let(:minimum_minor_age) { 11 }
   let(:minimum_adult_age) { 15 }
-  let(:minors_authorization) { "dummy_authorization_workflow" }
+  let(:minors_authorization) { "dummy_authorization_handler" }
   let(:tutors_authorization) { "postal_letter" }
   let(:organization) { Decidim::Organization.last }
   let(:minors_page) { Decidim::StaticPage.where(organization:, slug: "minors") }

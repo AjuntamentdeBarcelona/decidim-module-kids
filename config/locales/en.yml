@@ -32,3 +32,8 @@ en:
               checks for the age of the minor is in between the ranges defined here'
             tutors_authorization_help: The user will have to be authorized using this
               method before being able to create a minor account
+      user:
+        menu: My minor accounts
+      user_minors:
+        no_tutor_authorization: Minors module is misconfigured, please contact the
+          administrator.

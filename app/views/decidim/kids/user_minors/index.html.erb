@@ -1,0 +1,6 @@
+<% add_decidim_page_title(t("menu", scope: "decidim.kids.user")) %>
+<% content_for(:subtitle) { t("menu", scope: "decidim.kids.user") } %>
+
+list my kids
+
+<%= minors.pluck :name %>

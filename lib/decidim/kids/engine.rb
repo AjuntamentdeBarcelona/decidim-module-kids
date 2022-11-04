@@ -11,15 +11,20 @@ module Decidim
       isolate_namespace Decidim::Kids
 
       routes do
-        # Add engine routes here
-        # resources :kids
-        # root to: "kids#index"
+        authenticate(:user) do
+          resources :user_minors do
+            collection do
+              get :unverified
+            end
+          end
+        end
       end
 
       config.to_prepare do
         # Non-controller overrides here
         Decidim::Admin::Permissions.include(Decidim::Kids::Admin::PermissionsOverride)
         Decidim::Organization.include(Decidim::Kids::OrganizationOverride)
+        Decidim::User.include(Decidim::Kids::UserOverride)
         Decidim::StaticPage.include(Decidim::Kids::StaticPageOverride)
         Decidim::System::RegisterOrganizationForm.include(Decidim::Kids::System::OrganizationFormOverride)
         Decidim::System::UpdateOrganizationForm.include(Decidim::Kids::System::OrganizationFormOverride)
@@ -36,6 +41,24 @@ module Decidim
       initializer "decidim_kids.webpacker.assets_path" do
         Decidim.register_assets_path File.expand_path("app/packs", root)
       end
+
+      initializer "decidim_kids.user_menu" do
+        Decidim.menu :user_menu do |menu|
+          menu.add_item :minor_accounts,
+                        t("menu", scope: "decidim.kids.user"),
+                        decidim_kids.user_minors_path,
+                        position: 1.4,
+                        if: allowed_to?(:index, :minor_accounts, {}, [::Decidim::Kids::Permissions], current_user)
+        end
+      end
     end
   end
 end
+
+# Engines to handle logic unrelated to participatory spaces or components need to be registered independently
+Decidim.register_global_engine(
+  :decidim_kids, # this is the name of the global method to access engine routes,
+  # can't use decidim_donations as is the one assigned by the verification engine
+  ::Decidim::Kids::Engine,
+  at: "/decidim_kids"
+)
