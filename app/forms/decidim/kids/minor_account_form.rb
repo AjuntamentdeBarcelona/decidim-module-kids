@@ -9,6 +9,7 @@ module Decidim
       attribute :birthday, Decidim::Attributes::LocalizedDate
       attribute :email, String
       attribute :password, String
+      attribute :tos_agreement, Boolean
 
       validates :name, presence: true
       validates :birthday, presence: true # format: { with: /\A\d{8}\z/ }

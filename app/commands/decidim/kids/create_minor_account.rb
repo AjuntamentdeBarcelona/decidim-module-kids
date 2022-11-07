@@ -33,14 +33,16 @@ module Decidim
       end
 
       def create_user
-        @user = User.create!(
-          email: form.email,
-          name: form.name,
-          blocked: true,
-          organization: form.current_organization,
-          password: form.password,
-          nickname: form.name
-        )
+        @user = Decidim::User.new(email: form.email,
+                                  name: form.name,
+                                  blocked: true,
+                                  organization: form.current_organization,
+                                  password: form.password,
+                                  tos_agreement: form.tos_agreement,
+                                  nickname: form.name)
+        @user.skip_confirmation!
+        @user.skip_invitation = true
+        @user.save!
       end
 
       # def send_email_to_minor_account

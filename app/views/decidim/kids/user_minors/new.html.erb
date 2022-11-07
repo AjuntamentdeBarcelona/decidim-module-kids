@@ -23,6 +23,10 @@
             <%= form.password_field :password %>
           </div>
 
+          <div class="row column tos-agreement">
+            <%= form.check_box :tos_agreement, label: t(".tos_agreement"), id: "minor_tos_agreement", disabled: false %>
+          </div>
+
           <div class="actions">
             <%= form.submit t(".create"), class: "button expanded mt-s mb-none", data: { disable: true } %>
           </div>

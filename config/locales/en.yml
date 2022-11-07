@@ -54,6 +54,7 @@ en:
         new:
           create: Create minor account
           title: Add minor account
+          tos_agreement: You accept its Terms and Conditions
         no_tutor_authorization: Minors module is misconfigured, please contact the
           administrator.
         unverified:
