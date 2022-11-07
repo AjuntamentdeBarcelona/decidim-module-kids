@@ -56,6 +56,7 @@ en:
           success: Minor's account has been successfully created
         index:
           add: Add minor account
+          note: Maximum number of minors reached
         new:
           create: Create minor account
           title: Add minor account

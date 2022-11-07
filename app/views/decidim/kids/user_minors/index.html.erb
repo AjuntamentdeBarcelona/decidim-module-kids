@@ -14,3 +14,6 @@ list my kids
 <br>
 
 <%= button_to_add_minor_account %>
+<% unless can_add_minor_account? %>
+  <p><%= t(".note") %></p>
+<% end %>
