@@ -35,6 +35,11 @@ en:
           invalid_age: We could not verify the minor account because the authorization
             method does not provde the birthday or this one is not in the accepted
             range.
+      minor_notifications_mailer:
+        confirmation:
+          subject: Confirmation instructions
+          greeting: Welcome, %{recipient}!
+          body: Instructions
       minors_participation: Decidim Minors Participation
       system:
         organizations:
