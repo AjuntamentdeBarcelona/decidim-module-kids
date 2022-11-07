@@ -4,12 +4,13 @@ en:
     attributes:
       organization:
         enable_minors_participation: Enable minors participation
+        maximum_minors_accounts: Maximum number of minors that can be assigned to
+          a tutor
         minimum_adult_age: Legal age of consent to create a minor account without
           parental permission
         minimum_minor_age: Minimum age to create a minor account
         minors_authorization: Auhorization method for validating the minor's account
         tutors_authorization: Auhorization method for validating the tutor's account
-        maximum_minors_accounts: Maximum number of minors that can be assigned to a tutor
     errors:
       models:
         organization:
@@ -45,6 +46,14 @@ en:
       user:
         menu: My minor accounts
       user_minors:
+        create:
+          error: Errors occurred while creating a minor's account
+          success: Minor's account has been successfully created
+        index:
+          add: Add minor account
+        new:
+          create: Create minor account
+          title: Add minor account
         no_tutor_authorization: Minors module is misconfigured, please contact the
           administrator.
         unverified:

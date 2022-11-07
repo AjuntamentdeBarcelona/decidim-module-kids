@@ -1,0 +1,33 @@
+<% content_for(:subtitle) { t("menu", scope: "decidim.kids.user") } %>
+<div class="row">
+  <h3 class="section flex-center"><%= t(".title") %></h3>
+  <div class="columns large-6 medium-10 medium-centered">
+    <div class="card">
+      <div class="card__content">
+        <%= decidim_form_for(@form, url: user_minors_path) do |form| %>
+          <%= form_required_explanation %>
+
+          <div class="field">
+            <%= form.text_field :name, class: "js-hashtags" %>
+          </div>
+
+          <div class="field">
+            <%= form.date_field :birthday, class: "js-hashtags" %>
+          </div>
+
+          <div class="field">
+            <%= form.email_field :email, class: "js-hashtags" %>
+          </div>
+
+          <div class="field">
+            <%= form.password_field :password %>
+          </div>
+
+          <div class="actions">
+            <%= form.submit t(".create"), class: "button expanded mt-s mb-none", data: { disable: true } %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

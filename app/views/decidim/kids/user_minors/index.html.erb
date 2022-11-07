@@ -10,3 +10,7 @@ list my kids
 Age: <% user.minor_age %>
 </li>
 <% end %>
+
+<div>
+  <%= link_to t(".add"), decidim_kids.new_user_minor_path, class: "button small" %>
+</div>
