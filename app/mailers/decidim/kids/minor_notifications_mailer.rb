@@ -12,7 +12,7 @@ module Decidim
 
           subject = I18n.t("decidim.kids.minor_notifications_mailer.confirmation.subject")
 
-          mail(to: user.email, subject: subject)
+          mail(to: user.email, subject:)
         end
       end
     end

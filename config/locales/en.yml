@@ -37,9 +37,9 @@ en:
             range.
       minor_notifications_mailer:
         confirmation:
-          subject: Confirmation instructions
-          greeting: Welcome, %{recipient}!
           body: Instructions
+          greeting: Welcome, %{recipient}!
+          subject: Confirmation instructions
       minors_participation: Decidim Minors Participation
       system:
         organizations:
