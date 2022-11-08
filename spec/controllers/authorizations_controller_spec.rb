@@ -112,6 +112,11 @@ module Decidim::Kids
     end
 
     describe "GET new" do
+      it "redirects the user" do
+        get :new, params: { user_minor_id: minor.id }
+        expect(response).to render_template(:new)
+      end
+
       it_behaves_like "checks tutor authorization" do
         let(:view) { :new }
         let(:params) { { user_minor_id: minor.id } }
