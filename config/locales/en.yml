@@ -39,6 +39,7 @@ en:
         confirmation:
           body: Instructions
           greeting: Welcome, %{recipient}!
+          sign_in: Sign in
           subject: Confirmation instructions
       minors_participation: Decidim Minors Participation
       system:
