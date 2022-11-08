@@ -31,7 +31,7 @@ en:
           success: The minor account has been successfully authorized.
         create:
           invalid_age: We could not verify the minor account because the authorization
-            method does not provde the birthday or this one is not in the accepted
+            method does not provide the birthday attribute or this one is not in the accepted
             range.
       minors_participation: Decidim Minors Participation
       system:

@@ -4,7 +4,7 @@ module Decidim
   module Kids
     class AuthorizationsController < Decidim::Verifications::AuthorizationsController
       include Decidim::UserProfile
-      include AuthorizationMethods
+      include NeedsTutorAuthorization
 
       layout "layouts/decidim/user_profile"
 
@@ -36,7 +36,12 @@ module Decidim
       def create
         AuthorizeUser.call(handler, current_organization) do
           on(:ok) do
-            flash[:notice] = t("authorizations.create.success", scope: "decidim.verifications")
+            flash[:notice] = t("authorizations.authorize.success", scope: "decidim.kids")
+            redirect_to redirect_url || authorizations_path
+          end
+
+          on(:transferred) do
+            flash[:notice] = t("authorizations.authorize.success", scope: "decidim.kids")
             redirect_to redirect_url || authorizations_path
           end
 
@@ -46,7 +51,7 @@ module Decidim
           end
 
           on(:invalid) do
-            flash[:alert] = t("authorizations.create.error", scope: "decidim.verifications")
+            flash[:alert] = t("authorizations.authorize.error", scope: "decidim.kids")
             render action: :new
           end
         end
