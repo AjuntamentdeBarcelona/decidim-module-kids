@@ -56,6 +56,15 @@ shared_examples "checks tutor authorization" do
 end
 
 shared_examples "checks minor authorization" do
+  context "when minor is already authorized" do
+    let!(:minor_authorization) { create(:authorization, user: minor, name: minors_authorization_name) }
+
+    it "redirects the user" do
+      get view, params: params
+      expect(response).to redirect_to("/decidim_kids#{user_minors_path}")
+    end
+  end
+
   context "when minor's handler is not valid" do
     let(:minors_authorization_name) { :foo }
 

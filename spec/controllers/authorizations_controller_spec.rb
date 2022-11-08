@@ -103,6 +103,7 @@ module Decidim::Kids
           let(:view) { :create }
           let(:params) { { user_minor_id: minor.id } }
         end
+
         it_behaves_like "checks minor authorization" do
           let(:view) { :create }
           let(:params) { { user_minor_id: minor.id } }
@@ -115,6 +116,7 @@ module Decidim::Kids
         let(:view) { :new }
         let(:params) { { user_minor_id: minor.id } }
       end
+
       it_behaves_like "checks minor authorization" do
         let(:view) { :new }
         let(:params) { { user_minor_id: minor.id } }
@@ -127,6 +129,7 @@ module Decidim::Kids
         let(:view) { :index }
         let(:params) { { user_minor_id: minor.id } }
       end
+
       it_behaves_like "checks minor authorization" do
         let(:return_path) { "/decidim_kids#{user_minors_path}" }
         let(:view) { :index }

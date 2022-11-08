@@ -34,6 +34,11 @@ module Decidim
       end
 
       def create
+        if minor_authorized?
+          flash[:notice] = t("authorizations.authorize.already_authorized", scope: "decidim.kids")
+          return redirect_to decidim_kids.user_minors_path
+        end
+
         AuthorizeUser.call(handler, current_organization) do
           on(:ok) do
             flash[:notice] = t("authorizations.authorize.success", scope: "decidim.kids")
