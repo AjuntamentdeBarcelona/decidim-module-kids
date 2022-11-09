@@ -13,7 +13,7 @@ module Decidim
       end
 
       def new
-        @form = minor_account_form.from_params(params)
+        @form = minor_account_form.instance
       end
 
       def create
@@ -21,7 +21,7 @@ module Decidim
 
         return unless tutor_verified?
 
-        CreateMinorAccount.call(@form) do
+        CreateMinorAccount.call(@form, current_user) do
           on(:ok) do
             flash[:notice] = t("user_minors.create.success", scope: "decidim.kids")
             redirect_to user_minors_path
