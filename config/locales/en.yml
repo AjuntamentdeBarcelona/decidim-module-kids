@@ -33,8 +33,8 @@ en:
           success: The minor account has been successfully authorized.
         create:
           invalid_age: We could not verify the minor account because the authorization
-            method does not provde the birthday or this one is not in the accepted
-            range.
+            method does not provide the birthday attribute or this one is not in the
+            accepted range.
       minor_notifications_mailer:
         confirmation:
           body: Instructions

@@ -4,21 +4,7 @@ module Decidim
   module Kids
     class UserMinorsController < ApplicationController
       include Decidim::UserProfile
-      include AuthorizationMethods
-
-      before_action do
-        if tutor_adapter.blank?
-          flash[:alert] = t("user_minors.no_tutor_authorization", scope: "decidim.kids")
-          redirect_to decidim.account_path
-        end
-      end
-
-      before_action except: [:unverified] do
-        enforce_permission_to :index, :minor_accounts
-        redirect_to unverified_user_minors_path unless tutor_verified?
-      end
-
-      helper_method :minors, :tutor_adapter
+      include NeedsTutorAuthorization
 
       def index; end
 
