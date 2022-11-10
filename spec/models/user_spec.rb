@@ -6,8 +6,10 @@ module Decidim
   describe User do
     subject { user }
     let(:user) { create :user }
-    let(:minor) { create :minor }
+    let(:minor) { create :minor, minor_data: }
     let(:tutor) { create :tutor }
+    let(:minor_data) { create :minor_data, birthday: }
+    let(:birthday) { 12.years.ago }
 
     it { is_expected.not_to be_minor }
 
@@ -34,6 +36,23 @@ module Decidim
       it "has a email" do
         expect(subject.minor_data_email).to eq(minor.minor_data.email)
       end
+
+      it "has an age" do
+        expect(subject.minor_age).to eq(12)
+      end
+
+      context "when age is tricky" do
+        let(:birthday) { Time.zone.parse("2010-12-10") }
+        let(:now) { Time.zone.parse("2020-12-09") }
+
+        before do
+          allow(Time.zone).to receive(:now).and_return(now)
+        end
+
+        it "has the correct age" do
+          expect(subject.minor_age).to eq(9)
+        end
+      end
     end
 
     context "when user is a tutor" do
@@ -42,6 +61,10 @@ module Decidim
 
       it "has a minor" do
         expect(subject.minors.first).to be_minor
+      end
+
+      it "does not return an age" do
+        expect(subject.minor_age).to be_nil
       end
     end
   end
