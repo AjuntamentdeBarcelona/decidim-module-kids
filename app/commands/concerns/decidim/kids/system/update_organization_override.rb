@@ -21,7 +21,6 @@ module Decidim
             conf.save!
 
             Decidim::Kids::System::CreateMinorsDefaultPages.call(organization) if form.enable_minors_participation
-            Decidim::Kids::System::CreateMinorsTermsPages.call(organization) if form.enable_minors_participation
           end
         end
       end

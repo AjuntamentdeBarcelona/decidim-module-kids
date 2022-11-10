@@ -6,8 +6,7 @@ module Decidim
       extend ActiveSupport::Concern
 
       included do
-        MINORS_DEFAULT_PAGES = %w(minors).freeze
-        MINORS_TERMS_PAGES = %w(minors-terms).freeze
+        MINORS_DEFAULT_PAGES = %w(minors minors-terms).freeze
 
         def self.minors_default?(slug, organization)
           (organization&.enable_minors_participation && MINORS_DEFAULT_PAGES.include?(slug))
