@@ -7,8 +7,8 @@ en:
         minimum_adult_age: Legal age of consent to create a minor account without
           parental permission
         minimum_minor_age: Minimum age to create a minor account
-        minors_authorization: Auhorization method for validating the minor's account
-        tutors_authorization: Auhorization method for validating the tutor's account
+        minors_authorization: Authorization method for validating the minor's account
+        tutors_authorization: Authorization method for validating the tutor's account
     errors:
       models:
         organization:
