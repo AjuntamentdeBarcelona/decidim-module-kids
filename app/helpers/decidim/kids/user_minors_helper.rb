@@ -5,7 +5,7 @@ module Decidim
     module UserMinorsHelper
       def button_to_add_minor_account
         link_to(
-          t(".add"),
+          t("add", scope: "decidim.kids.user_minors.index"),
           decidim_kids.new_user_minor_path,
           class: "button small #{button_klass}"
         )

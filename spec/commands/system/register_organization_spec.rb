@@ -27,7 +27,7 @@ module Decidim::System
           minimum_adult_age:,
           minors_authorization:,
           tutors_authorization:,
-          maximum_tutors_per_minor:
+          maximum_minor_accounts:
         }
       end
       let(:enable_minors_participation) { true }

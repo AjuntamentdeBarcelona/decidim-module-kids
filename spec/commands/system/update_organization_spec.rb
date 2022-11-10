@@ -22,12 +22,14 @@ module Decidim::System
           minimum_minor_age:,
           minimum_adult_age:,
           minors_authorization:,
-          tutors_authorization:
+          tutors_authorization:,
+          maximum_minor_accounts:,
         }
       end
       let(:enable_minors_participation) { true }
       let(:minimum_minor_age) { 9 }
       let(:minimum_adult_age) { 15 }
+      let(:maximum_minor_accounts) { 5 }
       let(:minors_authorization) { "dummy_authorization_handler" }
       let(:tutors_authorization) { "id_documents" }
 
@@ -41,6 +43,7 @@ module Decidim::System
                  enable_minors_participation: false,
                  minimum_minor_age: 10,
                  minimum_adult_age: 14,
+                 maximum_minor_accounts: 3,
                  minors_authorization: "another_dummy_authorization_handler",
                  tutors_authorization: "another_dummy_authorization_handler")
         end
