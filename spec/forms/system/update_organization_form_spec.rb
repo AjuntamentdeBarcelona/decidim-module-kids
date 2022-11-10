@@ -19,13 +19,15 @@ module Decidim::System
         minimum_minor_age:,
         minimum_adult_age:,
         minors_authorization:,
-        tutors_authorization:
+        tutors_authorization:,
+        maximum_minor_accounts:
       )
     end
 
     let(:enable_minors_participation) { false }
     let(:minimum_minor_age) { 10 }
     let(:minimum_adult_age) { 14 }
+    let(:maximum_minor_accounts) { 4 }
     let(:minors_authorization) { "dummy_authorization_handler" }
     let(:tutors_authorization) { "dummy_authorization_handler" }
 
@@ -45,6 +47,12 @@ module Decidim::System
 
       context "and adult age is wrong" do
         let(:minimum_adult_age) { 0 }
+
+        it { is_expected.to be_valid }
+      end
+
+      context "and maximum number of accounts is wrong" do
+        let(:maximum_minor_accounts) { 0 }
 
         it { is_expected.to be_valid }
       end

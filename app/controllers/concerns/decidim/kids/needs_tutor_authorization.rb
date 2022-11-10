@@ -27,16 +27,17 @@ module Decidim
         private
 
         def tutor_verified?
-          @tutor_verified ||= begin
-            authorization = granted_authorizations(current_user).where(name: current_organization.tutors_authorization)
-            authorization.any? && !authorization.first.expired?
-          end
+          @tutor_verified ||= tutor_authorization.present? && !tutor_authorization.expired?
         end
 
         def tutor_adapter
           @tutor_adapter ||= Decidim::Verifications::Adapter.from_element(current_organization.tutors_authorization)
         rescue Decidim::Verifications::UnregisteredVerificationManifest
           nil
+        end
+
+        def tutor_authorization
+          @tutor_authorization ||= granted_authorizations(current_user).find_by(name: current_organization.tutors_authorization)
         end
 
         def minor_authorization(user)

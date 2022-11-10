@@ -29,18 +29,11 @@ module Decidim
     end
 
     # Default value maximum number of minors that can be assigned to a tutor
-    config_accessor :maximum_minors_accounts do
+    config_accessor :maximum_minor_accounts do
       3
     end
 
-    # Only one-step authorization workflows are supported
-    def self.valid_minor_workflows
-      Decidim.authorization_workflows.filter(&:form)
-    end
-
-    def self.valid_tutor_workflows
-      Decidim.authorization_workflows
-    end
+    ######## End of system configurations ########
 
     # Default authorization metadata attributes where the minor's birthday is stored
     # (if the authorization handler stores it)
@@ -52,6 +45,15 @@ module Decidim
     # If this value is blank: No age checks will be performed (but the validation process might do it independently)
     config_accessor :minor_authorization_age_attributes do
       [:birthday, :date_of_birth, :birth_date, :birthdate]
+    end
+
+    # Only one-step authorization workflows are supported
+    def self.valid_minor_workflows
+      Decidim.authorization_workflows.filter(&:form)
+    end
+
+    def self.valid_tutor_workflows
+      Decidim.authorization_workflows
     end
   end
 end

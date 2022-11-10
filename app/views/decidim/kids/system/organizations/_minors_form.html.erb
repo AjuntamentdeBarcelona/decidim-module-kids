@@ -13,6 +13,10 @@
   </div>
 
   <div class="field">
+    <%= f.number_field :maximum_minor_accounts %>
+  </div>
+
+  <div class="field">
     <%= f.select :minors_authorization, Decidim::Kids.valid_minor_workflows.pluck(:description, :name) %>
     <p class="help-text"><%= t ".minors_authorization_help" %></p>
   </div>
