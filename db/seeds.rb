@@ -26,6 +26,7 @@ if !Rails.env.production? || ENV.fetch("SEED", nil)
         accepted_tos_version: user.organization.tos_version + 1.hour
       )
       Decidim::Kids::MinorAccount.create!(minor:, tutor: user)
+      Decidim::Kids::MinorData.create!(user: minor, name: minor.name, email: minor.email, birthday: Faker::Date.birthday(min_age: 11, max_age: 14))
     end
   end
 end

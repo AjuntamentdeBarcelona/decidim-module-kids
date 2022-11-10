@@ -7,4 +7,4 @@ ignore_unused:
   - "decidim.components.kids.name"
 
 ignore_missing:
-  - decidim.participatory_processes.scopes.global
+  - decidim.verifications.authorizations.*

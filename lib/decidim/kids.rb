@@ -27,5 +27,26 @@ module Decidim
     config_accessor :minimum_adult_age do
       14
     end
+
+    # Only one-step authorization workflows are supported
+    def self.valid_minor_workflows
+      Decidim.authorization_workflows.filter(&:form)
+    end
+
+    def self.valid_tutor_workflows
+      Decidim.authorization_workflows
+    end
+
+    # Default authorization metadata attributes where the minor's birthday is stored
+    # (if the authorization handler stores it)
+    # If this value is present: In addition to the normal verification process for the minor, the
+    #                           age of the minor returned by the validation will be enforced to be
+    #                           between the minimum_minor_age and minimum_adult_age values.
+    #                           Note that if the validation does not stores the birthday in one of these
+    #                           attributes, the validation will always fail.
+    # If this value is blank: No age checks will be performed (but the validation process might do it independently)
+    config_accessor :minor_authorization_age_attributes do
+      [:birthday, :date_of_birth, :birth_date, :birthdate]
+    end
   end
 end

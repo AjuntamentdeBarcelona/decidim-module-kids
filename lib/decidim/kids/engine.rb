@@ -16,6 +16,12 @@ module Decidim
             collection do
               get :unverified
             end
+            resources :authorizations, only: [:new, :create, :index] do
+              # collection do
+              #   get :renew_modal
+              #   get :renew
+              # end
+            end
           end
         end
       end

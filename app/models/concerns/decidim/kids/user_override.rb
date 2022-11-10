@@ -25,6 +25,13 @@ module Decidim
         def tutor?
           minor_accounts.exists?
         end
+
+        def minor_age
+          return unless minor?
+          return if minor_data_birthday.blank?
+
+          ((Time.zone.now - minor_data_birthday.to_time) / 1.year.seconds).floor
+        end
       end
     end
   end
