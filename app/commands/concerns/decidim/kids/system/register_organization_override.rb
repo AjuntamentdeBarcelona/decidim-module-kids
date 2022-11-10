@@ -20,7 +20,7 @@ module Decidim
               conf.minimum_adult_age = form.minimum_adult_age
               conf.minors_authorization = form.minors_authorization
               conf.tutors_authorization = form.tutors_authorization
-              conf.maximum_minors_accounts = form.maximum_minors_accounts
+              conf.maximum_minor_accounts = form.maximum_minor_accounts
             end
 
             Decidim::Kids::System::CreateMinorsDefaultPages.call(organization) if form.enable_minors_participation

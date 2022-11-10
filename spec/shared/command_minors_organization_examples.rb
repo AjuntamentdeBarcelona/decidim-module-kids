@@ -21,6 +21,14 @@ shared_examples "valid command" do
     end
   end
 
+  context "when invalid number of accounts" do
+    let(:maximum_minor_accounts) { 0 }
+
+    it "returns a invalid response" do
+      expect { command.call }.to broadcast(:invalid)
+    end
+  end
+
   context "when incorrect age" do
     let(:minimum_minor_age) { 11 }
     let(:minimum_adult_age) { 10 }
@@ -102,6 +110,13 @@ shared_examples "saves minors configuration" do
     expect(organization.minimum_adult_age).to eq(minimum_adult_age)
   end
 
+  it "saves the number of accounts" do
+    expect(organization.maximum_minor_accounts).not_to eq(maximum_minor_accounts)
+    command.call
+    organization.reload_minors_config
+    expect(organization.maximum_minor_accounts).to eq(maximum_minor_accounts)
+  end
+
   it "saves the minor authorization" do
     expect(organization.minors_authorization).not_to eq(minors_authorization)
     command.call
@@ -120,6 +135,7 @@ end
 shared_examples "creates minors configuration" do
   let(:minimum_minor_age) { 11 }
   let(:minimum_adult_age) { 15 }
+  let(:maximum_minor_accounts) { 5 }
   let(:minors_authorization) { "dummy_authorization_handler" }
   let(:tutors_authorization) { "postal_letter" }
   let(:organization) { Decidim::Organization.last }
@@ -140,6 +156,11 @@ shared_examples "creates minors configuration" do
   it "saves the adult age" do
     command.call
     expect(organization.minimum_adult_age).to eq(minimum_adult_age)
+  end
+
+  it "saves the number of accounts" do
+    command.call
+    expect(organization.maximum_minor_accounts).to eq(maximum_minor_accounts)
   end
 
   it "saves the minor authorization" do

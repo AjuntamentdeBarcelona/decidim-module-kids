@@ -4,7 +4,7 @@ en:
     attributes:
       organization:
         enable_minors_participation: Enable minors participation
-        maximum_minors_accounts: Maximum number of minors that can be assigned to
+        maximum_minor_accounts: Maximum number of minors that can be assigned to
           a tutor
         minimum_adult_age: Legal age of consent to create a minor account without
           parental permission

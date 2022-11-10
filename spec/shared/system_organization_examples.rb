@@ -19,6 +19,7 @@ shared_examples "updates organization" do |uncheck_minors|
     end
     fill_in "Minimum age to create a minor account", with: "11"
     fill_in "Legal age of consent to create a minor account without parental permission", with: "15"
+    fill_in "Maximum number of minors that can be assigned to a tutor", with: "2"
 
     select "Another example authorization (Direct)", from: "organization_minors_authorization"
 
@@ -36,6 +37,7 @@ shared_examples "updates organization" do |uncheck_minors|
     end
     expect(organization.minimum_minor_age).to eq(11)
     expect(organization.minimum_adult_age).to eq(15)
+    expect(organization.maximum_minor_accounts).to eq(2)
     expect(organization.minors_authorization).to eq("another_dummy_authorization_handler")
   end
 end
@@ -58,6 +60,7 @@ shared_examples "creates organization" do
     check "organization_enable_minors_participation"
     fill_in "Minimum age to create a minor account", with: "11"
     fill_in "Legal age of consent to create a minor account without parental permission", with: "15"
+    fill_in "Maximum number of minors that can be assigned to a tutor", with: "5"
 
     select "Another example authorization (Direct)", from: "organization_minors_authorization"
 
@@ -70,6 +73,7 @@ shared_examples "creates organization" do
     expect(organization).to be_minors_participation_enabled
     expect(organization.minimum_minor_age).to eq(11)
     expect(organization.minimum_adult_age).to eq(15)
+    expect(organization.maximum_minor_accounts).to eq(5)
     expect(organization.minors_authorization).to eq("another_dummy_authorization_handler")
   end
 end
