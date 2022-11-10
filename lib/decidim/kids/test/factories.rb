@@ -45,6 +45,6 @@ FactoryBot.define do
     user { create(:minor) }
     name { Faker::Name.name }
     email { Faker::Internet.email }
-    birthday { rand(11..14).years.ago }
+    birthday { rand(10..14).years.ago }
   end
 end
