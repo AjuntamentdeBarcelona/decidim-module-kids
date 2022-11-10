@@ -30,7 +30,7 @@ module Decidim
           return unless minor?
           return if minor_data_birthday.blank?
 
-          Time.zone.today.year - minor_data_birthday.year
+          ((Time.zone.now - minor_data_birthday.to_time) / 1.year.seconds).floor
         end
       end
     end

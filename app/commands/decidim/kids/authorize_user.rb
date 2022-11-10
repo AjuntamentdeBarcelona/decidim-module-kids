@@ -18,7 +18,7 @@ module Decidim
 
         Decidim::Kids.minor_authorization_age_attributes.detect do |attr|
           begin
-            age = Time.zone.today.year - Date.parse(handler.try(attr).to_s).year
+            age = ((Time.zone.now - Date.parse(handler.try(attr).to_s).to_time) / 1.year.seconds).floor
           rescue TypeError, ::Date::Error
             next
           end
