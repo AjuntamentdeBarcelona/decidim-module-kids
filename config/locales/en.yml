@@ -78,5 +78,5 @@ en:
       user_minors_helper:
         button_to_add_minor_account:
           add: Add a minor
-          minor_tos:
-            tos_agreement: You accept its Terms and Conditions
+        minor_tos:
+          tos_agreement: You accept its Terms and Conditions
