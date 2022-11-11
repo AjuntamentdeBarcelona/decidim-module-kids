@@ -45,18 +45,18 @@ module Decidim
       end
 
       def update
-        @form = minor_account_form
+        @form = form(Decidim::Kids::MinorAccountForm).from_params(params)
 
         return unless tutor_verified?
 
-        UpdateMinorAccount.call(@form, current_user, @minor_user) do
+        UpdateMinorAccount.call(@form, current_user, minor_user) do
           on(:ok) do
-            flash[:notice] = t("user_minors.create.success", scope: "decidim.kids")
+            flash[:notice] = t("user_minors.update.success", scope: "decidim.kids")
             redirect_to user_minors_path
           end
 
           on(:invalid) do
-            flash.now[:alert] = t("user_minors.create.error", scope: "decidim.kids")
+            flash.now[:alert] = t("user_minors.update.error", scope: "decidim.kids")
             render :edit
           end
         end

@@ -3,10 +3,10 @@
 module Decidim
   module Kids
     class UpdateMinorAccount < Decidim::Command
-      def initialize(form, current_user, minor)
-        @current_user = current_user
+      def initialize(form, current_user, minor_user)
         @form = form
-        @minor = minor
+        @current_user = current_user
+        @minor_user = minor_user
       end
 
       def call
@@ -25,12 +25,15 @@ module Decidim
       attr_reader :form
 
       def update_minor
-        Decidim::Kids::MinorData.traceability.update!({
-                                                        birthday: form.birthday,
-                                                        email: form.email,
-                                                        name: form.name,
-                                                        password: form.password
-                                                      })
+        @minor_user.update!(attributes)
+      end
+
+      def attributes
+        {
+          email: form.email,
+          name: form.name,
+          password: form.password
+        }
       end
 
       def send_email_minor

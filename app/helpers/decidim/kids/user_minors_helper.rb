@@ -16,7 +16,7 @@ module Decidim
       end
 
       def can_add_minor_account?
-        return if current_user.minors.count >= Decidim::Kids.maximum_minor_accounts
+        return if current_user.minors.count < Decidim::Kids.maximum_minor_accounts
 
         true
       end

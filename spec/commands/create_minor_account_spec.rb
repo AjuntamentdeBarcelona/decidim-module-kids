@@ -29,7 +29,7 @@ module Decidim::Kids
           birthday: "01/11/2009",
           password: "testpassword123456",
           password_confirmation: "testpassword123456",
-          tos_agreement: true,
+          tos_agreement: true
         }
       end
 
@@ -37,7 +37,7 @@ module Decidim::Kids
         {
           email: "test@example.com",
           name: "Mike",
-          organization: organization,
+          organization:,
           password: "testpassword123456",
           password_confirmation: "testpassword123456",
           nickname: "Mike",

@@ -72,3 +72,6 @@ en:
           authorize: Authorize my account
           needs_to_be_verified: In order to create a minor account, you must be verified
             using the "%{method}" method
+        update:
+          error: Errors occurred while updating a minor's account
+          success: Minor's account has been successfully updated
