@@ -42,9 +42,6 @@ en:
           sign_in: Sign in
           subject: Confirmation instructions
       minors_participation: Decidim Minors Participation
-      user_minors_helper:
-        button_to_add_minor:
-          add: Add a minor
       system:
         organizations:
           minors_form:
@@ -78,3 +75,8 @@ en:
         update:
           error: Errors occurred while updating a minor's account
           success: Minor's account has been successfully updated
+      user_minors_helper:
+        button_to_add_minor_account:
+          add: Add a minor
+          minor_tos:
+            tos_agreement: You accept its Terms and Conditions
