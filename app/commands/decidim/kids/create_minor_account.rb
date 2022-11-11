@@ -28,11 +28,11 @@ module Decidim
         @minor = Decidim::User.new(email: form.email,
                                    name: form.name,
                                    blocked: true,
-                                   organization: form.current_organization,
+                                   organization: @current_user.organization,
                                    password: form.password,
                                    tos_agreement: true,
                                    password_confirmation: form.password_confirmation,
-                                   nickname: Decidim::User.nicknamize(form.name, organization: form.current_organization),
+                                   nickname: Decidim::User.nicknamize(form.name, organization: @current_user.organization),
                                    minor_data: MinorData.new({
                                                                birthday: form.birthday,
                                                                email: form.email,
