@@ -15,6 +15,10 @@ module Decidim
         end
       end
 
+      def minor_tos
+        content_tag(:a, t(".tos_agreement"), href: "/pages/#{Decidim::StaticPage::DEFAULT_PAGES.join}")
+      end
+
       def can_add_minor_account?
         return if current_user.minors.count >= Decidim::Kids.maximum_minor_accounts
 
