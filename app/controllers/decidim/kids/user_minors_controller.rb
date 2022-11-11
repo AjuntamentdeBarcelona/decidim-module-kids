@@ -17,11 +17,11 @@ module Decidim
       end
 
       def new
-        @form = minor_account_form.instance
+        @form = form(Decidim::Kids::MinorAccountForm).instance
       end
 
       def create
-        @form = minor_account_form.from_params(params)
+        @form = form(Decidim::Kids::MinorAccountForm).from_params(params)
 
         return unless tutor_verified?
 
