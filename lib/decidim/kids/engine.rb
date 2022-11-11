@@ -38,11 +38,11 @@ module Decidim
         Decidim::System::RegisterOrganization.include(Decidim::Kids::System::RegisterOrganizationOverride)
       end
 
-      # initializer "decidim_kids.overrides", after: "decidim.action_controller" do
-      #   config.to_prepare do
-      #     # Controller overrides here
-      #   end
-      # end
+      initializer "decidim_kids.overrides", after: "decidim.action_controller" do
+        config.to_prepare do
+          Decidim::ApplicationController.include(Decidim::Kids::WritesMinorLog)
+        end
+      end
 
       initializer "decidim_kids.webpacker.assets_path" do
         Decidim.register_assets_path File.expand_path("app/packs", root)
