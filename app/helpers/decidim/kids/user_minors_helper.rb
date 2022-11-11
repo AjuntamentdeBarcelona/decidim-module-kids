@@ -13,7 +13,6 @@ module Decidim
         else
           content_tag(:a, t(".add"), class: "button small disabled")
         end
-
       end
 
       def can_add_minor_account?
