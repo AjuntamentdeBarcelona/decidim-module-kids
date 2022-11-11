@@ -55,8 +55,12 @@ en:
         create:
           error: Errors occurred while creating a minor's account
           success: Minor's account has been successfully created
+        edit:
+          edit_button: Update minor account
+          title: Edit minor account
         index:
           add: Add minor account
+          edit: Edit
           note: Maximum number of minors reached
         new:
           create: Create minor account

@@ -9,6 +9,8 @@ list my kids
     <br>
     Age:
     <% user.minor_age %>
+    <br>
+    <%= link_to t(".edit"), decidim_kids.edit_user_minor_path(user.id) %>
   </li>
 <% end %>
 <br>

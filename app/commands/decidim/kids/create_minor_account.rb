@@ -26,7 +26,7 @@ module Decidim
 
       def create_minor
         @minor = Decidim::User.new(email: form.email,
-                                   name: "Pending Minor Account",
+                                   name: form.name,
                                    blocked: true,
                                    organization: form.current_organization,
                                    password: form.password,
