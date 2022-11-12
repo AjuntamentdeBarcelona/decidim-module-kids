@@ -32,6 +32,7 @@ module Decidim
         {
           email: form.email,
           password: form.password,
+          password_confirmation: form.password,
           name: form.name
         }
       end
