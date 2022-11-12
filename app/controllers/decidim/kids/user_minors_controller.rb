@@ -49,7 +49,7 @@ module Decidim
 
         return unless tutor_verified?
 
-        UpdateMinorAccount.call(@form, current_user, minor_user) do
+        UpdateMinorAccount.call(@form, minor_user) do
           on(:ok) do
             flash[:notice] = t("user_minors.update.success", scope: "decidim.kids")
             redirect_to user_minors_path
@@ -69,7 +69,7 @@ module Decidim
       end
 
       def minor_account_form
-        @form = form(Decidim::Kids::MinorAccountForm).from_model(@minor_user)
+        @form = form(Decidim::Kids::MinorAccountForm).from_model(minor_user.minor_data)
       end
 
       def minor_user
