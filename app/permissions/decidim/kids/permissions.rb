@@ -16,11 +16,25 @@ module Decidim
             case permission_action.action
             when :index
               allow!
+            when :create
+              can_create_minor_account?
+            when :edit
+              can_edit_minor_account?
             end
           end
         end
 
         permission_action
+      end
+
+      private
+
+      def can_create_minor_account?
+        allow! if user.minors.count <= Decidim::Kids.maximum_minor_accounts
+      end
+
+      def can_edit_minor_account?
+        allow! if minor_user.tutors.include?(tutor)
       end
     end
   end

@@ -17,10 +17,14 @@ module Decidim
       end
 
       def new
+        enforce_permission_to :create, :minor_accounts
+
         @form = form(Decidim::Kids::MinorAccountForm).instance
       end
 
       def create
+        enforce_permission_to :create, :minor_accounts
+
         @form = form(Decidim::Kids::MinorAccountForm).from_params(params)
 
         return unless tutor_verified?
@@ -41,10 +45,14 @@ module Decidim
       def show; end
 
       def edit
+        enforce_permission_to :create, :minor_accounts, minor_user: minor_user, tutor: tutor
+
         @form = minor_account_form
       end
 
       def update
+        enforce_permission_to :create, :minor_accounts, minor_user: minor_user, tutor: tutor
+
         @form = form(Decidim::Kids::MinorAccountForm).from_params(params)
 
         return unless tutor_verified?
@@ -74,6 +82,10 @@ module Decidim
 
       def minor_user
         @minor_user = minors.find_by(id: params[:id])
+      end
+
+      def tutor
+        @tutor = minor_user.tutors.find_by(id: current_user.id)
       end
     end
   end
