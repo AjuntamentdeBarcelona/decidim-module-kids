@@ -36,7 +36,7 @@ module Decidim::Kids
     end
 
     context "when create action" do
-      let(:max_minors) {Decidim::Kids.maximum_minor_accounts}
+      let(:max_minors) { Decidim::Kids.maximum_minor_accounts }
       let(:action_name) { :create }
 
       context "when the maximum number of minors has been reached" do
@@ -52,15 +52,15 @@ module Decidim::Kids
       end
     end
 
-    # context "when edit action" do
-    #   let!(:minor) { create(:minor, tutor: user, organization:) }
-    #
-    #   let!(:action) do
-    #     { scope: :public, action: :edit, subject: :minor_accounts, minor_user: minor }
-    #   end
-    #
-    #   it { is_expected.to be true }
-    # end
+    context "when edit action" do
+      let!(:minor) { create(:minor, tutor: user, organization:) }
+
+      let!(:action) do
+        { scope: :public, action: :edit, subject: :minor_accounts, minor_user: minor }
+      end
+
+      it { is_expected.to be true }
+    end
 
     context "when other action" do
       let(:action_name) { :other_action }

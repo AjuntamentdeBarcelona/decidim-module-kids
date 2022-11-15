@@ -37,7 +37,7 @@ module Decidim
                                                                birthday: form.birthday,
                                                                email: form.email,
                                                                name: form.name,
-                                                               password: form.password
+                                                               # password: form.password
                                                              }))
 
         @minor.skip_confirmation!

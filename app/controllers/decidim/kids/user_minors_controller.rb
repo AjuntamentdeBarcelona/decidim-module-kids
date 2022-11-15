@@ -27,8 +27,6 @@ module Decidim
 
         @form = form(Decidim::Kids::MinorAccountForm).from_params(params)
 
-        return unless tutor_verified?
-
         CreateMinorAccount.call(@form, current_user) do
           on(:ok) do
             flash[:notice] = t("user_minors.create.success", scope: "decidim.kids")
@@ -42,8 +40,6 @@ module Decidim
         end
       end
 
-      def show; end
-
       def edit
         enforce_permission_to :edit, :minor_accounts, minor_user: minor_user
 
@@ -54,8 +50,6 @@ module Decidim
         enforce_permission_to :edit, :minor_accounts, minor_user: minor_user
 
         @form = form(Decidim::Kids::MinorAccountForm).from_params(params)
-
-        return unless tutor_verified?
 
         UpdateMinorAccount.call(@form, minor_user) do
           on(:ok) do
@@ -77,11 +71,11 @@ module Decidim
       end
 
       def minor_account_form
-        @form = form(Decidim::Kids::MinorAccountForm).from_model(minor_user.minor_data)
+        @form ||= form(Decidim::Kids::MinorAccountForm).from_model(minor_user.minor_data)
       end
 
       def minor_user
-        @minor_user = minors.find_by(id: params[:id])
+        @minor_user ||= minors.find_by(id: params[:id])
       end
     end
   end

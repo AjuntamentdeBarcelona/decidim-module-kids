@@ -13,7 +13,6 @@ module Decidim
       encrypt_attribute :name, type: :string
       encrypt_attribute :email, type: :string
       encrypt_attribute :birthday, type: :string
-      encrypt_attribute :password, type: :string
 
       validate :user_is_minor
 
