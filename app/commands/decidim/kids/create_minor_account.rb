@@ -14,7 +14,6 @@ module Decidim
 
         transaction do
           create_minor
-          send_email_minor
         end
 
         broadcast(:ok, minor_user)
@@ -45,10 +44,6 @@ module Decidim
         MinorAccount.create!(tutor: @current_user, minor: @minor_user)
         @minor_user.minor_data.save!
         @minor_user
-      end
-
-      def send_email_minor
-        Decidim::Kids::MinorNotificationsMailer.confirmation(@minor_user).deliver_later
       end
     end
   end
