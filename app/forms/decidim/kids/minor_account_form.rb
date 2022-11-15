@@ -18,10 +18,20 @@ module Decidim
       validates :password, presence: true, password: { name: :name, email: :email, username: :nickname }
       validates :password_confirmation, presence: true, if: :password_present
 
+      validate :valid_minor_age
+
       private
 
       def password_present
         password.present?
+      end
+
+      def valid_minor_age
+        min_minor_age = Decidim::Kids.minimum_minor_age
+        minimum_adult_age = Decidim::Kids.minimum_adult_age
+        minor_age = ((Time.zone.now - birthday.to_time) / 1.year.seconds).floor
+
+        errors.add(:birthday, I18n.t("decidim.kids.minor_account.form.invalid_age")) unless minor_age.between?(min_minor_age, minimum_adult_age - 1)
       end
     end
   end

@@ -35,6 +35,9 @@ en:
           invalid_age: We could not verify the minor account because the authorization
             method does not provide the birthday attribute or this one is not in the
             accepted range.
+      minor_account:
+        form:
+          invalid_age: Invalid age
       minor_notifications_mailer:
         confirmation:
           body: Instructions

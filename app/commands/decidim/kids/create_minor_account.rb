@@ -36,8 +36,7 @@ module Decidim
                                    minor_data: MinorData.new({
                                                                birthday: form.birthday,
                                                                email: form.email,
-                                                               name: form.name,
-                                                               # password: form.password
+                                                               name: form.name
                                                              }))
 
         @minor.skip_confirmation!

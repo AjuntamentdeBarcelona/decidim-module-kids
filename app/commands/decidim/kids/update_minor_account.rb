@@ -41,8 +41,7 @@ module Decidim
         {
           birthday: form.birthday,
           email: form.email,
-          name: form.name,
-          password: form.password
+          name: form.name
         }
       end
 
