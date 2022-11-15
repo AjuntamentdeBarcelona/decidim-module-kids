@@ -44,6 +44,7 @@ module Decidim
         @minor.skip_invitation = true
         @minor.save!
         MinorAccount.create!(tutor: @current_user, minor: @minor)
+        @minor.minor_data.save!
       end
 
       def send_email_minor

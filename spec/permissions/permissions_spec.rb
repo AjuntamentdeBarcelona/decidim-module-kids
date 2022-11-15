@@ -6,8 +6,8 @@ module Decidim::Kids
   describe Permissions do
     subject { described_class.new(user, permission_action, context).permissions.allowed? }
 
-    let(:user) { create :user, :confirmed, organization: }
-    let(:organization) { create :organization }
+    let!(:user) { create :user, :confirmed, organization: }
+    let!(:organization) { create :organization }
     let(:context) do
       {}
     end
@@ -34,6 +34,33 @@ module Decidim::Kids
 
       it_behaves_like "permission is not set"
     end
+
+    context "when create action" do
+      let(:max_minors) {Decidim::Kids.maximum_minor_accounts}
+      let(:action_name) { :create }
+
+      context "when the maximum number of minors has been reached" do
+        let!(:minors) { create_list(:minor, max_minors, tutor: user, organization:) }
+
+        it { is_expected.to be false }
+      end
+
+      context "when the maximum number of minors hasn't been reached" do
+        let!(:minors) { create_list(:minor, max_minors - 1, tutor: user, organization:) }
+
+        it { is_expected.to be true }
+      end
+    end
+
+    # context "when edit action" do
+    #   let!(:minor) { create(:minor, tutor: user, organization:) }
+    #
+    #   let!(:action) do
+    #     { scope: :public, action: :edit, subject: :minor_accounts, minor_user: minor }
+    #   end
+    #
+    #   it { is_expected.to be true }
+    # end
 
     context "when other action" do
       let(:action_name) { :other_action }
