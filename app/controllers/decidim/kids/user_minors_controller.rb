@@ -28,9 +28,9 @@ module Decidim
         @form = form(Decidim::Kids::MinorAccountForm).from_params(params)
 
         CreateMinorAccount.call(@form, current_user) do
-          on(:ok) do
+          on(:ok) do |minor_user|
             flash[:notice] = t("user_minors.create.success", scope: "decidim.kids")
-            redirect_to user_minors_path
+            redirect_to decidim_kids.new_user_minor_authorization_path(user_minor_id: minor_user.id)
           end
 
           on(:invalid) do

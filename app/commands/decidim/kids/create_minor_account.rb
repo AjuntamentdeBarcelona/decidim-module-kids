@@ -17,37 +17,38 @@ module Decidim
           send_email_minor
         end
 
-        broadcast(:ok)
+        broadcast(:ok, minor_user)
       end
 
       private
 
-      attr_reader :form
+      attr_reader :form, :minor_user
 
       def create_minor
-        @minor = Decidim::User.new(email: form.email,
-                                   name: form.name,
-                                   blocked: true,
-                                   organization: @current_user.organization,
-                                   password: form.password,
-                                   tos_agreement: true,
-                                   password_confirmation: form.password_confirmation,
-                                   nickname: Decidim::User.nicknamize(form.name, organization: @current_user.organization),
-                                   minor_data: MinorData.new({
-                                                               birthday: form.birthday,
-                                                               email: form.email,
-                                                               name: form.name
-                                                             }))
+        @minor_user = Decidim::User.new(email: form.email,
+                                        name: form.name,
+                                        blocked: true,
+                                        organization: @current_user.organization,
+                                        password: form.password,
+                                        tos_agreement: true,
+                                        password_confirmation: form.password_confirmation,
+                                        nickname: Decidim::User.nicknamize(form.name, organization: @current_user.organization),
+                                        minor_data: MinorData.new({
+                                                                    birthday: form.birthday,
+                                                                    email: form.email,
+                                                                    name: form.name
+                                                                  }))
 
-        @minor.skip_confirmation!
-        @minor.skip_invitation = true
-        @minor.save!
-        MinorAccount.create!(tutor: @current_user, minor: @minor)
-        @minor.minor_data.save!
+        @minor_user.skip_confirmation!
+        @minor_user.skip_invitation = true
+        @minor_user.save!
+        MinorAccount.create!(tutor: @current_user, minor: @minor_user)
+        @minor_user.minor_data.save!
+        @minor_user
       end
 
       def send_email_minor
-        Decidim::Kids::MinorNotificationsMailer.confirmation(@minor).deliver_later
+        Decidim::Kids::MinorNotificationsMailer.confirmation(@minor_user).deliver_later
       end
     end
   end
