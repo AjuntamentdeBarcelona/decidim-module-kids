@@ -13,10 +13,11 @@ module Decidim
       attribute :tos_agreement, Boolean
 
       validates :name, presence: true
-      validates :birthday, presence: true # format: { with: /\A\d{8}\z/ }
+      validates :birthday, presence: true
       validates :email, presence: true, "valid_email_2/email": { disposable: true }
       validates :password, presence: true, password: { name: :name, email: :email, username: :nickname }
       validates :password_confirmation, presence: true, if: :password_present
+      validates :tos_agreement, presence: true
 
       validate :valid_minor_age
 
@@ -29,9 +30,9 @@ module Decidim
       def valid_minor_age
         min_minor_age = Decidim::Kids.minimum_minor_age
         minimum_adult_age = Decidim::Kids.minimum_adult_age
-        minor_age = ((Time.zone.now - birthday.to_time) / 1.year.seconds).floor
+        minor_age = ((Time.zone.now - birthday&.to_time) / 1.year.seconds).floor if birthday.present?
 
-        errors.add(:birthday, I18n.t("decidim.kids.minor_account.form.invalid_age")) unless minor_age.between?(min_minor_age, minimum_adult_age - 1)
+        errors.add(:birthday, I18n.t("decidim.kids.minor_account.form.invalid_age")) unless minor_age&.between?(min_minor_age, minimum_adult_age - 1)
       end
     end
   end
