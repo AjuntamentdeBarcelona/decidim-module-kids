@@ -38,7 +38,7 @@ module Decidim::Kids
     context "when valid" do
       it "updates the user's name" do
         form.name = "Marco"
-        byebug
+
         expect { command.call }.to broadcast(:ok)
         expect(minor.reload.name).to eq("Marco")
       end
