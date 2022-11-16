@@ -8,7 +8,7 @@ module Decidim
 
       helper_method :minors, :minor_user, :minor_account_form
 
-      before_action :minor_user, only: [:show, :edit, :update]
+      before_action :minor_user, only: [:edit, :update]
 
       def index; end
 
@@ -27,12 +27,10 @@ module Decidim
 
         @form = form(Decidim::Kids::MinorAccountForm).from_params(params)
 
-        return unless tutor_verified?
-
         CreateMinorAccount.call(@form, current_user) do
-          on(:ok) do
+          on(:ok) do |minor_user|
             flash[:notice] = t("user_minors.create.success", scope: "decidim.kids")
-            redirect_to user_minors_path
+            redirect_to decidim_kids.new_user_minor_authorization_path(user_minor_id: minor_user.id)
           end
 
           on(:invalid) do
@@ -41,8 +39,6 @@ module Decidim
           end
         end
       end
-
-      def show; end
 
       def edit
         enforce_permission_to :edit, :minor_accounts, minor_user: minor_user
@@ -54,8 +50,6 @@ module Decidim
         enforce_permission_to :edit, :minor_accounts, minor_user: minor_user
 
         @form = form(Decidim::Kids::MinorAccountForm).from_params(params)
-
-        return unless tutor_verified?
 
         UpdateMinorAccount.call(@form, minor_user) do
           on(:ok) do
@@ -77,11 +71,11 @@ module Decidim
       end
 
       def minor_account_form
-        @form = form(Decidim::Kids::MinorAccountForm).from_model(minor_user.minor_data)
+        @form ||= form(Decidim::Kids::MinorAccountForm).from_model(minor_user.minor_data)
       end
 
       def minor_user
-        @minor_user = minors.find_by(id: params[:id])
+        @minor_user ||= minors.find_by(id: params[:id])
       end
     end
   end

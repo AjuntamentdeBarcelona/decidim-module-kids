@@ -11,10 +11,7 @@ module Decidim
       def call
         return broadcast(:invalid) if form.invalid?
 
-        transaction do
-          update_minor
-          send_email_minor
-        end
+        update_minor
 
         broadcast(:ok)
       end
@@ -41,13 +38,8 @@ module Decidim
         {
           birthday: form.birthday,
           email: form.email,
-          name: form.name,
-          password: form.password
+          name: form.name
         }
-      end
-
-      def send_email_minor
-        Decidim::Kids::MinorNotificationsMailer.confirmation(@minor_user).deliver_later
       end
     end
   end

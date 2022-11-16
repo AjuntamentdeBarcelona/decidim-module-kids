@@ -7,25 +7,7 @@
         <%= decidim_form_for(@form, url: user_minor_path(minor_user)) do |form| %>
           <%= form_required_explanation %>
 
-          <div class="field">
-            <%= form.text_field :name, class: "js-hashtags" %>
-          </div>
-
-          <div class="field">
-            <%= form.date_field :birthday, class: "js-hashtags" %>
-          </div>
-
-          <div class="field">
-            <%= form.email_field :email, class: "js-hashtags" %>
-          </div>
-
-          <div class="field">
-            <%= form.password_field :password %>
-          </div>
-
-          <div class="field">
-            <%= form.password_field :password_confirmation %>
-          </div>
+          <%= render partial: "form_fields", locals: { form: form } %>
 
           <div class="actions">
             <%= form.submit t(".edit_button"), class: "button expanded mt-s mb-none", data: { disable: true } %>
