@@ -56,8 +56,14 @@ module Decidim::Kids
     context "when edit action" do
       let(:action_name) { :edit }
 
+      let(:context) do
+        {
+          minor_user: minor
+        }
+      end
+
       let(:action) do
-        { scope: :public, action: action_name, subject: action_subject, minor_user: minor }
+        { scope: :public, action: action_name, subject: action_subject }
       end
 
       it { is_expected.to be true }
