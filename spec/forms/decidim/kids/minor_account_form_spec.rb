@@ -10,24 +10,26 @@ module Decidim
       let(:user) { create(:user, :confirmed, organization:) }
       let(:organization) { user.organization }
 
+      let(:name) { "Marco" }
+      let(:email) { "marco@example.org" }
+      let(:birthday) { "01/11/2010" }
+      let(:password) { "password123456" }
+      let(:password_confirmation) { password }
+      let(:tos_agreement) { true }
+
       let(:params) do
         {
           name:,
           email:,
           birthday:,
           password:,
-          password_confirmation:
+          password_confirmation:,
+          tos_agreement:
         }
       end
 
-      let(:name) { "Marco" }
-      let(:email) { "marco@example.org" }
-      let(:birthday) { "01/11/2010" }
-      let(:password) { "password123456" }
-      let(:password_confirmation) { password }
-
       let(:form) do
-        described_class.new(params)
+        described_class.from_params(params)
       end
 
       context "when everything is OK" do
@@ -80,6 +82,12 @@ module Decidim
 
           it { is_expected.to be_invalid }
         end
+      end
+
+      context "when tos_agreement is not accepted" do
+        let(:tos_agreement) { false }
+
+        it { is_expected.not_to be_valid }
       end
     end
   end

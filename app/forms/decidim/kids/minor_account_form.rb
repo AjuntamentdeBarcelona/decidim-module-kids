@@ -17,11 +17,18 @@ module Decidim
       validates :email, presence: true, "valid_email_2/email": { disposable: true }
       validates :password, presence: true, password: { name: :name, email: :email, username: :nickname }
       validates :password_confirmation, presence: true, if: :password_present
-      validates :tos_agreement, presence: true, on: :create
+      validates :tos_agreement, acceptance: true
 
       validate :valid_minor_age
+      validate :agreement, on: :create
 
       private
+
+      def agreement
+        return if tos_agreement.present?
+
+        errors.add(:tos_agreement, :invalid)
+      end
 
       def password_present
         password.present?
