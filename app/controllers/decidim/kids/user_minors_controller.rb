@@ -8,7 +8,7 @@ module Decidim
 
       helper_method :minors, :minor_user, :minor_account_form
 
-      before_action :minor_user, only: [:show, :edit, :update]
+      before_action :minor_user, only: [:edit, :update]
 
       def index; end
 
