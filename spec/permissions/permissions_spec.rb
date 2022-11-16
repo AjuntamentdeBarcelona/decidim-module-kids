@@ -6,8 +6,9 @@ module Decidim::Kids
   describe Permissions do
     subject { described_class.new(user, permission_action, context).permissions.allowed? }
 
-    let!(:user) { create :user, :confirmed, organization: }
-    let!(:organization) { create :organization }
+    let(:organization) { create :organization }
+    let(:user) { create(:user, :confirmed, organization:) }
+    let(:minor) { create(:minor, tutor: user, organization:) }
     let(:context) do
       {}
     end
@@ -53,10 +54,10 @@ module Decidim::Kids
     end
 
     context "when edit action" do
-      let!(:minor) { create(:minor, tutor: user, organization:) }
+      let(:action_name) { :edit }
 
-      let!(:action) do
-        { scope: :public, action: :edit, subject: :minor_accounts, minor_user: minor }
+      let(:action) do
+        { scope: :public, action: action_name, subject: action_subject, minor_user: minor }
       end
 
       it { is_expected.to be true }
