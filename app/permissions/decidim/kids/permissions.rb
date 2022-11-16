@@ -9,7 +9,8 @@ module Decidim
 
         return permission_action unless user
 
-        if permission_action.subject == :minor_accounts
+        case permission_action.subject
+        when :minor_accounts
           if !user.organization.minors_participation_enabled? || user.minor? || !user.confirmed?
             disallow!
           else
@@ -17,6 +18,12 @@ module Decidim
             when :index
               allow!
             end
+          end
+        when :authorizations
+          if !user.organization.minors_participation_enabled? || user.minor?
+            disallow!
+          else
+            allow!
           end
         end
 

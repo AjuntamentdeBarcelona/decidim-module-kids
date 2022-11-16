@@ -38,11 +38,11 @@ module Decidim
         Decidim::System::RegisterOrganization.include(Decidim::Kids::System::RegisterOrganizationOverride)
       end
 
-      # initializer "decidim_kids.overrides", after: "decidim.action_controller" do
-      #   config.to_prepare do
-      #     # Controller overrides here
-      #   end
-      # end
+      initializer "decidim_kids.overrides", after: "decidim.action_controller" do
+        config.to_prepare do
+          Decidim::Verifications::ApplicationController.include(Decidim::Kids::NeedsAdultPermission)
+        end
+      end
 
       initializer "decidim_kids.webpacker.assets_path" do
         Decidim.register_assets_path File.expand_path("app/packs", root)
@@ -55,6 +55,7 @@ module Decidim
                         decidim_kids.user_minors_path,
                         position: 1.4,
                         if: allowed_to?(:index, :minor_accounts, {}, [::Decidim::Kids::Permissions], current_user)
+          menu.remove_item(:authorizations) unless allowed_to?(nil, :authorizations, {}, [::Decidim::Kids::Permissions], current_user)
         end
       end
     end
