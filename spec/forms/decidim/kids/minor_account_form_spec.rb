@@ -16,8 +16,7 @@ module Decidim
           email:,
           birthday:,
           password:,
-          password_confirmation:,
-          tos_agreement:
+          password_confirmation:
         }
       end
 
@@ -26,7 +25,6 @@ module Decidim
       let(:birthday) { "01/11/2010" }
       let(:password) { "password123456" }
       let(:password_confirmation) { password }
-      let(:tos_agreement) { true }
 
       let(:form) do
         described_class.new(params)
@@ -82,12 +80,6 @@ module Decidim
 
           it { is_expected.to be_invalid }
         end
-      end
-
-      context "when tos_agreement is blank" do
-        let(:tos_agreement) { "" }
-
-        it { is_expected.not_to be_valid }
       end
     end
   end

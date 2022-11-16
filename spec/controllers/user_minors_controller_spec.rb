@@ -81,7 +81,7 @@ module Decidim::Kids
       context "when the form is valid" do
         it "creates a minor" do
           expect do
-            post :create, params: params
+            post :create, params:
           end.to change(MinorAccount, :count).by(1)
 
           expect(flash[:notice]).to eq("Minor's account has been successfully created")
@@ -114,6 +114,7 @@ module Decidim::Kids
             minor_user: minor_params
           }
         end
+
         context "when the form is valid" do
           it "updates the minor" do
             patch :update, params: params
