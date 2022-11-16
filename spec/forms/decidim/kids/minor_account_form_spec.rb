@@ -12,12 +12,12 @@ module Decidim
 
       let(:params) do
         {
-          name: name,
-          email: email,
-          birthday: birthday,
-          password: password,
-          password_confirmation: password_confirmation,
-          tos_agreement: tos_agreement
+          name:,
+          email:,
+          birthday:,
+          password:,
+          password_confirmation:,
+          tos_agreement:
         }
       end
 
