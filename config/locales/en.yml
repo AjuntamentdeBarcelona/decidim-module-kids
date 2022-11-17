@@ -8,8 +8,8 @@ en:
           tutor
         maximum_minor_age: Maximum age for a person to be considered a minor
         minimum_minor_age: Minimum age allowed to create a minor account
-        minors_authorization: Auhorization method for validating the minor's account
-        tutors_authorization: Auhorization method for validating the tutor's account
+        minors_authorization: Authorization method for validating the minor's account
+        tutors_authorization: Authorization method for validating the tutor's account
     errors:
       models:
         organization:
