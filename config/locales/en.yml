@@ -4,9 +4,10 @@ en:
     attributes:
       organization:
         enable_minors_participation: Enable minors participation
-        minimum_adult_age: Legal age of consent to create a minor account without
-          parental permission
-        minimum_minor_age: Minimum age to create a minor account
+        maximum_minor_accounts: Maximum number of minors that can be assigned to a
+          tutor
+        maximum_minor_age: Maximum age for a person to be considered a minor
+        minimum_minor_age: Minimum age allowed to create a minor account
         minors_authorization: Authorization method for validating the minor's account
         tutors_authorization: Authorization method for validating the tutor's account
     errors:
@@ -20,7 +21,7 @@ en:
       registrations:
         new:
           create_an_account: create an account
-          minors_description: Are you under %{minimum_adult_age}? Call your parents
+          minors_description: Are you under %{maximum_minor_age}? Call your parents
             and check with them how you can %{link}
           minors_title: Minors Participation
     kids:
@@ -33,6 +34,15 @@ en:
           invalid_age: We could not verify the minor account because the authorization
             method does not provide the birthday attribute or this one is not in the
             accepted range.
+      minor_account:
+        form:
+          invalid_age: Invalid age
+      minor_notifications_mailer:
+        confirmation:
+          body: Instructions
+          greeting: Welcome, %{recipient}!
+          sign_in: Sign in
+          subject: Confirmation instructions
       minors_participation: Decidim Minors Participation
       system:
         organizations:
@@ -44,9 +54,32 @@ en:
       user:
         menu: My minor accounts
       user_minors:
+        create:
+          error: Errors occurred while creating a minor's account
+          success: Minor's account has been successfully created
+        edit:
+          edit_button: Update minor account
+          title: Edit minor account
+        index:
+          add: Add a minor
+          edit: Edit
+          note: Maximum number of minors reached
+        new:
+          create: Create minor account
+          title: Add a minor
         no_tutor_authorization: Minors module is misconfigured, please contact the
           administrator.
+        tos_field:
+          tos_agreement: You accept its Terms and Conditions
         unverified:
           authorize: Authorize my account
           needs_to_be_verified: In order to create a minor account, you must be verified
             using the "%{method}" method
+        update:
+          error: Errors occurred while updating a minor's account
+          success: Minor's account has been successfully updated
+      user_minors_helper:
+        button_to_add_minor_account:
+          add: Add a minor
+        minor_tos:
+          tos_agreement: You accept its Terms and Conditions

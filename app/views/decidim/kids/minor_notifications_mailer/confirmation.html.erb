@@ -1,0 +1,7 @@
+<p class="email-greeting"><%= t(".greeting", recipient: @user.email) %></p>
+
+<p class="email-instructions"><%= t(".body") %></p>
+
+<p class="email-button email-button__cta">
+  <%= link_to t(".sign_in"), decidim.new_user_session_path %></p>
+</p>

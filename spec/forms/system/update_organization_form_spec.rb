@@ -17,15 +17,17 @@ module Decidim::System
         users_registration_mode: "enabled",
         enable_minors_participation:,
         minimum_minor_age:,
-        minimum_adult_age:,
+        maximum_minor_age:,
         minors_authorization:,
-        tutors_authorization:
+        tutors_authorization:,
+        maximum_minor_accounts:
       )
     end
 
     let(:enable_minors_participation) { false }
     let(:minimum_minor_age) { 10 }
-    let(:minimum_adult_age) { 14 }
+    let(:maximum_minor_age) { 13 }
+    let(:maximum_minor_accounts) { 4 }
     let(:minors_authorization) { "dummy_authorization_handler" }
     let(:tutors_authorization) { "dummy_authorization_handler" }
 
@@ -34,7 +36,7 @@ module Decidim::System
 
       it "matches ages" do
         expect(subject.minimum_minor_age).to eq(minimum_minor_age)
-        expect(subject.minimum_adult_age).to eq(minimum_adult_age)
+        expect(subject.maximum_minor_age).to eq(maximum_minor_age)
       end
 
       context "and minor age is wrong" do
@@ -44,13 +46,19 @@ module Decidim::System
       end
 
       context "and adult age is wrong" do
-        let(:minimum_adult_age) { 0 }
+        let(:maximum_minor_age) { 0 }
+
+        it { is_expected.to be_valid }
+      end
+
+      context "and maximum number of accounts is wrong" do
+        let(:maximum_minor_accounts) { 0 }
 
         it { is_expected.to be_valid }
       end
 
       context "and adult is lower than minor" do
-        let(:minimum_adult_age) { 9 }
+        let(:maximum_minor_age) { 9 }
 
         it { is_expected.to be_valid }
       end
@@ -75,7 +83,7 @@ module Decidim::System
 
       it "matches ages" do
         expect(subject.minimum_minor_age).to eq(minimum_minor_age)
-        expect(subject.minimum_adult_age).to eq(minimum_adult_age)
+        expect(subject.maximum_minor_age).to eq(maximum_minor_age)
       end
 
       it "authorization is registered" do
@@ -90,13 +98,13 @@ module Decidim::System
       end
 
       context "and adult age is wrong" do
-        let(:minimum_adult_age) { 0 }
+        let(:maximum_minor_age) { 0 }
 
         it { is_expected.to be_invalid }
       end
 
       context "and adult is lower than minor" do
-        let(:minimum_adult_age) { 9 }
+        let(:maximum_minor_age) { 9 }
 
         it { is_expected.to be_invalid }
       end
