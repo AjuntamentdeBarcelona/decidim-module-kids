@@ -63,6 +63,8 @@ module Decidim
       end
 
       def destroy
+        enforce_permission_to :delete, :minor_accounts, minor_user: minor_user
+
         DestroyMinorAccount.call(minor_user, minor_account) do
           on(:ok) do
             flash[:notice] = t("user_minors.destroy.success", scope: "decidim.kids")

@@ -10,13 +10,17 @@ list my kids
     Age:
     <%= user.minor_age %>
     <br>
-    <%= link_to t(".edit"), decidim_kids.edit_user_minor_path(user.id) %>
+    <% if allowed_to? :edit, :minor_accounts, minor_user: user %>
+      <%= link_to t(".edit"), decidim_kids.edit_user_minor_path(user.id) %>
+    <% end %>
     <br>
-    <%= icon_link_to "circle-x", decidim_kids.user_minor_path(user.id),
-                     t('.destroy_button'),
-                     method: :delete,
-                     data: { confirm: t('.confirm') },
-                     class: "action-icon action-icon--remove" %>
+    <% if allowed_to? :delete, :minor_accounts, minor_user: user %>
+      <%= icon_link_to "circle-x", decidim_kids.user_minor_path(user.id),
+                       t('.destroy_button'),
+                       method: :delete,
+                       data: { confirm: t('.confirm') },
+                       class: "action-icon action-icon--remove" %>
+    <% end %>
   </li>
 <% end %>
 <br>
