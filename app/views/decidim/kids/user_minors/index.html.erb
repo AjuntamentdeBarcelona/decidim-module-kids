@@ -11,6 +11,12 @@ list my kids
     <%= user.minor_age %>
     <br>
     <%= link_to t(".edit"), decidim_kids.edit_user_minor_path(user.id) %>
+    <br>
+    <%= icon_link_to "circle-x", decidim_kids.user_minor_path(user.id),
+                     t('.destroy_button'),
+                     method: :delete,
+                     data: { confirm: t('.confirm') },
+                     class: "action-icon action-icon--remove" %>
   </li>
 <% end %>
 <br>
