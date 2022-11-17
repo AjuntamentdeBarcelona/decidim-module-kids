@@ -2,13 +2,12 @@
 
 module Decidim
   module Kids
-    module NeedsAdultPermission
+    module HasMinorsPermissions
       extend ActiveSupport::Concern
-      include HasMinorsPermissions
 
       included do
-        before_action do
-          enforce_permission_to :all, :authorizations
+        def permission_class_chain
+          super + [::Decidim::Kids::Permissions]
         end
       end
     end

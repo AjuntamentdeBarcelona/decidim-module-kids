@@ -7,6 +7,8 @@ module Decidim::Kids
     subject { described_class.new(user, permission_action, context).permissions.allowed? }
 
     let(:user) { create :user, :confirmed, organization: }
+    let(:other_user) { create :user, :confirmed, organization: }
+    let(:another_user) { create :user, :confirmed, organization: }
     let(:organization) { create :organization }
     let(:context) do
       {}
@@ -63,6 +65,148 @@ module Decidim::Kids
       let(:is_minor) { true }
 
       it { is_expected.to be false }
+    end
+
+    context "when user is trying to access authorizations" do
+      let(:action_name) { :all }
+      let(:action_subject) { :authorizations }
+
+      context "when user is not a minor" do
+        it { is_expected.to be true }
+      end
+
+      context "when user is a minor" do
+        let(:is_minor) { true }
+
+        it { is_expected.to be false }
+      end
+    end
+
+    context "when user is trying to create a conversation with other users" do
+      let(:action_name) { :create }
+      let(:action_subject) { :conversation }
+      let(:context) { { conversation: } }
+      let(:conversation) do
+        Decidim::Messaging::Conversation.create(participants: [user, other_user, another_user])
+      end
+
+      context "when participants are minors" do
+        before do
+          allow(other_user).to receive(:minor?).and_return(true)
+          allow(another_user).to receive(:minor?).and_return(true)
+        end
+
+        context "when user is an adult" do
+          it { is_expected.to be false }
+        end
+
+        context "when user is a minor" do
+          before do
+            allow(user).to receive(:minor?).and_return(true)
+          end
+
+          it { is_expected.to be true }
+        end
+      end
+
+      context "when participants are adults" do
+        context "when user is an adult" do
+          it { is_expected.to be true }
+        end
+
+        context "when user is a minor" do
+          before do
+            allow(user).to receive(:minor?).and_return(true)
+          end
+
+          it { is_expected.to be false }
+        end
+      end
+
+      context "when participants are a mix of adults and minors" do
+        before do
+          allow(another_user).to receive(:minor?).and_return(true)
+        end
+
+        context "when user is an adult" do
+          it { is_expected.to be false }
+        end
+
+        context "when user is a minor" do
+          before do
+            allow(user).to receive(:minor?).and_return(true)
+          end
+
+          it { is_expected.to be false }
+        end
+      end
+
+#      context "when participants are a group of users" do
+#        let(:user_group) { create(:user_group, :verified) }
+#        let(:conversation) do
+#          Decidim::Messaging::Conversation.create(participants: [user, user_group])
+#        end
+#
+#        before do
+#          create(:user_group_membership, user: other_user, user_group:)
+#          create(:user_group_membership, user: another_user, user_group:, role: :member)
+#        end
+#
+#        context "when the group of user are minors" do
+#          before do
+#            allow(other_user).to receive(:minor?).and_return(true)
+#            allow(another_user).to receive(:minor?).and_return(true)
+#          end
+#
+#          context "when user is an adult" do
+#            it { is_expected.to be false }
+#          end
+#
+#          context "when user is a minor" do
+#            before do
+#              allow(user).to receive(:minor?).and_return(true)
+#            end
+#
+#            it { is_expected.to be true }
+#          end
+#        end
+#
+#        context "when the group of user are adults" do
+#          before do
+#            allow(another_user).to receive(:minor?).and_return(true)
+#          end
+#
+#          context "when user is an adult" do
+#            it { is_expected.to be true }
+#          end
+#
+#          context "when user is a minor" do
+#            before do
+#              allow(user).to receive(:minor?).and_return(true)
+#            end
+#
+#            it { is_expected.to be false }
+#          end
+#        end
+#
+#        context "when the group of user is a mix of adults and minors" do
+#          before do
+#            allow(another_user).to receive(:minor?).and_return(true)
+#          end
+#
+#          context "when user is an adult" do
+#            it { is_expected.to be false }
+#          end
+#
+#          context "when user is a minor" do
+#            before do
+#              allow(user).to receive(:minor?).and_return(true)
+#            end
+#
+#            it { is_expected.to be false }
+#          end
+#        end
+#      end
     end
   end
 end
