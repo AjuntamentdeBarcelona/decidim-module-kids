@@ -2,6 +2,7 @@
 
 require "spec_helper"
 require "shared/user_minors_examples"
+require "shared/user_minors_crud_examples"
 
 describe "User manages minor accounts", type: :system do
   let(:organization) { user.organization }
@@ -39,6 +40,8 @@ describe "User manages minor accounts", type: :system do
     end
 
     it_behaves_like "user minors enabled"
+    it_behaves_like "creates minor accounts"
+    it_behaves_like "updates minor accounts"
 
     describe "user minors CRUD" do
       let!(:authorization) { create(:authorization, user:, name: organization.tutors_authorization) }
