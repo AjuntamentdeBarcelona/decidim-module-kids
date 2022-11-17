@@ -47,9 +47,9 @@ Decidim::Kids.configure do |config|
     10
   end
 
-  # Default value for the legal age of consent to create a minor account without parental permission
-  config_accessor :minimum_adult_age do
-    14
+  # Default value for the maximum age of a person to be considered a minor (1 year than this number will consider the user an adult)
+  config_accessor :maximum_minor_age do
+    13
   end
 end
 ```

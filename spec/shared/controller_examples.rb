@@ -49,8 +49,33 @@ shared_examples "checks tutor authorization" do
     let(:tutor_authorization) { nil }
 
     it "redirects the user" do
-      get view, params: params
+      case view
+      when :create
+        post view, params:
+      when :update
+        patch view, params:
+      else
+        get view, params:
+      end
       expect(response).to redirect_to(unverified_user_minors_path)
+    end
+  end
+
+  context "when tutor's handler is not configured" do
+    before do
+      allow(organization).to receive(:tutors_authorization).and_return(nil)
+    end
+
+    it "redirects the user back" do
+      case view
+      when :create
+        post view, params:
+      when :update
+        patch view, params:
+      else
+        get view, params:
+      end
+      expect(response).to redirect_to(Decidim::Core::Engine.routes.url_helpers.account_path)
     end
   end
 end
