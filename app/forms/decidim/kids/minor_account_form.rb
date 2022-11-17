@@ -20,15 +20,8 @@ module Decidim
       validates :tos_agreement, acceptance: true
 
       validate :valid_minor_age
-      validate :agreement, on: :create
 
       private
-
-      def agreement
-        return if tos_agreement.present?
-
-        errors.add(:tos_agreement, :invalid)
-      end
 
       def password_present
         password.present?

@@ -67,6 +67,12 @@ module Decidim::Kids
     end
 
     describe "GET new" do
+      it_behaves_like "checks tutor authorization" do
+        let(:return_path) { "/decidim_kids#{user_minors_path}" }
+        let(:view) { :new }
+        let(:params) { { user_minor_id: minor.id } }
+      end
+
       context "when creation" do
         it "renders the empty form" do
           get :new, params: params
@@ -78,6 +84,11 @@ module Decidim::Kids
     end
 
     describe "POST create" do
+      it_behaves_like "checks tutor authorization" do
+        let(:return_path) { "/decidim_kids#{user_minors_path}" }
+        let(:view) { :create }
+      end
+
       context "when the form is valid" do
         it "creates a minor" do
           expect do
@@ -96,40 +107,45 @@ module Decidim::Kids
           send_form_and_expect_rendering_the_new_template_again
         end
       end
+    end
 
-      describe "PATCH update" do
-        let(:minor_params) do
-          {
-            name: "Katty",
-            email:,
-            birthday:,
-            password:,
-            password_confirmation:
-          }
+    describe "PATCH update" do
+      let(:minor_params) do
+        {
+          name: "Katty",
+          email:,
+          birthday:,
+          password:,
+          password_confirmation:
+        }
+      end
+
+      let(:params) do
+        {
+          id: minor.id,
+          minor_user: minor_params
+        }
+      end
+
+      it_behaves_like "checks tutor authorization" do
+        let(:return_path) { "/decidim_kids#{user_minors_path}" }
+        let(:view) { :update }
+      end
+
+      context "when the form is valid" do
+        it "updates the minor" do
+          patch :update, params: params
+
+          expect(flash[:notice]).not_to eq("Minor's account has been successfully updated")
         end
+      end
 
-        let(:params) do
-          {
-            id: minor.id,
-            minor_user: minor_params
-          }
-        end
+      context "when the form is invalid" do
+        let(:email) { nil }
 
-        context "when the form is valid" do
-          it "updates the minor" do
-            patch :update, params: params
-
-            expect(flash[:notice]).not_to eq("Minor's account has been successfully updated")
-          end
-        end
-
-        context "when the form is invalid" do
-          let(:email) { nil }
-
-          it "renders the edit template" do
-            patch :update, params: params
-            expect(controller).to render_template "edit"
-          end
+        it "renders the edit template" do
+          patch :update, params: params
+          expect(controller).to render_template "edit"
         end
       end
     end

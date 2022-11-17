@@ -6,9 +6,7 @@ module Decidim
       include Decidim::UserProfile
       include NeedsTutorAuthorization
 
-      helper_method :minors, :minor_user, :minor_account_form
-
-      before_action :minor_user, only: [:edit, :update]
+      helper_method :minor_user, :minor_account_form
 
       def index; end
 
@@ -65,10 +63,6 @@ module Decidim
       end
 
       private
-
-      def minors
-        current_user.minors
-      end
 
       def minor_account_form
         @form ||= form(Decidim::Kids::MinorAccountForm).from_model(minor_user.minor_data)

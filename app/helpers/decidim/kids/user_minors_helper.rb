@@ -16,7 +16,7 @@ module Decidim
       end
 
       def minor_tos
-        content_tag(:a, t(".tos_agreement"), href: "/pages/#{Decidim::StaticPage::DEFAULT_PAGES.join}")
+        content_tag(:a, t(".tos_agreement"), href: "/pages/#{Decidim::StaticPage::MINORS_DEFAULT_PAGES.last}")
       end
 
       def can_add_minor_account?
