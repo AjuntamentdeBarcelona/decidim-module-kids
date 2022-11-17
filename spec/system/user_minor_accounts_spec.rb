@@ -40,8 +40,6 @@ describe "User manages minor accounts", type: :system do
     end
 
     it_behaves_like "user minors enabled"
-    it_behaves_like "creates minor accounts"
-    it_behaves_like "updates minor accounts"
 
     describe "user minors CRUD" do
       let!(:authorization) { create(:authorization, user:, name: organization.tutors_authorization) }
@@ -51,7 +49,8 @@ describe "User manages minor accounts", type: :system do
         click_link "My minor account"
       end
 
-      it_behaves_like "user minors CRUD"
+      it_behaves_like "creates minor accounts"
+      it_behaves_like "updates minor accounts"
     end
 
     context "when the user is a minor" do

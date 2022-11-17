@@ -56,16 +56,6 @@ shared_examples "user minors enabled" do
 
       it_behaves_like "requires authorization"
     end
-
-    context "when the maximum number of accounts of minors has been reached" do
-      let!(:minor) { create_list(:minor, maximum_minor_accounts, tutor: user, organization:) }
-
-      it "button 'Add a minor' is disabled" do
-        click_link "My minor accounts"
-
-        expect(page).to have_css("a.disabled", text: "Add a minor", count: 1)
-      end
-    end
   end
 end
 
