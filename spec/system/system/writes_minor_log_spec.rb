@@ -18,7 +18,7 @@ describe "Writes minor log", type: :system do
     end
 
     it "doesn't write log in the minors log" do
-      expect(Rails.logger).not_to have_received(:tagged).with(/MINORS-ACTIVITY/)
+      expect(Rails.logger).not_to have_received(:tagged).with(/MINOR-ACTIVITY/)
     end
   end
 
@@ -29,7 +29,7 @@ describe "Writes minor log", type: :system do
     end
 
     it "doesn't write log in the minors log" do
-      expect(Rails.logger).not_to have_received(:tagged).with(/MINORS-ACTIVITY/)
+      expect(Rails.logger).not_to have_received(:tagged).with(/MINOR-ACTIVITY/)
     end
   end
 
@@ -41,7 +41,7 @@ describe "Writes minor log", type: :system do
     end
 
     it "writes log in the minors log" do
-      expect(Rails.logger).to have_received(:tagged).with(/MINORS-ACTIVITY/)
+      expect(Rails.logger).to have_received(:tagged).with(/MINOR-ACTIVITY/)
     end
   end
 end

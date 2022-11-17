@@ -7,7 +7,7 @@ module Decidim
 
       included do
         before_action do
-          Rails.logger.tagged("MINORS-ACTIVITY").info(log_params) if current_user.present? && current_user.minor?
+          Rails.logger.tagged("MINOR-ACTIVITY").info(log_params) if current_user.present? && current_user.minor?
         end
 
         private
