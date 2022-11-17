@@ -41,7 +41,6 @@ shared_examples "creates minor accounts" do
   end
 end
 
-
 shared_examples "updates minor accounts" do
   it "can edit a minor" do
     click_link "Edit"
