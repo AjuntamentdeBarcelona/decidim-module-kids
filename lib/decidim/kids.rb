@@ -23,9 +23,9 @@ module Decidim
       10
     end
 
-    # Default value for the legal age of consent to create a minor account without parental permission
-    config_accessor :minimum_adult_age do
-      14
+    # Default value for the maximum age of a person to be considered a minor (1 year than this number will consider the user an adult)
+    config_accessor :maximum_minor_age do
+      13
     end
 
     # Default value maximum number of minors that can be assigned to a tutor
@@ -39,7 +39,7 @@ module Decidim
     # (if the authorization handler stores it)
     # If this value is present: In addition to the normal verification process for the minor, the
     #                           age of the minor returned by the validation will be enforced to be
-    #                           between the minimum_minor_age and minimum_adult_age values.
+    #                           between the minimum_minor_age and maximum_minor_age values.
     #                           Note that if the validation does not stores the birthday in one of these
     #                           attributes, the validation will always fail.
     # If this value is blank: No age checks will be performed (but the validation process might do it independently)

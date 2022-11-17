@@ -29,11 +29,11 @@ module Decidim
 
       def valid_minor_age
         min_minor_age = Decidim::Kids.minimum_minor_age
-        minimum_adult_age = Decidim::Kids.minimum_adult_age
+        maximum_minor_age = Decidim::Kids.maximum_minor_age
 
         if birthday.present?
           minor_age = ((Time.zone.now - birthday.to_time) / 1.year.seconds).floor
-          errors.add(:birthday, I18n.t("decidim.kids.minor_account.form.invalid_age")) unless minor_age.between?(min_minor_age, minimum_adult_age - 1)
+          errors.add(:birthday, I18n.t("decidim.kids.minor_account.form.invalid_age")) unless minor_age.between?(min_minor_age, maximum_minor_age)
         end
       end
     end

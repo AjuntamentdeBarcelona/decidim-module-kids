@@ -14,7 +14,7 @@ shared_examples "valid command" do
   end
 
   context "when invalid adult age" do
-    let(:minimum_adult_age) { 0 }
+    let(:maximum_minor_age) { 0 }
 
     it "returns a invalid response" do
       expect { command.call }.to broadcast(:invalid)
@@ -31,7 +31,7 @@ shared_examples "valid command" do
 
   context "when incorrect age" do
     let(:minimum_minor_age) { 11 }
-    let(:minimum_adult_age) { 10 }
+    let(:maximum_minor_age) { 10 }
 
     it "returns a invalid response" do
       expect { command.call }.to broadcast(:invalid)
@@ -73,7 +73,7 @@ shared_examples "valid command" do
   context "when minors is not enabled" do
     let(:enable_minors_participation) { false }
     let(:minimum_minor_age) { 11 }
-    let(:minimum_adult_age) { 10 }
+    let(:maximum_minor_age) { 10 }
     let(:minors_authorization) { "" }
     let(:tutors_authorization) { "" }
 
@@ -85,7 +85,7 @@ end
 
 shared_examples "saves minors configuration" do
   let(:minimum_minor_age) { 11 }
-  let(:minimum_adult_age) { 15 }
+  let(:maximum_minor_age) { 15 }
   let(:minors_authorization) { "dummy_authorization_handler" }
   let(:tutors_authorization) { "postal_letter" }
 
@@ -104,10 +104,10 @@ shared_examples "saves minors configuration" do
   end
 
   it "saves the adult age" do
-    expect(organization.minimum_adult_age).not_to eq(minimum_adult_age)
+    expect(organization.maximum_minor_age).not_to eq(maximum_minor_age)
     command.call
     organization.reload_minors_config
-    expect(organization.minimum_adult_age).to eq(minimum_adult_age)
+    expect(organization.maximum_minor_age).to eq(maximum_minor_age)
   end
 
   it "saves the number of accounts" do
@@ -134,7 +134,7 @@ end
 
 shared_examples "creates minors configuration" do
   let(:minimum_minor_age) { 11 }
-  let(:minimum_adult_age) { 15 }
+  let(:maximum_minor_age) { 14 }
   let(:maximum_minor_accounts) { 5 }
   let(:minors_authorization) { "dummy_authorization_handler" }
   let(:tutors_authorization) { "postal_letter" }
@@ -155,7 +155,7 @@ shared_examples "creates minors configuration" do
 
   it "saves the adult age" do
     command.call
-    expect(organization.minimum_adult_age).to eq(minimum_adult_age)
+    expect(organization.maximum_minor_age).to eq(maximum_minor_age)
   end
 
   it "saves the number of accounts" do

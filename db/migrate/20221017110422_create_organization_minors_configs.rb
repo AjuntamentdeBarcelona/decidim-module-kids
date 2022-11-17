@@ -6,7 +6,10 @@ class CreateOrganizationMinorsConfigs < ActiveRecord::Migration[5.2]
       t.integer :decidim_organization_id, null: false, index: { name: "index_decidim_kids_organization" }
       t.boolean :enable_minors_participation, null: false, default: false
       t.integer :minimum_minor_age, null: false, default: 10
-      t.integer :minimum_adult_age, null: false, default: 14
+      t.integer :maximum_minor_age, null: false, default: 13
+      t.string :minors_authorization
+      t.string :tutors_authorization
+      t.integer :maximum_minor_accounts, null: false, default: 3
       t.timestamps
     end
   end

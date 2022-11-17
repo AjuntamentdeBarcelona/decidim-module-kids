@@ -10,7 +10,7 @@ module Decidim::Kids
     let(:organization) { create :organization }
     let(:enable_minors_participation) { true }
     let(:minimum_minor_age) { 10 }
-    let(:minimum_adult_age) { 14 }
+    let(:maximum_minor_age) { 13 }
     let(:tutors_authorization_name) { "dummy_authorization_handler" }
     let(:minors_authorization_name) { "dummy_authorization_handler" }
     let!(:minors_organization_config) do
@@ -18,7 +18,7 @@ module Decidim::Kids
              organization:,
              enable_minors_participation:,
              minimum_minor_age:,
-             minimum_adult_age:,
+             maximum_minor_age:,
              tutors_authorization: tutors_authorization_name,
              minors_authorization: minors_authorization_name)
     end

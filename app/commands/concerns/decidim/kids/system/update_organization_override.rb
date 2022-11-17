@@ -15,7 +15,7 @@ module Decidim
             conf = Decidim::Kids::OrganizationConfig.find_or_create_by({ organization: })
             conf.enable_minors_participation = form.enable_minors_participation
             conf.minimum_minor_age = form.minimum_minor_age
-            conf.minimum_adult_age = form.minimum_adult_age
+            conf.maximum_minor_age = form.maximum_minor_age
             conf.minors_authorization = form.minors_authorization
             conf.tutors_authorization = form.tutors_authorization
             conf.maximum_minor_accounts = form.maximum_minor_accounts

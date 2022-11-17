@@ -9,7 +9,7 @@ describe "User manages minor accounts", type: :system do
   let(:user) { create(:user, :confirmed) }
   let(:enable_minors_participation) { false }
   let(:minimum_minor_age) { 10 }
-  let(:minimum_adult_age) { 14 }
+  let(:maximum_minor_age) { 13 }
   let(:maximum_minor_accounts) { 3 }
   let(:tutors_authorization) { "dummy_authorization_handler" }
   let(:minors_authorization) { "dummy_authorization_handler" }
@@ -18,7 +18,7 @@ describe "User manages minor accounts", type: :system do
            organization:,
            enable_minors_participation:,
            minimum_minor_age:,
-           minimum_adult_age:,
+           maximum_minor_age:,
            maximum_minor_accounts:,
            tutors_authorization:,
            minors_authorization:)
