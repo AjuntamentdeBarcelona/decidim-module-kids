@@ -22,7 +22,7 @@ module Decidim
           rescue TypeError, ::Date::Error
             next
           end
-          age.between? handler.user.organization.minimum_minor_age, handler.user.organization.minimum_adult_age
+          age.between? handler.user.organization.minimum_minor_age, handler.user.organization.maximum_minor_age
         end
       end
     end

@@ -8,7 +8,7 @@ FactoryBot.define do
     organization
     enable_minors_participation { true }
     minimum_minor_age { 10 }
-    minimum_adult_age { 14 }
+    maximum_minor_age { 13 }
     minors_authorization { "dummy_authorization_handler" }
     tutors_authorization { "dummy_authorization_handler" }
   end

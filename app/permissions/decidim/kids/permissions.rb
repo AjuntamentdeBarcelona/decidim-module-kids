@@ -24,7 +24,10 @@ module Decidim
           case permission_action.action
           when :index
             allow!
-          end
+          when :create
+            can_create_minor_account?
+          when :edit
+            can_edit_minor_account?end
         end
       end
 
@@ -43,6 +46,20 @@ module Decidim
         toggle_allow(conversation.participants.all? { |p| minor_conversation_participant?(interlocutor, p) })
       end
 
+      private
+
+      def minor_user
+        @minor_user ||= context.fetch(:minor_user, nil)
+      end
+
+      def can_create_minor_account?
+        toggle_allow(user.minors.count < Decidim::Kids.maximum_minor_accounts)
+      end
+
+      def can_edit_minor_account?
+        toggle_allow(user.minors.include?(minor_user))
+      end
+
       def minor_conversation_participant?(interlocutor, participant)
         case participant.class.to_s
         when "Decidim::User"
@@ -50,7 +67,9 @@ module Decidim
         when "Decidim::UserGroup"
           participant.users.all? { |p| minor_conversation_participant?(interlocutor, p) }
         else
+          # :nocov:
           raise NotImplementedError
+          # :nocov:
         end
       end
     end
