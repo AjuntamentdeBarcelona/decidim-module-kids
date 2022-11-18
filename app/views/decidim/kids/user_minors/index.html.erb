@@ -16,9 +16,9 @@ list my kids
     <br>
     <% if allowed_to? :delete, :minor_accounts, minor_user: user %>
       <%= icon_link_to "circle-x", decidim_kids.user_minor_path(user.id),
-                       t('.destroy_button'),
+                       t(".destroy_button"),
                        method: :delete,
-                       data: { confirm: t('.confirm') },
+                       data: { confirm: t(".confirm") },
                        class: "action-icon action-icon--remove" %>
     <% end %>
   </li>

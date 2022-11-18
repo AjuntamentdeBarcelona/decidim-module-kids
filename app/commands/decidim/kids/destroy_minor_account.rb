@@ -12,7 +12,7 @@ module Decidim
       def call
         transaction do
           delete_minor_user!
-          destroy_minor_data unless @minor_user.confirmed?
+          destroy_minor_data
           destroy_minor_account
         end
 
