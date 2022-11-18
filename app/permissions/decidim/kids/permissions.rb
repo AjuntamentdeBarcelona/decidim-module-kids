@@ -27,18 +27,25 @@ module Decidim
           when :create
             can_create_minor_account?
           when :edit
-            can_edit_minor_account?end
+            can_edit_minor_account?
+          end
         end
       end
 
       def authorizations_action?
         return unless permission_action.subject == :authorizations
 
-        toggle_allow(user.organization.minors_participation_enabled? && !user.minor?)
+        case permission_action.action
+        when :all
+          return allow! unless user.organization.minors_participation_enabled?
+
+          toggle_allow(!user.minor?)
+        end
       end
 
       def conversation_action?
         return unless permission_action.subject == :conversation
+        return unless user.organization.minors_participation_enabled?
         return unless [:create, :update].include?(permission_action.action)
 
         conversation = context.fetch(:conversation)

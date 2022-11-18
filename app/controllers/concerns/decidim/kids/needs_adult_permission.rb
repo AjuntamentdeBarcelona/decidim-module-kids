@@ -4,7 +4,7 @@ module Decidim
   module Kids
     module NeedsAdultPermission
       extend ActiveSupport::Concern
-      include HasMinorsPermissions
+      include HasDecidimKidsPermissions
 
       included do
         before_action do

@@ -114,6 +114,26 @@ module Decidim::Kids
 
         it { is_expected.to be false }
       end
+
+      context "when minors configuration is disabled" do
+        let(:minors_enabled) { false }
+
+        context "when user is not a minor" do
+          it { is_expected.to be true }
+        end
+
+        context "when user is a minor" do
+          let(:is_minor) { true }
+
+          it { is_expected.to be true }
+        end
+
+        context "when action name is not all" do
+          let(:action_name) { :create }
+
+          it { expect { subject }.to raise_error(Decidim::PermissionAction::PermissionNotSetError) }
+        end
+      end
     end
 
     context "when user is trying to create a conversation with other users" do
@@ -132,6 +152,12 @@ module Decidim::Kids
 
         context "when user is an adult" do
           it { is_expected.to be false }
+
+          context "when minors configuration is disabled" do
+            let(:minors_enabled) { false }
+
+            it { expect { subject }.to raise_error(Decidim::PermissionAction::PermissionNotSetError) }
+          end
         end
 
         context "when user is a minor" do

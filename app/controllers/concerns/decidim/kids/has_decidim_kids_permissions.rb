@@ -2,7 +2,7 @@
 
 module Decidim
   module Kids
-    module HasMinorsPermissions
+    module HasDecidimKidsPermissions
       extend ActiveSupport::Concern
 
       included do
