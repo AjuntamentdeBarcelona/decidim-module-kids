@@ -51,6 +51,7 @@ describe "User manages minor accounts", type: :system do
 
       it_behaves_like "creates minor accounts"
       it_behaves_like "updates minor accounts"
+      it_behaves_like "deletes minor accounts"
     end
 
     context "when the user is a minor" do
