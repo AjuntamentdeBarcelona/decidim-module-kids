@@ -153,7 +153,7 @@ module Decidim::Kids
         it "deletes the minor" do
           delete :destroy, params: { id: minor.id }
 
-          expect(flash[:notice]).to eq("Minor's account has been successfully destroyed")
+          expect(flash[:notice]).to eq("Minor's account has been successfully deleted")
           expect(MinorAccount.count).to eq(0)
         end
       end

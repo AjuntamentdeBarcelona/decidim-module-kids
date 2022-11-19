@@ -59,13 +59,13 @@ en:
           success: Minor's account has been successfully created
         destroy:
           error: Errors occurred while deleting a minor's account
-          success: Minor's account has been successfully destroyed
+          success: Minor's account has been successfully deleted
         edit:
           edit_button: Update minor account
           title: Edit minor account
         index:
           add: Add a minor
-          confirm: Are you sure you want to destroy minor's account?
+          confirm: Are you sure you want to delete minor's account?
           destroy_button: Delete
           edit: Edit
           note: Maximum number of minors reached
