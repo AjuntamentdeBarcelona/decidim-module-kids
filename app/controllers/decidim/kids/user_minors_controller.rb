@@ -69,10 +69,6 @@ module Decidim
           on(:ok) do
             flash[:notice] = t("user_minors.destroy.success", scope: "decidim.kids")
           end
-
-          on(:invalid) do
-            flash[:alert] = t("user_minors.destroy.error", scope: "decidim.kids")
-          end
         end
 
         redirect_to user_minors_path
