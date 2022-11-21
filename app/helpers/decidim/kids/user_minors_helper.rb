@@ -22,6 +22,20 @@ module Decidim
       def can_add_minor_account?
         current_user.minors.count < Decidim::Kids.maximum_minor_accounts
       end
+
+      def minor_confirmed?(user)
+        return unless user.sign_in_count?
+
+        true
+      end
+
+      def confirmed(user)
+        if minor_confirmed?(user)
+          content_tag(:span, t("confirmed_user", scope: "decidim.kids.user_minors.index"), class: "text-success")
+        else
+          content_tag(:span, t("unconfirmed", scope: "decidim.kids.user_minors.index"), class: "text-alert")
+        end
+      end
     end
   end
 end

@@ -27,12 +27,12 @@ module Decidim
 
         CreateMinorAccount.call(@form, current_user) do
           on(:ok) do |minor_user|
-            flash[:notice] = t("user_minors.create.success", scope: "decidim.kids")
+            flash[:notice] = I18n.t("user_minors.create.success", scope: "decidim.kids")
             redirect_to decidim_kids.new_user_minor_authorization_path(user_minor_id: minor_user.id)
           end
 
           on(:invalid) do
-            flash.now[:alert] = t("user_minors.create.error", scope: "decidim.kids")
+            flash.now[:alert] = I18n.t("user_minors.create.error", scope: "decidim.kids")
             render :new
           end
         end
@@ -51,12 +51,12 @@ module Decidim
 
         UpdateMinorAccount.call(@form, minor_user) do
           on(:ok) do
-            flash[:notice] = t("user_minors.update.success", scope: "decidim.kids")
+            flash[:notice] = I18n.t("user_minors.update.success", scope: "decidim.kids")
             redirect_to user_minors_path
           end
 
           on(:invalid) do
-            flash.now[:alert] = t("user_minors.update.error", scope: "decidim.kids")
+            flash.now[:alert] = I18n.t("user_minors.update.error", scope: "decidim.kids")
             render :edit
           end
         end
@@ -67,10 +67,19 @@ module Decidim
 
         DestroyMinorAccount.call(minor_user, minor_account) do
           on(:ok) do
-            flash[:notice] = t("user_minors.destroy.success", scope: "decidim.kids")
+            flash[:notice] = I18n.t("user_minors.destroy.success", scope: "decidim.kids")
           end
         end
 
+        redirect_to user_minors_path
+      end
+
+      def resend_invitation_to_minor
+        InviteMinorAgain.call(minor_user) do
+          on(:ok) do
+            flash[:notice] = I18n.t("user_minors.resend.success", scope: "decidim.kids")
+          end
+        end
         redirect_to user_minors_path
       end
 

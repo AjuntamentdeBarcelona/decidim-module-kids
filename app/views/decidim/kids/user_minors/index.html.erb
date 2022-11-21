@@ -1,31 +1,37 @@
 <% add_decidim_page_title(t("menu", scope: "decidim.kids.user")) %>
 <% content_for(:subtitle) { t("menu", scope: "decidim.kids.user") } %>
 
-list my kids
+<div class="card with-overflow">
+  <div class="card-divider">
+    <h2 class="card-title flex--sbc">
+      <div>
+        <%= t(".title") %>
+      </div>
+    </h2>
+  </div>
+  <div class="card-section">
+    <div class="table-scroll">
+      <table class="table-list">
+        <thead>
+        <tr>
+          <th><%= t(".name") %></th>
+          <th><%= t(".age") %></th>
+          <th><%= t(".confirmed") %></th>
+          <th><%= t(".verified") %></th>
+          <th><%= t(".actions") %></th>
+        </tr>
+        </thead>
+        <tbody>
+        <% minors.each do |user| %>
+          <%= render partial: "minor_tr", locals: { user: user } %>
+        <% end %>
+        </tbody>
+      </table>
 
-<% minors.each do |user| %>
-  <li>
-    <%= link_to user.name, decidim_kids.new_user_minor_authorization_path(user_minor_id: user.id) %>
-    <br>
-    Age:
-    <%= user.minor_age %>
-    <br>
-    <% if allowed_to? :edit, :minor_accounts, minor_user: user %>
-      <%= link_to t(".edit"), decidim_kids.edit_user_minor_path(user.id) %>
-    <% end %>
-    <br>
-    <% if allowed_to? :delete, :minor_accounts, minor_user: user %>
-      <%= icon_link_to "circle-x", decidim_kids.user_minor_path(user.id),
-                       t(".destroy_button"),
-                       method: :delete,
-                       data: { confirm: t(".confirm") },
-                       class: "action-icon action-icon--remove" %>
-    <% end %>
-  </li>
-<% end %>
-<br>
-
-<%= button_to_add_minor_account %>
-<% unless can_add_minor_account? %>
-  <p><%= t(".note") %></p>
-<% end %>
+      <%= button_to_add_minor_account %>
+      <% unless can_add_minor_account? %>
+        <p><%= t(".note") %></p>
+      <% end %>
+    </div>
+  </div>
+</div>

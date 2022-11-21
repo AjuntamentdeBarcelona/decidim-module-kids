@@ -1,1 +1,13 @@
 /* css for decidim_kids */
+
+.table-list__actions .action-icon.action-icon--remove{
+  color: #e66a5d;
+}
+
+.table-list__actions .action-space:not(:last-child){
+  margin-right: 1rem;
+}
+
+.table-list__actions .action-space{
+  display: inline-block;
+}
