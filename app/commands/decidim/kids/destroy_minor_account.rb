@@ -13,9 +13,9 @@ module Decidim
 
       def call
         transaction do
-          destroy_minor_user
           destroy_minor_data
           destroy_minor_account
+          destroy_minor_user
         end
 
         broadcast(:ok)
