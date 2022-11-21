@@ -62,3 +62,19 @@ shared_examples "updates minor accounts" do
     expect(page).to have_content("Nikola Tesla")
   end
 end
+
+shared_examples "deletes minor accounts" do
+  it "can delete a minor" do
+    page.find("a.action-icon--remove").click
+
+    expect(page).to have_content("Are you sure you want to delete minor's account?")
+
+    click_link("OK")
+
+    within_flash_messages do
+      expect(page).to have_content("successfully deleted")
+    end
+
+    expect(page).not_to have_content("Tesla")
+  end
+end

@@ -62,6 +62,18 @@ module Decidim
         end
       end
 
+      def destroy
+        enforce_permission_to :delete, :minor_accounts, minor_user: minor_user
+
+        DestroyMinorAccount.call(minor_user, minor_account) do
+          on(:ok) do
+            flash[:notice] = t("user_minors.destroy.success", scope: "decidim.kids")
+          end
+        end
+
+        redirect_to user_minors_path
+      end
+
       private
 
       def minor_account_form
@@ -70,6 +82,10 @@ module Decidim
 
       def minor_user
         @minor_user ||= minors.find_by(id: params[:id])
+      end
+
+      def minor_account
+        @minor_account ||= Decidim::Kids::MinorAccount.where(decidim_minor_id: minor_user.id)
       end
     end
   end

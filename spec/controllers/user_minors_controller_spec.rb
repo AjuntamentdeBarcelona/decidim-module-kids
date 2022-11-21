@@ -148,6 +148,15 @@ module Decidim::Kids
           expect(controller).to render_template "edit"
         end
       end
+
+      describe "DELETE destroy" do
+        it "deletes the minor" do
+          delete :destroy, params: { id: minor.id }
+
+          expect(flash[:notice]).to eq("Minor's account has been successfully deleted")
+          expect(MinorAccount.count).to eq(0)
+        end
+      end
     end
   end
 end
