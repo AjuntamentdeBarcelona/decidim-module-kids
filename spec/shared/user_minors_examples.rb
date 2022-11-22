@@ -37,7 +37,7 @@ shared_examples "user minors enabled" do
     it "minors path can be accessed" do
       visit decidim_kids.user_minors_path
       expect(page).to have_content("Participant settings - My minor accounts")
-      expect(page).to have_content("list my kids")
+      expect(page).to have_content("List my kids")
     end
 
     context "when there is minors" do

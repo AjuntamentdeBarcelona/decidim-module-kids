@@ -96,7 +96,7 @@ module Decidim
       def minor_account
         @minor_account ||= Decidim::Kids::MinorAccount.where(decidim_minor_id: minor_user.id)
       end
-      
+
       def minor_authorized?(user)
         minor_authorization(user).present?
       end
