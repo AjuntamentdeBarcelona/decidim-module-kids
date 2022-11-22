@@ -80,6 +80,7 @@ module Decidim
             flash[:notice] = I18n.t("user_minors.resend.success", scope: "decidim.kids")
           end
         end
+
         redirect_to user_minors_path
       end
 

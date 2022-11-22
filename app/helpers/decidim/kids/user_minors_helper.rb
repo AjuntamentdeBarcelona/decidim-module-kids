@@ -42,7 +42,7 @@ module Decidim
       def button_verify(user)
         content_tag(:a, t("button_verify", scope: "decidim.kids.user_minors.index"),
                     href: decidim_kids.new_user_minor_authorization_path(user_minor_id: user.id),
-                    class: "button pt-xs pb-xs mt-s mb-s")
+                    class: "button pt-xs pb-xs mt-none mb-none")
       end
 
       def verification_minor_status(user)
