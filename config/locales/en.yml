@@ -75,10 +75,11 @@ en:
           destroy_button: Delete
           edit: Edit
           name: Name
+          not_confirmed: 'No'
           note: Maximum number of minors reached
+          pending: Pending
           resend_email: Resend email
           title: List my kids
-          unconfirmed: 'No'
           verified: Verified
         new:
           create: Create minor account
