@@ -74,6 +74,7 @@ en:
           confirmed_user: 'Yes'
           destroy_button: Delete
           edit: Edit
+          last_login: Last sign in
           name: Name
           not_confirmed: 'No'
           note: Maximum number of minors reached

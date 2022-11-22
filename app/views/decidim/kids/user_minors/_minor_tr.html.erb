@@ -35,4 +35,10 @@
                        class: "action-icon action-icon--remove" %>
     <% end %>
   </td>
+
+  <td>
+    <% if user.last_sign_in_at %>
+        <%= l user.last_sign_in_at, format: :short %>
+    <% end %>
+  </td>
 </tr>
