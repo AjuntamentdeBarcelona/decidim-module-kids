@@ -1,0 +1,16 @@
+<p class="email-greeting">
+  <%= t("greeting", scope: "decidim.kids.minor_notifications_mailer.confirmation", recipient: @user.email) %>
+</p>
+
+<p class="email-instructions">
+  <%= t("body", scope: "decidim.kids.minor_notifications_mailer.confirmation") %>
+</p>
+
+<p class="email-instructions">
+  <%= t("body_2", scope: "decidim.kids.minor_notifications_mailer.confirmation") %>
+</p>
+
+<p class="email-button email-button__cta">
+  <%= link_to t("sign_in", scope: "decidim.kids.minor_notifications_mailer.confirmation"),
+              decidim.new_user_session_path %>
+</p>

@@ -75,7 +75,7 @@ module Decidim
       end
 
       def resend_invitation_to_minor
-        InviteMinorAgain.call(minor_user) do
+        Decidim::InviteUserAgain.call(minor_user, "invite_minor") do
           on(:ok) do
             flash[:notice] = I18n.t("user_minors.resend.success", scope: "decidim.kids")
           end
