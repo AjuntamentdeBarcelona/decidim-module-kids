@@ -11,18 +11,23 @@ module Decidim
       def call
         return broadcast(:invalid) if form.invalid?
 
+        minor_email = minor_user.email
+
         update_minor
+
+        minor_user.invite!(invited_by, invitation_instructions: "invite_minor") unless minor_email == form.email
 
         broadcast(:ok)
       end
 
       private
 
-      attr_reader :form
+      attr_reader :form, :invited_by
 
       def update_minor
-        @minor_user.update!(attributes_user)
-        @minor_user.minor_data.update!(attributes_data)
+        minor_user.skip_reconfirmation!
+        minor_user.update!(attributes_user)
+        minor_user.minor_data.update!(attributes_data)
       end
 
       def attributes_user
