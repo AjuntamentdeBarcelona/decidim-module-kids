@@ -11,6 +11,9 @@
 </p>
 
 <p class="email-button email-button__cta">
-  <%= link_to t("sign_in", scope: "decidim.kids.minor_notifications_mailer.confirmation"),
-              decidim.new_user_session_path %>
+  <%= link_to t("devise.mailer.invitation_instructions.accept"),
+              accept_invitation_url(@resource,
+                                    invitation_token: @token,
+                                    invite_redirect: decidim.root_path,
+                                    host: @resource.organization.host) %>
 </p>

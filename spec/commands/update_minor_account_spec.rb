@@ -52,31 +52,23 @@ module Decidim::Kids
       end
 
       describe "when the password is present" do
-        before do
+        it "updates the user's password" do
           form.password = "decidim123123123"
           form.password_confirmation = "decidim123123123"
-        end
 
-        it "updates the password" do
           expect { command.call }.to broadcast(:ok)
-          expect(minor.reload.valid_password?("decidim123123123")).to be(true)
+          expect(minor.reload.password).to eq("decidim123123123")
         end
       end
 
       describe "updating the email" do
-        before do
+        it "updates the user's email" do
           form.email = "new@email.com"
-        end
 
-        it "broadcasts ok" do
           expect { command.call }.to broadcast(:ok)
-        end
 
-        it "sends a reconfirmation email" do
-          expect do
-            perform_enqueued_jobs { command.call }
-          end.to broadcast(:ok)
-          expect(last_email.to).to include("new@email.com")
+          expect(minor.minor_data.reload.email).to eq("new@email.com")
+          expect(minor.reload.email).to eq("new@email.com")
         end
       end
     end

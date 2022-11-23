@@ -22,7 +22,7 @@ module Decidim
 
       private
 
-      attr_reader :form, :invited_by
+      attr_reader :form, :minor_user, :invited_by
 
       def update_minor
         minor_user.skip_reconfirmation!

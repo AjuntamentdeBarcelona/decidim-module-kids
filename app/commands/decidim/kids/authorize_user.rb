@@ -9,7 +9,9 @@ module Decidim
 
         super
 
-        minor_user.invite!(minor_user, invitation_instructions: "invite_minor")
+        handler.user.blocked = false
+
+        handler.user.invite!(handler.user, invitation_instructions: "invite_minor")
       end
 
       private
