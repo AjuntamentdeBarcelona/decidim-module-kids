@@ -64,6 +64,7 @@ describe "User manages minor accounts", type: :system do
       end
 
       it_behaves_like "minors table"
+      it_behaves_like "resend email"
     end
 
     context "when the user is a minor" do

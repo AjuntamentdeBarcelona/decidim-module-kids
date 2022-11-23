@@ -47,3 +47,15 @@ shared_context "when minors verified" do
     find(".actions button[type=submit]").click
   end
 end
+
+shared_examples "resend email" do
+  let(:sign_in_count) { 0 }
+
+  include_context "when minors verified"
+
+  it "resends the invitation to the minor" do
+    click_link "Resend email"
+
+    expect(page).to have_content("successfully")
+  end
+end
