@@ -8,6 +8,8 @@ module Decidim
         return broadcast(:invalid_age) unless valid_age?
 
         super
+
+        minor_user.invite!(minor_user, invitation_instructions: "invite_minor")
       end
 
       private
