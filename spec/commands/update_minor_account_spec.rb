@@ -6,7 +6,7 @@ module Decidim::Kids
   describe UpdateMinorAccount do
     let(:organization) { create :organization }
     let(:user) { create(:user, :confirmed, organization:) }
-    let(:minor) { create(:minor, tutor: user, organization:) }
+    let(:minor) { create(:minor, name: "Pending verification minor", tutor: user, organization:) }
     let(:command) { described_class.new(form, minor) }
 
     let(:minor_data) do
@@ -40,7 +40,8 @@ module Decidim::Kids
         form.name = "Marco"
 
         expect { command.call }.to broadcast(:ok)
-        expect(minor.reload.name).to eq("Marco")
+        expect(minor.reload.name).to eq("Pending verification minor")
+        expect(minor.minor_data.reload.name).to eq("Marco")
       end
 
       it "updates the user's birthday" do
@@ -58,6 +59,24 @@ module Decidim::Kids
 
           expect { command.call }.to broadcast(:ok)
           expect(minor.reload.password).to eq("decidim123123123")
+        end
+
+        it "shows password errors" do
+          form.password = "another123123123"
+          form.password_confirmation = "decidim123123123"
+
+          expect { command.call }.to broadcast(:invalid)
+          expect(minor.reload.password).to eq("decidim123456789")
+        end
+
+        context "when the minor user is invalid" do
+          before do
+            allow(minor).to receive(:valid?).and_return(false)
+          end
+
+          it "broadcasts invalid" do
+            expect { command.call }.to broadcast(:invalid)
+          end
         end
       end
 

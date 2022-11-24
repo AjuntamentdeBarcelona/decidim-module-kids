@@ -37,7 +37,7 @@ end
 
 shared_context "when minors verified" do
   before do
-    click_link minor.name
+    click_link minor.minor_data.name
 
     fill_in "Document number", with: "1234X"
     fill_in "Postal code", with: "1234X"

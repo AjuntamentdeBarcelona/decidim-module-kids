@@ -12,15 +12,22 @@ module Decidim
       end
 
       def call
+        return broadcast(:invalid) unless handler.user.minor?
         return broadcast(:invalid_age) unless valid_age?
 
+        result = :ok
         Decidim::Verifications::AuthorizeUser.call(handler, handler.user.organization) do
           on(:ok) do
             handler.user.blocked = false
+            handler.user.blocked_at = nil
+            handler.user.name = handler.user.minor_data.name
 
             handler.user.invite!(handler.user, invitation_instructions: "invite_minor")
           end
+          on(:invalid) { result = :invalid }
+          on(:transferred) { result = :transferred }
         end
+        broadcast(result)
       end
 
       private

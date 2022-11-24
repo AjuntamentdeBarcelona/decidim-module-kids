@@ -37,9 +37,12 @@ en:
           invalid_age: We could not verify the minor account because the authorization
             method does not provide the birthday attribute or this one is not in the
             accepted range.
+        new:
+          authorizing_html: You are verifying the minor <b>%{minor}</b>
       minor_account:
         form:
           invalid_age: Invalid age
+        name: Verification pending minor account
       minor_notifications_mailer:
         confirmation:
           body: Instructions
@@ -76,15 +79,18 @@ en:
           confirm: Are you sure you want to delete minor's account?
           confirmed: Confirmed
           confirmed_user: 'Yes'
+          description: Here you can see the minors that you tutor. It is mandatory
+            to verify the minor before they can participate in the platform.
           destroy_button: Delete
           edit: Edit
           last_login: Last sign in
           name: Name
+          needs_verification: Needs to be verified!
           not_confirmed: 'No'
           note: Maximum number of minors reached
           pending: Pending
           resend_email: Resend email
-          title: List my kids
+          title: My tutored minors
           verified: Verified
         new:
           create: Create minor account

@@ -1,6 +1,6 @@
 <tr>
   <td>
-    <%= link_to user.name, decidim_kids.new_user_minor_authorization_path(user_minor_id: user.id) %>
+    <%= link_to user.minor_data.name, decidim_kids.new_user_minor_authorization_path(user_minor_id: user.id) %>
   </td>
 
   <td>
@@ -19,6 +19,14 @@
     <%= verification_minor_status(user) %>
   </td>
 
+  <td>
+    <% if user.last_sign_in_at %>
+        <%= l user.last_sign_in_at, format: :short %>
+    <% elsif !minor_authorized?(user) %>
+      <span class="label warning"><%= t("needs_verification", scope: "decidim.kids.user_minors.index") %></span>
+    <% end %>
+  </td>
+
   <td class="table-list__actions">
     <% if allowed_to? :edit, :minor_accounts, minor_user: user %>
       <%= icon_link_to "pencil", decidim_kids.edit_user_minor_path(user.id),
@@ -33,12 +41,6 @@
                        method: :delete,
                        data: { confirm: t("confirm", scope: "decidim.kids.user_minors.index") },
                        class: "action-icon action-icon--remove" %>
-    <% end %>
-  </td>
-
-  <td>
-    <% if user.last_sign_in_at %>
-        <%= l user.last_sign_in_at, format: :short %>
     <% end %>
   </td>
 </tr>

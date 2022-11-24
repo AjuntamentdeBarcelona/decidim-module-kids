@@ -26,7 +26,11 @@ shared_examples "creates minor accounts" do
         expect(page).to have_content("successfully created")
       end
 
-      expect(page).to have_content("John Tesla")
+      expect(page).to have_content("You are verifying the minor John Tesla")
+
+      visit decidim_admin.officializations_path
+      expect(page).to have_content("Pending verification minor account")
+      expect(page).not_to have_content(minor.minor_data.name)
     end
   end
 
@@ -71,6 +75,10 @@ shared_examples "updates minor accounts" do
     end
 
     expect(page).to have_content("Nikola Tesla")
+
+    visit decidim_admin.officializations_path
+    expect(page).to have_content("Pending verification minor account")
+    expect(page).not_to have_content(minor.minor_data.name)
   end
 
   it "can edit a minor without password" do
@@ -106,5 +114,31 @@ shared_examples "deletes minor accounts" do
     end
 
     expect(page).not_to have_content("Tesla")
+  end
+end
+
+shared_examples "authorizes minor accounts" do
+  it "can edit a minor with password" do
+    expect(minor.name).to eq("Pending verification minor account")
+    click_link "Verify"
+
+    within "form.new_authorization_handler" do
+      fill_in "Document number", with: "12345X"
+      fill_in "Birthday", with: 12.years.ago.strftime("%d/%m/%Y")
+      find("*[type=submit]").click
+    end
+
+    within_flash_messages do
+      expect(page).to have_content("The minor account has been successfully authorized")
+    end
+
+    minor.reload
+    expect(minor.name).not_to eq("Pending verification minor account")
+    expect(minor.name).to eq(minor.minor_data.name)
+    expect(page).to have_content(minor.name)
+
+    visit decidim_admin.officializations_path
+    expect(page).not_to have_content("Pending verification minor account")
+    expect(page).to have_content(minor.minor_data.name)
   end
 end

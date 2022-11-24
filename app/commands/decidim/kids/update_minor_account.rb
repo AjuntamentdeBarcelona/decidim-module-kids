@@ -39,7 +39,6 @@ module Decidim
       def update_minor
         minor_user.skip_reconfirmation!
         minor_user.email = form.email
-        minor_user.name = form.name
       end
 
       def update_minor_password

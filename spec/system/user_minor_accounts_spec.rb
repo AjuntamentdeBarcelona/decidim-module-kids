@@ -7,7 +7,7 @@ require "shared/minors_table_examples"
 
 describe "User manages minor accounts", type: :system do
   let(:organization) { user.organization }
-  let(:user) { create(:user, :confirmed) }
+  let(:user) { create(:user, :admin, :confirmed) }
   let(:enable_minors_participation) { false }
   let(:minimum_minor_age) { 10 }
   let(:maximum_minor_age) { 13 }
@@ -44,7 +44,7 @@ describe "User manages minor accounts", type: :system do
 
     describe "user minors CRUD" do
       let!(:authorization) { create(:authorization, user:, name: organization.tutors_authorization) }
-      let!(:minor) { create(:minor, tutor: user, organization:) }
+      let!(:minor) { create(:minor, :blocked, name: "Pending verification minor account", tutor: user, organization:) }
 
       before do
         click_link "My minor account"
@@ -53,6 +53,7 @@ describe "User manages minor accounts", type: :system do
       it_behaves_like "creates minor accounts"
       it_behaves_like "updates minor accounts"
       it_behaves_like "deletes minor accounts"
+      it_behaves_like "authorizes minor accounts"
     end
 
     describe "List my kids" do
