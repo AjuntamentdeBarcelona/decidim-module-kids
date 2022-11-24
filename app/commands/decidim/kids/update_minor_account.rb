@@ -11,11 +11,23 @@ module Decidim
       def call
         return broadcast(:invalid) if form.invalid?
 
-        minor_email = minor_user.email
+        old_minor_email = minor_user.email
 
         update_minor
+        update_minor_password
 
-        minor_user.invite!(invited_by, invitation_instructions: "invite_minor") unless minor_email == form.email
+        if minor_user.valid?
+          minor_user.save!
+        else
+          [:password, :password_confirmation].each do |key|
+            form.errors.add key, minor_user.errors[key] if minor_user.errors.has_key? key
+          end
+          return broadcast(:invalid)
+        end
+
+        minor_user.minor_data.update!(attributes_data)
+
+        minor_user.invite!(invited_by, invitation_instructions: "invite_minor") unless old_minor_email == form.email
 
         broadcast(:ok)
       end
@@ -26,17 +38,15 @@ module Decidim
 
       def update_minor
         minor_user.skip_reconfirmation!
-        minor_user.update!(attributes_user)
-        minor_user.minor_data.update!(attributes_data)
+        minor_user.email = form.email
+        minor_user.name = form.name
       end
 
-      def attributes_user
-        {
-          email: form.email,
-          password: form.password,
-          password_confirmation: form.password,
-          name: form.name
-        }
+      def update_minor_password
+        return if form.password.blank?
+
+        minor_user.password = form.password
+        minor_user.password_confirmation = form.password_confirmation
       end
 
       def attributes_data

@@ -3,18 +3,29 @@
 module Decidim
   module Kids
     # A command to authorize a user with an authorization handler.
-    class AuthorizeUser < Decidim::Verifications::AuthorizeUser
+    class AuthorizeMinor < Decidim::Command
+      # Public: Initializes the command.
+      #
+      # handler - An AuthorizationHandler object.
+      def initialize(handler)
+        @handler = handler
+      end
+
       def call
         return broadcast(:invalid_age) unless valid_age?
 
-        super
+        Decidim::Verifications::AuthorizeUser.call(handler, handler.user.organization) do
+          on(:ok) do
+            handler.user.blocked = false
 
-        handler.user.blocked = false
-
-        handler.user.invite!(handler.user, invitation_instructions: "invite_minor")
+            handler.user.invite!(handler.user, invitation_instructions: "invite_minor")
+          end
+        end
       end
 
       private
+
+      attr_reader :handler
 
       def valid_age?
         return true unless handler.valid?

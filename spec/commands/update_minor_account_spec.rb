@@ -31,8 +31,8 @@ module Decidim::Kids
     let(:name) { "Marco" }
     let(:email) { "marco@example.org" }
     let(:birthday) { "01/11/2010" }
-    let(:password) { "password123456" }
-    let(:password_confirmation) { password }
+    let(:password) { nil }
+    let(:password_confirmation) { nil }
     let(:tos_agreement) { true }
 
     context "when valid" do
@@ -62,13 +62,21 @@ module Decidim::Kids
       end
 
       describe "updating the email" do
-        it "updates the user's email" do
+        before do
           form.email = "new@email.com"
+        end
 
+        it "broadcasts ok" do
           expect { command.call }.to broadcast(:ok)
-
           expect(minor.minor_data.reload.email).to eq("new@email.com")
           expect(minor.reload.email).to eq("new@email.com")
+        end
+
+        it "sends a confirmation email" do
+          expect do
+            perform_enqueued_jobs { command.call }
+          end.to broadcast(:ok)
+          expect(last_email.to).to include("new@email.com")
         end
       end
     end

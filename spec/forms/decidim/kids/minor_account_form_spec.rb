@@ -74,11 +74,17 @@ module Decidim
         context "when password is blank" do
           let(:password) { "" }
 
-          it { is_expected.not_to be_valid }
+          it { is_expected.to be_valid }
         end
 
         context "when the password is weak" do
           let(:password) { "aaasssdddfff" }
+
+          it { is_expected.to be_invalid }
+        end
+
+        context "when the password confirmation is different" do
+          let(:password_confirmation) { "another thing" }
 
           it { is_expected.to be_invalid }
         end

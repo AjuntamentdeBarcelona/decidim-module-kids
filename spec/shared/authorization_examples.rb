@@ -1,20 +1,54 @@
 # frozen_string_literal: true
 
 shared_examples "everything is ok" do
-  it "creates an authorization for the user" do
+  it "creates an authorization for the minor" do
     expect { subject.call }.to change(authorizations, :count).by(1)
   end
 
   it "stores the metadata" do
-    subject.call
+    expect { subject.call }.to broadcast(:ok)
 
     expect(authorizations.first.metadata["document_number"]).to eq("12345678X")
   end
 
   it "sets the authorization as granted" do
-    subject.call
+    expect { subject.call }.to broadcast(:ok)
 
     expect(authorizations.first).to be_granted
+  end
+
+  it "sends a confirmation email and unlocks the minor" do
+    expect(minor).to be_blocked
+    expect do
+      perform_enqueued_jobs { subject.call }
+    end.to broadcast(:ok)
+
+    minor.reload
+    expect(last_email.to).to include(minor.email)
+
+    expect(minor).not_to be_blocked
+  end
+
+  context "when authorization goes wrong" do
+    before do
+      allow(handler).to receive(:valid?).and_return(false)
+    end
+
+    it "is not valid" do
+      expect { subject.call }.to broadcast(:invalid)
+    end
+
+    it "does not create an authorization for the minor" do
+      expect { subject.call }.not_to change(authorizations, :count)
+      expect(minor.reload).to be_blocked
+    end
+
+    it "does not send any email" do
+      expect do
+        perform_enqueued_jobs { subject.call }
+      end.to broadcast(:invalid)
+      expect(last_email).to be_nil
+    end
   end
 end
 

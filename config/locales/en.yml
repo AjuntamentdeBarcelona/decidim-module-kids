@@ -65,6 +65,7 @@ en:
           error: Errors occurred while deleting a minor's account
           success: Minor's account has been successfully deleted
         edit:
+          change_password: Change password
           edit_button: Update minor account
           title: Edit minor account
         index:

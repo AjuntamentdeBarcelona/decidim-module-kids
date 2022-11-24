@@ -4,22 +4,21 @@ require "spec_helper"
 require "shared/authorization_examples"
 
 module Decidim::Kids
-  describe AuthorizeUser do
-    subject { described_class.new(handler, organization) }
+  describe AuthorizeMinor do
+    subject { described_class.new(handler) }
 
-    let(:organization) { create(:organization) }
-    let(:user) { create(:user, :confirmed) }
+    let(:minor) { create(:user, :blocked) }
     let(:document_number) { "12345678X" }
     let(:birthday) { 12.years.ago }
     let(:handler) do
       DummyAuthorizationHandler.new(
         document_number:,
         birthday:,
-        user:
+        user: minor
       )
     end
 
-    let(:authorizations) { Decidim::Verifications::Authorizations.new(organization: user.organization, user:, granted: true) }
+    let(:authorizations) { Decidim::Verifications::Authorizations.new(organization: minor.organization, user: minor, granted: true) }
 
     context "when the form is not authorized" do
       before do
