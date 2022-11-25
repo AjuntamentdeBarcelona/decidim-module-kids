@@ -51,10 +51,7 @@ module Decidim
       def log_params
         {
           tutor_id: @current_user.id,
-          minor_id: @minor_user.id,
-          minor_birthday: form.birthday,
-          minor_email: form.email,
-          minor_name: form.name
+          minor_id: @minor_user.id
         }
       end
     end
