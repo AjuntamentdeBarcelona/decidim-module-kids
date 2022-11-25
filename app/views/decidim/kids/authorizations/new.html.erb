@@ -2,7 +2,7 @@
 <% content_for(:subtitle) { t("menu", scope: "decidim.kids.user") } %>
 
 <div class="callout secondary">
-<%= minor_user.name %>
+<%= t(".authorizing_html", minor: minor_user.minor_data.name) %>
 <%= link_to "cancel", :back, class: "button secondary small float-right" %>
 </div>
 

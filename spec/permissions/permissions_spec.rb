@@ -71,6 +71,24 @@ module Decidim::Kids
       it { is_expected.to be true }
     end
 
+    context "when destroy action" do
+      let(:action_name) { :delete }
+      let(:minor_account) { Decidim::Kids::MinorAccount.where(decidim_minor_id: minor.id) }
+
+      let(:context) do
+        {
+          minor_user: minor,
+          minor_account:
+        }
+      end
+
+      let(:action) do
+        { scope: :public, action: action_name, subject: action_subject }
+      end
+
+      it { is_expected.to be true }
+    end
+
     context "when other action" do
       let(:action_name) { :other_action }
 

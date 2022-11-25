@@ -28,6 +28,8 @@ module Decidim
             can_create_minor_account?
           when :edit
             can_edit_minor_account?
+          when :delete
+            can_destroy_minor_account?
           end
         end
       end
@@ -65,6 +67,10 @@ module Decidim
 
       def can_edit_minor_account?
         toggle_allow(user.minors.include?(minor_user))
+      end
+
+      def can_destroy_minor_account?
+        can_edit_minor_account?
       end
 
       def minor_conversation_participant?(interlocutor, participant)

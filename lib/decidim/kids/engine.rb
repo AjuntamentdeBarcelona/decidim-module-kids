@@ -16,6 +16,9 @@ module Decidim
             collection do
               get :unverified
             end
+            member do
+              post :resend_invitation_to_minor, to: "user_minors#resend_invitation_to_minor"
+            end
             resources :authorizations, only: [:new, :create, :index] do
               # collection do
               #   get :renew_modal
