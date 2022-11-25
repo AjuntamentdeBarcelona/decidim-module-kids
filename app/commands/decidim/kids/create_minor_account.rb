@@ -25,8 +25,9 @@ module Decidim
 
       def create_minor
         @minor_user = Decidim::User.new(email: form.email,
-                                        name: form.name,
+                                        name: I18n.t("minor_account.name", scope: "decidim.kids"),
                                         blocked: true,
+                                        blocked_at: Time.current,
                                         organization: @current_user.organization,
                                         password: form.password,
                                         tos_agreement: true,

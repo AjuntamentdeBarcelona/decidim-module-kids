@@ -18,6 +18,9 @@ en:
               bigger_than_adult: The minor age must be lower than the adult age
   decidim:
     devise:
+      mailer:
+        invitation_instructions:
+          accept: Accept email
       registrations:
         new:
           create_an_account: create an account
@@ -34,12 +37,16 @@ en:
           invalid_age: We could not verify the minor account because the authorization
             method does not provide the birthday attribute or this one is not in the
             accepted range.
+        new:
+          authorizing_html: You are verifying the minor <b>%{minor}</b>
       minor_account:
         form:
           invalid_age: Invalid age
+        name: Verification pending minor account
       minor_notifications_mailer:
         confirmation:
           body: Instructions
+          body_2: The account is "tutelated"
           greeting: Welcome, %{recipient}!
           sign_in: Sign in
           subject: Confirmation instructions
@@ -61,19 +68,37 @@ en:
           error: Errors occurred while deleting a minor's account
           success: Minor's account has been successfully deleted
         edit:
+          change_password: Change password
           edit_button: Update minor account
           title: Edit minor account
         index:
+          actions: Actions
           add: Add a minor
+          age: Age
+          button_verify: Verify
           confirm: Are you sure you want to delete minor's account?
+          confirmed: Confirmed
+          confirmed_user: 'Yes'
+          description: Here you can see the minors that you tutor. It is mandatory
+            to verify the minor before they can participate in the platform.
           destroy_button: Delete
           edit: Edit
+          last_login: Last sign in
+          name: Name
+          needs_verification: Needs to be verified!
+          not_confirmed: 'No'
           note: Maximum number of minors reached
+          pending: Pending
+          resend_email: Resend email
+          title: My tutored minors
+          verified: Verified
         new:
           create: Create minor account
           title: Add a minor
         no_tutor_authorization: Minors module is misconfigured, please contact the
           administrator.
+        resend:
+          success: Email was successfully sent
         tos_field:
           tos_agreement: You accept its Terms and Conditions
         unverified:

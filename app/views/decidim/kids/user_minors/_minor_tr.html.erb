@@ -1,0 +1,46 @@
+<tr>
+  <td>
+    <%= link_to user.minor_data.name, decidim_kids.new_user_minor_authorization_path(user_minor_id: user.id) %>
+  </td>
+
+  <td>
+    <%= user.minor_age %>
+  </td>
+
+  <td>
+    <%= confirm_email_status(user) %>
+    <% if !minor_confirmed?(user) && minor_authorized?(user) %>
+      <%= link_to t("resend_email", scope: "decidim.kids.user_minors.index"),
+                  resend_invitation_to_minor_user_minor_path(user.id), method: :post %>
+    <% end %>
+  </td>
+
+  <td>
+    <%= verification_minor_status(user) %>
+  </td>
+
+  <td>
+    <% if user.last_sign_in_at %>
+        <%= l user.last_sign_in_at, format: :short %>
+    <% elsif !minor_authorized?(user) %>
+      <span class="label warning"><%= t("needs_verification", scope: "decidim.kids.user_minors.index") %></span>
+    <% end %>
+  </td>
+
+  <td class="table-list__actions">
+    <% if allowed_to? :edit, :minor_accounts, minor_user: user %>
+      <%= icon_link_to "pencil", decidim_kids.edit_user_minor_path(user.id),
+                       t("edit", scope: "decidim.kids.user_minors.index"), class: "action-icon" %>
+    <% end %>
+
+    <span class="action-space icon"></span>
+
+    <% if allowed_to? :delete, :minor_accounts, minor_user: user %>
+      <%= icon_link_to "circle-x", decidim_kids.user_minor_path(user.id),
+                       t("destroy_button", scope: "decidim.kids.user_minors.index"),
+                       method: :delete,
+                       data: { confirm: t("confirm", scope: "decidim.kids.user_minors.index") },
+                       class: "action-icon action-icon--remove" %>
+    <% end %>
+  </td>
+</tr>

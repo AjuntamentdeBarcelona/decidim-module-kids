@@ -15,7 +15,8 @@ module Decidim
       validates :name, presence: true
       validates :birthday, presence: true
       validates :email, presence: true, "valid_email_2/email": { disposable: true }
-      validates :password, presence: true, password: { name: :name, email: :email, username: :nickname }
+      validates :password, confirmation: true
+      validates :password, presence: true, password: { name: :name, email: :email, username: :nickname }, if: :password_present
       validates :password_confirmation, presence: true, if: :password_present
       validates :tos_agreement, acceptance: true
 
