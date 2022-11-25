@@ -24,6 +24,8 @@ module Decidim::Kids
         }
       end
 
+      let(:last_user) { Decidim::User.last }
+
       before do
         allow(Rails.logger).to receive(:tagged).and_call_original
       end
@@ -35,6 +37,9 @@ module Decidim::Kids
 
         it "creates a new user" do
           expect { command.call }.to change(Decidim::User, :count).by(1)
+          expect(last_user).to be_minor
+          expect(last_user.name).to eq("Verification pending minor account")
+          expect(last_user.minor_data.name).to eq("Mike")
         end
 
         it "creates a new minor's account" do

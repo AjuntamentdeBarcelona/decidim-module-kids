@@ -1,0 +1,19 @@
+<p class="email-greeting">
+  <%= t("greeting", scope: "decidim.kids.minor_notifications_mailer.confirmation", recipient: @user.email) %>
+</p>
+
+<p class="email-instructions">
+  <%= t("body", scope: "decidim.kids.minor_notifications_mailer.confirmation") %>
+</p>
+
+<p class="email-instructions">
+  <%= t("body_2", scope: "decidim.kids.minor_notifications_mailer.confirmation") %>
+</p>
+
+<p class="email-button email-button__cta">
+  <%= link_to t("decidim.devise.mailer.invitation_instructions.accept"),
+              accept_invitation_url(@resource,
+                                    invitation_token: @token,
+                                    invite_redirect: decidim.root_path,
+                                    host: @resource.organization.host) %>
+</p>

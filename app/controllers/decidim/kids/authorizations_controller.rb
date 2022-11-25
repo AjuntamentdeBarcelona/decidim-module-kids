@@ -39,7 +39,7 @@ module Decidim
           return redirect_to decidim_kids.user_minors_path
         end
 
-        AuthorizeUser.call(handler, current_organization) do
+        AuthorizeMinor.call(handler) do
           on(:ok) do
             flash[:notice] = t("authorizations.authorize.success", scope: "decidim.kids")
             redirect_to redirect_url || authorizations_path

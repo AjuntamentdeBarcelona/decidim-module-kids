@@ -1,19 +1,28 @@
 <% add_decidim_page_title(t("menu", scope: "decidim.kids.user")) %>
 <% content_for(:subtitle) { t("menu", scope: "decidim.kids.user") } %>
 
-list my kids
+<h2 class="card-title flex--sbc">
+  <%= t(".title") %>
+</h2>
+<p class="help-text"><%= t(".description") %></p>
 
-<% minors.each do |user| %>
-  <li>
-    <%= link_to user.name, decidim_kids.new_user_minor_authorization_path(user_minor_id: user.id) %>
-    <br>
-    Age:
-    <%= user.minor_age %>
-    <br>
-    <%= link_to t(".edit"), decidim_kids.edit_user_minor_path(user.id) %>
-  </li>
-<% end %>
-<br>
+<table class="table-list">
+  <thead>
+  <tr>
+    <th><%= t(".name") %></th>
+    <th><%= t(".age") %></th>
+    <th><%= t(".confirmed") %></th>
+    <th><%= t(".verified") %></th>
+    <th><%= t(".last_login") %></th>
+    <th><%= t(".actions") %></th>
+  </tr>
+  </thead>
+  <tbody>
+  <% minors.each do |user| %>
+    <%= render partial: "minor_tr", locals: { user: user } %>
+  <% end %>
+  </tbody>
+</table>
 
 <%= button_to_add_minor_account %>
 <% unless can_add_minor_account? %>
