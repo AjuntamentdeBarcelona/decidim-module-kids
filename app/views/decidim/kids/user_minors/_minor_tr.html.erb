@@ -42,5 +42,11 @@
                        data: { confirm: t("confirm", scope: "decidim.kids.user_minors.index") },
                        class: "action-icon action-icon--remove" %>
     <% end %>
+    <span class="action-space icon"></span>
+    <%= icon_link_to "account-login",
+                     decidim_kids.user_minor_minor_impersonations_path(user_minor_id: user.id),
+                     t("impersonations.impersonate_button", scope: "decidim.kids"),
+                     method: :post,
+                     class: "action-icon action-icon--impersonate" %>
   </td>
 </tr>
