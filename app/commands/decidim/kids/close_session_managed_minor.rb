@@ -8,8 +8,8 @@ module Decidim
       #
       # current_user       - The user impersonating a minor
       # minor_user         - The user to impersonate
-      def initialize(minor_user, current_user)
-        @minor_user = minor_user
+      def initialize(current_user, real_user)
+        @real_user= real_user
         @current_user = current_user
       end
 
@@ -23,10 +23,10 @@ module Decidim
 
       private
 
-      attr_reader :current_user, :minor_user
+      attr_reader :current_user, :real_user
 
       def impersonation_log
-        @impersonation_log ||= Decidim::Kids::ImpersonationMinorLog.where(tutor: current_user, minor: minor_user).active.first
+        @impersonation_log ||= Decidim::Kids::ImpersonationMinorLog.where(tutor: real_user, minor: current_user).active.first
       end
 
       def close_session

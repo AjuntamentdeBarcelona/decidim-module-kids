@@ -25,10 +25,10 @@ module Decidim
       end
 
       def close_session
-        CloseSessionManagedMinor.call(minor_user, current_user) do
+        CloseSessionManagedMinor.call(current_user, real_user) do
           on(:ok) do
             flash[:notice] = I18n.t("impersonations.close_session.success", scope: "decidim.kids")
-            redirect_to minor_users_path
+            redirect_to decidim.root_path
           end
 
           on(:invalid) do
@@ -41,6 +41,7 @@ module Decidim
       private
 
       def minor_user
+        byebug
         current_user.minors.find(params[:user_minor_id])
       end
     end
