@@ -8,7 +8,7 @@ module Decidim
       #
       # current_user       - The user impersonating a minor
       # minor_user         - The user to impersonate
-      def initialize(current_user, minor_user)
+      def initialize(minor_user, current_user)
         @current_user = current_user
         @minor_user = minor_user
       end
@@ -24,14 +24,13 @@ module Decidim
 
       private
 
-      attr_reader :minor_user, :current_user
+      attr :minor_user
 
       def create_impersonation_log
         Decidim::Kids::ImpersonationMinorLog.create!(
           tutor: current_user,
           minor: minor_user,
-          started_at: Time.current,
-          expired_at: Time.current + ImpersonationMinorLog::SESSION_TIME_IN_MINUTES.minutes
+          started_at: Time.current
         )
       end
 
@@ -41,8 +40,8 @@ module Decidim
           impersonation_log,
           current_user,
           resource: {
-            name: minor_user.name,
             id: minor_user.id,
+            name: minor_user.name,
             nickname: minor_user.nickname
           },
           visibility: "public-only"

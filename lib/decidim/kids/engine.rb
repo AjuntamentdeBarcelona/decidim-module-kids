@@ -44,6 +44,7 @@ module Decidim
         Decidim::System::UpdateOrganizationForm.include(Decidim::Kids::System::OrganizationFormOverride)
         Decidim::System::UpdateOrganization.include(Decidim::Kids::System::UpdateOrganizationOverride)
         Decidim::System::RegisterOrganization.include(Decidim::Kids::System::RegisterOrganizationOverride)
+        Decidim::ImpersonateUsers.include(Decidim::Kids::ImpersonateUsersOverride)
       end
 
       # initializer "decidim_kids.overrides", after: "decidim.action_controller" do
