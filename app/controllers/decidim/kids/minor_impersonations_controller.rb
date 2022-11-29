@@ -41,7 +41,6 @@ module Decidim
       private
 
       def minor_user
-        byebug
         current_user.minors.find(params[:user_minor_id])
       end
     end
