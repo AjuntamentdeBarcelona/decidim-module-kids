@@ -1,0 +1,9 @@
+<% unless impersonation_log_minor.blank? %>
+  <%= button_to t("impersonations.close_session.button", scope: "decidim.kids"),
+                decidim_kids.close_session_user_minor_minor_impersonations_path(current_user),
+                method: :post,
+                class: "button tiny impersonation-bar__button", data: { disable: true } %>
+  <% else %>
+  <%= button_to t(".close_session"), decidim_admin.close_session_impersonatable_user_impersonations_path(current_user),
+                class: "button tiny impersonation-bar__button", data: { disable: true } %>
+<% end %>

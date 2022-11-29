@@ -43,6 +43,7 @@ en:
         close_session:
           error: There was a problem closing the current management session.
           success: The current impersonation session has been successfully ended.
+          button: Close session
         create:
           error: There was a problem managing the minor.
           success: The managed minor has been successfully created.
