@@ -9,7 +9,7 @@ module Decidim
       # current_user       - The user impersonating a minor
       # minor_user         - The user to impersonate
       def initialize(current_user, real_user)
-        @real_user= real_user
+        @real_user = real_user
         @current_user = current_user
       end
 
