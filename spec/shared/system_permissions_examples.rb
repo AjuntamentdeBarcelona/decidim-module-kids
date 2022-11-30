@@ -18,11 +18,35 @@ shared_examples "displays authorization" do
   end
 end
 
+shared_examples "doesn't display authorization" do
+  it "doesn't display authorization link" do
+    expect(page).not_to have_content("Authorizations")
+  end
+end
+
 shared_context "when conversing to the user" do
   before do
     page.find("#start-conversation-dialog-button").click
     page.find("#add_conversation_users").set(person.name)
     page.find("#autoComplete_result_0").click
     click_button("Next")
+  end
+end
+
+shared_context "and visiting conversations page" do
+  before do
+    visit decidim.conversations_path
+  end
+end
+
+shared_context "and visiting account page" do
+  before do
+    visit decidim.account_path
+  end
+end
+
+shared_context "and visiting authorizations page" do
+  before do
+    visit decidim_verifications.authorizations_path
   end
 end

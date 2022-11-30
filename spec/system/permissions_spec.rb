@@ -27,40 +27,25 @@ describe "Enable minors participation permissions", type: :system do
       end
 
       context "when accessing account page" do
-        before do
-          visit decidim.account_path
-        end
-
-        it "doesn't displays authorization link" do
-          expect(page).not_to have_content("Authorizations")
-        end
+        include_context "and visiting account page"
+        it_behaves_like "doesn't display authorization"
       end
 
       context "when accessing authorizations page" do
-        before do
-          visit decidim_verifications.authorizations_path
-        end
-
+        include_context "and visiting authorizations page"
         it_behaves_like "not authorized"
       end
 
       context "when accessing conversations page" do
-        before do
-          visit decidim.conversations_path
-        end
+        include_context "and visiting conversations page"
 
         context "when conversing to other minor" do
-          include_context "when conversing to the user" do
-            let(:person) { other_minor }
-          end
+          include_context "when conversing to the user", let(:person) { other_minor }
           it_behaves_like "converse with user"
         end
 
         context "when conversing to an adult" do
-          include_context "when conversing to the user" do
-            let(:person) { user }
-          end
-
+          include_context "when conversing to the user", let(:person) { user }
           it_behaves_like "not authorized"
         end
       end
@@ -72,39 +57,25 @@ describe "Enable minors participation permissions", type: :system do
       end
 
       context "when accessing account page" do
-        before do
-          visit decidim.account_path
-        end
-
+        include_context "and visiting account page"
         it_behaves_like "displays authorization"
       end
 
       context "when accessing authorizations page" do
-        before do
-          visit decidim_verifications.authorizations_path
-        end
-
+        include_context "and visiting authorizations page"
         it_behaves_like "displays authorization"
       end
 
       context "when accessing conversations page" do
-        before do
-          visit decidim.conversations_path
-        end
+        include_context "and visiting conversations page"
 
         context "when conversing to a minor" do
-          include_context "when conversing to the user" do
-            let(:person) { minor }
-          end
-
+          include_context "when conversing to the user", let(:person) { minor }
           it_behaves_like "not authorized"
         end
 
         context "when conversing with other adult" do
-          include_context "when conversing to the user" do
-            let(:person) { other_user }
-          end
-
+          include_context "when conversing to the user", let(:person) { other_user }
           it_behaves_like "converse with user"
         end
       end
@@ -120,39 +91,25 @@ describe "Enable minors participation permissions", type: :system do
       end
 
       context "when accessing account page" do
-        before do
-          visit decidim.account_path
-        end
-
+        include_context "and visiting account page"
         it_behaves_like "displays authorization"
       end
 
       context "when accessing authorizations page" do
-        before do
-          visit decidim_verifications.authorizations_path
-        end
-
+        include_context "and visiting authorizations page"
         it_behaves_like "displays authorization"
       end
 
       context "when accessing conversations page" do
-        before do
-          visit decidim.conversations_path
-        end
+        include_context "and visiting conversations page"
 
         context "when conversing with other minor" do
-          include_context "when conversing to the user" do
-            let(:person) { other_minor }
-          end
-
+          include_context "when conversing to the user", let(:person) { other_minor }
           it_behaves_like "converse with user"
         end
 
         context "when conversing with an adult" do
-          include_context "when conversing to the user" do
-            let(:person) { user }
-          end
-
+          include_context "when conversing to the user", let(:person) { user }
           it_behaves_like "converse with user"
         end
       end
@@ -164,39 +121,25 @@ describe "Enable minors participation permissions", type: :system do
       end
 
       context "when accessing account page" do
-        before do
-          visit decidim.account_path
-        end
-
+        include_context "and visiting account page"
         it_behaves_like "displays authorization"
       end
 
       context "when accessing authorizations page" do
-        before do
-          visit decidim_verifications.authorizations_path
-        end
-
+        include_context "and visiting authorizations page"
         it_behaves_like "displays authorization"
       end
 
       context "when accessing conversations page" do
-        before do
-          visit decidim.conversations_path
-        end
+        include_context "and visiting conversations page"
 
         context "when conversing with a minor" do
-          include_context "when conversing to the user" do
-            let(:person) { minor }
-          end
-
+          include_context "when conversing to the user", let(:person) { minor }
           it_behaves_like "converse with user"
         end
 
         context "when conversing with other adult" do
-          include_context "when conversing to the user" do
-            let(:person) { other_user }
-          end
-
+          include_context "when conversing to the user", let(:person) { other_user }
           it_behaves_like "converse with user"
         end
       end
