@@ -11,6 +11,8 @@ module Decidim
       helper_method :minor_user
 
       def create
+        enforce_permission_to :impersonate, :impersonation_minor, minor_user: minor_user
+
         ImpersonateMinor.call(minor_user, current_user) do
           on(:ok) do
             flash[:notice] = I18n.t("impersonations.create.success", scope: "decidim.kids")
