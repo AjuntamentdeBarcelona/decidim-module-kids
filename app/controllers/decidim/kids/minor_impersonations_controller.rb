@@ -5,11 +5,14 @@ module Decidim
     # Controller that allows impersonating managed minors.
     class MinorImpersonationsController < ApplicationController
       include Decidim::UserProfile
-      include NeedsTutorAuthorization
 
       layout "layouts/decidim/user_profile"
 
       helper_method :minor_user
+
+      def permission_class_chain
+        [::Decidim::Kids::Permissions] + super
+      end
 
       def create
         enforce_permission_to :impersonate, :minor_accounts, minor_user: minor_user
