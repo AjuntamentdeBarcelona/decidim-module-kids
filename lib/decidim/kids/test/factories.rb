@@ -47,4 +47,9 @@ FactoryBot.define do
     email { Faker::Internet.email }
     birthday { rand(10..14).years.ago }
   end
+
+  factory :impersonation_minor_log, class: "Decidim::Kids::ImpersonationMinorLog" do
+    tutor { create(:user, :confirmed) }
+    minor { create(:user, :confirmed, organization: tutor.organization) }
+  end
 end
