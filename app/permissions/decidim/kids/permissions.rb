@@ -22,11 +22,11 @@ module Decidim
               can_edit_minor_account?
             when :delete
               can_destroy_minor_account?
+            when :impersonate
+              can_impersonate_minor_account?
             end
           end
         end
-
-        impersonate_action
 
         permission_action
       end
@@ -49,13 +49,9 @@ module Decidim
         can_edit_minor_account?
       end
 
-      def impersonate_action
-        return unless permission_action.action == :impersonate &&
-                      permission_action.subject == :impersonation_minor
-
+      def can_impersonate_minor_account?
         is_allowed = Decidim::Kids::ImpersonationMinorLog.active.where(tutor: user).empty? &&
-                     Decidim::Kids.allow_impersonation &&
-                     minor_user.sign_in_count.positive?
+                     Decidim::Kids.allow_impersonation
 
         toggle_allow(is_allowed)
       end
