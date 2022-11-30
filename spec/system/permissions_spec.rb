@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "spec_helper"
+require "shared/system_permissions_examples"
 
 describe "Enable minors participation permissions", type: :system do
   let(:organization) { create(:organization, available_authorizations: %w(dummy_authorization_handler)) }
@@ -30,7 +31,7 @@ describe "Enable minors participation permissions", type: :system do
           visit decidim.account_path
         end
 
-        it "doesn't display authorization link" do
+        it "doesn't displays authorization link" do
           expect(page).not_to have_content("Authorizations")
         end
       end
@@ -40,9 +41,7 @@ describe "Enable minors participation permissions", type: :system do
           visit decidim_verifications.authorizations_path
         end
 
-        it "can't access the page" do
-          expect(page).to have_content("You are not authorized to perform this action")
-        end
+        it_behaves_like "not authorized"
       end
 
       context "when accessing conversations page" do
@@ -51,29 +50,18 @@ describe "Enable minors participation permissions", type: :system do
         end
 
         context "when conversing to other minor" do
-          before do
-            page.find("#start-conversation-dialog-button").click
-            page.find("#add_conversation_users").set(other_minor.name)
-            page.find("#autoComplete_result_0").click
-            click_button("Next")
+          include_context "when conversing to the user" do
+            let(:person) { other_minor }
           end
-
-          it "can converse with a minor" do
-            expect(page).to have_content("Conversation with")
-          end
+          it_behaves_like "converse with user"
         end
 
         context "when conversing to an adult" do
-          before do
-            page.find("#start-conversation-dialog-button").click
-            page.find("#add_conversation_users").set(user.name)
-            page.find("#autoComplete_result_0").click
-            click_button("Next")
+          include_context "when conversing to the user" do
+            let(:person) { user }
           end
 
-          it "can't converse with an adult" do
-            expect(page).to have_content("You are not authorized to perform this action")
-          end
+          it_behaves_like "not authorized"
         end
       end
     end
@@ -88,18 +76,15 @@ describe "Enable minors participation permissions", type: :system do
           visit decidim.account_path
         end
 
-        it "display authorization link" do
-          expect(page).to have_content("Authorizations")
-        end
+        it_behaves_like "displays authorization"
       end
 
       context "when accessing authorizations page" do
         before do
           visit decidim_verifications.authorizations_path
         end
-        it "can access the page" do
-          expect(page).to have_content("Authorizations")
-        end
+
+        it_behaves_like "displays authorization"
       end
 
       context "when accessing conversations page" do
@@ -108,29 +93,19 @@ describe "Enable minors participation permissions", type: :system do
         end
 
         context "when conversing to a minor" do
-          before do
-            page.find("#start-conversation-dialog-button").click
-            page.find("#add_conversation_users").set(minor.name)
-            page.find("#autoComplete_result_0").click
-            click_button("Next")
+          include_context "when conversing to the user" do
+            let(:person) { minor }
           end
 
-          it "can't converse with a minor" do
-            expect(page).to have_content("You are not authorized to perform this action")
-          end
+          it_behaves_like "not authorized"
         end
 
         context "when conversing with other adult" do
-          before do
-            page.find("#start-conversation-dialog-button").click
-            page.find("#add_conversation_users").set(other_user.name)
-            page.find("#autoComplete_result_0").click
-            click_button("Next")
+          include_context "when conversing to the user" do
+            let(:person) { other_user }
           end
 
-          it "can converse with other adult" do
-            expect(page).to have_content("Conversation with")
-          end
+          it_behaves_like "converse with user"
         end
       end
     end
@@ -149,9 +124,7 @@ describe "Enable minors participation permissions", type: :system do
           visit decidim.account_path
         end
 
-        it "display authorization link" do
-          expect(page).to have_content("Authorizations")
-        end
+        it_behaves_like "displays authorization"
       end
 
       context "when accessing authorizations page" do
@@ -159,40 +132,28 @@ describe "Enable minors participation permissions", type: :system do
           visit decidim_verifications.authorizations_path
         end
 
-        it "can access the authorizations page" do
-          expect(page).to have_content("Authorizations")
-        end
+        it_behaves_like "displays authorization"
       end
 
-      context "when accessing conversation page" do
+      context "when accessing conversations page" do
         before do
           visit decidim.conversations_path
         end
 
         context "when conversing with other minor" do
-          before do
-            page.find("#start-conversation-dialog-button").click
-            page.find("#add_conversation_users").set(other_minor.name)
-            page.find("#autoComplete_result_0").click
-            click_button("Next")
+          include_context "when conversing to the user" do
+            let(:person) { other_minor }
           end
 
-          it "can converse with other minor" do
-            expect(page).to have_content("Conversation with")
-          end
+          it_behaves_like "converse with user"
         end
 
         context "when conversing with an adult" do
-          before do
-            page.find("#start-conversation-dialog-button").click
-            page.find("#add_conversation_users").set(user.name)
-            page.find("#autoComplete_result_0").click
-            click_button("Next")
+          include_context "when conversing to the user" do
+            let(:person) { user }
           end
 
-          it "can converse with other adult" do
-            expect(page).to have_content("Conversation with")
-          end
+          it_behaves_like "converse with user"
         end
       end
     end
@@ -207,9 +168,7 @@ describe "Enable minors participation permissions", type: :system do
           visit decidim.account_path
         end
 
-        it "display authorizations link" do
-          expect(page).to have_content("Authorizations")
-        end
+        it_behaves_like "displays authorization"
       end
 
       context "when accessing authorizations page" do
@@ -217,40 +176,28 @@ describe "Enable minors participation permissions", type: :system do
           visit decidim_verifications.authorizations_path
         end
 
-        it "can access the page" do
-          expect(page).to have_content("Authorizations")
-        end
+        it_behaves_like "displays authorization"
       end
 
-      context "when accessing conversation page" do
+      context "when accessing conversations page" do
         before do
           visit decidim.conversations_path
         end
 
         context "when conversing with a minor" do
-          before do
-            page.find("#start-conversation-dialog-button").click
-            page.find("#add_conversation_users").set(minor.name)
-            page.find("#autoComplete_result_0").click
-            click_button("Next")
+          include_context "when conversing to the user" do
+            let(:person) { minor }
           end
 
-          it "can converse with a minor" do
-            expect(page).to have_content("Conversation with")
-          end
+          it_behaves_like "converse with user"
         end
 
         context "when conversing with other adult" do
-          before do
-            page.find("#start-conversation-dialog-button").click
-            page.find("#add_conversation_users").set(other_user.name)
-            page.find("#autoComplete_result_0").click
-            click_button("Next")
+          include_context "when conversing to the user" do
+            let(:person) { other_user }
           end
 
-          it "can converse with other adult" do
-            expect(page).to have_content("Conversation with")
-          end
+          it_behaves_like "converse with user"
         end
       end
     end
