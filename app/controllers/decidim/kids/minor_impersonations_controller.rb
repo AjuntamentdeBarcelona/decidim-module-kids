@@ -5,6 +5,7 @@ module Decidim
     # Controller that allows impersonating managed minors.
     class MinorImpersonationsController < ApplicationController
       include Decidim::UserProfile
+      include NeedsTutorAuthorization
 
       layout "layouts/decidim/user_profile"
 
