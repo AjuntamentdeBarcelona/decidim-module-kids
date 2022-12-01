@@ -22,11 +22,6 @@ module Decidim
             flash[:notice] = I18n.t("impersonations.create.success", scope: "decidim.kids")
             redirect_to decidim.root_path
           end
-
-          on(:invalid) do
-            flash.now[:alert] = I18n.t("impersonations.create.error", scope: "decidim.kids")
-            render user_minors_path
-          end
         end
       end
 
@@ -34,11 +29,6 @@ module Decidim
         CloseSessionManagedMinor.call(current_user, real_user) do
           on(:ok) do
             flash[:notice] = I18n.t("impersonations.close_session.success", scope: "decidim.kids")
-            redirect_to decidim.root_path
-          end
-
-          on(:invalid) do
-            flash.now[:alert] = I18n.t("impersonations.close_session.error", scope: "decidim.kids")
             redirect_to decidim.root_path
           end
         end
