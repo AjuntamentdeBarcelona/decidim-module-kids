@@ -7,7 +7,7 @@ module Decidim::Kids
     describe "call" do
       let(:organization) { create :organization }
       let(:user) { create(:user, :confirmed, organization:) }
-      let(:minor) { create(:minor, name: "Minor – Mike", tutor: user, organization:) }
+      let(:minor) { create(:minor, tutor: user, organization:) }
       let(:command) { described_class.new(minor, user) }
 
       context "when a minor is verified and has logged in" do
