@@ -7,6 +7,7 @@ module Decidim
 
       included do
         helper_method :impersonation_log_minor
+
         def current_user
           @current_user ||= managed_minor || managed_user || real_user
         end
@@ -26,10 +27,6 @@ module Decidim
 
         def impersonation_log_minor
           @impersonation_log_minor ||= Decidim::Kids::ImpersonationMinorLog.where(tutor: real_user).active.first
-        end
-
-        def expired_log_minor
-          @expired_log ||= Decidim::Kids::ImpersonationMinorLog.where(tutor: real_user).expired.first
         end
 
         def current_user_impersonated?
