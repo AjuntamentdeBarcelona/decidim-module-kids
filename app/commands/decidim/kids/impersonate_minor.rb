@@ -26,7 +26,7 @@ module Decidim
 
       private
 
-      attr :minor_user
+      attr :minor_user, :current_user
 
       def create_impersonation_log
         Decidim::Kids::ImpersonationMinorLog.create!(

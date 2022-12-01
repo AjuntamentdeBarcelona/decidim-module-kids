@@ -4,7 +4,7 @@ module Decidim
   module Kids
     # ImpersonationLogs are created whenever an tutor impersonate a minor user
     class ImpersonationMinorLog < ApplicationRecord
-      SESSION_TIME_IN_MINUTES = 1
+      SESSION_TIME_IN_MINUTES = 10
 
       belongs_to :tutor,
                  foreign_key: "decidim_tutor_id",
