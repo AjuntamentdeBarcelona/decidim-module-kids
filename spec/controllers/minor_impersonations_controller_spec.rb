@@ -17,8 +17,7 @@ module Decidim
                organization:,
                enable_minors_participation:,
                minimum_minor_age:,
-               maximum_minor_age:
-        )
+               maximum_minor_age:)
       end
 
       let(:user) { create(:user, :confirmed, organization:) }
