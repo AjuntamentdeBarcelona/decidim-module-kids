@@ -19,6 +19,8 @@ module Decidim
           create_action_log(impersonation_log)
         end
 
+        enqueue_expire_job
+
         broadcast(:ok)
       end
 
@@ -46,6 +48,12 @@ module Decidim
           },
           visibility: "public-only"
         )
+      end
+
+      def enqueue_expire_job
+        Decidim::Kids::ExpireImpersonationJob
+          .set(wait: Decidim::Kids::ImpersonationMinorLog::SESSION_TIME_IN_MINUTES.minutes)
+          .perform_later(minor_user, current_user)
       end
     end
   end
