@@ -48,6 +48,7 @@ en:
           error: There was a problem managing the minor.
           success: The managed minor has been successfully created.
         impersonate_button: Impersonate
+        title: Enter your password to impersonate a minor
       minor_account:
         form:
           invalid_age: Invalid age

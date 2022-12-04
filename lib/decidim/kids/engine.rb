@@ -25,9 +25,9 @@ module Decidim
               #   get :renew
               # end
             end
-            resources :minor_impersonations, only: [:create] do
+            resources :minor_impersonations, controller: "minor_impersonations", only: [:new, :create] do
               collection do
-                post :close_session, to: "minor_impersonations#close_session"
+                post :close_session
               end
             end
           end

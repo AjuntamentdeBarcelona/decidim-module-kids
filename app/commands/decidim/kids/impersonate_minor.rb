@@ -8,12 +8,15 @@ module Decidim
       #
       # current_user       - The user impersonating a minor
       # minor_user         - The user to impersonate
-      def initialize(minor_user, current_user)
+      def initialize(minor_user, current_user, form)
         @current_user = current_user
         @minor_user = minor_user
+        @form = form
       end
 
       def call
+        return broadcast(:invalid) if form.invalid?
+
         transaction do
           impersonation_log = create_impersonation_log
           create_action_log(impersonation_log)
@@ -26,7 +29,7 @@ module Decidim
 
       private
 
-      attr :minor_user, :current_user
+      attr :form, :minor_user, :current_user
 
       def create_impersonation_log
         Decidim::Kids::ImpersonationMinorLog.create!(

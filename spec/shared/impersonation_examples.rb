@@ -28,18 +28,52 @@ shared_examples "user impersonate" do
       expect(page).to have_css(".action-icon--impersonate", count: 1)
     end
 
-    it "user can impersonate a minor" do
-      find(".action-icon--impersonate").click
+    context "when valid password" do
+      it "user can impersonate a minor" do
+        find(".action-icon--impersonate").click
 
-      expect(page).to have_content(minor.minor_data.name)
-      expect(page).to have_content("Close session")
+        fill_in "Password", match: :first, with: "mallorca123123123"
+
+        click_button("Impersonate")
+
+        expect(page).to have_content(minor.minor_data.name)
+        expect(page).to have_content("Close session")
+      end
+
+      it "closes the minor's session" do
+        find(".action-icon--impersonate").click
+
+        fill_in "Password", match: :first, with: "mallorca123123123"
+
+        click_button("Impersonate")
+        click_button("Close session")
+
+        expect(page).to have_content(user.name)
+      end
     end
 
-    it "closes the minor's session" do
-      find(".action-icon--impersonate").click
-      click_button("Close session")
+    context "when invalid password" do
+      it "user can not impersonate a minor" do
+        find(".action-icon--impersonate").click
 
-      expect(page).to have_content(user.name)
+        fill_in "Password", match: :first, with: "mallorca123123"
+
+        click_button("Impersonate")
+
+        expect(page).to have_css(".alert")
+      end
+    end
+
+    context "when empty password" do
+      it "user can not impersonate a minor" do
+        find(".action-icon--impersonate").click
+
+        fill_in "Password", match: :first, with: ""
+
+        click_button("Impersonate")
+
+        expect(page).to have_content("error in this field")
+      end
     end
   end
 end

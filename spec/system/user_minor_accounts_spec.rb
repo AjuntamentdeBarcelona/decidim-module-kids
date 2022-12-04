@@ -71,6 +71,8 @@ describe "User manages minor accounts", type: :system do
 
     describe "User impersonates a minor" do
       let!(:authorization) { create(:authorization, user:, name: organization.tutors_authorization) }
+      let!(:user) { create(:user, :confirmed, password: valid_password) }
+      let(:valid_password) { "mallorca123123123" }
       let!(:minor) { create(:minor, tutor: user, organization:, sign_in_count:) }
 
       before do
