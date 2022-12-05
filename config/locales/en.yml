@@ -50,6 +50,9 @@ en:
           greeting: Welcome, %{recipient}!
           sign_in: Sign in
           subject: Confirmation instructions
+        promote:
+          subject: Your account was promoted
+          body_1: Hi, your account has been promoted. You now have an adult account and your account is no longer dependent on your legal guardian's account.
       minors_participation: Decidim Minors Participation
       system:
         organizations:
