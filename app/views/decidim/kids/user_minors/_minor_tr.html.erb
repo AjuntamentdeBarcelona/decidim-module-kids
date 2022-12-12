@@ -10,8 +10,11 @@
   <td>
     <%= confirm_email_status(user) %>
     <% if !minor_confirmed?(user) && minor_authorized?(user) %>
-      <%= link_to t("resend_email", scope: "decidim.kids.user_minors.index"),
-                  resend_invitation_to_minor_user_minor_path(user.id), method: :post %>
+      <%= icon_link_to "action-redo",
+                       resend_invitation_to_minor_user_minor_path(user.id),
+                       t("resend_email", scope: "decidim.kids.user_minors.index"),
+                       method: :post,
+                       class: "ml-xs" %>
     <% end %>
   </td>
 
@@ -21,7 +24,7 @@
 
   <td>
     <% if user.last_sign_in_at %>
-        <%= l user.last_sign_in_at, format: :short %>
+      <%= l user.last_sign_in_at, format: :short %>
     <% elsif !minor_authorized?(user) %>
       <span class="label warning"><%= t("needs_verification", scope: "decidim.kids.user_minors.index") %></span>
     <% end %>
