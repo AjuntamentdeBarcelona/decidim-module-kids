@@ -35,6 +35,12 @@ module Decidim
 
           age_from_birthday(minor_data_birthday)
         end
+
+        def password_required?
+          return false if managed? || minor_data.present?
+
+          super
+        end
       end
     end
   end
