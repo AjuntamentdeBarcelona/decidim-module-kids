@@ -86,6 +86,7 @@ en:
             accepted range.
         new:
           authorizing_html: You are verifying the minor <b>%{minor}</b>
+          help_text: "Second step: For security reasons, we need to check that the minor's details are correct and we can verify his or her identity on our census"
       minor_account:
         form:
           invalid_age: Invalid age
