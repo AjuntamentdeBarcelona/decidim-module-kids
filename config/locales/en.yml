@@ -143,6 +143,7 @@ en:
         new:
           create: Create minor account
           title: Add a minor
+          subtitle: "Fist step: Now you must fill in the form with the necessary information to create the minor's account"
         no_tutor_authorization: Minors module is misconfigured, please contact the
           administrator.
         resend:
