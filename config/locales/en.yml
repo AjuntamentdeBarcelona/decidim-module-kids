@@ -39,7 +39,9 @@ en:
             accepted range.
         new:
           authorizing_html: You are verifying the minor <b>%{minor}</b>
-          help_text: "Second step: For security reasons, we need to check that the minor's details are correct and we can verify his or her identity on our census"
+          help_text: 'Second step: For security reasons, we need to check that the
+            minor''s details are correct and we can verify his or her identity on
+            our census'
       minor_account:
         form:
           invalid_age: Invalid age
@@ -96,12 +98,14 @@ en:
         new:
           create: Create minor account
           help_text_email: Write here the child's e-mail
+          subtitle: 'Fist step: Now you must fill in the form with the necessary information
+            to create the minor''s account'
           title: Add a minor
-          subtitle: "Fist step: Now you must fill in the form with the necessary information to create the minor's account"
         no_tutor_authorization: Minors module is misconfigured, please contact the
           administrator.
         resend:
-          success: Email was successfully sent
+          success: An email have been sent to the minor's email adress. Please confirm
+            the email to finish the process
         tos_field:
           tos_agreement: You accept its Terms and Conditions
         unverified:
