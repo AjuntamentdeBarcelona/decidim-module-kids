@@ -94,6 +94,7 @@ en:
           verified: Verified
         new:
           create: Create minor account
+          help_text_email: Write here the child's e-mail
           title: Add a minor
           subtitle: "Fist step: Now you must fill in the form with the necessary information to create the minor's account"
         no_tutor_authorization: Minors module is misconfigured, please contact the
