@@ -29,9 +29,7 @@ module Decidim
                                         blocked: true,
                                         blocked_at: Time.current,
                                         organization: @current_user.organization,
-                                        password: form.password,
                                         tos_agreement: true,
-                                        password_confirmation: form.password_confirmation,
                                         nickname: Decidim::User.nicknamize(form.name, organization: @current_user.organization),
                                         minor_data: MinorData.new({
                                                                     birthday: form.birthday,

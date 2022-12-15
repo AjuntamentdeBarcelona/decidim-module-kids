@@ -2,9 +2,11 @@
 <% content_for(:subtitle) { t("menu", scope: "decidim.kids.user") } %>
 
 <div class="callout secondary">
-<%= t(".authorizing_html", minor: minor_user.minor_data.name) %>
-<%= link_to "cancel", :back, class: "button secondary small float-right" %>
+  <%= t(".authorizing_html", minor: minor_user.minor_data.name) %>
+  <%= link_to "cancel", :back, class: "button secondary small float-right" %>
 </div>
+
+<div><%= t(".help_text") %></div>
 
 <div class="columns large-8 large-centered text-center page-title">
   <h2><%= t("decidim.verifications.authorizations.new.authorize_with", authorizer: t("#{handler.handler_name}.name", scope: "decidim.authorization_handlers")) %></h2>

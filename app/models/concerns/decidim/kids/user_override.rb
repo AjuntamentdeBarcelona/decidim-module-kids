@@ -34,6 +34,12 @@ module Decidim
 
           ((Time.zone.now - minor_data_birthday.to_time) / 1.year.seconds).floor
         end
+
+        def password_required?
+          return false if managed? || minor_data.present?
+
+          super
+        end
       end
     end
   end

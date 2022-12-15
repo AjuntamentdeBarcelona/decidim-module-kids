@@ -9,17 +9,6 @@
 
           <%= render partial: "form_fields", locals: { form: form } %>
 
-          <% if @form.errors[:password].any? || @form.errors[:password_confirmation].any? %>
-            <%= render partial: "password_fields", locals: { form: form } %>
-          <% else %>
-            <p>
-              <button type="button" data-toggle="passwordChange" class="link change-password"><%= t ".change_password" %></button>
-            </p>
-            <div id="passwordChange" class="toggle-show" data-toggler=".is-expanded">
-              <%= render partial: "password_fields", locals: { form: form } %>
-            </div>
-          <% end %>
-
           <div class="actions">
             <%= form.submit t(".edit_button"), class: "button expanded mt-s mb-none", data: { disable: true } %>
           </div>

@@ -14,16 +14,8 @@ module Decidim
         old_minor_email = minor_user.email
 
         update_minor
-        update_minor_password
 
-        if minor_user.valid?
-          minor_user.save!
-        else
-          [:password, :password_confirmation].each do |key|
-            form.errors.add key, minor_user.errors[key] if minor_user.errors.has_key? key
-          end
-          return broadcast(:invalid)
-        end
+        minor_user.save!
 
         minor_user.minor_data.update!(attributes_data)
 
@@ -39,13 +31,6 @@ module Decidim
       def update_minor
         minor_user.skip_reconfirmation!
         minor_user.email = form.email
-      end
-
-      def update_minor_password
-        return if form.password.blank?
-
-        minor_user.password = form.password
-        minor_user.password_confirmation = form.password_confirmation
       end
 
       def attributes_data
