@@ -50,6 +50,21 @@ shared_examples "user impersonate" do
 
         expect(page).to have_content(user.name)
       end
+
+      context "and session expires" do
+        it "user is logged out" do
+          find(".action-icon--impersonate").click
+
+          fill_in "Password", match: :first, with: "mallorca123123123"
+
+          click_button("Impersonate")
+
+          Decidim::Kids::ImpersonationMinorLog.last.update!(started_at: 1.hour.ago)
+
+          visit decidim.account_path
+          expect(page).to have_content(user.name)
+        end
+      end
     end
 
     context "when invalid password" do

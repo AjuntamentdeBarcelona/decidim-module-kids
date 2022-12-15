@@ -22,7 +22,10 @@ module Decidim
         def managed_minor
           return if impersonation_log_minor.blank?
 
-          @managed_minor ||= impersonation_log_minor.minor
+          @managed_minor ||= begin
+            impersonation_log_minor.ensure_not_expired!
+            impersonation_log_minor.minor
+          end
         end
 
         def impersonation_log_minor
