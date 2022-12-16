@@ -4,6 +4,7 @@ module Decidim
   module Kids
     module NeedsTutorAuthorization
       extend ActiveSupport::Concern
+      include HasDecidimKidsPermissions
 
       included do
         before_action do
@@ -19,10 +20,6 @@ module Decidim
         end
 
         helper_method :minors, :tutor_adapter
-
-        def permission_class_chain
-          [::Decidim::Kids::Permissions] + super
-        end
 
         private
 

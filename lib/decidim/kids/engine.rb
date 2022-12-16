@@ -44,6 +44,8 @@ module Decidim
       initializer "decidim_kids.overrides", after: "decidim.action_controller" do
         config.to_prepare do
           Decidim::ApplicationController.include(Decidim::Kids::WritesMinorLog)
+          Decidim::Verifications::ApplicationController.include(Decidim::Kids::NeedsAdultPermission)
+          Decidim::Messaging::ConversationsController.include(Decidim::Kids::HasDecidimKidsPermissions)
         end
       end
 
@@ -58,6 +60,7 @@ module Decidim
                         decidim_kids.user_minors_path,
                         position: 1.4,
                         if: allowed_to?(:index, :minor_accounts, {}, [::Decidim::Kids::Permissions], current_user)
+          menu.remove_item(:authorizations) unless allowed_to?(:all, :authorizations, {}, [::Decidim::Kids::Permissions], current_user)
         end
       end
     end
