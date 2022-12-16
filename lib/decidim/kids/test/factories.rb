@@ -51,5 +51,6 @@ FactoryBot.define do
   factory :impersonation_minor_log, class: "Decidim::Kids::ImpersonationMinorLog" do
     tutor { create(:user, :confirmed) }
     minor { create(:user, :confirmed, organization: tutor.organization) }
+    started_at { Time.current }
   end
 end
