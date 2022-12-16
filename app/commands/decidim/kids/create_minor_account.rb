@@ -44,7 +44,15 @@ module Decidim
         @minor_user.save!
         MinorAccount.create!(tutor: @current_user, minor: @minor_user)
         @minor_user.minor_data.save!
+        Rails.logger.tagged("MINOR-CONSENT").info(log_params)
         @minor_user
+      end
+
+      def log_params
+        {
+          tutor_id: @current_user.id,
+          minor_id: @minor_user.id
+        }
       end
     end
   end
