@@ -15,6 +15,15 @@ shared_examples "handles the minors configuration" do |spaces|
       expect(page).to have_link("Minors configuration")
     end
   end
-  # context "when minors disabled" do
-  # end
+
+  context "when minors disabled" do
+    let(:enable_minors_participation) { false }
+
+    it "has not the minors configuration link" do
+      click_link spaces
+      click_link participatory_space.title["en"]
+
+      expect(page).not_to have_link("Minors configuration")
+    end
+  end
 end

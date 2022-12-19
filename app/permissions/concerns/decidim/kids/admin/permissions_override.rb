@@ -8,6 +8,9 @@ module Decidim
 
         included do
           def static_page_action?
+            # reusing this method to check if the admin is trying to access the minors participatory spaces configuration
+            return space_minors_configuration? if permission_action.subject == :space_minors_configuration
+
             return unless permission_action.subject == :static_page
 
             static_page = context.fetch(:static_page, nil)
@@ -22,6 +25,10 @@ module Decidim
             else
               true
             end
+          end
+
+          def space_minors_configuration?
+            organization.minors_participation_enabled? && user.admin?
           end
         end
       end
