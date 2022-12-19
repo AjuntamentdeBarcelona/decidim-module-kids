@@ -28,6 +28,12 @@
   </td>
 
   <td class="table-list__actions">
+
+      <%= icon_link_to "book", decidim.profile_activity_path(nickname: user.nickname),
+                       t("activity", scope: "decidim.profiles.show"), class: "action-icon" %>
+
+
+    <span class="action-space icon"></span>
     <% if allowed_to? :edit, :minor_accounts, minor_user: user %>
       <%= icon_link_to "pencil", decidim_kids.edit_user_minor_path(user.id),
                        t("edit", scope: "decidim.kids.user_minors.index"), class: "action-icon" %>
