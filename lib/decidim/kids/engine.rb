@@ -45,6 +45,7 @@ module Decidim
         config.to_prepare do
           Decidim::Verifications::ApplicationController.include(Decidim::Kids::NeedsAdultPermission)
           Decidim::Messaging::ConversationsController.include(Decidim::Kids::HasDecidimKidsPermissions)
+          Decidim::UserActivitiesController.include(Decidim::Kids::HasMinorActivitiesAsOwn)
         end
       end
 
