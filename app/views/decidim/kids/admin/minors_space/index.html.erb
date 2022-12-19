@@ -1,0 +1,32 @@
+<div class="card" id="minors_space">
+  <div class="card-divider">
+    <h2 class='card-title'>
+      <%= t("minors_space.index.title", scope: "decidim.kids.admin") %>
+    </h2>
+  </div>
+
+  <div class="card-section">
+
+<div style="white-space: pre-wrap;">
+As an administrator I would like to be able to set various degrees of access depending on the type of process to be carried out and the age of the participants:
+
+    Space for all. All participants will have access regardless of the age of the participants.
+
+    Exclusive space for minors:
+        For minors with guardianship, who are participants below the legal age of consent minimum_minor_age. According to what has been configured in the system "Enable the option to have accounts for minors" - ref: [GDPR08]).
+        Have the option to limit that minors without guardianship can participate. I.e. who are above the minimum_adult_age, but below the age of majority (Ref: GDPR 18).
+
+    They will also be able to access:
+        facilitators of the participation space (with existing profiles of administrators, collaborators, moderators).
+        tutors associated with minors, with read-only access.
+        new read-only role without access to the administration panel, by educators or similar figures. See ref: [GDPR17].
+        those participants who have been verified with the municipal register in case this option is activated. See ref: [GDPR18]
+
+    Visitors and other participants who do not comply with the rules will not have access, but will be able to view the space. When they click on it, they will see an error message "you cannot access this space because you do not meet the requirements".
+
+    The space will be accessible but its contents will not be visible by transversal functionalities (e.g. the search engine, profile follow sections, GraphQL API, etc).
+
+</div>
+
+  </div>
+</div>

@@ -28,6 +28,11 @@ en:
             and check with them how you can %{link}
           minors_title: Minors Participation
     kids:
+      admin:
+        minors_space:
+          menu: Minors configuration
+          index:
+            title: Participatory space minors configuration
       authorizations:
         authorize:
           already_authorized: The minor account is already authorized.
