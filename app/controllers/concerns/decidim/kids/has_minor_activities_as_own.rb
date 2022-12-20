@@ -9,7 +9,7 @@ module Decidim
         alias_method :user_own_activities?, :own_activities?
 
         def own_activities?
-          user_own_activities? || (current_user&.minors&.include?(user) && current_organization.minors_participation_enabled?)
+          user_own_activities? || (current_organization.minors_participation_enabled? && current_user&.minors&.include?(user))
         end
       end
     end
