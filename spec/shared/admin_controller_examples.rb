@@ -41,6 +41,14 @@ shared_examples "controls the minor configuration" do
     expect(response).to redirect_to(minors_space_index_path)
   end
 
+  it "does not create config if error" do
+    expect do
+      post :create, params: params.merge(minors_space_config: { access_type: "minors" })
+    end.not_to change(Decidim::Kids::MinorsSpaceConfig, :count)
+
+    expect(flash[:alert]).to include("Error saving configuration!")
+  end
+
   context "when config already exists" do
     let!(:minors_space_config) { create(:minors_space_config, participatory_space:) }
 
