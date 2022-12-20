@@ -24,7 +24,7 @@ module Decidim
           engine = manifest.context(:admin).engine
           engine.routes.append do
             scope "#{admin_scope}:#{admin_slug}" do
-              resources :minors_space
+              resources :minors_space, only: [:index, :create]
             end
           end
 

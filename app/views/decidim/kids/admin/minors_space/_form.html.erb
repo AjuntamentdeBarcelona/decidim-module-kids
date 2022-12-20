@@ -1,0 +1,23 @@
+<div class="row column">
+  <%= form.select :access_type, access_types %>
+</div>
+<div id="minors-extra" class="<%= "hide" unless form.object.access_type == "minors" %>">
+  <div class="row column">
+    <%= form.select :authorization, Decidim::Kids.valid_minor_workflows.pluck(:description, :name) %>
+  </div>
+  <div class="row column">
+    <%= form.number_field :max_age %>
+  </div>
+</div>
+<% console %>
+<script type="text/javascript">
+  var sel = document.getElementById("minors_space_config_access_type");
+  sel.addEventListener("change", function () {
+    var minorsExtra = document.getElementById("minors-extra");
+    if (sel.value === "minors") {
+      minorsExtra.classList.remove("hide");
+    } else {
+      minorsExtra.classList.add("hide");
+    }
+  });
+</script>

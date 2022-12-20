@@ -10,6 +10,11 @@ en:
         minimum_minor_age: Minimum age allowed to create a minor account
         minors_authorization: Authorization method for validating the minor's account
         tutors_authorization: Authorization method for validating the tutor's account
+      minors_space_config:
+        access_type: Participatory space access type
+        authorization: Authorization method for other users allowed in this space
+        max_age: Check for this maximum age if the authorization allows it (leave it empty or zero
+          to disable)
     errors:
       models:
         organization:
@@ -31,7 +36,22 @@ en:
       admin:
         minors_space:
           index:
+            description_html: |
+              In here you can configure how this participatory space will behave when normal or minor users will access to it.<br>
+              Participatory spaces can be of two types: limited to minors or open to everybody as well (the default behavior).<br>
+              When a participatory space is open to everybody, minors will be able to access to it (there will be no restrictions).<br>
+              When a participatory space is limited to minors, only minors and some special users will be able to access to it. The rest of the users will be redirected with an error message.<br>
+              <br>The additional users with access to a space limited to minors are:<br>
+              <ul>
+              <li>The users with the role of administrator, moderator, collaborator or valuator.</li>
+              <li>The users that are tutors of a minor, with read-only access.</li>
+              <li>Ifu the option is activated, the users verified by the specified authorization method (for instance, you can use this verification method to verify minors up to an age that not need tutelation).</li>
+              </ul>
             title: Participatory space minors configuration
+            save: Save
+          form:
+            all: Space for all (no restrictions)
+            minors: Space for minors only
           menu: Minors configuration
       authorizations:
         authorize:
