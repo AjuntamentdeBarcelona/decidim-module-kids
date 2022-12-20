@@ -2,6 +2,11 @@
 en:
   activemodel:
     attributes:
+      minors_space_config:
+        access_type: Participatory space access type
+        authorization: Authorization method for other users allowed in this space
+        max_age: Check for this maximum age if the authorization allows it (leave
+          it empty or zero to disable this check)
       organization:
         enable_minors_participation: Enable minors participation
         maximum_minor_accounts: Maximum number of minors that can be assigned to a
@@ -10,11 +15,6 @@ en:
         minimum_minor_age: Minimum age allowed to create a minor account
         minors_authorization: Authorization method for validating the minor's account
         tutors_authorization: Authorization method for validating the tutor's account
-      minors_space_config:
-        access_type: Participatory space access type
-        authorization: Authorization method for other users allowed in this space
-        max_age: Check for this maximum age if the authorization allows it (leave it empty or zero
-          to disable)
     errors:
       models:
         organization:
@@ -35,6 +35,9 @@ en:
     kids:
       admin:
         minors_space:
+          form:
+            all: Space for all (no restrictions)
+            minors: Space for minors only
           index:
             description_html: |
               In here you can configure how this participatory space will behave when normal or minor users will access to it.<br>
@@ -47,15 +50,12 @@ en:
               <li>The users that are tutors of a minor, with read-only access.</li>
               <li>Ifu the option is activated, the users verified by the specified authorization method (for instance, you can use this verification method to verify minors up to an age that not need tutelation).</li>
               </ul>
-            title: Participatory space minors configuration
             save: Save
-          form:
-            all: Space for all (no restrictions)
-            minors: Space for minors only
-          save:
-            success: Configuration saved successfully.
-            error: Error saving configuration! (%{errors})
+            title: Participatory space minors configuration
           menu: Minors configuration
+          save:
+            error: Error saving configuration! (%{errors})
+            success: Configuration saved successfully.
       authorizations:
         authorize:
           already_authorized: The minor account is already authorized.

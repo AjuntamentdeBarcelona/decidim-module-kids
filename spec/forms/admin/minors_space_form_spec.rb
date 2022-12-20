@@ -36,14 +36,14 @@ module Decidim::Kids::Admin
 
         it { is_expected.to be_invalid }
 
-        context "and max age is not a number" do
-          let(:max_age) { "not a number" }
-
-          it { is_expected.to be_invalid }
-        end
-
         context "and max age is ok" do
           let(:max_age) { 18 }
+
+          it { is_expected.to be_valid }
+        end
+
+        context "and max age is zero" do
+          let(:max_age) { 0 }
 
           it { is_expected.to be_valid }
         end
