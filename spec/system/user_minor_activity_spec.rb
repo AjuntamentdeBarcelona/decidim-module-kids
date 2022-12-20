@@ -97,4 +97,19 @@ describe "Test private activity of my minors", type: :system do
       end
     end
   end
+
+  context "when minors participation disabled" do
+    let(:enable_minors_participation) { false }
+
+    context "when the user is an adult" do
+      before do
+        login_as user, scope: :user
+      end
+
+      context "when visiting one of my minor activity page" do
+        include_context "when accessing activity page", let(:person) { minor }
+        it_behaves_like "doesn't display private link"
+      end
+    end
+  end
 end
