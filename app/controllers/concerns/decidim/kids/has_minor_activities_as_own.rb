@@ -7,8 +7,9 @@ module Decidim
 
       included do
         alias_method :user_own_activities?, :own_activities?
+
         def own_activities?
-          user_own_activities? || current_user.minors.include?(user)
+          user_own_activities? || current_user&.minors&.include?(user)
         end
       end
     end
