@@ -31,4 +31,14 @@ shared_examples "controls the minor configuration" do
 
     expect(controller.current_participatory_space).to eq(participatory_space)
   end
+
+  context "when minors disabled" do
+    let(:enable_minors_participation) { false }
+
+    it "redirects to the participatory space admin" do
+      get :index, params: params
+
+      expect(response).to redirect_to(Decidim::Admin::Engine.routes.url_helpers.root_path)
+    end
+  end
 end

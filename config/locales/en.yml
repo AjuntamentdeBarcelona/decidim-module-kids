@@ -30,9 +30,9 @@ en:
     kids:
       admin:
         minors_space:
-          menu: Minors configuration
           index:
             title: Participatory space minors configuration
+          menu: Minors configuration
       authorizations:
         authorize:
           already_authorized: The minor account is already authorized.
