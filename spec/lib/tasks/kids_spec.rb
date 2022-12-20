@@ -7,7 +7,6 @@ describe "kids:promote_minor_accounts", type: :task do
   let(:user) { create(:user, :admin, :confirmed, organization:) }
   let(:other_user) { create(:user, :admin, :confirmed, organization:) }
   let(:minor) { create(:minor, tutor: user, organization:) }
-  let(:other_minor) { create(:minor, tutor: user, organization:) }
   let(:minor_to_promote) { create(:minor_to_promote, tutor: user, organization:) }
   let(:enable_minors_participation) { false }
   let!(:minors_organization_config) { create(:minors_organization_config, organization:, enable_minors_participation:) }
@@ -15,13 +14,11 @@ describe "kids:promote_minor_accounts", type: :task do
   before do
     minor.confirm
     minor_to_promote.confirm
-    other_minor.confirm
   end
 
   context "when minors turn the maximum minor age" do
     it "run gracefully" do
       expect(Decidim::Kids::MinorAccount.where(minor:)).to be_present
-      expect(Decidim::Kids::MinorAccount.where(minor: other_minor)).to be_present
       expect(Decidim::Kids::MinorAccount.where(minor: minor_to_promote)).to be_present
       expect { task.execute }.not_to raise_error
     end
@@ -32,7 +29,6 @@ describe "kids:promote_minor_accounts", type: :task do
         expect(minor_to_promote.minor_age).to eq(15)
         task.execute
         expect(Decidim::Kids::MinorAccount.where(minor: minor_to_promote)).to be_empty
-        expect(Decidim::Kids::MinorAccount.where(minor: other_minor)).not_to be_empty
         expect(Decidim::Kids::MinorAccount.where(minor:)).not_to be_empty
       end
 

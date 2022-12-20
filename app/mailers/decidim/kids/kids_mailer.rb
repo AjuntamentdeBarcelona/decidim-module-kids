@@ -6,7 +6,7 @@ module Decidim
       def promote_minor_account(user)
         @user = user
         @organization = user.organization
-        subject = I18n.t(".subject")
+        subject = I18n.t("decidim.kids.minor_notifications_mailer.promote.subject")
         mail(to: user.email, subject:)
       end
     end
