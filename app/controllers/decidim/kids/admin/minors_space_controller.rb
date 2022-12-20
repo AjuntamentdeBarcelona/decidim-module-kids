@@ -13,15 +13,30 @@ module Decidim
         helper_method :access_types
 
         def index
-          @form = form(MinorsSpaceForm).instance
-          render :index
+          @form = form(MinorsSpaceForm).from_model(current_participatory_space_config)
         end
 
         def create
-          byebug
+          @form = form(MinorsSpaceForm).from_params(params)
+
+          SaveParticipatorySpaceConfig.call(@form, current_participatory_space) do
+            on(:ok) do
+              flash[:notice] = I18n.t("minors_space.save.success", scope: "decidim.kids.admin")
+              redirect_to action: :index
+            end
+
+            on(:invalid) do
+              flash.now[:alert] = I18n.t("minors_space.save.error", scope: "decidim.kids.admin", errors: @form&.errors&.messages&.values&.flatten&.first)
+              render :index
+            end
+          end
         end
 
         private
+
+        def current_participatory_space_config
+          @current_participatory_space_config ||= MinorsSpaceConfig.for(current_participatory_space)
+        end
 
         def access_types
           {

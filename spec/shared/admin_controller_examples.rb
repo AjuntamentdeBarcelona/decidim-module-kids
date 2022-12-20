@@ -32,6 +32,28 @@ shared_examples "controls the minor configuration" do
     expect(controller.current_participatory_space).to eq(participatory_space)
   end
 
+  it "creates config and redirects" do
+    expect do
+      post :create, params: params.merge(minors_space_config: { access_type: "all" })
+    end.to change(Decidim::Kids::MinorsSpaceConfig, :count).by(1)
+
+    expect(flash[:notice]).to eq("Configuration saved successfully.")
+    expect(response).to redirect_to(minors_space_index_path)
+  end
+
+  context "when config already exists" do
+    let!(:minors_space_config) { create(:minors_space_config, participatory_space:) }
+
+    it "updates config and redirects" do
+      expect do
+        post :create, params: params.merge(minors_space_config: { access_type: "all" })
+      end.not_to change(Decidim::Kids::MinorsSpaceConfig, :count)
+
+      expect(flash[:notice]).to eq("Configuration saved successfully.")
+      expect(response).to redirect_to(minors_space_index_path)
+    end
+  end
+
   context "when minors disabled" do
     let(:enable_minors_participation) { false }
 

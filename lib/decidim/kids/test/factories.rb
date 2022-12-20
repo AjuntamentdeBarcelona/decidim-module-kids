@@ -47,4 +47,11 @@ FactoryBot.define do
     email { Faker::Internet.email }
     birthday { rand(10..14).years.ago }
   end
+
+  factory :minors_space_config, class: "Decidim::Kids::MinorsSpaceConfig" do
+    max_age { 16 }
+    access_type { "all" }
+    authorization { "dummy_authorization_handler" }
+    participatory_space { create(:participatory_process) }
+  end
 end

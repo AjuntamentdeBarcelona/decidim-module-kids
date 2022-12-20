@@ -52,6 +52,9 @@ en:
           form:
             all: Space for all (no restrictions)
             minors: Space for minors only
+          save:
+            success: Configuration saved successfully.
+            error: Error saving configuration! (%{errors})
           menu: Minors configuration
       authorizations:
         authorize:
