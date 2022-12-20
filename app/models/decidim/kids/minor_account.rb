@@ -17,10 +17,10 @@ module Decidim
       validate :can_be_minor
 
       def promote_account
-        if minor.minor_age >= (minor&.organization&.maximum_minor_age || Decidim::Kids.maximum_minor_age)
-          minor.tutors = []
-          Decidim::Kids::KidsMailer.promote_minor_account(minor).deliver_now
-        end
+        return if minor.minor_age < (minor&.organization&.maximum_minor_age || Decidim::Kids.maximum_minor_age)
+
+        minor.tutors = []
+        Decidim::Kids::KidsMailer.promote_minor_account(minor).deliver_now
       end
 
       private
