@@ -31,7 +31,7 @@ shared_context "when participating in a minor's participatory space" do
 
   before do
     allow(Devise).to receive(:allow_unconfirmed_access_for).and_return(1.day)
-    request.env["decidim.current_organization"] = user.organization
+    request.env["decidim.current_organization"] = organization
     sign_in user, scope: :user
   end
 end

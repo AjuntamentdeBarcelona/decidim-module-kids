@@ -28,7 +28,7 @@ module Decidim::Kids
     let(:return_path) { "/decidim_kids#{user_minor_authorizations_path}" }
 
     before do
-      request.env["decidim.current_organization"] = user.organization
+      request.env["decidim.current_organization"] = organization
       sign_in user, scope: :user
     end
 

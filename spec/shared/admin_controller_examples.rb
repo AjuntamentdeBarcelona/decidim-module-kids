@@ -19,7 +19,7 @@ shared_context "when admin managing a participatory space" do
   let(:user) { create(:user, :admin, :confirmed, organization:) }
 
   before do
-    request.env["decidim.current_organization"] = user.organization
+    request.env["decidim.current_organization"] = organization
     sign_in user, scope: :user
   end
 end
@@ -54,7 +54,7 @@ shared_examples "controls the minor configuration" do
 
   it "does not create config if error" do
     expect do
-      post :create, params: params.merge(minors_space_config: { access_type: "minors" })
+      post :create, params: params.merge(minors_space_config: { access_type: "minors", authorization: "nonsense" })
     end.not_to change(Decidim::Kids::MinorsSpaceConfig, :count)
 
     expect(flash[:alert]).to include("Error saving configuration!")

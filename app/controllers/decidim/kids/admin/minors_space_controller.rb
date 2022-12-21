@@ -3,8 +3,7 @@
 module Decidim
   module Kids
     module Admin
-      # Base Controller that specific participatory spaces should inherit from.
-      #
+      # Base Controller that specific participatory spaces should inherit from to limit access to minors.
       class MinorsSpaceController < Decidim::Admin::ApplicationController
         before_action do
           enforce_permission_to :manage, :space_minors_configuration
