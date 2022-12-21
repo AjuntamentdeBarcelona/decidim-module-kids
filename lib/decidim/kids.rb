@@ -56,6 +56,7 @@ module Decidim
       [
         {
           manifest: :assemblies,
+          # From the routes specified in the admin_engine.rb of the participatory space module:
           admin_menu: :admin_assembly_menu,
           admin_scope: "/assemblies/", # this is used to generate the prefix of the admin url,
           # needs to match other subcontrollers (like categories)

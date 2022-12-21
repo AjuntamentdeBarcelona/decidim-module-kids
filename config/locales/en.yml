@@ -33,6 +33,8 @@ en:
             and check with them how you can %{link}
           minors_title: Minors Participation
     kids:
+      actions:
+        unauthorized: You cannot access this space because you do not meet the requirements
       admin:
         minors_space:
           form:
