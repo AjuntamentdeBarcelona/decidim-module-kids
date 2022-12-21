@@ -30,11 +30,16 @@ module Decidim
 
       def enforce_space_for_minors!
         return unless current_organization.minors_participation_enabled?
-        return if current_user.admin?
-        return if current_user.minor?
 
-        # TODO: tutors with readonly access
-        # TODO: users with authorization to access minors spaces, check the age if possible
+        if current_user
+          # Allow admins and any other role with access to the admin dashboard
+          return if allowed_to?(:read, :admin_dashboard, current_participatory_space:)
+          # Allow minors
+          return if current_user.minor?
+
+          # TODO: tutors with readonly access
+          # TODO: users with authorization to access minors spaces, check the age if possible
+        end
 
         raise Decidim::Kids::ActionForbidden
       end

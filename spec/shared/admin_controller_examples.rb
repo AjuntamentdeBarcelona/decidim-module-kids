@@ -17,6 +17,11 @@ shared_context "when admin managing a participatory space" do
            minors_authorization: minors_authorization_name)
   end
   let(:user) { create(:user, :admin, :confirmed, organization:) }
+
+  before do
+    request.env["decidim.current_organization"] = user.organization
+    sign_in user, scope: :user
+  end
 end
 
 shared_examples "controls the minor configuration" do

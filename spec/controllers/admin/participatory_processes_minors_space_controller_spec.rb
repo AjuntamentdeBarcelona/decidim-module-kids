@@ -9,11 +9,6 @@ module Decidim::ParticipatoryProcesses::Admin
 
     include_context "when admin managing a participatory space"
 
-    before do
-      request.env["decidim.current_organization"] = user.organization
-      sign_in user, scope: :user
-    end
-
     let!(:participatory_process) do
       create(
         :participatory_process,
