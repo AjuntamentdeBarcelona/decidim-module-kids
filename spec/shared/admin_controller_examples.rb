@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-shared_context "when admin managing a participatory space" do
+shared_context "with a minor's organization" do
   let(:organization) { create :organization }
   let(:enable_minors_participation) { true }
   let(:minimum_minor_age) { 10 }
@@ -17,6 +17,10 @@ shared_context "when admin managing a participatory space" do
            minors_authorization: minors_authorization_name)
   end
   let(:user) { create(:user, :admin, :confirmed, organization:) }
+end
+
+shared_context "when admin managing a participatory space" do
+  include_context "with a minor's organization"
 
   before do
     request.env["decidim.current_organization"] = organization
