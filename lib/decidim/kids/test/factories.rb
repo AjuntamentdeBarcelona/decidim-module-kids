@@ -2,6 +2,7 @@
 
 require "decidim/core/test/factories"
 require "decidim/system/test/factories"
+require "decidim/proposals/test/factories"
 
 FactoryBot.define do
   factory :minors_organization_config, class: "Decidim::Kids::OrganizationConfig" do
