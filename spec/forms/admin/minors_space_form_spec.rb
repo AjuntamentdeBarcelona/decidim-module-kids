@@ -58,7 +58,7 @@ module Decidim::Kids::Admin
       context "when access_type is minors" do
         let(:access_type) { "minors" }
 
-        it { is_expected.to be_invalid }
+        it { is_expected.to be_valid }
 
         context "and authorization is not registered" do
           let(:authorization) { "not_registered" }

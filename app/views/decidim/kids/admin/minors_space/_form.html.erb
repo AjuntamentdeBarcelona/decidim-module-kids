@@ -3,7 +3,7 @@
 </div>
 <div id="minors-extra" class="<%= "hide" unless form.object.access_type == "minors" %>">
   <div class="row column">
-    <%= form.select :authorization, Decidim::Kids.valid_minor_workflows.pluck(:description, :name) %>
+    <%= form.select :authorization, Decidim::Kids.valid_minor_workflows.pluck(:description, :name), include_blank: true %>
   </div>
   <div class="row column">
     <%= form.number_field :max_age %>

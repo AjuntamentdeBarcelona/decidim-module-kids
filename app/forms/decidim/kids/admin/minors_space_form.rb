@@ -12,7 +12,8 @@ module Decidim
 
         validates :access_type, presence: true, inclusion: { in: %w(all minors) }
         validates :max_age, numericality: { only_integer: true, greater_or_equal_than: 0 }, if: -> { access_type == "minors" }
-        validates :authorization, inclusion: { in: Decidim::Kids.valid_minor_workflows.pluck(:name) }, allow_blank: false, if: -> { access_type == "minors" }
+        validates :authorization, inclusion: { in: Decidim::Kids.valid_minor_workflows.pluck(:name) },
+                                  if: -> { authorization.present? && access_type == "minors" }
       end
     end
   end
