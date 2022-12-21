@@ -32,6 +32,12 @@ shared_examples "controls the minor configuration" do
     expect(controller.current_participatory_space).to eq(participatory_space)
   end
 
+  it "has the access_type helper" do
+    get :index, params: params
+
+    expect(controller.helpers.access_types.values).to eq(%w(all minors))
+  end
+
   it "creates config and redirects" do
     expect do
       post :create, params: params.merge(minors_space_config: { access_type: "all" })
