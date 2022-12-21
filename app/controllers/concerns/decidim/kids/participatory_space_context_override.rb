@@ -37,11 +37,22 @@ module Decidim
           # Allow minors
           return if current_user.minor?
 
-          # TODO: tutors with readonly access
+          return if current_user_is_a_valid_tutor?
           # TODO: users with authorization to access minors spaces, check the age if possible
         end
 
         raise Decidim::Kids::ActionForbidden
+      end
+
+      def current_user_is_a_valid_tutor?
+        return unless current_user.tutor?
+        return unless current_user.confirmed?
+
+        # only tutors with readonly access are allowed
+        return if request.post? || request.patch? || request.put? || request.delete?
+
+        # check for having at least one minor confirmed
+        current_user.minors.detect(&:confirmed?)
       end
     end
   end

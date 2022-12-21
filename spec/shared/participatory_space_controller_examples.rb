@@ -26,15 +26,17 @@ shared_context "when participating in a minor's participatory space" do
   let(:admin) { create(:user, :admin, :confirmed, organization:) }
   let(:user) { create(:user, :confirmed, organization:) }
   let(:minor) { create(:minor, :confirmed, organization:) }
+  let(:tutor) { create(:tutor, :confirmed, organization:) }
   let(:valuator) { create(:user, :confirmed, organization:) }
 
   before do
+    allow(Devise).to receive(:allow_unconfirmed_access_for).and_return(1.day)
     request.env["decidim.current_organization"] = user.organization
     sign_in user, scope: :user
   end
 end
 
-shared_examples "cannot access to action" do |action|
+shared_examples "cannot GET" do |action|
   it "redirects to the participatory space admin" do
     get action, params: params
 
@@ -43,7 +45,7 @@ shared_examples "cannot access to action" do |action|
   end
 end
 
-shared_examples "can access to action" do |action|
+shared_examples "can GET" do |action|
   it "renders view" do
     get action, params: params
 
@@ -52,7 +54,46 @@ shared_examples "can access to action" do |action|
   end
 end
 
-shared_examples "cannot access to a component" do
+shared_examples "cannot POST" do |action|
+  it "redirects on post" do
+    post action, params: params
+
+    expect(flash[:alert]).to include("You cannot access this space because you do not meet the requirements")
+    expect(response).to redirect_to(Decidim::Core::Engine.routes.url_helpers.root_path)
+  end
+
+  it "redirects on put" do
+    put action, params: params
+
+    expect(flash[:alert]).to include("You cannot access this space because you do not meet the requirements")
+    expect(response).to redirect_to(Decidim::Core::Engine.routes.url_helpers.root_path)
+  end
+
+  it "redirects on patch" do
+    patch action, params: params
+
+    expect(flash[:alert]).to include("You cannot access this space because you do not meet the requirements")
+    expect(response).to redirect_to(Decidim::Core::Engine.routes.url_helpers.root_path)
+  end
+
+  it "redirects on delete" do
+    delete action, params: params
+
+    expect(flash[:alert]).to include("You cannot access this space because you do not meet the requirements")
+    expect(response).to redirect_to(Decidim::Core::Engine.routes.url_helpers.root_path)
+  end
+end
+
+shared_examples "can POST" do |action|
+  it "renders view" do
+    post action, params: params
+
+    expect(flash[:alert]).to be_blank
+    expect(subject).to render_template(:index)
+  end
+end
+
+shared_examples "cannot GET to a component" do
   describe ::Decidim::Proposals::ProposalsController, type: :controller do
     routes { Decidim::Proposals::Engine.routes }
     before do
@@ -69,7 +110,7 @@ shared_examples "cannot access to a component" do
   end
 end
 
-shared_examples "can access to a component" do
+shared_examples "can GET to a component" do
   describe ::Decidim::Proposals::ProposalsController, type: :controller do
     routes { Decidim::Proposals::Engine.routes }
     before do
@@ -87,36 +128,69 @@ shared_examples "can access to a component" do
 end
 
 shared_examples "access participatory space and components" do
-  it_behaves_like "cannot access to action", :index
-  it_behaves_like "cannot access to a component"
+  it_behaves_like "cannot GET", :index
+  it_behaves_like "cannot POST", :index
+  it_behaves_like "cannot GET to a component"
 
   context "when minors is disabled" do
     let(:enable_minors_participation) { false }
 
-    it_behaves_like "can access to action", :index
-    it_behaves_like "can access to a component"
+    it_behaves_like "can GET", :index
+    it_behaves_like "can POST", :index
+    it_behaves_like "can GET to a component"
   end
 
   context "when the user is a minor" do
     let(:user) { minor }
 
-    it_behaves_like "can access to action", :index
-    it_behaves_like "can access to a component"
+    it_behaves_like "can GET", :index
+    it_behaves_like "can POST", :index
+    it_behaves_like "can GET to a component"
   end
 
   context "when the user is an admin" do
     let(:user) { admin }
 
-    it_behaves_like "can access to action", :index
-    it_behaves_like "can access to a component"
+    it_behaves_like "can GET", :index
+    it_behaves_like "can POST", :index
+    it_behaves_like "can GET to a component"
   end
 
   context "when the user has and admin role" do
     allowed_roles.each do |role, space_name|
       let(:user) { create role, :confirmed, space_name => participatory_space }
 
-      it_behaves_like "can access to action", :index
-      it_behaves_like "can access to a component"
+      it_behaves_like "can GET", :index
+      it_behaves_like "can POST", :index
+      it_behaves_like "can GET to a component"
+    end
+  end
+
+  context "when the user is a tutor" do
+    let(:user) { tutor }
+
+    it_behaves_like "can GET", :index
+    it_behaves_like "cannot POST", :index
+    it_behaves_like "can GET to a component"
+
+    context "and tutor is not confirmed" do
+      before do
+        tutor.update(confirmed_at: nil)
+      end
+
+      it_behaves_like "cannot GET", :index
+      it_behaves_like "cannot POST", :index
+      it_behaves_like "cannot GET to a component"
+    end
+
+    context "and tutor does not have any minor confirmed" do
+      let!(:minor_account) { create(:minor_account, tutor:, minor:) }
+      let(:tutor) { create :user, :confirmed, organization: }
+      let(:minor) { create :user, organization: }
+
+      it_behaves_like "cannot GET", :index
+      it_behaves_like "cannot POST", :index
+      it_behaves_like "cannot GET to a component"
     end
   end
 end
