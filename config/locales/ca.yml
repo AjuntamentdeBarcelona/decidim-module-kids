@@ -1,0 +1,106 @@
+---
+ca:
+  activemodel:
+    attributes:
+      organization:
+        enable_minors_participation: Habilitar la participació de menors
+        maximum_minor_accounts: Máxim nombre de menors que es poden assignar a una tutoria
+        maximum_minor_age: Edat màxima per a encara ser considerada menor
+        minimum_minor_age: Edat mínima per a poder crear un compte de menor
+        minors_authorization: Mètode d'autorització per a la validació un compte de menor
+        tutors_authorization: Mètode d'autorització per a la validació un compte de tutoria
+    errors:
+      models:
+        organization:
+          attributes:
+            minimum_minor_age:
+              bigger_than_adult: L'edat del/de la menor ha de ser inferior a la edad adulta
+  decidim:
+    devise:
+      mailer:
+        invitation_instructions:
+          accept: Acceptar email
+      registrations:
+        new:
+          create_an_account: crear un compte
+          minors_description: Tens menys de %{maximum_minor_age} anys? Parla amb al teva mare i pare per consulta'ls-hi com pots %{link}
+          minors_title: Participació de menors
+    kids:
+      authorizations:
+        authorize:
+          already_authorized: El compte de menor ja està autoritzada.
+          error: S'ha produït un error en autoritzar el compte de menor.
+          success: El compte de menor s'ha autoritzat amb èxit.
+        create:
+          invalid_age: El compte de menor no s'ha pogut verificar perquè el mètode d'autorització no conté la dada de la data de naixement o aquesta no correspon a la franja d'edat corresponent.
+        new:
+          authorizing_html: Estàs verificant el compte de menor de <b>%{minor}</b>
+      minor_account:
+        form:
+          invalid_age: Edat no vàlida
+        name: Verificació de compte de menor pendent
+      minor_notifications_mailer:
+        confirmation:
+          body: Instruccions
+          body_2: El compte està "tutelat"
+          greeting: Benvingut/da, %{recipient}!
+          sign_in: Iniciar sessió
+          subject: Instruccions de confirmació
+      minors_participation: Participació de menors a Decidim
+      system:
+        organizations:
+          minors_form:
+            minors_authorization_help: 'Atenció: Assegura''t que aquest mètode de verificació comprova l''edat del menor vers la franja d''edat que s''ha definit'
+            tutors_authorization_help: La usuària haurà de ser autoritzada fent servir aquest mètode abans de poder-se crear un compte de menor
+      user:
+        menu: Els meus comptes de menors
+      user_minors:
+        create:
+          error: S'han produït errors mentre es creava un compte de menor
+          success: El compte de menor s'ha creat amb èxit
+        destroy:
+          error: S'han produït errors mentre s'esborrava un compte de menor
+          success: El compte de menor s'ha esborrat amb èxit
+        edit:
+          change_password: Canviar la contrasenya
+          edit_button: Actualitzar el compte de menor
+          title: Editar el compte de menor
+        index:
+          actions: Accions
+          add: Afegir un/a menor
+          age: Edat
+          button_verify: Verificar
+          confirm: Segur que vols esborrar aquest compte de menor?
+          confirmed: Confirmada
+          confirmed_user: 'Sí'
+          description: Aquí pots veure els comptes de menors que tutoritzes. És obligatori verificar els comptes de menors abans que puguin participar a la plataforma.
+          destroy_button: Eliminar
+          edit: Editar
+          last_login: Darrer inici de sessió
+          name: Nom
+          needs_verification: Cal verificació!
+          not_confirmed: 'No'
+          note: Maximum number of minors reached
+          pending: Pendent
+          resend_email: Reenvia el correu
+          title: Menors que tutoritzo
+          verified: Verificada
+        new:
+          create: Crear un compte de menor
+          title: Afegir menor
+        no_tutor_authorization: El mòdul de menors està mal configurat, si us plau, contacta amb les administradores.
+        resend:
+          success: Correu electrònic enviat amb èxit
+        tos_field:
+          tos_agreement: Acceptes els seus Termes i Condicions
+        unverified:
+          authorize: Autoritzar el meu compte
+          needs_to_be_verified: Per a poder crear un compte de menor, t'has de verificar fent servir el mètode "%{method}"
+        update:
+          error: S'han produït errors mentre s'actualitzava un compte de menor
+          success: El teu compte s'ha actualitzat amb èxit
+      user_minors_helper:
+        button_to_add_minor_account:
+          add: Afegir menor
+        minor_tos:
+          tos_agreement: Acceptes els seus Termes i Condicions
