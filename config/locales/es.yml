@@ -3,9 +3,9 @@ es:
   activemodel:
     attributes:
       organization:
-        enable_minors_participation: Enable minors participation
-        maximum_minor_accounts: Maximum number of minors that can be assigned to a tutor
-        maximum_minor_age: Maximum age for a person to be considered a minor
+        enable_minors_participation: Habilitar la participación de menores
+        maximum_minor_accounts: Número máximo de menores que pueden ser asignarse a una tutoría
+        maximum_minor_age: Edad máxima para aún ser considerada menor
         minimum_minor_age: Minimum age allowed to create a minor account
         minors_authorization: Authorization method for validating the minor's account
         tutors_authorization: Authorization method for validating the tutor's account
