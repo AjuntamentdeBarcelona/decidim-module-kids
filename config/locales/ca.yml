@@ -67,40 +67,40 @@ ca:
           title: Editar el compte de menor
         index:
           actions: Accions
-          add: Add a minor
-          age: Age
-          button_verify: Verify
-          confirm: Are you sure you want to delete minor's account?
-          confirmed: Confirmed
-          confirmed_user: 'Yes'
-          description: Here you can see the minors that you tutor. It is mandatory to verify the minor before they can participate in the platform.
-          destroy_button: Delete
-          edit: Edit
-          last_login: Last sign in
-          name: Name
-          needs_verification: Needs to be verified!
+          add: Afegir un/a menor
+          age: Edat
+          button_verify: Verificar
+          confirm: Segur que vols esborrar aquest compte de menor?
+          confirmed: Confirmada
+          confirmed_user: 'Sí'
+          description: Aquí pots veure els comptes de menors que tutoritzes. És obligatori verificar els comptes de menors abans que puguin participar a la plataforma.
+          destroy_button: Eliminar
+          edit: Editar
+          last_login: Darrer inici de sessió
+          name: Nom
+          needs_verification: Cal verificació!
           not_confirmed: 'No'
           note: Maximum number of minors reached
-          pending: Pending
-          resend_email: Resend email
-          title: My tutored minors
-          verified: Verified
+          pending: Pendent
+          resend_email: Reenvia el correu
+          title: Menors que tutoritzo
+          verified: Verificada
         new:
-          create: Create minor account
-          title: Add a minor
-        no_tutor_authorization: Minors module is misconfigured, please contact the administrator.
+          create: Crear un compte de menor
+          title: Afegir menor
+        no_tutor_authorization: El mòdul de menors està mal configurat, si us plau, contacta amb les administradores.
         resend:
-          success: Email was successfully sent
+          success: Correu electrònic enviat amb èxit
         tos_field:
-          tos_agreement: You accept its Terms and Conditions
+          tos_agreement: Acceptes els seus Termes i Condicions
         unverified:
-          authorize: Authorize my account
-          needs_to_be_verified: In order to create a minor account, you must be verified using the "%{method}" method
+          authorize: Autoritzar el meu compte
+          needs_to_be_verified: Per a poder crear un compte de menor, t'has de verificar fent servir el mètode "%{method}"
         update:
-          error: Errors occurred while updating a minor's account
-          success: Minor's account has been successfully updated
+          error: S'han produït errors mentre s'actualitzava un compte de menor
+          success: El teu compte s'ha actualitzat amb èxit
       user_minors_helper:
         button_to_add_minor_account:
-          add: Add a minor
+          add: Afegir menor
         minor_tos:
-          tos_agreement: You accept its Terms and Conditions
+          tos_agreement: Acceptes els seus Termes i Condicions
