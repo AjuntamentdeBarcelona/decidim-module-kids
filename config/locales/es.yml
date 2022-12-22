@@ -6,67 +6,67 @@ es:
         enable_minors_participation: Habilitar la participación de menores
         maximum_minor_accounts: Número máximo de menores que pueden ser asignarse a una tutoría
         maximum_minor_age: Edad máxima para aún ser considerada menor
-        minimum_minor_age: Minimum age allowed to create a minor account
-        minors_authorization: Authorization method for validating the minor's account
-        tutors_authorization: Authorization method for validating the tutor's account
+        minimum_minor_age: Edad mínima para poder crear una cuenta de menor
+        minors_authorization: Método de autorización para validar una cuenta de menor
+        tutors_authorization: Método de autorización para validar la cuenta de la tutoría
     errors:
       models:
         organization:
           attributes:
             minimum_minor_age:
-              bigger_than_adult: The minor age must be lower than the adult age
+              bigger_than_adult: La edad del/de la menor debe ser inferior a la edat adulta
   decidim:
     devise:
       mailer:
         invitation_instructions:
-          accept: Accept email
+          accept: Aceptar email
       registrations:
         new:
-          create_an_account: create an account
-          minors_description: Are you under %{maximum_minor_age}? Call your parents and check with them how you can %{link}
-          minors_title: Minors Participation
+          create_an_account: crear una cuenta
+          minors_description: '¿Tienes menos de %{maximum_minor_age} años? Habla con tu madre y padre para consultarles como puedes %{link}'
+          minors_title: Participación de menores
     kids:
       authorizations:
         authorize:
-          already_authorized: The minor account is already authorized.
-          error: There was an error authorizing the minor account.
-          success: The minor account has been successfully authorized.
+          already_authorized: La cuenta de menor ya está autorizada.
+          error: Se ha producido un error al autorizar la cuenta de menor.
+          success: La cuenta de menor ha sido autorizada con éxito.
         create:
-          invalid_age: We could not verify the minor account because the authorization method does not provide the birthday attribute or this one is not in the accepted range.
+          invalid_age: La cuenta de menor no se ha podido verificar porque el método de autorización no contiene el dato de fecha de nacimiento o esta no se encuentra dentro la franja de edad correspondiente.
         new:
-          authorizing_html: You are verifying the minor <b>%{minor}</b>
+          authorizing_html: Estás verificando la cuenta de menor de <b>%{minor}</b>
       minor_account:
         form:
-          invalid_age: Invalid age
-        name: Verification pending minor account
+          invalid_age: Edad no válida
+        name: Verificación de cuenta de menor pendiente
       minor_notifications_mailer:
         confirmation:
-          body: Instructions
-          body_2: The account is "tutelated"
-          greeting: Welcome, %{recipient}!
-          sign_in: Sign in
-          subject: Confirmation instructions
-      minors_participation: Decidim Minors Participation
+          body: Instrucciones
+          body_2: La cuenta está "tutelada"
+          greeting: '¡Bienvenido/a %{recipient}!'
+          sign_in: Iniciar sesión
+          subject: Instrucciones de confirmación
+      minors_participation: Participación de menores en Decidim
       system:
         organizations:
           minors_form:
-            minors_authorization_help: 'Warning: Make sure this verification method checks for the age of the minor is in between the ranges defined here'
-            tutors_authorization_help: The user will have to be authorized using this method before being able to create a minor account
+            minors_authorization_help: 'Atención: Asegúrate que este método de verificación comprueba la edad del menor contra la franja de edad que se ha definido'
+            tutors_authorization_help: La usuaria tendrá que ser autorizada usando este método antes de poder crear una cuenta de menor
       user:
-        menu: My minor accounts
+        menu: Mis cuentas de menores
       user_minors:
         create:
-          error: Errors occurred while creating a minor's account
-          success: Minor's account has been successfully created
+          error: Se han producido errores mientras se creaba una cuenta de menores
+          success: La cuenta de menor se ha creado con éxito
         destroy:
-          error: Errors occurred while deleting a minor's account
-          success: Minor's account has been successfully deleted
+          error: Se han producido errores mientras se borraba una cuenta de menores
+          success: La cuenta de menor se ha borrado con éxito
         edit:
-          change_password: Change password
-          edit_button: Update minor account
-          title: Edit minor account
+          change_password: Cambiar la contraseña
+          edit_button: Actualizar la cuenta de menor
+          title: Editar la cuenta de menor
         index:
-          actions: Actions
+          actions: Acciones
           add: Add a minor
           age: Age
           button_verify: Verify
