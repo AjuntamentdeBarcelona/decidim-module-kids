@@ -25,6 +25,11 @@ bundle
 bundle exec rails decidim_kids:install:migrations
 ```
 
+> NOTE: This module works better with an authorization methods capable of storing the user's birthday in the metadata.
+> To install a, dummy, authorization method that stores the birthday in the metadata, you can run:
+> `bundle exec rails decidim_kids:install:handlers`
+
+
 ## Usage
 
 This module should work out of the box jut by adding it to your Gemfile.

@@ -38,7 +38,8 @@ module Decidim
           return if current_user.minor?
 
           return if current_user_is_a_valid_tutor?
-          # TODO: users with authorization to access minors spaces, check the age if possible
+          # users with authorization to access minors spaces, check the age if possible
+          return if current_user_has_a_valid_authorization?
         end
 
         raise Decidim::Kids::ActionForbidden
@@ -53,6 +54,29 @@ module Decidim
 
         # check for having at least one minor confirmed
         current_user.minors.detect(&:confirmed?)
+      end
+
+      def current_user_has_a_valid_authorization?
+        @authorization = current_user_authorizations.find_by(name: space_minors_config.authorization)
+        return unless @authorization
+        return true if space_minors_config.max_age.blank?
+
+        authorization_has_a_valid_age?
+      end
+
+      def authorization_has_a_valid_age?
+        Decidim::Kids.minor_authorization_age_attributes.detect do |attr|
+          begin
+            age = ((Time.zone.now - Date.parse(@authorization.try(attr).to_s).to_time) / 1.year.seconds).floor
+          rescue TypeError, ::Date::Error
+            next
+          end
+          age <= space_minors_config.max_age
+        end
+      end
+
+      def current_user_authorizations
+        Decidim::Verifications::Authorizations.new(organization: current_organization, user: current_user, granted: true).query
       end
     end
   end
