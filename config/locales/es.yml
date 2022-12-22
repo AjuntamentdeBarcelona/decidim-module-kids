@@ -67,40 +67,40 @@ es:
           title: Editar la cuenta de menor
         index:
           actions: Acciones
-          add: Add a minor
-          age: Age
-          button_verify: Verify
-          confirm: Are you sure you want to delete minor's account?
-          confirmed: Confirmed
-          confirmed_user: 'Yes'
-          description: Here you can see the minors that you tutor. It is mandatory to verify the minor before they can participate in the platform.
-          destroy_button: Delete
-          edit: Edit
-          last_login: Last sign in
-          name: Name
-          needs_verification: Needs to be verified!
+          add: Añadir un/a menor
+          age: Edad
+          button_verify: Verificar
+          confirm: '¿Seguro que quieres borrar la cuenta de menor?'
+          confirmed: Confirmada
+          confirmed_user: 'Sí'
+          description: Aquí puedes ver las cuentas de menores que tutorizas. Es obligatorio verificar las cuentas de menores antes que puedan participar en la plataforma.
+          destroy_button: Eliminar
+          edit: Editar
+          last_login: Último inicio de sesión
+          name: Nombre
+          needs_verification: '¡Requiere verificación!'
           not_confirmed: 'No'
           note: Maximum number of minors reached
-          pending: Pending
-          resend_email: Resend email
-          title: My tutored minors
-          verified: Verified
+          pending: Pendiente
+          resend_email: Reenviar email
+          title: Menores que tutorizo
+          verified: Verificada
         new:
-          create: Create minor account
-          title: Add a minor
-        no_tutor_authorization: Minors module is misconfigured, please contact the administrator.
+          create: Crear una cuenta de menor
+          title: Añadir menor
+        no_tutor_authorization: El módulo de menores está desconfigurado, por favor, contacta con las administradoras.
         resend:
-          success: Email was successfully sent
+          success: Correo electrónico enviado con éxito
         tos_field:
-          tos_agreement: You accept its Terms and Conditions
+          tos_agreement: Aceptas sus Términos y Condiciones
         unverified:
-          authorize: Authorize my account
-          needs_to_be_verified: In order to create a minor account, you must be verified using the "%{method}" method
+          authorize: Autorizar mi cuenta
+          needs_to_be_verified: Para poder crear una cunta de menor, debes verificarte usando el método "%{method}"
         update:
-          error: Errors occurred while updating a minor's account
-          success: Minor's account has been successfully updated
+          error: Se han producido errores mientras se actualizaba una cuenta de menores
+          success: La cuenta de menor se ha actualizado con éxito
       user_minors_helper:
         button_to_add_minor_account:
-          add: Add a minor
+          add: Añadir menor
         minor_tos:
-          tos_agreement: You accept its Terms and Conditions
+          tos_agreement: Aceptas sus Términos y Condiciones
