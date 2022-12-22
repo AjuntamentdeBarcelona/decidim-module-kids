@@ -26,8 +26,8 @@ en:
       dummy_age_authorization_handler:
         explanation: Get verified by introducing a document number ending with "X"
         fields:
-          document_number: Document number
           birthday: Date of birth
+          document_number: Document number
         name: Example authorization with birthday metadata
     devise:
       mailer:
@@ -46,6 +46,16 @@ en:
         minors_space:
           form:
             all: Space for all (no restrictions)
+            handlers:
+              available: The authorization handler "%{handler}" is activated.
+              errors:
+                invalid: The authorization handler is invalid.
+                metadata: The authorization handler does not have the correct metadata
+                  to check the age of the person.
+                ok: The authorization handler has the correct metadata and can check
+                  the age of the person.
+              unavailable: The authorization handler "%{handler}" is not activated.
+                Please activate it in the organization's authorization configuration.
             minors: Space for minors only
           index:
             description_html: |

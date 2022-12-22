@@ -9,7 +9,7 @@ module Decidim
           enforce_permission_to :manage, :space_minors_configuration
         end
 
-        helper_method :access_types
+        helper_method :access_types, :authorization_handlers, :authorization_method_error
 
         def index
           @form = form(MinorsSpaceForm).from_model(current_participatory_space_config)
@@ -35,6 +35,20 @@ module Decidim
 
         def current_participatory_space_config
           @current_participatory_space_config ||= MinorsSpaceConfig.for(current_participatory_space)
+        end
+
+        def authorization_handlers
+          Decidim::Kids.valid_minor_workflows.pluck(:description, :name)
+        end
+
+        def authorization_method_error(handler)
+          form_class = Decidim::Verifications.find_workflow_manifest(handler)&.form&.safe_constantize
+          return :invalid unless form_class
+
+          dummy = form_class.new
+          return :metadata unless dummy.respond_to? :metadata
+
+          :metadata unless Decidim::Kids.minor_authorization_age_attributes.detect { |attr| dummy.metadata.has_key?(attr.to_sym) }
         end
 
         def access_types
