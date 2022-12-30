@@ -25,6 +25,11 @@ bundle
 bundle exec rails decidim_kids:install:migrations
 ```
 
+> NOTE: This module works better with an authorization methods capable of storing the user's birthday in the metadata.
+> To install a, dummy, authorization method that stores the birthday in the metadata, you can run:
+> `bundle exec rails decidim_kids:install:handlers`
+
+
 ## Usage
 
 This module should work out of the box jut by adding it to your Gemfile.
@@ -51,9 +56,27 @@ Decidim::Kids.configure do |config|
   config_accessor :maximum_minor_age do
     13
   end
+
+  # Default value maximum number of minors that can be assigned to a tutor
+  config_accessor :maximum_minor_accounts do
+    3
+  end
+
+  # Other, more advanced, configuration options are available. Check the source code at lib/decidim/kids.rb for more information.
 end
 ```
 
+## Using authorizations
+
+This module relies on the use of authorization handlers in order to detect if an user is a minor or not.
+
+There are two ways that authorization are used:
+
+1. In the organization's configuration (configured at `/system`). In here the "super-admin", needs to define what authorization methods will be used to authorize a user that can be a "tutor" (ie: can have minors in charge), or a "minor".
+  In the case of a minor, the authorization handler should have a field in the form that asks the age of the person (ideally, it also should check that the person is a minor through some census service, but that's not mandatory). In this case, it is not required to store this date in the authorization's metadata.
+2. In a participatory space that access restricted to minors, the authorization handler will be used to check if a normal user (not a minor) can also participate in such space. In this case, the authorization handler should store the birthday of the user in the authorization's metadata.
+
+> NOTE: it is possible to define the name of the form fields that will be used to store the birthday of the user in the authorization's metadata. Check the source code at `lib/decidim/kids.rb` for more information.
 
 ## Contributing
 

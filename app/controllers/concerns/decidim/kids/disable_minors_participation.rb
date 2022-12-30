@@ -2,7 +2,8 @@
 
 module Decidim
   module Kids
-    module NeedsAdultPermission
+    # Controllers implementing this concern will be able to restrict access to user's that are not minors.
+    module DisableMinorsParticipation
       extend ActiveSupport::Concern
       include HasDecidimKidsPermissions
 

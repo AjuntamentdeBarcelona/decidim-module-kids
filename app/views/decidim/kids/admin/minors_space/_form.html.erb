@@ -1,0 +1,53 @@
+<div class="row column">
+  <%= form.select :access_type, access_types, prompt: "" %>
+</div>
+<div id="minors-extra" class="<%= "hide" unless form.object.access_type == "minors" %>">
+  <div class="row column">
+    <%= form.select :authorization, authorization_handlers, include_blank: true %>
+  </div>
+  <div class="row column">
+    <%= form.number_field :max_age %>
+  </div>
+</div>
+
+<% authorization_handlers.each do |desc, handler| %>
+  <div class="<%= "hide" if handler != form.object.authorization %> callout warning check-form-handlers" id="check-form-<%= handler %>">
+    <p>
+    <% if current_organization.available_authorization_handlers.include?(handler.to_s) %>
+      <strong class="text-success">&#9786;</strong> <%= t("form.handlers.available", scope: "decidim.kids.admin.minors_space", handler: desc) %>
+    <% else %>
+      <strong class="text-alert">&#9785;</strong> <%= t("form.handlers.unavailable", scope: "decidim.kids.admin.minors_space", handler: desc) %>
+    <% end %>
+    </p>
+    <p>
+    <% if error = authorization_method_error(handler) %>
+      <strong class="text-alert">&#9785;</strong> <%= t("form.handlers.errors.#{error}", scope: "decidim.kids.admin.minors_space") %>
+    <% else %>
+      <strong class="text-success">&#9786;</strong> <%= t("form.handlers.errors.ok", scope: "decidim.kids.admin.minors_space") %>
+    <% end %>
+    </p>
+  </div>
+<% end %>
+
+<script type="text/javascript">
+  var sel = document.getElementById("minors_space_config_access_type");
+  var auth = document.getElementById("minors_space_config_authorization");
+  sel.addEventListener("change", function () {
+    var minorsExtra = document.getElementById("minors-extra");
+    if (sel.value === "minors") {
+      minorsExtra.classList.remove("hide");
+    } else {
+      minorsExtra.classList.add("hide");
+    }
+  });
+  auth.addEventListener("change", function () {
+    var checkFormHandlers = document.getElementsByClassName("check-form-handlers");
+    var checkForm = document.getElementById("check-form-" + auth.value);
+    Array.from(checkFormHandlers).forEach(function (el) {
+      el.classList.add("hide");
+    });
+    if (checkForm) {
+      checkForm.classList.remove("hide");
+    }
+  });
+</script>

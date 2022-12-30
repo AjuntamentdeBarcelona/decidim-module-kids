@@ -2,6 +2,11 @@
 en:
   activemodel:
     attributes:
+      minors_space_config:
+        access_type: Participatory space access type
+        authorization: Authorization method for other users allowed in this space
+        max_age: Check for this maximum age if the authorization allows it (leave
+          it empty or zero to disable this check)
       organization:
         enable_minors_participation: Enable minors participation
         maximum_minor_accounts: Maximum number of minors that can be assigned to a
@@ -17,6 +22,13 @@ en:
             minimum_minor_age:
               bigger_than_adult: The minor age must be lower than the adult age
   decidim:
+    authorization_handlers:
+      dummy_age_authorization_handler:
+        explanation: Get verified by introducing a document number ending with "X"
+        fields:
+          birthday: Date of birth
+          document_number: Document number
+        name: Example authorization with birthday metadata
     devise:
       mailer:
         invitation_instructions:
@@ -28,6 +40,41 @@ en:
             and check with them how you can %{link}
           minors_title: Minors Participation
     kids:
+      actions:
+        unauthorized: You cannot access this space because you do not meet the requirements
+      admin:
+        minors_space:
+          form:
+            all: Space for all (no restrictions)
+            handlers:
+              available: The authorization handler "%{handler}" is activated.
+              errors:
+                invalid: The authorization handler is invalid.
+                metadata: The authorization handler does not have the correct metadata
+                  to check the age of the person.
+                ok: The authorization handler has the correct metadata and can check
+                  the age of the person.
+              unavailable: The authorization handler "%{handler}" is not activated.
+                Please activate it in the organization's authorization configuration.
+            minors: Space for minors only
+          index:
+            description_html: |
+              In here you can configure how this participatory space will behave when normal or minor users will access to it.<br>
+              Participatory spaces can be of two types: limited to minors or open to everybody as well (the default behavior).<br>
+              When a participatory space is open to everybody, minors will be able to access to it (there will be no restrictions).<br>
+              When a participatory space is limited to minors, only minors and some special users will be able to access to it. The rest of the users will be redirected with an error message.<br>
+              <br>The extra users with access to a space limited to minors are:<br>
+              <ul>
+              <li>The users with the role of administrator, moderator, collaborator or valuator.</li>
+              <li>The users that are tutors of a minor, with read-only access.</li>
+              <li>If the option is activated, the users verified by the specified authorization method will be granted access as well. For instance, you can use this verification method to verify minors up to an age that not need tutelation.</li>
+              </ul>
+            save: Save
+            title: Participatory space minors configuration
+          menu: Minors configuration
+          save:
+            error: Error saving configuration! (%{errors})
+            success: Configuration saved successfully.
       authorizations:
         authorize:
           already_authorized: The minor account is already authorized.

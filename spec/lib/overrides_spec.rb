@@ -15,6 +15,7 @@ checksums = [
   {
     package: "decidim-core",
     files: {
+      "/app/controllers/concerns/decidim/participatory_space_context.rb" => "f6726d9098ccf96f865c2a3ab9439b2d",
       "/app/models/decidim/organization.rb" => "e0b67b906f0ad3db84226914f07a05e7",
       "/app/models/decidim/static_page.rb" => "23b8d77f1893d11af189001cbaa008c8",
       "/app/views/decidim/devise/registrations/new.html.erb" => "593710b9c75fc90f1322871f231f0b5f"

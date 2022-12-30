@@ -2,6 +2,7 @@
 
 require "decidim/core/test/factories"
 require "decidim/system/test/factories"
+require "decidim/proposals/test/factories"
 
 FactoryBot.define do
   factory :minors_organization_config, class: "Decidim::Kids::OrganizationConfig" do
@@ -46,5 +47,12 @@ FactoryBot.define do
     name { Faker::Name.name }
     email { Faker::Internet.email }
     birthday { rand(10..14).years.ago }
+  end
+
+  factory :minors_space_config, class: "Decidim::Kids::MinorsSpaceConfig" do
+    max_age { 16 }
+    access_type { "minors" }
+    authorization { "dummy_age_authorization_handler" }
+    participatory_space { create(:participatory_process) }
   end
 end

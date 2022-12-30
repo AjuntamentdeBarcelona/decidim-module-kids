@@ -4,8 +4,12 @@
 if !Rails.env.production? || ENV.fetch("SEED", nil)
   print "Creating seeds for decidim_kids...\n" unless Rails.env.test?
 
+  organization = Decidim::Organization.first
+  organization.available_authorizations << "dummy_age_authorization_handler"
+  organization.save!
+
   Decidim::Kids::OrganizationConfig.create!(
-    organization: Decidim::Organization.first,
+    organization:,
     enable_minors_participation: true,
     tutors_authorization: "dummy_authorization_handler",
     minors_authorization: "dummy_authorization_handler"
