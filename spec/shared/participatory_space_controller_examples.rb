@@ -132,6 +132,14 @@ shared_examples "access participatory space and components" do
   it_behaves_like "cannot POST", :index
   it_behaves_like "cannot GET to a component"
 
+  context "when config is for all" do
+    let(:access_type) { "all" }
+
+    it_behaves_like "can GET", :index
+    it_behaves_like "can POST", :index
+    it_behaves_like "can GET to a component"
+  end
+
   context "when minors is disabled" do
     let(:enable_minors_participation) { false }
 

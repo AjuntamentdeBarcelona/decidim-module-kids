@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 shared_context "with a minor's organization" do
-  let(:organization) { create :organization }
+  let(:available_authorizations) { %w(dummy_authorization_handler another_dummy_authorization_handler dummy_age_authorization_handler) }
+  let(:organization) { create :organization, available_authorizations: }
   let(:enable_minors_participation) { true }
   let(:minimum_minor_age) { 10 }
   let(:maximum_minor_age) { 13 }
@@ -45,6 +46,20 @@ shared_examples "controls the minor configuration" do
     get :index, params: params
 
     expect(controller.helpers.access_types.values).to eq(%w(all minors))
+  end
+
+  it "has the authorization_handlers helper" do
+    get :index, params: params
+
+    expect(controller.helpers.authorization_handlers.to_h.values).to match_array(available_authorizations)
+  end
+
+  it "has the authorization_method_error helper" do
+    get :index, params: params
+
+    expect(controller.helpers.authorization_method_error("nonsense")).to eq(:invalid)
+    expect(controller.helpers.authorization_method_error("dummy_authorization_handler")).to eq(:metadata)
+    expect(controller.helpers.authorization_method_error("dummy_age_authorization_handler")).to be_nil
   end
 
   it "creates config and redirects" do
