@@ -17,8 +17,8 @@ shared_context "when participating in a minor's participatory space" do
            minors_authorization: minors_authorization_name)
   end
   let(:access_type) { "minors" }
-  let(:max_age) { 16 }
-  let(:authorization) { "dummy_authorization_handler" }
+  let(:max_age) { 0 }
+  let(:authorization) { "dummy_age_authorization_handler" }
 
   let!(:component) { create :proposal_component, participatory_space: }
   let!(:space_config) { create :minors_space_config, access_type:, max_age:, authorization:, participatory_space: }
@@ -191,6 +191,39 @@ shared_examples "access participatory space and components" do
       it_behaves_like "cannot GET", :index
       it_behaves_like "cannot POST", :index
       it_behaves_like "cannot GET to a component"
+    end
+  end
+
+  context "when the space has an authorization" do
+    let(:birthday) { 18 }
+    let!(:user_authorization) { create(:authorization, user:, name: "dummy_age_authorization_handler", metadata: { birthday: }) }
+
+    it_behaves_like "can GET", :index
+    it_behaves_like "can POST", :index
+    it_behaves_like "can GET to a component"
+
+    context "and age is required" do
+      let(:max_age) { 16 }
+
+      it_behaves_like "cannot GET", :index
+      it_behaves_like "cannot POST", :index
+      it_behaves_like "cannot GET to a component"
+
+      context "and the user has the age" do
+        let(:birthday) { 15.years.ago }
+
+        it_behaves_like "can GET", :index
+        it_behaves_like "can POST", :index
+        it_behaves_like "can GET to a component"
+
+        context "and another authorization is required" do
+          let(:authorization) { "dummy_authorization_handler" }
+
+          it_behaves_like "cannot GET", :index
+          it_behaves_like "cannot POST", :index
+          it_behaves_like "cannot GET to a component"
+        end
+      end
     end
   end
 end

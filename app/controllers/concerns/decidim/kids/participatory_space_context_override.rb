@@ -57,9 +57,9 @@ module Decidim
       end
 
       def current_user_has_a_valid_authorization?
-        @authorization = current_user_authorizations.find_by(name: space_minors_config.authorization)
-        return unless @authorization
-        return true if space_minors_config.max_age.blank?
+        return unless space_authorization
+
+        return true if space_minors_config.max_age.blank? || space_minors_config.max_age.zero?
 
         authorization_has_a_valid_age?
       end
@@ -67,12 +67,16 @@ module Decidim
       def authorization_has_a_valid_age?
         Decidim::Kids.minor_authorization_age_attributes.detect do |attr|
           begin
-            age = ((Time.zone.now - Date.parse(@authorization.try(attr).to_s).to_time) / 1.year.seconds).floor
+            age = ((Time.zone.now - Date.parse(space_authorization.metadata[attr.to_s]).to_time) / 1.year.seconds).floor
           rescue TypeError, ::Date::Error
             next
           end
           age <= space_minors_config.max_age
         end
+      end
+
+      def space_authorization
+        @space_authorization ||= current_user_authorizations.find_by(name: space_minors_config.authorization)
       end
 
       def current_user_authorizations
