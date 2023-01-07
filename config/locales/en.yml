@@ -95,9 +95,12 @@ en:
         name: Verification pending minor account
       minor_notifications_mailer:
         confirmation:
-          body: Instructions
-          body_2: The account is "tutelated"
-          greeting: Welcome, %{recipient}!
+          body: Your legal guardian has authorised the creation of your account to
+            participate in the platform. Your account will be under guardianship until
+            you reach the legal age. You can now finalise the account creation by
+            confirming this email and following the instructions
+          confirm: Confirm email
+          greeting: Welcome, <b>%{recipient}</b>!
           sign_in: Sign in
           subject: Confirmation instructions
       minors_participation: Decidim Minors Participation
