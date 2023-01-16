@@ -67,6 +67,7 @@ es:
           title: Editar la cuenta de menor
         index:
           actions: Acciones
+          activity: Activity
           add: Añadir un/a menor
           age: Edad
           button_verify: Verificar
