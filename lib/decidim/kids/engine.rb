@@ -46,6 +46,7 @@ module Decidim
           Decidim::ApplicationController.include(Decidim::Kids::WritesMinorLog)
           Decidim::Verifications::ApplicationController.include(Decidim::Kids::NeedsAdultPermission)
           Decidim::Messaging::ConversationsController.include(Decidim::Kids::HasDecidimKidsPermissions)
+          Decidim::UserActivitiesController.include(Decidim::Kids::HasMinorActivitiesAsOwn)
         end
       end
 

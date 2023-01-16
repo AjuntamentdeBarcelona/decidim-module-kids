@@ -73,6 +73,7 @@ en:
           title: Edit minor account
         index:
           actions: Actions
+          activity: Activity
           add: Add a minor
           age: Age
           button_verify: Verify
