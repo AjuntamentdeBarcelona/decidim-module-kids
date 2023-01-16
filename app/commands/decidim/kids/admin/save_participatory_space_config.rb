@@ -3,7 +3,7 @@
 module Decidim
   module Kids
     module Admin
-      # A command to authorize a user with an authorization handler.
+      # A command to save the participatory space minor configuration.
       class SaveParticipatorySpaceConfig < Decidim::Command
         def initialize(form, participatory_space)
           @form = form

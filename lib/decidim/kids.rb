@@ -8,6 +8,8 @@ module Decidim
   module Kids
     include ActiveSupport::Configurable
 
+    autoload :AgeMethods, "decidim/kids/age_methods"
+
     #######################################################
     # Default configurations for any organization
     # these setting can be overridden in /system admin conf

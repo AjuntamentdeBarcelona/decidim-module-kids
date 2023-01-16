@@ -5,6 +5,7 @@ module Decidim
     # This module contains all the domain logic associated to restrict operations depending on the user's age/minors configuration.
     module ParticipatorySpaceContextOverride
       extend ActiveSupport::Concern
+      include AgeMethods
 
       included do
         class ::Decidim::Kids::ActionForbidden < ::Decidim::ActionForbidden
@@ -66,11 +67,9 @@ module Decidim
 
       def authorization_has_a_valid_age?
         Decidim::Kids.minor_authorization_age_attributes.detect do |attr|
-          begin
-            age = ((Time.zone.now - Date.parse(space_authorization.metadata[attr.to_s]).to_time) / 1.year.seconds).floor
-          rescue TypeError, ::Date::Error
-            next
-          end
+          age = age_from_date(space_authorization.metadata[attr.to_s])
+          next unless age
+
           age <= space_minors_config.max_age
         end
       end
