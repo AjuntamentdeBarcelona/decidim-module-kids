@@ -43,6 +43,7 @@ module Decidim
 
       initializer "decidim_kids.overrides", after: "decidim.action_controller" do
         config.to_prepare do
+          Decidim::ApplicationController.include(Decidim::Kids::WritesMinorLog)
           Decidim::Verifications::ApplicationController.include(Decidim::Kids::NeedsAdultPermission)
           Decidim::Messaging::ConversationsController.include(Decidim::Kids::HasDecidimKidsPermissions)
         end
