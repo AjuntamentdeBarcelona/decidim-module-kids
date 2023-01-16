@@ -67,6 +67,7 @@ ca:
           title: Editar el compte de menor
         index:
           actions: Accions
+          activity: Activity
           add: Afegir un/a menor
           age: Edat
           button_verify: Verificar
