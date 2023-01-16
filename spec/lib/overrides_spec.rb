@@ -43,7 +43,7 @@ checksums = [
     files: {
       "/app/controllers/concerns/decidim/kids/has_minor_activities_as_own.rb" => "05b8aa4b52972a0f85817fd4147b4021"
     }
-  },
+  }
 ]
 
 describe "Overriden files", type: :view do
