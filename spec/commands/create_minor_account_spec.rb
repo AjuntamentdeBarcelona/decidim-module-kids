@@ -26,6 +26,10 @@ module Decidim::Kids
 
       let(:last_user) { Decidim::User.last }
 
+      before do
+        allow(Rails.logger).to receive(:tagged).and_call_original
+      end
+
       describe "when the form is valid" do
         it "broadcasts :ok and creates the minor" do
           expect { command.call }.to broadcast(:ok)
@@ -40,6 +44,11 @@ module Decidim::Kids
 
         it "creates a new minor's account" do
           expect { command.call }.to change(MinorAccount, :count).by(1)
+        end
+
+        it "writes log with consent" do
+          command.call
+          expect(Rails.logger).to have_received(:tagged).with(/MINOR-CONSENT/)
         end
       end
 
@@ -62,6 +71,11 @@ module Decidim::Kids
           expect do
             command.call
           end.not_to change(Decidim::Kids::MinorAccount, :count)
+        end
+
+        it "doesn't write log with consent" do
+          command.call
+          expect(Rails.logger).not_to have_received(:tagged).with(/MINOR-CONSENT/)
         end
       end
     end

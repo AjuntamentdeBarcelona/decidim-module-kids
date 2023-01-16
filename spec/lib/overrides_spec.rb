@@ -38,6 +38,12 @@ checksums = [
       "/app/views/decidim/system/organizations/new.html.erb" => "ef9277c31e87f864e911a05d7ad0a333",
       "/app/views/decidim/system/organizations/edit.html.erb" => "a5fbf0df2106009878cbca6e36472cae"
     }
+  },
+  {
+    package: "decidim-kids",
+    files: {
+      "/app/controllers/concerns/decidim/kids/has_minor_activities_as_own.rb" => "05b8aa4b52972a0f85817fd4147b4021"
+    }
   }
 ]
 
