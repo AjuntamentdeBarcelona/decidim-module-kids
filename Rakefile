@@ -6,6 +6,7 @@ def install_module(path)
   Dir.chdir(path) do
     system("bundle exec rake decidim_kids:install:migrations")
     system("bundle exec rake db:migrate")
+    system("bundle exec rake decidim_kids:install:handlers")
   end
 end
 
@@ -13,6 +14,10 @@ def seed_db(path)
   Dir.chdir(path) do
     system("bundle exec rake db:seed")
   end
+end
+
+def copy_helpers
+  FileUtils.cp "lib/decidim/kids/templates/dummy_age_authorization_handler.rb", "app/services/dummy_age_authorization_handler.rb"
 end
 
 desc "Generates a dummy app for testing"

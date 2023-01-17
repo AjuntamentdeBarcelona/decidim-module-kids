@@ -4,6 +4,7 @@ module Decidim
   module Kids
     module UserOverride
       extend ActiveSupport::Concern
+      include AgeMethods
 
       included do
         has_many :minor_accounts, class_name: "Decidim::Kids::MinorAccount", foreign_key: :decidim_tutor_id, dependent: :destroy
@@ -32,7 +33,7 @@ module Decidim
           return unless minor?
           return if minor_data_birthday.blank?
 
-          ((Time.zone.now - minor_data_birthday.to_time) / 1.year.seconds).floor
+          age_from_birthday(minor_data_birthday)
         end
       end
     end

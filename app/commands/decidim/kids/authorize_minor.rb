@@ -4,6 +4,8 @@ module Decidim
   module Kids
     # A command to authorize a user with an authorization handler.
     class AuthorizeMinor < Decidim::Command
+      include AgeMethods
+
       # Public: Initializes the command.
       #
       # handler - An AuthorizationHandler object.
@@ -39,11 +41,9 @@ module Decidim
         return true if Decidim::Kids.minor_authorization_age_attributes.blank?
 
         Decidim::Kids.minor_authorization_age_attributes.detect do |attr|
-          begin
-            age = ((Time.zone.now - Date.parse(handler.try(attr).to_s).to_time) / 1.year.seconds).floor
-          rescue TypeError, ::Date::Error
-            next
-          end
+          age = age_from_date(handler.try(attr).to_s)
+          next unless age
+
           age.between? handler.user.organization.minimum_minor_age, handler.user.organization.maximum_minor_age
         end
       end

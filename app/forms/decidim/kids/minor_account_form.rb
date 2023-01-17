@@ -3,6 +3,8 @@
 module Decidim
   module Kids
     class MinorAccountForm < Decidim::Form
+      include AgeMethods
+
       mimic :minor_account
 
       attribute :name, String
@@ -33,7 +35,7 @@ module Decidim
         maximum_minor_age = Decidim::Kids.maximum_minor_age
 
         if birthday.present?
-          minor_age = ((Time.zone.now - birthday.to_time) / 1.year.seconds).floor
+          minor_age = age_from_birthday(birthday)
           errors.add(:birthday, I18n.t("decidim.kids.minor_account.form.invalid_age")) unless minor_age.between?(min_minor_age, maximum_minor_age)
         end
       end
