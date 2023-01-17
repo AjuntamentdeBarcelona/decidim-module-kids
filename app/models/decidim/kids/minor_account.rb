@@ -16,10 +16,13 @@ module Decidim
       validate :can_be_tutor
       validate :can_be_minor
 
-      def promote_account
-        return if minor.minor_age < (minor&.organization&.maximum_minor_age || Decidim::Kids.maximum_minor_age)
+      def promote_account!
+        return if minor.minor_age <= (minor&.organization&.maximum_minor_age || Decidim::Kids.maximum_minor_age)
 
-        minor.tutors = []
+        ActiveRecord::Base.transaction do
+          minor.tutors.destroy_all
+          minor.minor_data.destroy
+        end
         Decidim::Kids::KidsMailer.promote_minor_account(minor).deliver_now
       end
 

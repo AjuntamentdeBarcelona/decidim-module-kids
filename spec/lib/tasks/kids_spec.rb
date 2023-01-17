@@ -24,7 +24,7 @@ describe "kids:promote_minor_accounts", type: :task do
     end
 
     context "when removing minor account relation" do
-      it "remove no longer minor accounts relations" do
+      it "removes no longer minor accounts relations" do
         expect(organization.maximum_minor_age).to eq(13)
         expect(minor_to_promote.minor_age).to eq(15)
         task.execute
@@ -34,6 +34,10 @@ describe "kids:promote_minor_accounts", type: :task do
 
       it "sends mails to the new regular users" do
         expect { task.execute }.to change { ActionMailer::Base.deliveries.count }.by(1)
+      end
+
+      it "decreases the count of minor accounts" do
+        expect { task.execute }.to change { Decidim::Kids::MinorAccount.count }.by(-1)
       end
     end
   end
