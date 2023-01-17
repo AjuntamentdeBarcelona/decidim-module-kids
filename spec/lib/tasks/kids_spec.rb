@@ -37,7 +37,7 @@ describe "kids:promote_minor_accounts", type: :task do
       end
 
       it "decreases the count of minor accounts" do
-        expect { task.execute }.to change { Decidim::Kids::MinorAccount.count }.by(-1)
+        expect { task.execute }.to change(Decidim::Kids::MinorAccount, :count).by(-1)
       end
     end
   end
