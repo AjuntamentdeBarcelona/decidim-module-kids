@@ -3,9 +3,9 @@ ca:
   activemodel:
     attributes:
       minors_space_config:
-        access_type: Participatory space access type
-        authorization: Authorization method for other users allowed in this space
-        max_age: Check for this maximum age if the authorization allows it (leave it empty or zero to disable this check)
+        access_type: Tipus d'accés a l'espai de participació
+        authorization: Mètode d'autorització per a altres usuàries permeses en aquest espai
+        max_age: Comprova aquesta edat màxima si l'autorització ho permet (deixa'l buit o a zero per a desactivar aquesta comprovació)
       organization:
         enable_minors_participation: Habilitar la participació de menors
         maximum_minor_accounts: Máxim nombre de menors que es poden assignar a una tutoria
@@ -22,11 +22,11 @@ ca:
   decidim:
     authorization_handlers:
       dummy_age_authorization_handler:
-        explanation: Get verified by introducing a document number ending with "X"
+        explanation: Verifica't introduint un número de document que acabi en "X"
         fields:
-          birthday: Date of birth
-          document_number: Document number
-        name: Example authorization with birthday metadata
+          birthday: Data de naixement
+          document_number: Número de document
+        name: Exemple d'autorització amb metadades d'aniversari
     devise:
       mailer:
         invitation_instructions:
@@ -38,7 +38,7 @@ ca:
           minors_title: Participació de menors
     kids:
       actions:
-        unauthorized: You cannot access this space because you do not meet the requirements
+        unauthorized: No pots accedir a aquest espai perquè no compleixes amb els requisits
       admin:
         minors_space:
           form:
