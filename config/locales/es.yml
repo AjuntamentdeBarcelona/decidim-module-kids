@@ -42,33 +42,32 @@ es:
       admin:
         minors_space:
           form:
-            all: Space for all (no restrictions)
+            all: Espacio para todo el mundo (sin restricciones)
             handlers:
-              available: The authorization handler "%{handler}" is activated.
+              available: El gestor de autorización con "%{handler}" está activada.
               errors:
-                invalid: The authorization handler is invalid.
-                metadata: The authorization handler does not have the correct metadata to check the age of the person.
-                ok: The authorization handler has the correct metadata and can check the age of the person.
-              unavailable: The authorization handler "%{handler}" is not activated. Please activate it in the organization's authorization configuration.
-            minors: Space for minors only
+                invalid: El gestor de autorización es inválido.
+                metadata: El gestor de autorización no tiene los metadatos correctos para comprobar la edad de la persona.
+                ok: El gestor de autorización no tiene los metadatos correctos para comprobar la edad de la persona.
+              unavailable: El gestor de autorización "%{handler}" no está activado. Por favor, actívalo en la configuración de autorización de la organización.
+            minors: Espacio solo para menores
           index:
             description_html: |
-              In here you can configure how this participatory space will behave when normal or minor users will access to it.<br>
-              Participatory spaces can be of two types: limited to minors or open to everybody as well (the default behavior).<br>
-              When a participatory space is open to everybody, minors will be able to access to it (there will be no restrictions).<br>
-              When a participatory space is limited to minors, only minors and some special users will be able to access to it. The rest of the users will be redirected with an error message.<br>
-              <br>The extra users with access to a space limited to minors are:<br>
+              Aquí puedes configurar como se comportará este espacio de participación cuando usuarias adultas o menores accedan.<br>
+              Los espacios participativos pueden ser de dos tipos: limitados a menores o abiertos a todo el mundo (el comportamiento predeterminado).<br>
+              Cuando un espacio de participación esté abierto a todo el mundo, los menores podran acceder (no habrá restricciones).<br>
+              Cuando un espacio de particpación esté limitado a solo menores, solo menores y algunas usuarias especiales podran acceder. El resto de usuarias seran redireccionadas con un mensaje de error.<br>
+              <br>Las usuarias adicionales con acceso a un espacio limitado con menores son:<br>
               <ul>
-              <li>The users with the role of administrator, moderator, collaborator or valuator.</li>
-              <li>The users that are tutors of a minor, with read-only access.</li>
-              <li>If the option is activated, the users verified by the specified authorization method will be granted access as well. For instance, you can use this verification method to verify minors up to an age that not need tutelation.</li>
+              <li>Las usuarias con el rol de administradora, moderadora, colaboradora o evaladora.</li>
+              <li>Si la opción está activada, las usuarias verificadas por el método de autorización especificado también tendrán acceso. Por ejemplo, puedes utilizar este método de verificación para verificar menores hasta una edad que no necesite tutela.</li>
               </ul>
-            save: Save
-            title: Participatory space minors configuration
-          menu: Minors configuration
+            save: Guardar
+            title: Configuración del espacio participativo para menores
+          menu: Configuración para menores
           save:
-            error: Error saving configuration! (%{errors})
-            success: Configuration saved successfully.
+            error: '¡Se ha producido un error al guardar la configuración! (%{errors})'
+            success: Configuración guardada con éxito.
       authorizations:
         authorize:
           already_authorized: La cuenta de menor ya está autorizada.
@@ -110,7 +109,7 @@ es:
           title: Editar la cuenta de menor
         index:
           actions: Acciones
-          activity: Activity
+          activity: Actividad
           add: Añadir un/a menor
           age: Edad
           button_verify: Verificar
