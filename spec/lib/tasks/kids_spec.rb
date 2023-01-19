@@ -7,13 +7,15 @@ describe "kids:promote_minor_accounts", type: :task do
   let(:user) { create(:user, :admin, :confirmed, organization:) }
   let(:other_user) { create(:user, :admin, :confirmed, organization:) }
   let(:minor) { create(:minor, tutor: user, organization:) }
-  let(:minor_to_promote) { create(:minor_to_promote, tutor: user, organization:) }
+  let(:minor_to_promote) { create(:user, :confirmed, organization:) }
+  let!(:minor_to_promote_account) { create :minor_account, tutor: user, minor: minor_to_promote }
+  let!(:minor_data_to_promote) { create :minor_data, user: minor_to_promote, birthday: }
+  let(:birthday) { 15.years.ago }
   let(:enable_minors_participation) { false }
   let!(:minors_organization_config) { create(:minors_organization_config, organization:, enable_minors_participation:) }
 
   before do
     minor.confirm
-    minor_to_promote.confirm
   end
 
   context "when minors turn the maximum minor age" do
