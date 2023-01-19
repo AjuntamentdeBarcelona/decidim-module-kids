@@ -42,33 +42,32 @@ ca:
       admin:
         minors_space:
           form:
-            all: Space for all (no restrictions)
+            all: Espai per a tothom (sense restriccions)
             handlers:
-              available: The authorization handler "%{handler}" is activated.
+              available: El gestor d'autorització amb "%{handler}" està activada.
               errors:
-                invalid: The authorization handler is invalid.
-                metadata: The authorization handler does not have the correct metadata to check the age of the person.
-                ok: The authorization handler has the correct metadata and can check the age of the person.
-              unavailable: The authorization handler "%{handler}" is not activated. Please activate it in the organization's authorization configuration.
-            minors: Space for minors only
+                invalid: El gestor d'autorització és invàlid.
+                metadata: El gestor d'autorització no disposa de les metadades correctes per a comprovar l'edat de la persona.
+                ok: El gestor d'autorització disposa de la metadada correcta i pot comprovar l'edat de la persona.
+              unavailable: El gestor d'autorització "%{handler}" no està activat. Si us plau, activa'l a la configuració d'autoritzacions de l'organització.
+            minors: Espai només per a menors
           index:
             description_html: |
-              In here you can configure how this participatory space will behave when normal or minor users will access to it.<br>
-              Participatory spaces can be of two types: limited to minors or open to everybody as well (the default behavior).<br>
-              When a participatory space is open to everybody, minors will be able to access to it (there will be no restrictions).<br>
-              When a participatory space is limited to minors, only minors and some special users will be able to access to it. The rest of the users will be redirected with an error message.<br>
-              <br>The extra users with access to a space limited to minors are:<br>
+              Aquí pots configurar com es comportarà aquest espai de participació quan usuàries adultes o menors hi accedeixin.<br>>
+              Els espais participatius poden ser de dos tipus: limitats a menors o oberts a tothom (el comportament predeterminat).<br>
+              Quan un espai de participació estigui obert a tothom, els menors podran accedir-hi (no hi haurà restriccions).<br>
+              Quan un espai de participació estigui limitat només a menors, només menors i algunes usuàries especials podran accedir-hi. La resta d'usuàries seran redireccionades amb un missatge d'error.<br>
+              <br>Les usuàries addicionals amb accés a un espai limitat amb menors son:<br>
               <ul>
-              <li>The users with the role of administrator, moderator, collaborator or valuator.</li>
-              <li>The users that are tutors of a minor, with read-only access.</li>
-              <li>If the option is activated, the users verified by the specified authorization method will be granted access as well. For instance, you can use this verification method to verify minors up to an age that not need tutelation.</li>
+              <li>Les usuàries amb el rol d'administradora, moderadora, col·laboradora o avaluadora.</li>
+              <li>Si l'opció està activada, les usuàries verificades pel mètode d'autorizació especificat també tindran accés. Per exemple, pots fer servir aquest mètode de verificació per a verificar menors fins a una edat que no necessita tutela.</li>
               </ul>
-            save: Save
-            title: Participatory space minors configuration
-          menu: Minors configuration
+            save: Desa
+            title: Configuració de l'espai de participació per a menors
+          menu: Configuració per a menors
           save:
-            error: Error saving configuration! (%{errors})
-            success: Configuration saved successfully.
+            error: S'ha produït un error en desar la configuració! (%{errors})
+            success: Configuració desada amb èxit.
       authorizations:
         authorize:
           already_authorized: El compte de menor ja està autoritzada.
@@ -110,7 +109,7 @@ ca:
           title: Editar el compte de menor
         index:
           actions: Accions
-          activity: Activity
+          activity: Activitat
           add: Afegir un/a menor
           age: Edat
           button_verify: Verificar
