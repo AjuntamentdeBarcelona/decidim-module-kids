@@ -21,7 +21,7 @@
 
   <td>
     <% if user.last_sign_in_at %>
-        <%= l user.last_sign_in_at, format: :short %>
+      <%= l user.last_sign_in_at, format: :short %>
     <% elsif !minor_authorized?(user) %>
       <span class="label warning"><%= t("needs_verification", scope: "decidim.kids.user_minors.index") %></span>
     <% end %>
@@ -43,6 +43,13 @@
                        method: :delete,
                        data: { confirm: t("confirm", scope: "decidim.kids.user_minors.index") },
                        class: "action-icon action-icon--remove" %>
+    <% end %>
+    <span class="action-space icon"></span>
+    <% if allowed_to? :impersonate, :minor_accounts, minor_user: user %>
+      <%= icon_link_to "account-login",
+                       decidim_kids.new_user_minor_minor_impersonation_path(user),
+                       t("impersonations.impersonate_button", scope: "decidim.kids"),
+                       class: "action-icon action-icon--impersonate" %>
     <% end %>
   </td>
 </tr>

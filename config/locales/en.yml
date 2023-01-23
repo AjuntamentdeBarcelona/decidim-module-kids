@@ -86,6 +86,16 @@ en:
             accepted range.
         new:
           authorizing_html: You are verifying the minor <b>%{minor}</b>
+      impersonations:
+        close_session:
+          button: Close session
+          error: There was a problem closing the current management session.
+          success: The current impersonation session has been successfully ended.
+        create:
+          error: There was a problem managing the minor.
+          success: The managed minor has been successfully created.
+        impersonate_button: Impersonate
+        title: Enter your password to impersonate a minor
       minor_account:
         form:
           invalid_age: Invalid age

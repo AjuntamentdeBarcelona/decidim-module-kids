@@ -4,6 +4,7 @@ require "spec_helper"
 require "shared/user_minors_examples"
 require "shared/user_minors_crud_examples"
 require "shared/minors_table_examples"
+require "shared/impersonation_examples"
 
 describe "User manages minor accounts", type: :system do
   let(:organization) { user.organization }
@@ -66,6 +67,19 @@ describe "User manages minor accounts", type: :system do
 
       it_behaves_like "minors table"
       it_behaves_like "resend email"
+    end
+
+    describe "User impersonates a minor" do
+      let!(:authorization) { create(:authorization, user:, name: organization.tutors_authorization) }
+      let!(:user) { create(:user, :confirmed, password: valid_password) }
+      let(:valid_password) { "mallorca123123123" }
+      let!(:minor) { create(:minor, tutor: user, organization:, sign_in_count:) }
+
+      before do
+        click_link "My minor account"
+      end
+
+      it_behaves_like "user impersonate"
     end
 
     context "when the user is a minor" do

@@ -25,6 +25,11 @@ module Decidim
               #   get :renew
               # end
             end
+            resources :minor_impersonations, controller: "minor_impersonations", only: [:new, :create] do
+              collection do
+                post :close_session
+              end
+            end
           end
         end
       end
@@ -48,6 +53,8 @@ module Decidim
           Decidim::ApplicationController.include(Decidim::Kids::WritesMinorLog)
           Decidim::Verifications::ApplicationController.include(Decidim::Kids::NeedsAdultPermission)
           Decidim::Messaging::ConversationsController.include(Decidim::Kids::HasDecidimKidsPermissions)
+          Decidim::ApplicationController.include(Decidim::Kids::ImpersonateMinors)
+          Decidim::DeviseControllers.include(Decidim::Kids::ImpersonateMinors)
           Decidim::UserActivitiesController.include(Decidim::Kids::HasMinorActivitiesAsOwn)
         end
       end
