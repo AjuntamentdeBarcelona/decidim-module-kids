@@ -44,14 +44,18 @@ module Decidim
         Decidim::System::UpdateOrganizationForm.include(Decidim::Kids::System::OrganizationFormOverride)
         Decidim::System::UpdateOrganization.include(Decidim::Kids::System::UpdateOrganizationOverride)
         Decidim::System::RegisterOrganization.include(Decidim::Kids::System::RegisterOrganizationOverride)
+        Decidim::ParticipatorySpaceContext.include(Decidim::Kids::ParticipatorySpaceContextOverride)
       end
 
       initializer "decidim_kids.overrides", after: "decidim.action_controller" do
         config.to_prepare do
+          Decidim::Verifications::ApplicationController.include(Decidim::Kids::DisableMinorsParticipation)
+          Decidim::ApplicationController.include(Decidim::Kids::WritesMinorLog)
           Decidim::Verifications::ApplicationController.include(Decidim::Kids::NeedsAdultPermission)
           Decidim::Messaging::ConversationsController.include(Decidim::Kids::HasDecidimKidsPermissions)
           Decidim::ApplicationController.include(Decidim::Kids::ImpersonateMinors)
           Decidim::DeviseControllers.include(Decidim::Kids::ImpersonateMinors)
+          Decidim::UserActivitiesController.include(Decidim::Kids::HasMinorActivitiesAsOwn)
         end
       end
 

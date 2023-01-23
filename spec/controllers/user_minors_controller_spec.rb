@@ -47,7 +47,7 @@ module Decidim::Kids
     end
 
     before do
-      request.env["decidim.current_organization"] = user.organization
+      request.env["decidim.current_organization"] = organization
       sign_in user, scope: :user
     end
 

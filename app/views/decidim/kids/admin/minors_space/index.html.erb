@@ -1,0 +1,18 @@
+<div class="card" id="minors_space">
+  <div class="card-divider">
+    <h2 class='card-title'>
+      <%= t("minors_space.index.title", scope: "decidim.kids.admin") %>
+    </h2>
+  </div>
+
+  <div class="card-section">
+    <p><%= t("minors_space.index.description_html", scope: "decidim.kids.admin") %></p>
+
+    <%= decidim_form_for(@form, url: minors_space_index_path, method: :post, html: { class: "form" }) do |form| %>
+      <%= render partial: "form", locals: { form: form } %>
+      <div class="button--double form-general-submit">
+        <%= form.submit t("minors_space.index.save", scope: "decidim.kids.admin"), class: "button", data: { disable: true } %>
+      </div>
+    <% end %>
+  </div>
+</div>

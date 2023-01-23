@@ -15,6 +15,7 @@ checksums = [
   {
     package: "decidim-core",
     files: {
+      "/app/controllers/concerns/decidim/participatory_space_context.rb" => "f6726d9098ccf96f865c2a3ab9439b2d",
       "/app/models/decidim/organization.rb" => "e0b67b906f0ad3db84226914f07a05e7",
       "/app/models/decidim/static_page.rb" => "23b8d77f1893d11af189001cbaa008c8",
       "/app/views/decidim/devise/registrations/new.html.erb" => "593710b9c75fc90f1322871f231f0b5f"
@@ -36,6 +37,12 @@ checksums = [
       "/app/commands/decidim/system/update_organization.rb" => "10a082eede58856a73baccc19923b5b4",
       "/app/views/decidim/system/organizations/new.html.erb" => "ef9277c31e87f864e911a05d7ad0a333",
       "/app/views/decidim/system/organizations/edit.html.erb" => "a5fbf0df2106009878cbca6e36472cae"
+    }
+  },
+  {
+    package: "decidim-kids",
+    files: {
+      "/app/controllers/concerns/decidim/kids/has_minor_activities_as_own.rb" => "05b8aa4b52972a0f85817fd4147b4021"
     }
   }
 ]
