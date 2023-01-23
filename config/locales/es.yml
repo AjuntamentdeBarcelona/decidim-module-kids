@@ -77,6 +77,16 @@ es:
           invalid_age: La cuenta de menor no se ha podido verificar porque el método de autorización no contiene el dato de fecha de nacimiento o esta no se encuentra dentro la franja de edad correspondiente.
         new:
           authorizing_html: Estás verificando la cuenta de menor de <b>%{minor}</b>
+      impersonations:
+        close_session:
+          button: Close session
+          error: There was a problem closing the current management session.
+          success: The current impersonation session has been successfully ended.
+        create:
+          error: There was a problem managing the minor.
+          success: The managed minor has been successfully created.
+        impersonate_button: Impersonate
+        title: Enter your password to impersonate a minor
       minor_account:
         form:
           invalid_age: Edad no válida
