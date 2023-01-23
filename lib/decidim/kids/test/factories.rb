@@ -55,7 +55,7 @@ FactoryBot.define do
     authorization { "dummy_age_authorization_handler" }
     participatory_space { create(:participatory_process) }
   end
-  
+
   factory :impersonation_minor_log, class: "Decidim::Kids::ImpersonationMinorLog" do
     tutor { create(:user, :confirmed) }
     minor { create(:user, :confirmed, organization: tutor.organization) }
