@@ -6,8 +6,8 @@ module Decidim
     class CloseSessionManagedMinor < Decidim::Command
       # Public: Initializes the command.
       #
-      # current_user       - The user impersonating a minor
-      # minor_user         - The user to impersonate
+      # real_user - The user impersonating a minor
+      # current_user - The user to impersonate
       def initialize(current_user, real_user)
         @real_user = real_user
         @current_user = current_user

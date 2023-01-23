@@ -8,6 +8,7 @@ module Decidim
       #
       # current_user       - The user impersonating a minor
       # minor_user         - The user to impersonate
+      # form               - The form with the authorization info
       def initialize(minor_user, current_user, form)
         @current_user = current_user
         @minor_user = minor_user
