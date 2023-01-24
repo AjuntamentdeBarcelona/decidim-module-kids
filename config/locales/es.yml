@@ -98,6 +98,9 @@ es:
           greeting: '¡Bienvenido/a %{recipient}!'
           sign_in: Iniciar sesión
           subject: Instrucciones de confirmación
+        promote:
+          body_1: Hi %{recipient}, your account has been promoted. You now have an adult account and your account is no longer dependent on your legal guardian's account.
+          subject: Your account was promoted
       minors_participation: Participación de menores en Decidim
       system:
         organizations:
