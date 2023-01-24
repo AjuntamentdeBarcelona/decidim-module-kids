@@ -98,6 +98,9 @@ ca:
           greeting: Benvingut/da, %{recipient}!
           sign_in: Iniciar sessió
           subject: Instruccions de confirmació
+        promote:
+          body_1: Hi %{recipient}, your account has been promoted. You now have an adult account and your account is no longer dependent on your legal guardian's account.
+          subject: Your account was promoted
       minors_participation: Participació de menors a Decidim
       system:
         organizations:
