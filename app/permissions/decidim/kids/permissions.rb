@@ -30,6 +30,8 @@ module Decidim
             can_edit_minor_account?
           when :delete
             can_destroy_minor_account?
+          when :impersonate
+            can_impersonate_minor_account?
           end
         end
       end
@@ -84,6 +86,14 @@ module Decidim
           raise NotImplementedError
           # :nocov:
         end
+      end
+
+      def can_impersonate_minor_account?
+        is_allowed = Decidim::Kids::ImpersonationMinorLog.active.where(tutor: user).empty? &&
+                     Decidim::Kids.allow_impersonation &&
+                     minor_user.sign_in_count.positive?
+
+        toggle_allow(is_allowed)
       end
     end
   end

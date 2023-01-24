@@ -1,0 +1,19 @@
+<% content_for(:subtitle) { t("menu", scope: "decidim.kids.user") } %>
+<div class="row">
+  <h4 class="section flex-center"><%= t("title", scope: "decidim.kids.impersonations") %></h4>
+  <div class="columns large-6 medium-10 medium-centered">
+    <div class="card">
+      <div class="card__content">
+        <%= decidim_form_for(@form, url: decidim_kids.user_minor_minor_impersonations_path(user_minor_id: minor_user.id), method: :post) do |form| %>
+          <%= form_required_explanation %>
+          <div class="field">
+            <%= form.password_field :password %>
+          </div>
+          <div class="actions">
+            <%= form.submit t("impersonate_button", scope: "decidim.kids.impersonations"), class: "button expanded mt-s mb-none" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

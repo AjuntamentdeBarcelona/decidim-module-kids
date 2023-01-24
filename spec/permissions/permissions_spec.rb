@@ -22,9 +22,11 @@ module Decidim::Kids
     end
     let(:minors_enabled) { true }
     let(:is_minor) { false }
+    let(:allow_impersonation) { true }
 
     before do
       allow(organization).to receive(:minors_participation_enabled?).and_return(minors_enabled)
+      allow(Decidim::Kids.config).to receive(:allow_impersonation).and_return(allow_impersonation)
       allow(user).to receive(:minor?).and_return(is_minor)
     end
 
@@ -87,6 +89,40 @@ module Decidim::Kids
       end
 
       it { is_expected.to be true }
+    end
+
+    context "when impersonate action" do
+      let(:action_name) { :impersonate }
+      let(:minor) { create(:minor, tutor: user, organization:, sign_in_count:) }
+
+      let(:context) do
+        {
+          minor_user: minor
+        }
+      end
+
+      let(:action) do
+        { scope: :public, action: action_name, subject: action_subject }
+      end
+
+      context "when minor has sign_in" do
+        let(:sign_in_count) { 1 }
+
+        it { is_expected.to be true }
+      end
+
+      context "when minor has not sign_in" do
+        let(:sign_in_count) { 0 }
+
+        it { is_expected.to be false }
+      end
+
+      context "when impersonation of minors is not allowed" do
+        let(:sign_in_count) { 1 }
+        let(:allow_impersonation) { false }
+
+        it { is_expected.to be false }
+      end
     end
 
     context "when other action" do

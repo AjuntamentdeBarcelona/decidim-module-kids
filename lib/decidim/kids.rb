@@ -35,6 +35,11 @@ module Decidim
       3
     end
 
+    # If true, the tutor can impersonate a minor
+    config_accessor :allow_impersonation do
+      true
+    end
+
     ######## End of system configurations ########
 
     # Default authorization metadata attributes where the minor's birthday is stored

@@ -46,7 +46,7 @@ FactoryBot.define do
     user { create(:minor) }
     name { Faker::Name.name }
     email { Faker::Internet.email }
-    birthday { rand(10..14).years.ago }
+    birthday { rand(10..13).years.ago }
   end
 
   factory :minors_space_config, class: "Decidim::Kids::MinorsSpaceConfig" do
@@ -54,5 +54,11 @@ FactoryBot.define do
     access_type { "minors" }
     authorization { "dummy_age_authorization_handler" }
     participatory_space { create(:participatory_process) }
+  end
+
+  factory :impersonation_minor_log, class: "Decidim::Kids::ImpersonationMinorLog" do
+    tutor { create(:user, :confirmed) }
+    minor { create(:user, :confirmed, organization: tutor.organization) }
+    started_at { Time.current }
   end
 end

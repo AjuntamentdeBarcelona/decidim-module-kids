@@ -89,6 +89,16 @@ en:
           help_text: 'Second step: For security reasons, we need to check that the
             minor''s details are correct and we can verify his or her identity on
             our census'
+      impersonations:
+        close_session:
+          button: Close session
+          error: There was a problem closing the current management session.
+          success: The current impersonation session has been successfully ended.
+        create:
+          error: There was a problem managing the minor.
+          success: The managed minor has been successfully created.
+        impersonate_button: Impersonate
+        title: Enter your password to impersonate a minor
       minor_account:
         form:
           invalid_age: Invalid age
@@ -103,6 +113,11 @@ en:
           greeting: Welcome, <b>%{recipient}</b>!
           sign_in: Sign in
           subject: Confirmation instructions
+        promote:
+          body_1: Hi %{recipient}, your account has been promoted. You now have an
+            adult account and your account is no longer dependent on your legal guardian's
+            account.
+          subject: Your account was promoted
       minors_participation: Decidim Minors Participation
       system:
         organizations:
