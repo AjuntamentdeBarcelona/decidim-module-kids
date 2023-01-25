@@ -6,17 +6,9 @@ module Decidim::Kids
   describe UpdateMinorAccount do
     let(:organization) { create :organization }
     let(:user) { create(:user, :confirmed, organization:) }
-    # let!(:minor) { create(:minor, name: "Pending verification minor", tutor: user, organization:) }
     let(:command) { described_class.new(form, minor) }
     let!(:minor_data) { create(:minor_data, name: "Marco", email: "marco@example.org", birthday: "01/11/2010") }
     let!(:minor) { create(:minor, name: "Pending verification minor", tutor: user, organization:, minor_data:) }
-    # let(:minor_data) do
-    #   {
-    #     name:,
-    #     email:,
-    #     birthday:
-    #   }
-    # end
 
     let(:form) do
       MinorAccountForm.from_params(
