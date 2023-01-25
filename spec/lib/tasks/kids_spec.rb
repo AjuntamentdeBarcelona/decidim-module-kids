@@ -38,8 +38,8 @@ describe "kids:promote_minor_accounts", type: :task do
       context "and the minor reached the maximum minor age" do
         it "removes no longer minor accounts relations" do
           expect(organization.maximum_minor_age).to eq(13)
-          expect(minor_to_promote15.minor_age).to eq(15)
-          expect(minor_to_promote14.minor_age).to eq(14)
+          expect(minor_to_promote15.reload.minor_age).to eq(15)
+          expect(minor_to_promote14.reload.minor_age).to eq(14)
           task.execute
           expect(Decidim::Kids::MinorAccount.where(minor: minor_to_promote15)).to be_empty
           expect(Decidim::Kids::MinorAccount.where(minor: minor_to_promote14)).to be_empty
@@ -61,7 +61,7 @@ describe "kids:promote_minor_accounts", type: :task do
   context "when the minor is exactly the maximum minor age" do
     it "doesn't remove minor accounts relations" do
       expect(organization.maximum_minor_age).to eq(13)
-      expect(minor_to_promote13.minor_age).to eq(13)
+      expect(minor_to_promote13.reload.minor_age).to eq(13)
       task.execute
       expect(Decidim::Kids::MinorAccount.where(minor: minor_to_promote13)).not_to be_empty
       expect(Decidim::Kids::MinorData.where(user: minor_to_promote13)).not_to be_empty
@@ -71,7 +71,7 @@ describe "kids:promote_minor_accounts", type: :task do
   context "when the minor is under the maximum minor age" do
     it "doesn't remove minor accounts relations" do
       expect(organization.maximum_minor_age).to eq(13)
-      expect(minor_to_promote12.minor_age).to eq(12)
+      expect(minor_to_promote12.reload.minor_age).to eq(12)
       task.execute
       expect(Decidim::Kids::MinorAccount.where(minor: minor_to_promote12)).not_to be_empty
       expect(Decidim::Kids::MinorData.where(user: minor_to_promote12)).not_to be_empty
