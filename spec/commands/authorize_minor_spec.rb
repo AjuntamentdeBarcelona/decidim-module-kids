@@ -7,7 +7,8 @@ module Decidim::Kids
   describe AuthorizeMinor do
     subject { described_class.new(handler) }
 
-    let(:minor) { create(:minor, :blocked, name: "Verification pending minor") }
+    let(:minor) { create(:minor, :blocked, name: "Verification pending minor", minor_data:) }
+    let!(:minor_data) { create(:minor_data) }
     let(:document_number) { "12345678X" }
     let(:birthday) { 12.years.ago }
     let(:handler) do

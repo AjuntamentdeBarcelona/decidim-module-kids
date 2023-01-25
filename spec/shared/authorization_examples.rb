@@ -22,14 +22,13 @@ shared_examples "everything is ok" do
     expect(minor.name).to eq("Verification pending minor")
     expect do
       perform_enqueued_jobs { subject.call }
-    end.to broadcast(:ok)
+    end.to broadcast(:ok).and change(minor, :name).to eq(minor.minor_data.name)
 
     minor.reload
     expect(last_email.to).to include(minor.email)
 
     expect(minor).not_to be_blocked
     expect(minor.name).not_to eq("Verification pending minor")
-    expect(minor.name).to eq(minor.minor_data.name)
   end
 
   context "when authorization goes wrong" do
