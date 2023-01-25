@@ -14,8 +14,8 @@ describe "Updates an organization", type: :system do
     create(:minors_organization_config,
            organization: another_organization,
            enable_minors_participation: false,
-           minimum_minor_age: 9,
-           maximum_minor_age: 12)
+           minimum_minor_age:,
+           maximum_minor_age:)
   end
 
   before do
@@ -41,6 +41,8 @@ describe "Updates an organization", type: :system do
 
   context "when minors config already exists" do
     let(:another_organization) { organization }
+    let(:minimum_minor_age) { 9 }
+    let(:maximum_minor_age) { 12 }
 
     it "has defined properties" do
       click_button "Show advanced settings"
