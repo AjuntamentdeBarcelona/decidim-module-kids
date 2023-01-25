@@ -79,7 +79,7 @@ en:
         authorize:
           already_authorized: The minor account is already authorized.
           error: There was an error authorizing the minor account.
-          success: The minor account has been successfully authorized.
+          success: The minor account has been successfully authorized. An email have been sent to the minor's email address. Please confirm the email to finish the process
         create:
           invalid_age: We could not verify the minor account because the authorization
             method does not provide the birthday attribute or this one is not in the
