@@ -18,8 +18,6 @@ module Decidim::Kids
           name: "Mike",
           email: "test@example.com",
           birthday: "01/11/2009",
-          password: "password123456",
-          password_confirmation: "password123456",
           tos_agreement: true
         }
       end

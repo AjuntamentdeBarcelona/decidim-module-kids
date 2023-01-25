@@ -13,7 +13,6 @@ module Decidim
 
       def call
         transaction do
-          destroy_minor_data
           destroy_minor_account
           destroy_minor_user
         end
@@ -41,10 +40,6 @@ module Decidim
 
       def destroy_minor_user
         minor_user.sign_in_count? ? destroy_confirmed_minor_user! : destroy_not_confirmed_minor_user
-      end
-
-      def destroy_minor_data
-        @minor_user.minor_data.destroy!
       end
 
       def destroy_minor_account
