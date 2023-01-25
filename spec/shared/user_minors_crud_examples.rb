@@ -8,17 +8,14 @@ shared_examples "creates minor accounts" do
       within "form.new_minor_account" do
         fill_in "Name", with: "John Tesla"
         fill_in "Email", with: "john@example.org"
-        page.find("#minor_account_birthday").click
+        find("#minor_account_birthday").click
         fill_in "Birthday", with: 12.years.ago.strftime("%d/%m/%Y")
-        fill_in "Password", match: :first, with: "mallorca123123123"
-        fill_in "Password confirmation", with: "mallorca123123123"
-        find("*[type=submit]").click
+        send_keys(:enter)
+        find("button[type=submit]").click
 
         expect(page).to have_content("must be accepted")
 
         page.find("#minor_tos_agreement").click
-        fill_in "Password", match: :first, with: "mallorca123123123"
-        fill_in "Password confirmation", with: "mallorca123123123"
         find("*[type=submit]").click
       end
 
@@ -30,7 +27,6 @@ shared_examples "creates minor accounts" do
 
       visit decidim_admin.officializations_path
       expect(page).to have_content("Pending verification minor account")
-      expect(page).not_to have_content(minor.minor_data.name)
     end
   end
 
@@ -46,42 +42,7 @@ shared_examples "creates minor accounts" do
 end
 
 shared_examples "updates minor accounts" do
-  it "can edit a minor with password" do
-    click_link "Edit"
-
-    within "form.edit_minor_account" do
-      fill_in "Name", with: "Nikola Tesla"
-      click_button "Change password"
-      page.find("#minor_account_birthday").click
-      fill_in "Birthday", with: 12.years.ago.strftime("%d/%m/%Y")
-      page.find("#minor_account_name").click # remove datepicker modal
-      fill_in "Email", with: "test@example.org"
-      fill_in "Password", match: :first, with: "mallorca123123123"
-      find("*[type=submit]").click
-    end
-
-    within_flash_messages do
-      expect(page).to have_content("Errors occurred while updating a minor's account")
-    end
-
-    within "form.edit_minor_account" do
-      fill_in "Password", match: :first, with: "mallorca123123123"
-      fill_in "Password confirmation", with: "mallorca123123123"
-      find("*[type=submit]").click
-    end
-
-    within_flash_messages do
-      expect(page).to have_content("successfully updated")
-    end
-
-    expect(page).to have_content("Nikola Tesla")
-
-    visit decidim_admin.officializations_path
-    expect(page).to have_content("Pending verification minor account")
-    expect(page).not_to have_content(minor.minor_data.name)
-  end
-
-  it "can edit a minor without password" do
+  it "can edit a minor" do
     click_link "Edit"
 
     within "form.edit_minor_account" do
@@ -118,7 +79,7 @@ shared_examples "deletes minor accounts" do
 end
 
 shared_examples "authorizes minor accounts" do
-  it "can edit a minor with password" do
+  it "can edit a minor" do
     expect(minor.name).to eq("Pending verification minor account")
     click_link "Verify"
 
@@ -133,12 +94,13 @@ shared_examples "authorizes minor accounts" do
     end
 
     minor.reload
+
     expect(minor.name).not_to eq("Pending verification minor account")
-    expect(minor.name).to eq(minor.minor_data.name)
     expect(page).to have_content(minor.name)
 
     visit decidim_admin.officializations_path
+
     expect(page).not_to have_content("Pending verification minor account")
-    expect(page).to have_content(minor.minor_data.name)
+    expect(page).to have_content(minor.name)
   end
 end

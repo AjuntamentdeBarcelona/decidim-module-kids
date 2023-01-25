@@ -18,7 +18,7 @@ shared_examples "minors table" do
 
     it "has email status 'Pending'" do
       expect(page).to have_content("Pending", count: 1)
-      expect(page).to have_link("Resend email", count: 1)
+      expect(page).to have_css(".icon--action-redo", count: 1)
     end
   end
 
@@ -36,12 +36,12 @@ shared_examples "minors table" do
 end
 
 shared_context "when minors verified" do
-  before do
-    click_link minor.minor_data.name
+  let(:minor) { create(:minor, tutor: user, organization:, sign_in_count:, name: "John") }
 
-    fill_in "Document number", with: "1234X"
+  before do
+    click_link "Verify"
+    fill_in "Document number", with: "1224X"
     fill_in "Postal code", with: "1234X"
-    page.find("#authorization_handler_birthday").click
     fill_in "Birthday", with: "01/11/2010"
 
     find(".actions button[type=submit]").click
@@ -56,6 +56,6 @@ shared_examples "resend email" do
   it "resends the invitation to the minor" do
     click_link "Resend email"
 
-    expect(page).to have_content("successfully")
+    expect(page).to have_content("email have been sent")
   end
 end
