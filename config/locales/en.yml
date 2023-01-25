@@ -170,7 +170,7 @@ en:
         no_tutor_authorization: Minors module is misconfigured, please contact the
           administrator.
         resend:
-          success: An email have been sent to the minor's email adress. Please confirm
+          success: An email have been sent to the minor's email address. Please confirm
             the email to finish the process
         tos_field:
           tos_agreement: You accept its Terms and Conditions
