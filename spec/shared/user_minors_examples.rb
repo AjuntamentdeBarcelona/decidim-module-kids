@@ -41,13 +41,14 @@ shared_examples "user minors enabled" do
     end
 
     context "when there is minors" do
-      let!(:minor) { create(:minor, tutor: user, organization:) }
-      let!(:another_minor) { create(:minor, tutor: user, organization:) }
+      let!(:minors) { create_list(:minor, 2, tutor: user, organization:) }
 
-      it "minors names are listed" do
+      before do
         visit decidim_kids.user_minors_path
-        expect(page).to have_content(minor.minor_data.name)
-        expect(page).to have_content(another_minor.minor_data.name)
+      end
+
+      it "minors are listed in the table" do
+        expect(page).to have_css("tbody tr", count: 2)
       end
     end
 

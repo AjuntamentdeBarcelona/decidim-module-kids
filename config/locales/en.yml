@@ -79,13 +79,18 @@ en:
         authorize:
           already_authorized: The minor account is already authorized.
           error: There was an error authorizing the minor account.
-          success: The minor account has been successfully authorized.
+          success: The minor account has been successfully authorized. An email have
+            been sent to the minor's email address. Please confirm the email to finish
+            the process
         create:
           invalid_age: We could not verify the minor account because the authorization
             method does not provide the birthday attribute or this one is not in the
             accepted range.
         new:
           authorizing_html: You are verifying the minor <b>%{minor}</b>
+          help_text: 'Second step: For security reasons, we need to check that the
+            minor''s details are correct and we can verify his or her identity on
+            our census'
       impersonations:
         close_session:
           button: Close session
@@ -102,9 +107,12 @@ en:
         name: Verification pending minor account
       minor_notifications_mailer:
         confirmation:
-          body: Instructions
-          body_2: The account is "tutelated"
-          greeting: Welcome, %{recipient}!
+          body: Your legal guardian has authorised the creation of your account to
+            participate in the platform. Your account will be under guardianship until
+            you reach the legal age. You can now finalise the account creation by
+            confirming this email and following the instructions
+          confirm: Confirm email
+          greeting: Welcome, <b>%{recipient}</b>!
           sign_in: Sign in
           subject: Confirmation instructions
         promote:
@@ -157,11 +165,15 @@ en:
           verified: Verified
         new:
           create: Create minor account
+          help_text_email: Write here the child's e-mail
+          subtitle: 'Fist step: Now you must fill in the form with the necessary information
+            to create the minor''s account'
           title: Add a minor
         no_tutor_authorization: Minors module is misconfigured, please contact the
           administrator.
         resend:
-          success: Email was successfully sent
+          success: An email have been sent to the minor's email address. Please confirm
+            the email to finish the process
         tos_field:
           tos_agreement: You accept its Terms and Conditions
         unverified:

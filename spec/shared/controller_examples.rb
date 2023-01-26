@@ -24,7 +24,7 @@ shared_examples "authorizes the minor" do
     end.to change(Decidim::Authorization, :count).by(1)
 
     expect(authorization).not_to be_blank
-    expect(flash[:notice]).to eq("The minor account has been successfully authorized.")
+    expect(flash[:notice]).to eq("The minor account has been successfully authorized. An email have been sent to the minor's email address. Please confirm the email to finish the process")
     expect(response).to redirect_to(return_path)
   end
 end

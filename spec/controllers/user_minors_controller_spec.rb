@@ -163,7 +163,7 @@ module Decidim::Kids
       it "resends the email to the minor" do
         post :resend_invitation_to_minor, params: { id: minor.id }
 
-        expect(flash[:notice]).to have_content("Email was successfully sent")
+        expect(flash[:notice]).to have_content("An email have been sent to the minor's email address")
       end
     end
   end

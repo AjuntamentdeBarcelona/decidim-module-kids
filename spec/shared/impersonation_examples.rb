@@ -36,7 +36,7 @@ shared_examples "user impersonate" do
 
         click_button("Impersonate")
 
-        expect(page).to have_content(minor.minor_data.name)
+        expect(page).to have_content("You are managing the participant")
         expect(page).to have_content("Close session")
       end
 

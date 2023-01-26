@@ -6,23 +6,14 @@ module Decidim::Kids
   describe UpdateMinorAccount do
     let(:organization) { create :organization }
     let(:user) { create(:user, :confirmed, organization:) }
-    let(:minor) { create(:minor, name: "Pending verification minor", tutor: user, organization:) }
     let(:command) { described_class.new(form, minor) }
-
-    let(:minor_data) do
-      {
-        name:,
-        email:,
-        birthday:
-      }
-    end
+    let!(:minor_data) { create(:minor_data, name: "Marco", email: "marco@example.org", birthday: "01/11/2010") }
+    let!(:minor) { create(:minor, name: "Pending verification minor", tutor: user, organization:, minor_data:) }
 
     let(:form) do
       MinorAccountForm.from_params(
         name:,
         email:,
-        password:,
-        password_confirmation:,
         birthday:,
         tos_agreement:
       )
@@ -31,17 +22,17 @@ module Decidim::Kids
     let(:name) { "Marco" }
     let(:email) { "marco@example.org" }
     let(:birthday) { "01/11/2010" }
-    let(:password) { nil }
-    let(:password_confirmation) { nil }
     let(:tos_agreement) { true }
 
     context "when valid" do
       it "updates the user's name" do
-        form.name = "Marco"
+        form.name = "Marco New"
 
-        expect { command.call }.to broadcast(:ok)
+        expect do
+          command.call
+        end.to change { minor.minor_data.reload.name }.from("Marco").to("Marco New")
+
         expect(minor.reload.name).to eq("Pending verification minor")
-        expect(minor.minor_data.reload.name).to eq("Marco")
       end
 
       it "updates the user's birthday" do
@@ -50,34 +41,6 @@ module Decidim::Kids
 
         expect { command.call }.to broadcast(:ok)
         expect(minor.minor_data.reload.birthday).to eq(date)
-      end
-
-      describe "when the password is present" do
-        it "updates the user's password" do
-          form.password = "decidim123123123"
-          form.password_confirmation = "decidim123123123"
-
-          expect { command.call }.to broadcast(:ok)
-          expect(minor.reload.password).to eq("decidim123123123")
-        end
-
-        it "shows password errors" do
-          form.password = "another123123123"
-          form.password_confirmation = "decidim123123123"
-
-          expect { command.call }.to broadcast(:invalid)
-          expect(minor.reload.password).to eq("decidim123456789")
-        end
-
-        context "when the minor user is invalid" do
-          before do
-            allow(minor).to receive(:valid?).and_return(false)
-          end
-
-          it "broadcasts invalid" do
-            expect { command.call }.to broadcast(:invalid)
-          end
-        end
       end
 
       describe "updating the email" do

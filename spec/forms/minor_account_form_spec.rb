@@ -12,8 +12,6 @@ module Decidim::Kids
     let(:name) { "Marco" }
     let(:email) { "marco@example.org" }
     let(:birthday) { "01/11/2010" }
-    let(:password) { "password123456" }
-    let(:password_confirmation) { password }
     let(:tos_agreement) { true }
 
     let(:params) do
@@ -21,8 +19,6 @@ module Decidim::Kids
         name:,
         email:,
         birthday:,
-        password:,
-        password_confirmation:,
         tos_agreement:
       }
     end
@@ -66,26 +62,6 @@ module Decidim::Kids
         let(:email) { "" }
 
         it { is_expected.not_to be_valid }
-      end
-    end
-
-    describe "password" do
-      context "when password is blank" do
-        let(:password) { "" }
-
-        it { is_expected.to be_valid }
-      end
-
-      context "when the password is weak" do
-        let(:password) { "aaasssdddfff" }
-
-        it { is_expected.to be_invalid }
-      end
-
-      context "when the password confirmation is different" do
-        let(:password_confirmation) { "another thing" }
-
-        it { is_expected.to be_invalid }
       end
     end
 
