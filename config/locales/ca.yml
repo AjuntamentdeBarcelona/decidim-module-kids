@@ -1,0 +1,165 @@
+---
+ca:
+  activemodel:
+    attributes:
+      minors_space_config:
+        access_type: Tipus d'accés a l'espai de participació
+        authorization: Mètode d'autorització per a altres usuàries permeses en aquest espai
+        max_age: Comprova aquesta edat màxima si l'autorització ho permet (deixa'l buit o a zero per a desactivar aquesta comprovació)
+      organization:
+        enable_minors_participation: Habilitar la participació de menors
+        maximum_minor_accounts: Máxim nombre de menors que es poden assignar a una tutoria
+        maximum_minor_age: Edat màxima per a encara ser considerada menor
+        minimum_minor_age: Edat mínima per a poder crear un compte de menor
+        minors_authorization: Mètode d'autorització per a la validació un compte de menor
+        tutors_authorization: Mètode d'autorització per a la validació un compte de tutoria
+    errors:
+      models:
+        organization:
+          attributes:
+            minimum_minor_age:
+              bigger_than_adult: L'edat del/de la menor ha de ser inferior a la edad adulta
+  decidim:
+    authorization_handlers:
+      dummy_age_authorization_handler:
+        explanation: Verifica't introduint un número de document que acabi en "X"
+        fields:
+          birthday: Data de naixement
+          document_number: Número de document
+        name: Exemple d'autorització amb metadades d'aniversari
+    devise:
+      mailer:
+        invitation_instructions:
+          accept: Acceptar email
+      registrations:
+        new:
+          create_an_account: crear un compte
+          minors_description: Tens menys de %{maximum_minor_age} anys? Parla amb al teva mare i pare per consulta'ls-hi com pots %{link}
+          minors_title: Participació de menors
+    kids:
+      actions:
+        unauthorized: No pots accedir a aquest espai perquè no compleixes amb els requisits
+      admin:
+        minors_space:
+          form:
+            all: Espai per a tothom (sense restriccions)
+            handlers:
+              available: El gestor d'autorització amb "%{handler}" està activada.
+              errors:
+                invalid: El gestor d'autorització és invàlid.
+                metadata: El gestor d'autorització no disposa de les metadades correctes per a comprovar l'edat de la persona.
+                ok: El gestor d'autorització disposa de la metadada correcta i pot comprovar l'edat de la persona.
+              unavailable: El gestor d'autorització "%{handler}" no està activat. Si us plau, activa'l a la configuració d'autoritzacions de l'organització.
+            minors: Espai només per a menors
+          index:
+            description_html: |
+              Aquí pots configurar com es comportarà aquest espai de participació quan usuàries adultes o menors hi accedeixin.<br>>
+              Els espais participatius poden ser de dos tipus: limitats a menors o oberts a tothom (el comportament predeterminat).<br>
+              Quan un espai de participació estigui obert a tothom, els menors podran accedir-hi (no hi haurà restriccions).<br>
+              Quan un espai de participació estigui limitat només a menors, només menors i algunes usuàries especials podran accedir-hi. La resta d'usuàries seran redireccionades amb un missatge d'error.<br>
+              <br>Les usuàries addicionals amb accés a un espai limitat amb menors son:<br>
+              <ul>
+              <li>Les usuàries amb el rol d'administradora, moderadora, col·laboradora o avaluadora.</li>
+              <li>Si l'opció està activada, les usuàries verificades pel mètode d'autorizació especificat també tindran accés. Per exemple, pots fer servir aquest mètode de verificació per a verificar menors fins a una edat que no necessita tutela.</li>
+              </ul>
+            save: Desa
+            title: Configuració de l'espai de participació per a menors
+          menu: Configuració per a menors
+          save:
+            error: S'ha produït un error en desar la configuració! (%{errors})
+            success: Configuració desada amb èxit.
+      authorizations:
+        authorize:
+          already_authorized: El compte de menor ja està autoritzada.
+          error: S'ha produït un error en autoritzar el compte de menor.
+          success: The minor account has been successfully authorized. An email have been sent to the minor's email address. Please confirm the email to finish the process
+        create:
+          invalid_age: El compte de menor no s'ha pogut verificar perquè el mètode d'autorització no conté la dada de la data de naixement o aquesta no correspon a la franja d'edat corresponent.
+        new:
+          authorizing_html: Estàs verificant el compte de menor de <b>%{minor}</b>
+          help_text: 'Second step: For security reasons, we need to check that the minor''s details are correct and we can verify his or her identity on our census'
+      impersonations:
+        close_session:
+          button: Close session
+          error: There was a problem closing the current management session.
+          success: The current impersonation session has been successfully ended.
+        create:
+          error: There was a problem managing the minor.
+          success: The managed minor has been successfully created.
+        impersonate_button: Impersonate
+        title: Enter your password to impersonate a minor
+      minor_account:
+        form:
+          invalid_age: Edat no vàlida
+        name: Verificació de compte de menor pendent
+      minor_notifications_mailer:
+        confirmation:
+          body: Your legal guardian has authorised the creation of your account to participate in the platform. Your account will be under guardianship until you reach the legal age. You can now finalise the account creation by confirming this email and following the instructions
+          confirm: Confirm email
+          greeting: Welcome, <b>%{recipient}</b>!
+          sign_in: Iniciar sessió
+          subject: Instruccions de confirmació
+        promote:
+          body_1: Hi %{recipient}, your account has been promoted. You now have an adult account and your account is no longer dependent on your legal guardian's account.
+          subject: Your account was promoted
+      minors_participation: Participació de menors a Decidim
+      system:
+        organizations:
+          minors_form:
+            minors_authorization_help: 'Atenció: Assegura''t que aquest mètode de verificació comprova l''edat del menor vers la franja d''edat que s''ha definit'
+            tutors_authorization_help: La usuària haurà de ser autoritzada fent servir aquest mètode abans de poder-se crear un compte de menor
+      user:
+        menu: Els meus comptes de menors
+      user_minors:
+        create:
+          error: S'han produït errors mentre es creava un compte de menor
+          success: El compte de menor s'ha creat amb èxit
+        destroy:
+          error: S'han produït errors mentre s'esborrava un compte de menor
+          success: El compte de menor s'ha esborrat amb èxit
+        edit:
+          change_password: Canviar la contrasenya
+          edit_button: Actualitzar el compte de menor
+          title: Editar el compte de menor
+        index:
+          actions: Accions
+          activity: Activitat
+          add: Afegir un/a menor
+          age: Edat
+          button_verify: Verificar
+          confirm: Segur que vols esborrar aquest compte de menor?
+          confirmed: Confirmada
+          confirmed_user: 'Sí'
+          description: Aquí pots veure els comptes de menors que tutoritzes. És obligatori verificar els comptes de menors abans que puguin participar a la plataforma.
+          destroy_button: Eliminar
+          edit: Editar
+          last_login: Darrer inici de sessió
+          name: Nom
+          needs_verification: Cal verificació!
+          not_confirmed: 'No'
+          note: Maximum number of minors reached
+          pending: Pendent
+          resend_email: Reenvia el correu
+          title: Menors que tutoritzo
+          verified: Verificada
+        new:
+          create: Crear un compte de menor
+          help_text_email: Write here the child's e-mail
+          subtitle: 'Fist step: Now you must fill in the form with the necessary information to create the minor''s account'
+          title: Afegir menor
+        no_tutor_authorization: El mòdul de menors està mal configurat, si us plau, contacta amb les administradores.
+        resend:
+          success: An email have been sent to the minor's email address. Please confirm the email to finish the process
+        tos_field:
+          tos_agreement: Acceptes els seus Termes i Condicions
+        unverified:
+          authorize: Autoritzar el meu compte
+          needs_to_be_verified: Per a poder crear un compte de menor, t'has de verificar fent servir el mètode "%{method}"
+        update:
+          error: S'han produït errors mentre s'actualitzava un compte de menor
+          success: El teu compte s'ha actualitzat amb èxit
+      user_minors_helper:
+        button_to_add_minor_account:
+          add: Afegir menor
+        minor_tos:
+          tos_agreement: Acceptes els seus Termes i Condicions
