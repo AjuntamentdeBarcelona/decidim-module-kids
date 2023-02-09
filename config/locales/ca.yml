@@ -72,12 +72,12 @@ ca:
         authorize:
           already_authorized: El compte de menor ja està autoritzada.
           error: S'ha produït un error en autoritzar el compte de menor.
-          success: The minor account has been successfully authorized. An email have been sent to the minor's email address. Please confirm the email to finish the process
+          success: El compte de menor ha estat autoritzada correctament. S'ha enviat un correu electrònic a l'adreça de correu de la menor. Si us plau, confirma el compte per a finalitzar el procés
         create:
           invalid_age: El compte de menor no s'ha pogut verificar perquè el mètode d'autorització no conté la dada de la data de naixement o aquesta no correspon a la franja d'edat corresponent.
         new:
           authorizing_html: Estàs verificant el compte de menor de <b>%{minor}</b>
-          help_text: 'Second step: For security reasons, we need to check that the minor''s details are correct and we can verify his or her identity on our census'
+          help_text: 'Segon pas: Per motius de seguretat, necessitem que revisis que les dades de la menor són correctes i així podrem verificar la seva identitat al nostre cens'
       impersonations:
         close_session:
           button: Close session
