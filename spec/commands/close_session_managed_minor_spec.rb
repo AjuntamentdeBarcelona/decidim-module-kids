@@ -6,11 +6,11 @@ module Decidim::Kids
   describe CloseSessionManagedMinor do
     describe "call" do
       let(:organization) { create :organization }
-      let(:current_user) { create(:user, :confirmed, organization:) }
-      let(:minor) { create(:minor, :managed, tutor: current_user, organization:) }
+      let(:current_user) { create(:user, :confirmed, organization: organization) }
+      let(:minor) { create(:minor, :managed, tutor: current_user, organization: organization) }
       let(:command) { described_class.new(minor, current_user) }
 
-      let!(:impersonation_minor_log) { create(:impersonation_minor_log, tutor: current_user, minor:) }
+      let!(:impersonation_minor_log) { create(:impersonation_minor_log, tutor: current_user, minor: minor) }
 
       context "when everything is ok" do
         it "broadcasts ok" do

@@ -10,7 +10,7 @@ describe "minors space", type: :system do
   let!(:participatory_process) do
     create(
       :participatory_process,
-      organization:
+      organization: organization
     )
   end
 

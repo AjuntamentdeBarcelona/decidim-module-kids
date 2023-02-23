@@ -16,18 +16,18 @@ FactoryBot.define do
 
   factory :minor, parent: :user do
     transient do
-      tutor { create(:user, :confirmed, organization:) }
+      tutor { create(:user, :confirmed, organization: organization) }
     end
 
     after(:create) do |user, evaluator|
       create(:minor_account, tutor: evaluator.tutor, minor: user)
-      create(:minor_data, user:)
+      create(:minor_data, user: user)
     end
   end
 
   factory :tutor, parent: :user do
     transient do
-      minor { create(:user, :confirmed, organization:) }
+      minor { create(:user, :confirmed, organization: organization) }
     end
 
     confirmed_at { Time.current }

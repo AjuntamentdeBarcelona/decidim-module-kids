@@ -14,8 +14,8 @@ describe "Updates an organization", type: :system do
     create(:minors_organization_config,
            organization: another_organization,
            enable_minors_participation: false,
-           minimum_minor_age:,
-           maximum_minor_age:)
+           minimum_minor_age: minimum_minor_age,
+           maximum_minor_age: maximum_minor_age)
   end
 
   before do

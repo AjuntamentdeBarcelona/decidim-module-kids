@@ -12,9 +12,9 @@ module Decidim::Kids::Admin
 
     let(:params) do
       {
-        access_type:,
-        max_age:,
-        authorization:
+        access_type: access_type,
+        max_age: max_age,
+        authorization: authorization
       }
     end
 

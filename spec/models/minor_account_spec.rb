@@ -32,15 +32,15 @@ module Decidim::Kids
     end
 
     describe "validations" do
-      subject { build(:minor_account, tutor:, minor:) }
+      subject { build(:minor_account, tutor: tutor, minor: minor) }
       let(:organization) { create(:organization) }
-      let(:minor) { create :user, organization: }
-      let(:tutor) { create :user, :confirmed, organization: }
+      let(:minor) { create :user, organization: organization }
+      let(:tutor) { create :user, :confirmed, organization: organization }
 
       context "when tutor is already a minor" do
-        let(:another_minor) { create(:minor, organization:) }
+        let(:another_minor) { create(:minor, organization: organization) }
 
-        subject { build(:minor_account, tutor: another_minor, minor:) }
+        subject { build(:minor_account, tutor: another_minor, minor: minor) }
 
         it "both minors have the same organization" do
           expect(another_minor.organization).to eq minor.organization
@@ -52,9 +52,9 @@ module Decidim::Kids
       end
 
       context "when minor is already a tutor" do
-        let(:another_tutor) { create(:tutor, organization:) }
+        let(:another_tutor) { create(:tutor, organization: organization) }
 
-        subject { build(:minor_account, tutor:, minor: another_tutor) }
+        subject { build(:minor_account, tutor: tutor, minor: another_tutor) }
 
         it "both tutors have the same organization" do
           expect(another_tutor.organization).to eq tutor.organization
@@ -66,7 +66,7 @@ module Decidim::Kids
       end
 
       context "when user is an admin" do
-        let(:minor) { create :user, :admin, organization: }
+        let(:minor) { create :user, :admin, organization: organization }
 
         it "cannot be a minor" do
           expect(subject).to be_invalid
@@ -74,7 +74,7 @@ module Decidim::Kids
       end
 
       context "when user is unconfirmed" do
-        let(:tutor) { create :user, organization: }
+        let(:tutor) { create :user, organization: organization }
 
         it "cannot be a tutor" do
           expect(subject).to be_invalid

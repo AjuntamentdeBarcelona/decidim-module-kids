@@ -17,13 +17,13 @@ describe "User manages minor accounts", type: :system do
   let(:minors_authorization) { "dummy_authorization_handler" }
   let!(:minors_organization_config) do
     create(:minors_organization_config,
-           organization:,
-           enable_minors_participation:,
-           minimum_minor_age:,
-           maximum_minor_age:,
-           maximum_minor_accounts:,
-           tutors_authorization:,
-           minors_authorization:)
+           organization: organization,
+           enable_minors_participation: enable_minors_participation,
+           minimum_minor_age: minimum_minor_age,
+           maximum_minor_age: maximum_minor_age,
+           maximum_minor_accounts: maximum_minor_accounts,
+           tutors_authorization: tutors_authorization,
+           minors_authorization: minors_authorization)
   end
 
   before do
@@ -44,8 +44,8 @@ describe "User manages minor accounts", type: :system do
     it_behaves_like "user minors enabled"
 
     describe "user minors CRUD" do
-      let!(:authorization) { create(:authorization, user:, name: organization.tutors_authorization) }
-      let!(:minor) { create(:minor, :blocked, name: "Pending verification minor account", tutor: user, organization:) }
+      let!(:authorization) { create(:authorization, user: user, name: organization.tutors_authorization) }
+      let!(:minor) { create(:minor, :blocked, name: "Pending verification minor account", tutor: user, organization: organization) }
 
       before do
         click_link "My minor account"
@@ -58,8 +58,8 @@ describe "User manages minor accounts", type: :system do
     end
 
     describe "List my kids" do
-      let!(:authorization) { create(:authorization, user:, name: organization.tutors_authorization) }
-      let!(:minor) { create(:minor, tutor: user, organization:, sign_in_count:) }
+      let!(:authorization) { create(:authorization, user: user, name: organization.tutors_authorization) }
+      let!(:minor) { create(:minor, tutor: user, organization: organization, sign_in_count: sign_in_count) }
 
       before do
         click_link "My minor account"
@@ -70,10 +70,10 @@ describe "User manages minor accounts", type: :system do
     end
 
     describe "User impersonates a minor" do
-      let!(:authorization) { create(:authorization, user:, name: organization.tutors_authorization) }
+      let!(:authorization) { create(:authorization, user: user, name: organization.tutors_authorization) }
       let!(:user) { create(:user, :confirmed, password: valid_password) }
       let(:valid_password) { "mallorca123123123" }
-      let!(:minor) { create(:minor, tutor: user, organization:, sign_in_count:) }
+      let!(:minor) { create(:minor, tutor: user, organization: organization, sign_in_count: sign_in_count) }
 
       before do
         click_link "My minor account"

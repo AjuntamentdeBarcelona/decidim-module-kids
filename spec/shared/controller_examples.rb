@@ -51,11 +51,11 @@ shared_examples "checks tutor authorization" do
     it "redirects the user" do
       case view
       when :create
-        post view, params:
+        post view, params: params
       when :update
-        patch view, params:
+        patch view, params: params
       else
-        get view, params:
+        get view, params: params
       end
       expect(response).to redirect_to(unverified_user_minors_path)
     end
@@ -69,11 +69,11 @@ shared_examples "checks tutor authorization" do
     it "redirects the user back" do
       case view
       when :create
-        post view, params:
+        post view, params: params
       when :update
-        patch view, params:
+        patch view, params: params
       else
-        get view, params:
+        get view, params: params
       end
       expect(response).to redirect_to(Decidim::Core::Engine.routes.url_helpers.account_path)
     end

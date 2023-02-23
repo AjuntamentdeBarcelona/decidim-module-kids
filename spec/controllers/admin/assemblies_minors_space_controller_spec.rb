@@ -12,7 +12,7 @@ module Decidim::Assemblies::Admin
     let!(:assembly) do
       create(
         :assembly,
-        organization:
+        organization: organization
       )
     end
 

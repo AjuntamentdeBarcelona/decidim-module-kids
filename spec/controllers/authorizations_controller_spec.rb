@@ -15,16 +15,16 @@ module Decidim::Kids
     let(:minors_authorization_name) { "dummy_authorization_handler" }
     let!(:minors_organization_config) do
       create(:minors_organization_config,
-             organization:,
-             enable_minors_participation:,
-             minimum_minor_age:,
-             maximum_minor_age:,
+             organization: organization,
+             enable_minors_participation: enable_minors_participation,
+             minimum_minor_age: minimum_minor_age,
+             maximum_minor_age: maximum_minor_age,
              tutors_authorization: tutors_authorization_name,
              minors_authorization: minors_authorization_name)
     end
-    let(:user) { create(:user, :confirmed, organization:) }
-    let(:minor) { create(:minor, tutor: user, organization:) }
-    let!(:tutor_authorization) { create(:authorization, user:, name: organization.tutors_authorization) }
+    let(:user) { create(:user, :confirmed, organization: organization) }
+    let(:minor) { create(:minor, tutor: user, organization: organization) }
+    let!(:tutor_authorization) { create(:authorization, user: user, name: organization.tutors_authorization) }
     let(:return_path) { "/decidim_kids#{user_minor_authorizations_path}" }
 
     before do
@@ -40,7 +40,7 @@ module Decidim::Kids
         let(:handler_name) { "dummy_authorization_handler" }
         let(:document_number) { "12345678X" }
         let(:birthday) { 11.years.ago }
-        let(:handler_params) { { document_number:, birthday: } }
+        let(:handler_params) { { document_number: document_number, birthday: birthday } }
         let(:authorization) { Decidim::Authorization.find_by(name: handler_name, user: minor) }
         let(:age_attributes) { [:birthday] }
 

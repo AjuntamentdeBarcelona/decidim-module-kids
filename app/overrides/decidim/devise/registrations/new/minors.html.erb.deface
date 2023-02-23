@@ -1,2 +1,2 @@
-<!-- insert_after ".login__form" -->
+<!-- insert_before "#card__tos" -->
 <%= render "decidim/kids/devise/registrations/minors" %>

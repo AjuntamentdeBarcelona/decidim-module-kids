@@ -22,12 +22,12 @@ module Decidim::System
           reference_prefix: "GC",
           users_registration_mode: "existing",
           file_upload_settings: Decidim::OrganizationSettings.default(:upload),
-          enable_minors_participation:,
-          minimum_minor_age:,
-          maximum_minor_age:,
-          minors_authorization:,
-          tutors_authorization:,
-          maximum_minor_accounts:
+          enable_minors_participation: enable_minors_participation,
+          minimum_minor_age: minimum_minor_age,
+          maximum_minor_age: maximum_minor_age,
+          minors_authorization: minors_authorization,
+          tutors_authorization: tutors_authorization,
+          maximum_minor_accounts: maximum_minor_accounts
         }
       end
       let(:enable_minors_participation) { true }

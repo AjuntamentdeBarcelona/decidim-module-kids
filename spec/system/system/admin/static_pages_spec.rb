@@ -7,7 +7,7 @@ describe "Content pages", type: :system do
 
   let(:admin) { create :user, :admin, :confirmed }
   let(:organization) { admin.organization }
-  let!(:minors_static_page) { create(:static_page, organization:, slug: "minors") }
+  let!(:minors_static_page) { create(:static_page, organization: organization, slug: "minors") }
 
   before do
     switch_to_host(organization.host)
@@ -21,7 +21,7 @@ describe "Content pages", type: :system do
     end
 
     context "with minors configuration enabled" do
-      let!(:minors_organization_config) { create(:minors_organization_config, organization:) }
+      let!(:minors_organization_config) { create(:minors_organization_config, organization: organization) }
 
       before do
         visit current_path

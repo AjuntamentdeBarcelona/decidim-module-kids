@@ -21,7 +21,7 @@ module Decidim::Assemblies
     let!(:assembly) do
       create(
         :assembly,
-        organization:
+        organization: organization
       )
     end
 

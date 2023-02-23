@@ -2,7 +2,7 @@
 
 shared_context "with a minor's organization" do
   let(:available_authorizations) { %w(dummy_authorization_handler another_dummy_authorization_handler dummy_age_authorization_handler) }
-  let(:organization) { create :organization, available_authorizations: }
+  let(:organization) { create :organization, available_authorizations: available_authorizations }
   let(:enable_minors_participation) { true }
   let(:minimum_minor_age) { 10 }
   let(:maximum_minor_age) { 13 }
@@ -10,14 +10,14 @@ shared_context "with a minor's organization" do
   let(:minors_authorization_name) { "dummy_authorization_handler" }
   let!(:minors_organization_config) do
     create(:minors_organization_config,
-           organization:,
-           enable_minors_participation:,
-           minimum_minor_age:,
-           maximum_minor_age:,
+           organization: organization,
+           enable_minors_participation: enable_minors_participation,
+           minimum_minor_age: minimum_minor_age,
+           maximum_minor_age: maximum_minor_age,
            tutors_authorization: tutors_authorization_name,
            minors_authorization: minors_authorization_name)
   end
-  let(:user) { create(:user, :admin, :confirmed, organization:) }
+  let(:user) { create(:user, :admin, :confirmed, organization: organization) }
 end
 
 shared_context "when admin managing a participatory space" do
@@ -80,7 +80,7 @@ shared_examples "controls the minor configuration" do
   end
 
   context "when config already exists" do
-    let!(:minors_space_config) { create(:minors_space_config, participatory_space:) }
+    let!(:minors_space_config) { create(:minors_space_config, participatory_space: participatory_space) }
 
     it "updates config and redirects" do
       expect do

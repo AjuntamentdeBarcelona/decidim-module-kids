@@ -31,7 +31,7 @@ shared_examples "creates minor accounts" do
   end
 
   context "when the limit is reached" do
-    let!(:minor) { create_list(:minor, maximum_minor_accounts, tutor: user, organization:) }
+    let!(:minor) { create_list(:minor, maximum_minor_accounts, tutor: user, organization: organization) }
 
     it "cannot add a minor" do
       click_link "My minor accounts"

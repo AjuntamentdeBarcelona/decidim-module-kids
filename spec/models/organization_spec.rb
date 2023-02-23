@@ -67,10 +67,10 @@ module Decidim
       let(:maximum_minor_age) { 16 }
       let!(:config) do
         create :minors_organization_config,
-               organization:,
-               enable_minors_participation:,
-               minimum_minor_age:,
-               maximum_minor_age:
+               organization: organization,
+               enable_minors_participation: enable_minors_participation,
+               minimum_minor_age: minimum_minor_age,
+               maximum_minor_age: maximum_minor_age
       end
 
       it { is_expected.to be_valid }

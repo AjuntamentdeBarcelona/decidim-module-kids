@@ -19,7 +19,7 @@ class DummyAgeAuthorizationHandler < Decidim::AuthorizationHandler
   end
 
   def metadata
-    super.merge(document_number:, birthday:)
+    super.merge(document_number: document_number, birthday: birthday)
   end
 
   private

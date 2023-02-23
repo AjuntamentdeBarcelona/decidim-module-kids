@@ -10,7 +10,7 @@ describe "minors space", type: :system do
   let!(:assembly) do
     create(
       :assembly,
-      organization:
+      organization: organization
     )
   end
 

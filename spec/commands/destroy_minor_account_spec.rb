@@ -6,8 +6,8 @@ module Decidim::Kids
   describe DestroyMinorAccount do
     let(:command) { described_class.new(minor, minor_account) }
     let(:organization) { create :organization }
-    let(:user) { create(:user, :confirmed, organization:) }
-    let(:minor) { create(:minor, tutor: user, organization:, sign_in_count:) }
+    let(:user) { create(:user, :confirmed, organization: organization) }
+    let(:minor) { create(:minor, tutor: user, organization: organization, sign_in_count: sign_in_count) }
     let!(:minor_account) { Decidim::Kids::MinorAccount.where(decidim_minor_id: minor.id) }
     let(:sign_in_count) { 1 }
 

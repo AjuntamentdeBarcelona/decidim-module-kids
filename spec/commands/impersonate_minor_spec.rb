@@ -8,12 +8,12 @@ module Decidim::Kids
 
     describe "call" do
       let(:organization) { create :organization }
-      let!(:current_user) { create(:user, :confirmed, password: valid_password, organization:) }
-      let!(:minor) { create(:minor, tutor: current_user, organization:) }
+      let!(:current_user) { create(:user, :confirmed, password: valid_password, organization: organization) }
+      let!(:minor) { create(:minor, tutor: current_user, organization: organization) }
       let!(:form) do
         ImpersonateMinorForm.from_params(params).with_context(
           current_organization: organization,
-          current_user:
+          current_user: current_user
         )
       end
 
@@ -24,7 +24,7 @@ module Decidim::Kids
         {
           user_minor_id: minor.id,
           impersonate_minor: {
-            password:
+            password: password
           }
         }
       end
