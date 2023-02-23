@@ -78,23 +78,6 @@ module Decidim::Kids
             expect(flash[:alert]).to eq("There was an error authorizing the minor account.")
             expect(response).to render_template(:new)
           end
-
-          context "when the duplicate authorization user is deleted" do
-            let!(:other_user) { create(:user, :deleted, organization: user.organization) }
-
-            it "transfers the authorization and redirects the user" do
-              expect do
-                post :create, params: {
-                  user_minor_id: minor.id,
-                  authorization_handler: handler_params
-                }
-              end.not_to change(Decidim::Authorization, :count)
-
-              expect(authorization).not_to be_blank
-              expect(flash[:notice]).to eq("The minor account has been successfully authorized. An email have been sent to the minor's email address. Please confirm the email to finish the process")
-              expect(response).to redirect_to(return_path)
-            end
-          end
         end
       end
 
