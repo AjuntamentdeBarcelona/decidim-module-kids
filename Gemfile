@@ -4,7 +4,13 @@ source "https://rubygems.org"
 
 ruby RUBY_VERSION
 
-DECIDIM_VERSION = "0.27.2"
+# Inside the development app, the relative require has to be one level up, as
+# the Gemfile is copied to the development_app folder (almost) as is.
+base_path = ""
+base_path = "../" if File.basename(__dir__) == "development_app"
+require_relative "#{base_path}lib/decidim/kids/version"
+
+DECIDIM_VERSION = Decidim::Kids::DECIDIM_VERSION
 
 gem "decidim", DECIDIM_VERSION
 gem "decidim-kids", path: "."
