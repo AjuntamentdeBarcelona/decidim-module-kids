@@ -16,7 +16,7 @@ module Decidim::Kids::Admin
           access_type: "minors",
           authorization: "dummy_authorization_handler",
           max_age: 17,
-          participatory_space:
+          participatory_space: participatory_space
         }
       end
 
@@ -54,7 +54,7 @@ module Decidim::Kids::Admin
         end
 
         context "when the config already exists" do
-          let!(:existing_config) { create(:minors_space_config, participatory_space:) }
+          let!(:existing_config) { create(:minors_space_config, participatory_space: participatory_space) }
 
           it "broadcasts :ok and updates the config" do
             expect { command.call }.to broadcast(:ok)

@@ -4,12 +4,12 @@ require "spec_helper"
 
 describe "kids:promote_minor_accounts", type: :task do
   let(:organization) { create(:organization, available_authorizations: %w(dummy_authorization_handler)) }
-  let(:user) { create(:user, :admin, :confirmed, organization:) }
-  let(:other_user) { create(:user, :admin, :confirmed, organization:) }
-  let(:minor_to_promote15) { create(:user, :confirmed, organization:) }
-  let(:minor_to_promote14) { create(:user, :confirmed, organization:) }
-  let(:minor_to_promote13) { create(:user, :confirmed, organization:) }
-  let(:minor_to_promote12) { create(:user, :confirmed, organization:) }
+  let(:user) { create(:user, :admin, :confirmed, organization: organization) }
+  let(:other_user) { create(:user, :admin, :confirmed, organization: organization) }
+  let(:minor_to_promote15) { create(:user, :confirmed, organization: organization) }
+  let(:minor_to_promote14) { create(:user, :confirmed, organization: organization) }
+  let(:minor_to_promote13) { create(:user, :confirmed, organization: organization) }
+  let(:minor_to_promote12) { create(:user, :confirmed, organization: organization) }
   let!(:minor_to_promote_account15) { create :minor_account, tutor: user, minor: minor_to_promote15 }
   let!(:minor_to_promote_account14) { create :minor_account, tutor: user, minor: minor_to_promote14 }
   let!(:minor_to_promote_account13) { create :minor_account, tutor: user, minor: minor_to_promote13 }
@@ -19,7 +19,7 @@ describe "kids:promote_minor_accounts", type: :task do
   let!(:minor_data_to_promote13) { create :minor_data, user: minor_to_promote13, birthday: 13.years.ago - 1.day }
   let!(:minor_data_to_promote12) { create :minor_data, user: minor_to_promote12, birthday: 12.years.ago - 1.day }
   let(:enable_minors_participation) { false }
-  let!(:minors_organization_config) { create(:minors_organization_config, organization:, enable_minors_participation:) }
+  let!(:minors_organization_config) { create(:minors_organization_config, organization: organization, enable_minors_participation: enable_minors_participation) }
 
   context "when minors turn the maximum minor age" do
     it "run gracefully" do

@@ -6,7 +6,7 @@ module Decidim::Kids
   describe MinorAccountForm do
     subject { form }
 
-    let(:user) { create(:user, :confirmed, organization:) }
+    let(:user) { create(:user, :confirmed, organization: organization) }
     let(:organization) { user.organization }
 
     let(:name) { "Marco" }
@@ -16,10 +16,10 @@ module Decidim::Kids
 
     let(:params) do
       {
-        name:,
-        email:,
-        birthday:,
-        tos_agreement:
+        name: name,
+        email: email,
+        birthday: birthday,
+        tos_agreement: tos_agreement
       }
     end
 

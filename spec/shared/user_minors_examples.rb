@@ -19,20 +19,20 @@ shared_examples "user minors enabled" do
   it_behaves_like "requires authorization"
 
   context "when tutor's verification is pending" do
-    let!(:authorization) { create(:authorization, :pending, user:, name: organization.tutors_authorization) }
+    let!(:authorization) { create(:authorization, :pending, user: user, name: organization.tutors_authorization) }
 
     it_behaves_like "requires authorization"
   end
 
   context "when tutor's verification is expired", with_authorization_workflows: ["dummy_authorization_handler"] do
     let(:tutors_authorization) { "dummy_authorization_handler" }
-    let!(:authorization) { create(:authorization, granted_at: 2.months.ago, user:, name: "dummy_authorization_handler") }
+    let!(:authorization) { create(:authorization, granted_at: 2.months.ago, user: user, name: "dummy_authorization_handler") }
 
     it_behaves_like "requires authorization"
   end
 
   context "when tutor's verification is granted" do
-    let!(:authorization) { create(:authorization, user:, name: organization.tutors_authorization) }
+    let!(:authorization) { create(:authorization, user: user, name: organization.tutors_authorization) }
 
     it "minors path can be accessed" do
       visit decidim_kids.user_minors_path
@@ -41,7 +41,7 @@ shared_examples "user minors enabled" do
     end
 
     context "when there is minors" do
-      let!(:minors) { create_list(:minor, 2, tutor: user, organization:) }
+      let!(:minors) { create_list(:minor, 2, tutor: user, organization: organization) }
 
       before do
         visit decidim_kids.user_minors_path
@@ -53,7 +53,7 @@ shared_examples "user minors enabled" do
     end
 
     context "and is another verification method" do
-      let!(:authorization) { create(:authorization, user:) }
+      let!(:authorization) { create(:authorization, user: user) }
 
       it_behaves_like "requires authorization"
     end

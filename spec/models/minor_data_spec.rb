@@ -6,7 +6,7 @@ module Decidim::Kids
   describe MinorData do
     subject { minor_data }
 
-    let(:minor_data) { build(:minor_data, user:) }
+    let(:minor_data) { build(:minor_data, user: user) }
     let(:user) { create(:minor) }
     let(:ae) { Decidim::AttributeEncryptor }
 

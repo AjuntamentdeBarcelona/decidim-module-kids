@@ -15,12 +15,12 @@ module Decidim::System
         available_locales: ["en"],
         default_locale: "en",
         users_registration_mode: "enabled",
-        enable_minors_participation:,
-        minimum_minor_age:,
-        maximum_minor_age:,
-        minors_authorization:,
-        tutors_authorization:,
-        maximum_minor_accounts:
+        enable_minors_participation: enable_minors_participation,
+        minimum_minor_age: minimum_minor_age,
+        maximum_minor_age: maximum_minor_age,
+        minors_authorization: minors_authorization,
+        tutors_authorization: tutors_authorization,
+        maximum_minor_accounts: maximum_minor_accounts
       )
     end
 

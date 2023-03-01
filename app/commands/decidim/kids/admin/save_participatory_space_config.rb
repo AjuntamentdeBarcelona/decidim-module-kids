@@ -22,7 +22,7 @@ module Decidim
         private
 
         def save_config
-          config = MinorsSpaceConfig.find_or_initialize_by(participatory_space:)
+          config = MinorsSpaceConfig.find_or_initialize_by(participatory_space: participatory_space)
           config.update!(
             access_type: form.access_type,
             authorization: form.authorization,

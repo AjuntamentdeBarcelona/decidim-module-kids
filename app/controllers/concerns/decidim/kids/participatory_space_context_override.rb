@@ -34,7 +34,7 @@ module Decidim
 
         if current_user
           # Allow admins and any other role with access to the admin dashboard
-          return if allowed_to?(:read, :admin_dashboard, current_participatory_space:)
+          return if allowed_to?(:read, :admin_dashboard, current_participatory_space: current_participatory_space)
           # Allow minors
           return if current_user.minor?
 

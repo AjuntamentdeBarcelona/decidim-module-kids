@@ -12,21 +12,21 @@ module Decidim
       let(:enable_minors_participation) { true }
       let!(:minors_organization_config) do
         create(:minors_organization_config,
-               organization:,
-               enable_minors_participation:)
+               organization: organization,
+               enable_minors_participation: enable_minors_participation)
       end
 
       let(:valid_password) { "password123456" }
       let(:invalid_password) { "password12345" }
 
-      let(:user) { create(:user, :confirmed, password: valid_password, organization:) }
-      let(:minor) { create(:minor, tutor: user, organization:, sign_in_count: 1) }
+      let(:user) { create(:user, :confirmed, password: valid_password, organization: organization) }
+      let(:minor) { create(:minor, tutor: user, organization: organization, sign_in_count: 1) }
 
       let(:params) do
         {
           user_minor_id: minor.id,
           impersonate_minor: {
-            password:
+            password: password
           }
         }
       end
@@ -45,7 +45,7 @@ module Decidim
 
             expect(Decidim::Kids::ImpersonationMinorLog.active.where(
               tutor: user,
-              minor:
+              minor: minor
             ).count).to eq(1)
 
             expect(flash[:notice]).to be_present
@@ -61,7 +61,7 @@ module Decidim
 
             expect(Decidim::Kids::ImpersonationMinorLog.active.where(
               tutor: user,
-              minor:
+              minor: minor
             ).count).to eq(0)
 
             expect(flash[:alert]).to be_present
@@ -71,7 +71,7 @@ module Decidim
       end
 
       context "when user closes the session" do
-        let!(:impersonation_minor_log) { create(:impersonation_minor_log, tutor: user, minor:) }
+        let!(:impersonation_minor_log) { create(:impersonation_minor_log, tutor: user, minor: minor) }
 
         it "successfully closes minor session" do
           post :close_session, params: {
@@ -80,7 +80,7 @@ module Decidim
 
           expect(Decidim::Kids::ImpersonationMinorLog.active.where(
             tutor: user,
-            minor:
+            minor: minor
           ).count).to eq(0)
 
           expect(flash[:notice]).to be_present

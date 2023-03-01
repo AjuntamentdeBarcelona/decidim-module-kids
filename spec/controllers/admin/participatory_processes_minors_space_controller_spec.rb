@@ -12,7 +12,7 @@ module Decidim::ParticipatoryProcesses::Admin
     let!(:participatory_process) do
       create(
         :participatory_process,
-        organization:
+        organization: organization
       )
     end
 

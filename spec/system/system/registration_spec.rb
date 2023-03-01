@@ -22,7 +22,7 @@ describe "Registration", type: :system do
   end
 
   context "when signing up in an organization with minors configuration" do
-    let!(:minors_organization_config) { create(:minors_organization_config, organization:) }
+    let!(:minors_organization_config) { create(:minors_organization_config, organization: organization) }
 
     before do
       visit decidim.new_user_registration_path

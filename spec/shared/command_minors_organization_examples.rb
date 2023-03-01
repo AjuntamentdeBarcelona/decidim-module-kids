@@ -139,8 +139,8 @@ shared_examples "creates minors configuration" do
   let(:minors_authorization) { "dummy_authorization_handler" }
   let(:tutors_authorization) { "postal_letter" }
   let(:organization) { Decidim::Organization.last }
-  let(:minors_page) { Decidim::StaticPage.where(organization:, slug: "minors") }
-  let(:minors_terms_page) { Decidim::StaticPage.where(organization:, slug: "minors-terms") }
+  let(:minors_page) { Decidim::StaticPage.where(organization: organization, slug: "minors") }
+  let(:minors_terms_page) { Decidim::StaticPage.where(organization: organization, slug: "minors-terms") }
 
   it "saves the enabled status" do
     command.call

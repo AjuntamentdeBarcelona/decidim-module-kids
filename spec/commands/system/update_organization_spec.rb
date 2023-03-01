@@ -18,12 +18,12 @@ module Decidim::System
           host: "decide.gotham.gov",
           users_registration_mode: "existing",
           file_upload_settings: Decidim::OrganizationSettings.default(:upload),
-          enable_minors_participation:,
-          minimum_minor_age:,
-          maximum_minor_age:,
-          minors_authorization:,
-          tutors_authorization:,
-          maximum_minor_accounts:
+          enable_minors_participation: enable_minors_participation,
+          minimum_minor_age: minimum_minor_age,
+          maximum_minor_age: maximum_minor_age,
+          minors_authorization: minors_authorization,
+          tutors_authorization: tutors_authorization,
+          maximum_minor_accounts: maximum_minor_accounts
         }
       end
       let(:enable_minors_participation) { true }
@@ -39,7 +39,7 @@ module Decidim::System
       context "when minors config already exists" do
         let!(:minors_organization_config) do
           create(:minors_organization_config,
-                 organization:,
+                 organization: organization,
                  enable_minors_participation: false,
                  minimum_minor_age: 10,
                  maximum_minor_age: 14,

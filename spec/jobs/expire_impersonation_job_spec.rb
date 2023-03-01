@@ -6,9 +6,9 @@ module Decidim
   module Kids
     describe ExpireImpersonationJob do
       let(:organization) { create :organization }
-      let(:user) { create(:user, :confirmed, organization:) }
-      let(:minor) { create(:minor, :managed, tutor: user, organization:) }
-      let!(:impersonation_log) { create(:impersonation_minor_log, tutor: user, minor:) }
+      let(:user) { create(:user, :confirmed, organization: organization) }
+      let(:minor) { create(:minor, :managed, tutor: user, organization: organization) }
+      let!(:impersonation_log) { create(:impersonation_minor_log, tutor: user, minor: minor) }
 
       it "marks the impersonation as expired" do
         ExpireImpersonationJob.perform_now(minor, user)

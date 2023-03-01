@@ -15,16 +15,16 @@ module Decidim::Kids
     let(:minors_authorization_name) { "dummy_authorization_handler" }
     let!(:minors_organization_config) do
       create(:minors_organization_config,
-             organization:,
-             enable_minors_participation:,
-             minimum_minor_age:,
-             maximum_minor_age:,
+             organization: organization,
+             enable_minors_participation: enable_minors_participation,
+             minimum_minor_age: minimum_minor_age,
+             maximum_minor_age: maximum_minor_age,
              tutors_authorization: tutors_authorization_name,
              minors_authorization: minors_authorization_name)
     end
-    let(:user) { create(:user, :confirmed, organization:) }
-    let(:minor) { create(:minor, tutor: user, organization:) }
-    let!(:tutor_authorization) { create(:authorization, user:, name: organization.tutors_authorization) }
+    let(:user) { create(:user, :confirmed, organization: organization) }
+    let(:minor) { create(:minor, tutor: user, organization: organization) }
+    let!(:tutor_authorization) { create(:authorization, user: user, name: organization.tutors_authorization) }
     let(:return_path) { "/decidim_kids#{user_minor_authorizations_path}" }
     let(:after_create_path) { "/decidim_kids#{new_user_minor_authorization_path(user_minor_id: Decidim::User.last.id)}" }
 
@@ -37,12 +37,12 @@ module Decidim::Kids
 
     let(:params) do
       {
-        name:,
-        email:,
-        birthday:,
-        password:,
-        password_confirmation:,
-        tos_agreement:
+        name: name,
+        email: email,
+        birthday: birthday,
+        password: password,
+        password_confirmation: password_confirmation,
+        tos_agreement: tos_agreement
       }
     end
 
@@ -92,7 +92,7 @@ module Decidim::Kids
       context "when the form is valid" do
         it "creates a minor" do
           expect do
-            post :create, params:
+            post :create, params: params
           end.to change(MinorAccount, :count).by(1)
 
           expect(flash[:notice]).to eq("Minor's account has been successfully created")
@@ -113,10 +113,10 @@ module Decidim::Kids
       let(:minor_params) do
         {
           name: "Katty",
-          email:,
-          birthday:,
-          password:,
-          password_confirmation:
+          email: email,
+          birthday: birthday,
+          password: password,
+          password_confirmation: password_confirmation
         }
       end
 

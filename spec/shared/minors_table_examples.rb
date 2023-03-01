@@ -36,7 +36,7 @@ shared_examples "minors table" do
 end
 
 shared_context "when minors verified" do
-  let(:minor) { create(:minor, tutor: user, organization:, sign_in_count:, name: "John") }
+  let(:minor) { create(:minor, tutor: user, organization: organization, sign_in_count: sign_in_count, name: "John") }
 
   before do
     click_link "Verify"

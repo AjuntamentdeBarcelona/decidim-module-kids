@@ -21,7 +21,7 @@ module Decidim::ParticipatoryProcesses
     let!(:participatory_process) do
       create(
         :participatory_process,
-        organization:
+        organization: organization
       )
     end
 

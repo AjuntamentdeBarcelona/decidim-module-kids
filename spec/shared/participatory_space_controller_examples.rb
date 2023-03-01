@@ -9,10 +9,10 @@ shared_context "when participating in a minor's participatory space" do
   let(:minors_authorization_name) { "dummy_authorization_handler" }
   let!(:minors_organization_config) do
     create(:minors_organization_config,
-           organization:,
-           enable_minors_participation:,
-           minimum_minor_age:,
-           maximum_minor_age:,
+           organization: organization,
+           enable_minors_participation: enable_minors_participation,
+           minimum_minor_age: minimum_minor_age,
+           maximum_minor_age: maximum_minor_age,
            tutors_authorization: tutors_authorization_name,
            minors_authorization: minors_authorization_name)
   end
@@ -20,14 +20,14 @@ shared_context "when participating in a minor's participatory space" do
   let(:max_age) { 0 }
   let(:authorization) { "dummy_age_authorization_handler" }
 
-  let!(:component) { create :proposal_component, participatory_space: }
-  let!(:space_config) { create :minors_space_config, access_type:, max_age:, authorization:, participatory_space: }
+  let!(:component) { create :proposal_component, participatory_space: participatory_space }
+  let!(:space_config) { create :minors_space_config, access_type: access_type, max_age: max_age, authorization: authorization, participatory_space: participatory_space }
 
-  let(:admin) { create(:user, :admin, :confirmed, organization:) }
-  let(:user) { create(:user, :confirmed, organization:) }
-  let(:minor) { create(:minor, :confirmed, organization:) }
-  let(:tutor) { create(:tutor, :confirmed, organization:) }
-  let(:valuator) { create(:user, :confirmed, organization:) }
+  let(:admin) { create(:user, :admin, :confirmed, organization: organization) }
+  let(:user) { create(:user, :confirmed, organization: organization) }
+  let(:minor) { create(:minor, :confirmed, organization: organization) }
+  let(:tutor) { create(:tutor, :confirmed, organization: organization) }
+  let(:valuator) { create(:user, :confirmed, organization: organization) }
 
   before do
     allow(Devise).to receive(:allow_unconfirmed_access_for).and_return(1.day)
@@ -192,9 +192,9 @@ shared_examples "access participatory space and components" do
     end
 
     context "and tutor does not have any minor confirmed" do
-      let!(:minor_account) { create(:minor_account, tutor:, minor:) }
-      let(:tutor) { create :user, :confirmed, organization: }
-      let(:minor) { create :user, organization: }
+      let!(:minor_account) { create(:minor_account, tutor: tutor, minor: minor) }
+      let(:tutor) { create :user, :confirmed, organization: organization }
+      let(:minor) { create :user, organization: organization }
 
       it_behaves_like "cannot GET", :index
       it_behaves_like "cannot POST", :index
@@ -204,7 +204,7 @@ shared_examples "access participatory space and components" do
 
   context "when the space has an authorization" do
     let(:birthday) { 18 }
-    let!(:user_authorization) { create(:authorization, user:, name: "dummy_age_authorization_handler", metadata: { birthday: }) }
+    let!(:user_authorization) { create(:authorization, user: user, name: "dummy_age_authorization_handler", metadata: { birthday: birthday }) }
 
     it_behaves_like "can GET", :index
     it_behaves_like "can POST", :index
