@@ -3,7 +3,7 @@
 [![[CI] Lint](https://github.com/AjuntamentdeBarcelona/decidim-module-kids/actions/workflows/lint.yml/badge.svg)](https://github.com/AjuntamentdeBarcelona/decidim-module-kids/actions/workflows/lint.yml)
 [![[CI] Test](https://github.com/AjuntamentdeBarcelona/decidim-module-kids/actions/workflows/test.yml/badge.svg)](https://github.com/AjuntamentdeBarcelona/decidim-module-kids/actions/workflows/test.yml)
 [![Maintainability](https://api.codeclimate.com/v1/badges/82ab16cdaa0aa5d61d48/maintainability)](https://codeclimate.com/github/AjuntamentdeBarcelona/decidim-module-kids/maintainability)
-[![codecov](https://codecov.io/gh/AjuntamentdeBarcelona/decidim-module-kids/branch/main/graph/badge.svg?token=X11YWWSMO4)](https://codecov.io/gh/AjuntamentdeBarcelona/decidim-module-kids)
+[![codecov](https://codecov.io/gh/AjuntamentdeBarcelona/decidim-module-kids/branch/main/graph/badge.svg?token=R3KYJIQJ6P)](https://codecov.io/gh/AjuntamentdeBarcelona/decidim-module-kids)
 [![Gem Version](https://badge.fury.io/rb/decidim-kids.svg)](https://badge.fury.io/rb/decidim-kids)
 
 Module developed by Barcelona City Council to promote kids participation.
