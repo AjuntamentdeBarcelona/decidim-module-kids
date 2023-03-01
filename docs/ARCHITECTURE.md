@@ -24,4 +24,6 @@
 
 ## Emancipation workflow
 
-...
+A minor account can be promoted to a normal user account by just removing the relationships existing in the `decidim_kids_minor_accounts` and `decidim_kids_minor_data`.
+
+See the README file for instructions on how to set up an automated script to do that automatically.
