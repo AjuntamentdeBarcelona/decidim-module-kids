@@ -8,11 +8,21 @@
 
 Module developed by Barcelona City Council to promote kids participation.
 
-> NOTE: in development, not ready for production.
+> **IMPORTANT**:
+>
+> This module relies on the use of verification handlers. Security and minor protection will be as good as how good is the verification method in checking that a user is really a parent of a minor (or a tutor).
+>
+> **Use it under your own responsibility, nor the Barcelona City Council, neither any of the developers involved take any responsibility due the misuse of this piece of software.**
 
 ## Installation
 
 Add this line to your application's Gemfile:
+
+```ruby
+gem 'decidim-kids'
+```
+
+ Or, if you want to stay to the latest version, specify the GIT repository:
 
 ```ruby
 gem 'decidim-kids', git: "https://github.com/AjuntamentdeBarcelona/decidim-module-kids"
@@ -28,7 +38,6 @@ bundle exec rails decidim_kids:install:migrations
 > NOTE: This module works better with an authorization methods capable of storing the user's birthday in the metadata.
 > To install a, dummy, authorization method that stores the birthday in the metadata, you can run:
 > `bundle exec rails decidim_kids:install:handlers`
-
 
 ## Usage
 
@@ -62,9 +71,39 @@ Decidim::Kids.configure do |config|
     3
   end
 
-  # Other, more advanced, configuration options are available. Check the source code at lib/decidim/kids.rb for more information.
+  # If true, the tutor can impersonate a minor
+  config_accessor :allow_impersonation do
+    true
+  end
+
+  # Default authorization metadata attributes where the minor's birthday is stored
+  # (if the authorization handler stores it)
+  # If this value is present: In addition to the normal verification process for the minor, the
+  #                           age of the minor returned by the validation will be enforced to be
+  #                           between the minimum_minor_age and maximum_minor_age values.
+  #                           Note that if the validation does not stores the birthday in one of these
+  #                           attributes, the validation will always fail.
+  # If this value is blank: No age checks will be performed (but the validation process might do it independently)
+  config_accessor :minor_authorization_age_attributes do
+    [:birthday, :date_of_birth, :birth_date, :birthdate]
+  end
+  
+  # Other, more advanced, configuration options are available.
+  # Check the source code at lib/decidim/kids.rb for more information.
 end
 ```
+
+## Promoting minor accounts to normal accounts
+
+A minor account must be promoted in order to be converted into a normal, full-featured account. This must be performed externally by running a command.
+
+There is a rake task that can be incorporated in daily cron to do just that automatically:
+
+```
+bundle exec rake kids:promote_minor_accounts 
+```
+
+We recommend to incorporate this along with the other cron commands required for Decidim. 
 
 ## Using authorizations
 
@@ -78,11 +117,31 @@ There are two ways that authorization are used:
 
 > NOTE: it is possible to define the name of the form fields that will be used to store the birthday of the user in the authorization's metadata. Check the source code at `lib/decidim/kids.rb` for more information.
 
+## Screenshots
+
+This plugin is configurable per-tenant in `/system`:
+![System configuration](docs/system_minors.png)
+
+Users have a zone to manage their minors:
+![User config zone](docs/user_config.png)
+
+A minor needs to be verified to ensure the user is really the corresponding tutor:
+![Minor's verification](docs/minor_verification.png)
+
+A participatory space can be restricted to minors and an extra verification method that stores the age of the person (so you can define participatory spaces with mixed minors and adolescents that can participate together without any other external participants).
+![Participatory space minor's configuration](docs/ps_minors.png)
+
+A minor can be impersonated by the tutor:
+![Impersonation form](docs/impersonation_1.png)
+![Impersonation navigation](docs/impersonation_2.png)
+
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/AjuntamentdeBarcelona/decidim-module-kids.
 
 ### Developing
+
+Please see the extra notes on the design of this plugin at the [ARCHITECTURE](docs/ARCHITECTURE.md) document.
 
 To start contributing to this project, first:
 

@@ -40,8 +40,6 @@ module Decidim
       true
     end
 
-    ######## End of system configurations ########
-
     # Default authorization metadata attributes where the minor's birthday is stored
     # (if the authorization handler stores it)
     # If this value is present: In addition to the normal verification process for the minor, the
@@ -53,6 +51,8 @@ module Decidim
     config_accessor :minor_authorization_age_attributes do
       [:birthday, :date_of_birth, :birth_date, :birthdate]
     end
+    
+    ######## End of system configurations ########
 
     # Participatory spaces that can be restricted to minors
     # This will add a menu item on the admin participatory space and will enable administrators to configure it

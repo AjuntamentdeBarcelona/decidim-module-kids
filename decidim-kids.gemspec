@@ -20,7 +20,7 @@ Gem::Specification.new do |s|
   s.summary = "A decidim for kids module"
   s.description = "A module for promoting kids participation in Decidim."
 
-  s.files = Dir["{app,config,lib}/**/*", "LICENSE-AGPLv3.txt", "Rakefile", "README.md"]
+  s.files = Dir["{app,config,lib,db}/**/*", "LICENSE-AGPLv3.txt", "Rakefile", "README.md", "package.json", "package-lock.json"]
 
   s.add_dependency "decidim-core", Decidim::Kids::COMPAT_DECIDIM_VERSION
   s.add_dependency "decidim-system", Decidim::Kids::COMPAT_DECIDIM_VERSION

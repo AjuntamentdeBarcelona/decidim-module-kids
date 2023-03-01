@@ -24,4 +24,10 @@
 
 ## Emancipation workflow
 
-...
+A minor account can be promoted to a normal user account by just removing the relationships existing in the `decidim_kids_minor_accounts` and `decidim_kids_minor_data`.
+
+There is a rake task that can be incorporated in daily cron for instance to do just that automatically:
+
+```
+bundle exec rake kids:promote_minor_accounts 
+```
