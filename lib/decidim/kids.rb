@@ -51,7 +51,7 @@ module Decidim
     config_accessor :minor_authorization_age_attributes do
       [:birthday, :date_of_birth, :birth_date, :birthdate]
     end
-    
+
     ######## End of system configurations ########
 
     # Participatory spaces that can be restricted to minors
