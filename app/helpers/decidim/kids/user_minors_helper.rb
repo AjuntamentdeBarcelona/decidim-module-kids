@@ -3,6 +3,8 @@
 module Decidim
   module Kids
     module UserMinorsHelper
+      include Decidim::Admin::IconLinkHelper
+
       def button_to_add_minor_account
         if can_add_minor_account?
           link_to(

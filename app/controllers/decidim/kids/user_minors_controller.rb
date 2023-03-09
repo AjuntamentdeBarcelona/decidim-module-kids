@@ -6,6 +6,8 @@ module Decidim
       include Decidim::UserProfile
       include NeedsTutorAuthorization
 
+      helper UserMinorsHelper
+
       helper_method :minor_user, :minor_account_form, :minor_authorized?
 
       def index; end
