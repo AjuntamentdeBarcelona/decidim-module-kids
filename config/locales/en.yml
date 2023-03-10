@@ -41,6 +41,7 @@ en:
           minors_title: Minors Participation
     kids:
       actions:
+        missing: In order to perform this action, you need to be authorized with "%{authorization}"
         unauthorized: You cannot access this space because you do not meet the requirements
       admin:
         minors_space:

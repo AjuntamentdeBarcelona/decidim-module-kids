@@ -38,6 +38,7 @@ ca:
           minors_title: Participació de menors
     kids:
       actions:
+        missing: Per dur a terme aquesta acció, has de disposar de l'autorització "%{authorization}"
         unauthorized: No pots accedir a aquest espai perquè no compleixes amb els requisits
       admin:
         minors_space:
