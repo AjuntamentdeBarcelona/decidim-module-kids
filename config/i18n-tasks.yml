@@ -8,3 +8,4 @@ ignore_unused:
 
 ignore_missing:
   - decidim.verifications.authorizations.*
+  - devise.*
