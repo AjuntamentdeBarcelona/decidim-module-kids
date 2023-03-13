@@ -36,11 +36,11 @@ shared_context "when participating in a minor's participatory space" do
   end
 end
 
-shared_examples "cannot GET" do |action|
+shared_examples "cannot GET" do |action, flash_text|
   it "redirects to the participatory space admin" do
     get action, params: params
 
-    expect(flash[:alert]).to include("You cannot access this space because you do not meet the requirements")
+    expect(flash[:alert]).to include(flash_text)
     expect(response).to redirect_to(Decidim::Core::Engine.routes.url_helpers.root_path)
   end
 end
@@ -54,32 +54,32 @@ shared_examples "can GET" do |action|
   end
 end
 
-shared_examples "cannot POST" do |action|
+shared_examples "cannot POST" do |action, flash_text|
   it "redirects on post" do
     post action, params: params
 
-    expect(flash[:alert]).to include("You cannot access this space because you do not meet the requirements")
+    expect(flash[:alert]).to include(flash_text)
     expect(response).to redirect_to(Decidim::Core::Engine.routes.url_helpers.root_path)
   end
 
   it "redirects on put" do
     put action, params: params
 
-    expect(flash[:alert]).to include("You cannot access this space because you do not meet the requirements")
+    expect(flash[:alert]).to include(flash_text)
     expect(response).to redirect_to(Decidim::Core::Engine.routes.url_helpers.root_path)
   end
 
   it "redirects on patch" do
     patch action, params: params
 
-    expect(flash[:alert]).to include("You cannot access this space because you do not meet the requirements")
+    expect(flash[:alert]).to include(flash_text)
     expect(response).to redirect_to(Decidim::Core::Engine.routes.url_helpers.root_path)
   end
 
   it "redirects on delete" do
     delete action, params: params
 
-    expect(flash[:alert]).to include("You cannot access this space because you do not meet the requirements")
+    expect(flash[:alert]).to include(flash_text)
     expect(response).to redirect_to(Decidim::Core::Engine.routes.url_helpers.root_path)
   end
 end
@@ -93,7 +93,7 @@ shared_examples "can POST" do |action|
   end
 end
 
-shared_examples "cannot GET to a component" do
+shared_examples "cannot GET to a component" do |flash_text|
   describe ::Decidim::Proposals::ProposalsController, type: :controller do
     routes { Decidim::Proposals::Engine.routes }
     before do
@@ -104,7 +104,7 @@ shared_examples "cannot GET to a component" do
     it "redirects to the participatory space admin" do
       get :index
 
-      expect(flash[:alert]).to include("You cannot access this space because you do not meet the requirements")
+      expect(flash[:alert]).to include(flash_text)
       expect(response).to redirect_to(Decidim::Core::Engine.routes.url_helpers.root_path)
     end
   end
@@ -128,9 +128,9 @@ shared_examples "can GET to a component" do
 end
 
 shared_examples "access participatory space and components" do
-  it_behaves_like "cannot GET", :index
-  it_behaves_like "cannot POST", :index
-  it_behaves_like "cannot GET to a component"
+  it_behaves_like "cannot GET", :index, I18n.t("decidim.kids.actions.missing", authorization: I18n.t("decidim.authorization_handlers.dummy_age_authorization_handler.name"))
+  it_behaves_like "cannot POST", :index, I18n.t("decidim.kids.actions.missing", authorization: I18n.t("decidim.authorization_handlers.dummy_age_authorization_handler.name"))
+  it_behaves_like "cannot GET to a component", I18n.t("decidim.kids.actions.missing", authorization: I18n.t("decidim.authorization_handlers.dummy_age_authorization_handler.name"))
 
   context "when config is for all" do
     let(:access_type) { "all" }
@@ -178,7 +178,7 @@ shared_examples "access participatory space and components" do
     let(:user) { tutor }
 
     it_behaves_like "can GET", :index
-    it_behaves_like "cannot POST", :index
+    it_behaves_like "cannot POST", :index, I18n.t("decidim.kids.actions.missing", authorization: I18n.t("decidim.authorization_handlers.dummy_age_authorization_handler.name"))
     it_behaves_like "can GET to a component"
 
     context "and tutor is not confirmed" do
@@ -186,9 +186,9 @@ shared_examples "access participatory space and components" do
         tutor.update(confirmed_at: nil)
       end
 
-      it_behaves_like "cannot GET", :index
-      it_behaves_like "cannot POST", :index
-      it_behaves_like "cannot GET to a component"
+      it_behaves_like "cannot GET", :index, I18n.t("decidim.kids.actions.missing", authorization: I18n.t("decidim.authorization_handlers.dummy_age_authorization_handler.name"))
+      it_behaves_like "cannot POST", :index, I18n.t("decidim.kids.actions.missing", authorization: I18n.t("decidim.authorization_handlers.dummy_age_authorization_handler.name"))
+      it_behaves_like "cannot GET to a component", I18n.t("decidim.kids.actions.missing", authorization: I18n.t("decidim.authorization_handlers.dummy_age_authorization_handler.name"))
     end
 
     context "and tutor does not have any minor confirmed" do
@@ -196,9 +196,9 @@ shared_examples "access participatory space and components" do
       let(:tutor) { create :user, :confirmed, organization: organization }
       let(:minor) { create :user, organization: organization }
 
-      it_behaves_like "cannot GET", :index
-      it_behaves_like "cannot POST", :index
-      it_behaves_like "cannot GET to a component"
+      it_behaves_like "cannot GET", :index, I18n.t("decidim.kids.actions.missing", authorization: I18n.t("decidim.authorization_handlers.dummy_age_authorization_handler.name"))
+      it_behaves_like "cannot POST", :index, I18n.t("decidim.kids.actions.missing", authorization: I18n.t("decidim.authorization_handlers.dummy_age_authorization_handler.name"))
+      it_behaves_like "cannot GET to a component", I18n.t("decidim.kids.actions.missing", authorization: I18n.t("decidim.authorization_handlers.dummy_age_authorization_handler.name"))
     end
   end
 
@@ -213,9 +213,9 @@ shared_examples "access participatory space and components" do
     context "and age is required" do
       let(:max_age) { 16 }
 
-      it_behaves_like "cannot GET", :index
-      it_behaves_like "cannot POST", :index
-      it_behaves_like "cannot GET to a component"
+      it_behaves_like "cannot GET", :index, I18n.t("decidim.kids.actions.unauthorized")
+      it_behaves_like "cannot POST", :index, I18n.t("decidim.kids.actions.unauthorized")
+      it_behaves_like "cannot GET to a component", I18n.t("decidim.kids.actions.unauthorized")
 
       context "and the user has the age" do
         let(:birthday) { 15.years.ago }
@@ -227,9 +227,9 @@ shared_examples "access participatory space and components" do
         context "and another authorization is required" do
           let(:authorization) { "dummy_authorization_handler" }
 
-          it_behaves_like "cannot GET", :index
-          it_behaves_like "cannot POST", :index
-          it_behaves_like "cannot GET to a component"
+          it_behaves_like "cannot GET", :index, I18n.t("decidim.kids.actions.missing", authorization: I18n.t("decidim.authorization_handlers.dummy_authorization_handler.name"))
+          it_behaves_like "cannot POST", :index, I18n.t("decidim.kids.actions.missing", authorization: I18n.t("decidim.authorization_handlers.dummy_authorization_handler.name"))
+          it_behaves_like "cannot GET to a component", I18n.t("decidim.kids.actions.missing", authorization: I18n.t("decidim.authorization_handlers.dummy_authorization_handler.name"))
         end
       end
     end
