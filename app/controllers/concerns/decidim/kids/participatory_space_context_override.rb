@@ -14,7 +14,15 @@ module Decidim
         rescue_from Decidim::Kids::ActionForbidden, with: :no_minor_user_has_no_permission
 
         def no_minor_user_has_no_permission
-          flash[:alert] = t("actions.unauthorized", scope: "decidim.kids")
+          flash[:alert] = if !current_user
+                            t("devise.failure.unauthenticated")
+                          elsif space_authorization
+                            t("actions.unauthorized", scope: "decidim.kids")
+                          else
+                            t("actions.missing", scope: "decidim.kids",
+                                                 authorization: t("#{space_minors_config.authorization}.name",
+                                                                  scope: "decidim.authorization_handlers")).html_safe
+                          end
           redirect_to(user_has_no_permission_referer || user_has_no_permission_path)
         end
 

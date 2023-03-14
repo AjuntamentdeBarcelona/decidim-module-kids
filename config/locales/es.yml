@@ -38,6 +38,7 @@ es:
           minors_title: Participación de menores
     kids:
       actions:
+        missing: Para llevar a cabo esta acción, tienes que disponer de la autorización "%{authorization}"
         unauthorized: No puede acceder a este espacio porque no cumple los requisitos
       admin:
         minors_space:
