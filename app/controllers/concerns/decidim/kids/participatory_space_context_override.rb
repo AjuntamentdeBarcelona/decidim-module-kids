@@ -20,19 +20,21 @@ module Decidim
                             t("actions.unauthorized", scope: "decidim.kids")
                           else
                             t("actions.missing", scope: "decidim.kids",
-                                                 authorization: t("#{space_minors_config.authorization}.name",
+                                                 authorization: t("#{space_minors_config.try(:authorization)}.name",
                                                                   scope: "decidim.authorization_handlers")).html_safe
                           end
           redirect_to(user_has_no_permission_referer || user_has_no_permission_path)
         end
 
         before_action do
-          enforce_space_for_minors! if space_minors_config.access_type == "minors"
+          enforce_space_for_minors! if space_minors_config.try(:access_type) == "minors"
         end
       end
 
       def space_minors_config
         @space_minors_config ||= MinorsSpaceConfig.for(current_participatory_space)
+      rescue ActiveRecord::RecordNotFound
+        nil
       end
 
       private
@@ -83,7 +85,7 @@ module Decidim
       end
 
       def space_authorization
-        @space_authorization ||= current_user_authorizations.find_by(name: space_minors_config.authorization)
+        @space_authorization ||= current_user_authorizations.find_by(name: space_minors_config.try(:authorization))
       end
 
       def current_user_authorizations
