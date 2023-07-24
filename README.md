@@ -8,6 +8,12 @@
 
 Module developed by Barcelona City Council to promote kids participation.
 
+As an adult with an account in Decidim, you can create multiple accounts for minors. When you create an account for a minor, you become the tutor of this minor. You can impersonate your minor accounts and see their private activity as a tutor.
+
+A minor has limitations as they cannot conversate with adults and vice versa.
+
+Once a minor becomes an adult, the minor account is promoted and becomes a regular account that can tutorize other minor accounts.
+
 > **IMPORTANT**:
 >
 > This module relies on the use of verification handlers. Security and minor protection will be as good as how good is the verification method in checking that a user is really a parent of a minor (or a tutor).
