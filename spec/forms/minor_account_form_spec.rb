@@ -6,8 +6,8 @@ module Decidim::Kids
   describe MinorAccountForm do
     subject { form }
 
+    let(:organization) { create :organization }
     let(:user) { create(:user, :confirmed, organization: organization) }
-    let(:organization) { user.organization }
 
     let(:name) { "Marco" }
     let(:email) { "marco@example.org" }
@@ -24,7 +24,7 @@ module Decidim::Kids
     end
 
     let(:form) do
-      described_class.from_params(params)
+      described_class.from_params(params).with_context(current_organization: organization)
     end
 
     context "when everything is OK" do
