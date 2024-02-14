@@ -5,10 +5,13 @@ require "spec_helper"
 module Decidim::Kids
   describe CreateMinorAccount do
     describe "call" do
-      let!(:current_user) { create(:user, :confirmed) }
+      let(:organization) { create :organization }
+      let!(:current_user) { create(:user, :confirmed, organization: organization) }
 
       let!(:form) do
-        Decidim::Kids::MinorAccountForm.from_params(form_params)
+        MinorAccountForm.from_params(form_params).with_context(
+          current_organization: organization
+        )
       end
 
       let!(:command) { described_class.new(form, current_user) }
@@ -17,7 +20,7 @@ module Decidim::Kids
         {
           name: "Mike",
           email: "test@example.com",
-          birthday: "01/11/2009",
+          birthday: "01/11/#{Time.zone.today.year - 12}",
           tos_agreement: true
         }
       end

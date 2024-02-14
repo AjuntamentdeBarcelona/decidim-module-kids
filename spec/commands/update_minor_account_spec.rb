@@ -16,6 +16,8 @@ module Decidim::Kids
         email: email,
         birthday: birthday,
         tos_agreement: tos_agreement
+      ).with_context(
+        current_organization: organization
       )
     end
 
