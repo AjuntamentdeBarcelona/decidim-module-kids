@@ -22,8 +22,8 @@ module Decidim
       private
 
       def valid_minor_age
-        min_minor_age = Decidim::Kids.minimum_minor_age
-        maximum_minor_age = Decidim::Kids.maximum_minor_age
+        min_minor_age = current_organization.minimum_minor_age
+        maximum_minor_age = current_organization.maximum_minor_age
 
         if birthday.present?
           minor_age = age_from_birthday(birthday)
