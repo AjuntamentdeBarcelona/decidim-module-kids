@@ -5,7 +5,7 @@ require "spec_helper"
 module Decidim
   describe Organization do
     subject { organization }
-    let(:organization) { create :organization }
+    let(:organization) { create(:organization) }
 
     let(:default_minors_participation) { false }
     let(:enable_minors_participation) { false }
@@ -15,9 +15,7 @@ module Decidim
     let(:maximum_minor_age) { 14 }
 
     before do
-      allow(Decidim::Kids).to receive(:enable_minors_participation).and_return(default_minors_participation)
-      allow(Decidim::Kids).to receive(:minimum_minor_age).and_return(default_minimum_minor_age)
-      allow(Decidim::Kids).to receive(:maximum_minor_age).and_return(default_maximum_minor_age)
+      allow(Decidim::Kids).to receive_messages(enable_minors_participation: default_minors_participation, minimum_minor_age: default_minimum_minor_age, maximum_minor_age: default_maximum_minor_age)
     end
 
     shared_examples "minors disabled" do |min, max|
@@ -66,11 +64,11 @@ module Decidim
       let(:minimum_minor_age) { 12 }
       let(:maximum_minor_age) { 16 }
       let!(:config) do
-        create :minors_organization_config,
-               organization: organization,
-               enable_minors_participation: enable_minors_participation,
-               minimum_minor_age: minimum_minor_age,
-               maximum_minor_age: maximum_minor_age
+        create(:minors_organization_config,
+               organization:,
+               enable_minors_participation:,
+               minimum_minor_age:,
+               maximum_minor_age:)
       end
 
       it { is_expected.to be_valid }

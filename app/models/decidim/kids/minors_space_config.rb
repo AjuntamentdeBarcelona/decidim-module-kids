@@ -11,13 +11,13 @@ module Decidim
       validate :one_config_per_participatory_space
 
       def self.for(participatory_space)
-        find_or_initialize_by(participatory_space: participatory_space)
+        find_or_initialize_by(participatory_space:)
       end
 
       private
 
       def one_config_per_participatory_space
-        return unless self.class.where.not(id: id).exists?(participatory_space: participatory_space)
+        return unless self.class.where.not(id:).exists?(participatory_space:)
 
         errors.add(:participatory_space, :invalid)
       end

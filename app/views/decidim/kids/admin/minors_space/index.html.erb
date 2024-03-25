@@ -1,18 +1,26 @@
 <div class="card" id="minors_space">
-  <div class="card-divider">
-    <h2 class='card-title'>
+  <div class="item_show__header">
+    <h2 class="item_show__header-title">
       <%= t("minors_space.index.title", scope: "decidim.kids.admin") %>
     </h2>
   </div>
 
-  <div class="card-section">
-    <p><%= t("minors_space.index.description_html", scope: "decidim.kids.admin") %></p>
-
-    <%= decidim_form_for(@form, url: minors_space_index_path, method: :post, html: { class: "form" }) do |form| %>
-      <%= render partial: "form", locals: { form: form } %>
-      <div class="button--double form-general-submit">
-        <%= form.submit t("minors_space.index.save", scope: "decidim.kids.admin"), class: "button", data: { disable: true } %>
-      </div>
-    <% end %>
+  <div class="editor-content" style="font-size: 16px">
+    <%= t("minors_space.index.description_html", scope: "decidim.kids.admin") %>
   </div>
+
+  <%= decidim_form_for(@form, url: minors_space_index_path, method: :post, html: { class: "form form-defaults" }) do |form| %>
+    <div class="form__wrapper">
+      <div class="card pt-4">
+        <div class="card-section">
+          <%= render partial: "form", locals: { form: form } %>
+        </div>
+      </div>
+    </div>
+    <div class="item__edit-sticky">
+      <div class="item__edit-sticky-container">
+        <%= form.submit t("minors_space.index.save", scope: "decidim.kids.admin"), class: "button button__sm button__secondary", data: { disable: true } %>
+      </div>
+    </div>
+  <% end %>
 </div>

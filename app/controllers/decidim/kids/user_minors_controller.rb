@@ -22,6 +22,12 @@ module Decidim
         @form = form(Decidim::Kids::MinorAccountForm).instance
       end
 
+      def edit
+        enforce_permission_to(:edit, :minor_accounts, minor_user:)
+
+        @form = minor_account_form
+      end
+
       def create
         enforce_permission_to :create, :minor_accounts
 
@@ -40,14 +46,8 @@ module Decidim
         end
       end
 
-      def edit
-        enforce_permission_to :edit, :minor_accounts, minor_user: minor_user
-
-        @form = minor_account_form
-      end
-
       def update
-        enforce_permission_to :edit, :minor_accounts, minor_user: minor_user
+        enforce_permission_to(:edit, :minor_accounts, minor_user:)
 
         @form = form(Decidim::Kids::MinorAccountForm).from_params(params)
 
@@ -65,11 +65,13 @@ module Decidim
       end
 
       def destroy
-        enforce_permission_to :delete, :minor_accounts, minor_user: minor_user
+        enforce_permission_to(:delete, :minor_accounts, minor_user:)
 
         DestroyMinorAccount.call(minor_user, minor_account) do
           on(:ok) do
+            # rubocop:disable Rails/ActionControllerFlashBeforeRender
             flash[:notice] = I18n.t("user_minors.destroy.success", scope: "decidim.kids")
+            # rubocop:enable Rails/ActionControllerFlashBeforeRender
           end
         end
 
@@ -79,7 +81,9 @@ module Decidim
       def resend_invitation_to_minor
         Decidim::InviteUserAgain.call(minor_user, "invite_minor") do
           on(:ok) do
+            # rubocop:disable Rails/ActionControllerFlashBeforeRender
             flash[:notice] = I18n.t("user_minors.resend.success", scope: "decidim.kids")
+            # rubocop:enable Rails/ActionControllerFlashBeforeRender
           end
         end
 

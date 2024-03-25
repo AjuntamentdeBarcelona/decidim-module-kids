@@ -8,8 +8,7 @@ module Decidim
       include AgeMethods
 
       included do
-        class ::Decidim::Kids::ActionForbidden < ::Decidim::ActionForbidden
-        end
+        class ::Decidim::Kids::ActionForbidden < ::Decidim::ActionForbidden; end
 
         rescue_from Decidim::Kids::ActionForbidden, with: :no_minor_user_has_no_permission
 
@@ -44,7 +43,7 @@ module Decidim
 
         if current_user
           # Allow admins and any other role with access to the admin dashboard
-          return if allowed_to?(:read, :admin_dashboard, current_participatory_space: current_participatory_space)
+          return if allowed_to?(:read, :admin_dashboard, current_participatory_space:)
           # Allow minors
           return if current_user.minor?
 

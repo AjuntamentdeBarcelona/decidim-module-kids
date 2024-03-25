@@ -20,16 +20,16 @@ end
 
 shared_examples "doesn't display authorization" do
   it "doesn't display authorization link" do
-    expect(page).not_to have_content("Authorizations")
+    expect(page).to have_no_content("Authorizations")
   end
 end
 
 shared_context "when conversing to the user" do
   before do
-    page.find("#start-conversation-dialog-button").click
-    page.find("#add_conversation_users").set(person.name)
-    page.find("#autoComplete_result_0").click
-    click_button("Next")
+    page.find_by_id("start-conversation-dialog-button").click
+    page.find_by_id("add_conversation_users").set(person.name)
+    page.find_by_id("autoComplete_result_0").click
+    click_on "Next"
   end
 end
 

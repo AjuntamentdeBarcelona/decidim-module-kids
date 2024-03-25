@@ -14,14 +14,14 @@ def allowed_roles
 end
 
 module Decidim::ParticipatoryProcesses
-  describe ParticipatoryProcessesController, type: :controller do
+  describe ParticipatoryProcessesController do
     routes { Decidim::ParticipatoryProcesses::Engine.routes }
 
     let(:participatory_space) { participatory_process }
     let!(:participatory_process) do
       create(
         :participatory_process,
-        organization: organization
+        organization:
       )
     end
 

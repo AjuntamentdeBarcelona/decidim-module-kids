@@ -3,14 +3,14 @@
 require "spec_helper"
 require "shared/system_permissions_examples"
 
-describe "Enable minors participation permissions", type: :system do
+describe "Enable minors participation permissions" do
   let(:organization) { create(:organization, available_authorizations: %w(dummy_authorization_handler)) }
-  let(:user) { create(:user, :admin, :confirmed, organization: organization) }
-  let(:other_user) { create(:user, :admin, :confirmed, organization: organization) }
-  let(:minor) { create(:minor, tutor: user, organization: organization) }
-  let(:other_minor) { create(:minor, tutor: user, organization: organization) }
+  let(:user) { create(:user, :admin, :confirmed, organization:) }
+  let(:other_user) { create(:user, :admin, :confirmed, organization:) }
+  let(:minor) { create(:minor, tutor: user, organization:) }
+  let(:other_minor) { create(:minor, tutor: user, organization:) }
   let(:enable_minors_participation) { false }
-  let!(:minors_organization_config) { create(:minors_organization_config, organization: organization, enable_minors_participation: enable_minors_participation) }
+  let!(:minors_organization_config) { create(:minors_organization_config, organization:, enable_minors_participation:) }
 
   before do
     minor.confirm

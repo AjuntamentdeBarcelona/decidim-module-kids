@@ -5,10 +5,10 @@ require "spec_helper"
 module Decidim
   describe User do
     subject { user }
-    let(:user) { create :user }
-    let(:minor) { create :minor, minor_data: minor_data }
-    let(:tutor) { create :tutor }
-    let(:minor_data) { create :minor_data, birthday: birthday }
+    let(:user) { create(:user) }
+    let(:minor) { create(:minor, minor_data:) }
+    let(:tutor) { create(:tutor) }
+    let(:minor_data) { create(:minor_data, birthday:) }
     let(:birthday) { 12.years.ago }
 
     it { is_expected.not_to be_minor }

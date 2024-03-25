@@ -5,16 +5,16 @@ shared_examples "updates organization" do |uncheck_minors|
     fill_in "Name", with: "Citizens Rule!"
     fill_in "Host", with: "www.example.org"
     fill_in "Secondary hosts", with: "foobar.example.org\n\rbar.example.org"
-    choose "Don't allow participants to register, but allow existing participants to login"
+    choose "Do not allow participants to register, but allow existing participants to login"
     check "Example authorization (Direct)"
 
-    click_button "Show advanced settings"
+    click_on "Show advanced settings"
 
     if uncheck_minors
       expect(page).to have_checked_field "organization_enable_minors_participation"
       uncheck "organization_enable_minors_participation"
     else
-      expect(page).not_to have_checked_field "organization_enable_minors_participation"
+      expect(page).to have_no_checked_field "organization_enable_minors_participation"
       check "organization_enable_minors_participation"
     end
     fill_in "Minimum age allowed to create a minor account", with: "11"
@@ -23,7 +23,7 @@ shared_examples "updates organization" do |uncheck_minors|
 
     select "Another example authorization (Direct)", from: "organization_minors_authorization"
 
-    click_button "Save"
+    click_on "Save"
 
     expect(page).to have_css("div.flash.success")
     expect(page).to have_content("Citizens Rule!")
@@ -55,7 +55,7 @@ shared_examples "creates organization" do
     choose "Allow participants to register and login"
     check "Example authorization (Direct)"
 
-    click_button "Show advanced settings"
+    click_on "Show advanced settings"
 
     check "organization_enable_minors_participation"
     fill_in "Minimum age allowed to create a minor account", with: "11"
@@ -64,7 +64,7 @@ shared_examples "creates organization" do
 
     select "Another example authorization (Direct)", from: "organization_minors_authorization"
 
-    click_button "Create organization & invite admin"
+    click_on "Create organization & invite admin"
 
     expect(page).to have_css("div.flash.success")
     expect(page).to have_content("Citizen Corp")

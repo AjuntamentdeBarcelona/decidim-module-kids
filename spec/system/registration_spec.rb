@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-describe "Registration", type: :system do
+describe "Registration" do
   let(:organization) { create(:organization) }
 
   before do
@@ -16,13 +16,13 @@ describe "Registration", type: :system do
 
     describe "on first sight" do
       it "shows minors url" do
-        expect(page).not_to have_content("Are you under")
+        expect(page).to have_no_content("Are you under")
       end
     end
   end
 
   context "when signing up in an organization with minors configuration" do
-    let!(:minors_organization_config) { create(:minors_organization_config, organization: organization) }
+    let!(:minors_organization_config) { create(:minors_organization_config, organization:) }
 
     before do
       visit decidim.new_user_registration_path

@@ -58,7 +58,7 @@ module Decidim::Kids
         let(:started_at) { 1.hour.ago }
 
         let(:impersonation_minor_log) do
-          build(:impersonation_minor_log, started_at: started_at)
+          build(:impersonation_minor_log, started_at:)
         end
 
         it { is_expected.to be_truthy }
@@ -68,7 +68,7 @@ module Decidim::Kids
         let(:started_at) { 2.minutes.ago }
 
         let(:impersonation_minor_log) do
-          build(:impersonation_minor_log, started_at: started_at)
+          build(:impersonation_minor_log, started_at:)
         end
 
         it { is_expected.to be_nil }
@@ -82,7 +82,7 @@ module Decidim::Kids
         let(:started_at) { 2.hours.ago }
 
         let(:impersonation_minor_log) do
-          build(:impersonation_minor_log, started_at: started_at)
+          build(:impersonation_minor_log, started_at:)
         end
 
         it { is_expected.to be_truthy }

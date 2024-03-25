@@ -1,0 +1,11 @@
+FactoryBot/FactoryAssociationWithStrategy:
+  Exclude:
+    - "lib/decidim/kids/test/factories.rb"
+
+RSpec/IndexedLet:
+  Exclude:
+    - "spec/lib/tasks/kids_spec.rb"
+
+RSpec/NoExpectationExample:
+  Exclude:
+    - "spec/controllers/user_minors_controller_spec.rb"

@@ -1,10 +1,12 @@
-<% add_decidim_page_title(t("menu", scope: "decidim.kids.user")) %>
-<% content_for(:subtitle) { t("menu", scope: "decidim.kids.user") } %>
+<%= render layout: "layouts/decidim/shared/layout_user_profile" do %>
+  <% add_decidim_page_title(t("menu", scope: "decidim.kids.user")) %>
+  <% content_for(:subtitle) { t("menu", scope: "decidim.kids.user") } %>
 
-<div class="callout warning"><%= t ".needs_to_be_verified", method: tutor_adapter.description %></div>
+  <div class="callout warning"><%= t("needs_to_be_verified", method: tutor_adapter.description, scope: "decidim.kids.user_minors.unverified") %></div>
 
-<div class="row">
-  <div class="column end">
-    <%= link_to t(".authorize"), tutor_adapter.root_path(redirect_url: decidim_kids.user_minors_path), class: "button" %>
+  <div class="row">
+    <div class="column end">
+      <%= link_to t("authorize", scope: "decidim.kids.user_minors.unverified"), tutor_adapter.root_path(redirect_url: decidim_kids.user_minors_path), class: "button button__lg button__secondary" %>
+    </div>
   </div>
-</div>
+<% end %>

@@ -4,7 +4,7 @@ require "spec_helper"
 require "shared/admin_controller_examples"
 
 module Decidim::ParticipatoryProcesses::Admin
-  describe MinorsSpaceController, type: :controller do
+  describe MinorsSpaceController do
     routes { Decidim::ParticipatoryProcesses::AdminEngine.routes }
 
     include_context "when admin managing a participatory space"
@@ -12,7 +12,7 @@ module Decidim::ParticipatoryProcesses::Admin
     let!(:participatory_process) do
       create(
         :participatory_process,
-        organization: organization
+        organization:
       )
     end
 

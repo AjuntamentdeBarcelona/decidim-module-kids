@@ -15,9 +15,8 @@ DECIDIM_VERSION = Decidim::Kids::DECIDIM_VERSION
 gem "decidim", DECIDIM_VERSION
 gem "decidim-kids", path: "."
 
-gem "bootsnap", "~> 1.3"
-gem "faker", "~> 2.14"
-gem "rspec", "~> 3.0"
+gem "bootsnap", "~> 1.4"
+gem "faker"
 
 group :development, :test do
   gem "byebug", "~> 11.0", platform: :mri

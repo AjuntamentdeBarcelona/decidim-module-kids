@@ -34,6 +34,7 @@ module Decidim
                           engine.routes.url_helpers.minors_space_index_path(admin_slug => params[admin_slug] || params[:slug]),
                           position: 5.5,
                           active: :inclusive,
+                          icon_name: "group-line",
                           if: allowed_to?(:manage, :space_minors_configuration)
           end
         end

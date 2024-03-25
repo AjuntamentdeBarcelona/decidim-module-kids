@@ -6,11 +6,11 @@ module Decidim::Kids
   describe Permissions do
     subject { described_class.new(user, permission_action, context).permissions.allowed? }
 
-    let(:user) { create :user, :confirmed, organization: organization }
-    let(:other_user) { create :user, :confirmed, organization: organization }
-    let(:another_user) { create :user, :confirmed, organization: organization }
-    let(:organization) { create :organization }
-    let(:minor) { create(:minor, tutor: user, organization: organization) }
+    let(:user) { create(:user, :confirmed, organization:) }
+    let(:other_user) { create(:user, :confirmed, organization:) }
+    let(:another_user) { create(:user, :confirmed, organization:) }
+    let(:organization) { create(:organization) }
+    let(:minor) { create(:minor, tutor: user, organization:) }
     let(:context) do
       {}
     end
@@ -45,13 +45,13 @@ module Decidim::Kids
       let(:action_name) { :create }
 
       context "when the maximum number of minors has been reached" do
-        let!(:minors) { create_list(:minor, max_minors, tutor: user, organization: organization) }
+        let!(:minors) { create_list(:minor, max_minors, tutor: user, organization:) }
 
         it { is_expected.to be false }
       end
 
       context "when the maximum number of minors hasn't been reached" do
-        let!(:minors) { create_list(:minor, max_minors - 1, tutor: user, organization: organization) }
+        let!(:minors) { create_list(:minor, max_minors - 1, tutor: user, organization:) }
 
         it { is_expected.to be true }
       end
@@ -80,7 +80,7 @@ module Decidim::Kids
       let(:context) do
         {
           minor_user: minor,
-          minor_account: minor_account
+          minor_account:
         }
       end
 
@@ -93,7 +93,7 @@ module Decidim::Kids
 
     context "when impersonate action" do
       let(:action_name) { :impersonate }
-      let(:minor) { create(:minor, tutor: user, organization: organization, sign_in_count: sign_in_count) }
+      let(:minor) { create(:minor, tutor: user, organization:, sign_in_count:) }
 
       let(:context) do
         {
@@ -138,7 +138,7 @@ module Decidim::Kids
     end
 
     context "when user is not confirmed" do
-      let(:user) { create :user, organization: organization }
+      let(:user) { create(:user, organization:) }
 
       it { is_expected.to be false }
     end
@@ -193,7 +193,7 @@ module Decidim::Kids
     context "when user is trying to create a conversation with other users" do
       let(:action_name) { :create }
       let(:action_subject) { :conversation }
-      let(:context) { { conversation: conversation } }
+      let(:context) { { conversation: } }
       let(:conversation) do
         Decidim::Messaging::Conversation.create(participants: [user, other_user, another_user])
       end
@@ -262,8 +262,8 @@ module Decidim::Kids
         end
 
         before do
-          create(:user_group_membership, user: other_user, user_group: user_group)
-          create(:user_group_membership, user: another_user, user_group: user_group, role: :member)
+          create(:user_group_membership, user: other_user, user_group:)
+          create(:user_group_membership, user: another_user, user_group:, role: :member)
         end
 
         context "when the group of user are minors" do

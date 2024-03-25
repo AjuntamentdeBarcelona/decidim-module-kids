@@ -81,6 +81,6 @@ end
 Decidim.register_global_engine(
   :decidim_kids, # this is the name of the global method to access engine routes,
   # can't use decidim_donations as is the one assigned by the verification engine
-  ::Decidim::Kids::Engine,
+  Decidim::Kids::Engine,
   at: "/decidim_kids"
 )

@@ -15,12 +15,12 @@ module Decidim::System
         available_locales: ["en"],
         default_locale: "en",
         users_registration_mode: "enabled",
-        enable_minors_participation: enable_minors_participation,
-        minimum_minor_age: minimum_minor_age,
-        maximum_minor_age: maximum_minor_age,
-        minors_authorization: minors_authorization,
-        tutors_authorization: tutors_authorization,
-        maximum_minor_accounts: maximum_minor_accounts
+        enable_minors_participation:,
+        minimum_minor_age:,
+        maximum_minor_age:,
+        minors_authorization:,
+        tutors_authorization:,
+        maximum_minor_accounts:
       )
     end
 
@@ -94,43 +94,43 @@ module Decidim::System
       context "and minor age is wrong" do
         let(:minimum_minor_age) { 0 }
 
-        it { is_expected.to be_invalid }
+        it { is_expected.not_to be_valid }
       end
 
       context "and adult age is wrong" do
         let(:maximum_minor_age) { 0 }
 
-        it { is_expected.to be_invalid }
+        it { is_expected.not_to be_valid }
       end
 
       context "and adult is lower than minor" do
         let(:maximum_minor_age) { 9 }
 
-        it { is_expected.to be_invalid }
+        it { is_expected.not_to be_valid }
       end
 
       context "and no minor verification is specified" do
         let(:minors_authorization) { "" }
 
-        it { is_expected.to be_invalid }
+        it { is_expected.not_to be_valid }
       end
 
       context "and minor verification is not registered" do
         let(:minors_authorization) { "funny_verificator" }
 
-        it { is_expected.to be_invalid }
+        it { is_expected.not_to be_valid }
       end
 
       context "and no tutor verification is specified" do
         let(:tutors_authorization) { "" }
 
-        it { is_expected.to be_invalid }
+        it { is_expected.not_to be_valid }
       end
 
       context "and tutor verification is not registered" do
         let(:tutors_authorization) { "funny_verificator" }
 
-        it { is_expected.to be_invalid }
+        it { is_expected.not_to be_valid }
       end
 
       context "and tutor's verification is not Direct" do
@@ -142,7 +142,7 @@ module Decidim::System
       context "and minor's verification is not Direct" do
         let(:minors_authorization) { "id_documents" }
 
-        it { is_expected.to be_invalid }
+        it { is_expected.not_to be_valid }
       end
     end
   end

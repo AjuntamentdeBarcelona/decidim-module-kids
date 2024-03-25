@@ -9,7 +9,7 @@ if !Rails.env.production? || ENV.fetch("SEED", nil)
   organization.save!
 
   Decidim::Kids::OrganizationConfig.create!(
-    organization: organization,
+    organization:,
     enable_minors_participation: true,
     tutors_authorization: "dummy_authorization_handler",
     minors_authorization: "dummy_authorization_handler"
@@ -29,7 +29,7 @@ if !Rails.env.production? || ENV.fetch("SEED", nil)
         password_confirmation: "decidim123456789",
         accepted_tos_version: user.organization.tos_version + 1.hour
       )
-      Decidim::Kids::MinorAccount.create!(minor: minor, tutor: user)
+      Decidim::Kids::MinorAccount.create!(minor:, tutor: user)
       Decidim::Kids::MinorData.create!(user: minor, name: minor.name, email: minor.email, birthday: Faker::Date.birthday(min_age: 11, max_age: 14))
     end
   end

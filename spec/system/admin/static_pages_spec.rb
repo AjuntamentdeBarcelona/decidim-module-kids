@@ -2,12 +2,12 @@
 
 require "spec_helper"
 
-describe "Content pages", type: :system do
+describe "Static pages" do
   include ActionView::Helpers::SanitizeHelper
 
-  let(:admin) { create :user, :admin, :confirmed }
+  let(:admin) { create(:user, :admin, :confirmed) }
   let(:organization) { admin.organization }
-  let!(:minors_static_page) { create(:static_page, organization: organization, slug: "minors") }
+  let!(:minors_static_page) { create(:static_page, organization:, slug: "minors") }
 
   before do
     switch_to_host(organization.host)
@@ -17,19 +17,19 @@ describe "Content pages", type: :system do
     before do
       login_as admin, scope: :user
       visit decidim_admin.root_path
-      click_link "Pages"
+      click_on "Pages"
     end
 
     context "with minors configuration enabled" do
-      let!(:minors_organization_config) { create(:minors_organization_config, organization: organization) }
+      let!(:minors_organization_config) { create(:minors_organization_config, organization:) }
 
       before do
         visit current_path
       end
 
       it "can edit it" do
-        within find("tr", text: translated(minors_static_page.title)) do
-          click_link "Edit"
+        within "tr", text: translated(minors_static_page.title) do
+          click_on "Edit"
         end
 
         within ".edit_static_page" do
@@ -50,15 +50,17 @@ describe "Content pages", type: :system do
       end
 
       it "can't delete it" do
-        within find("tr", text: translated(minors_static_page.title)) do
-          expect(page).not_to have_selector(".action-icon--remove")
+        within "tr", text: translated(minors_static_page.title) do
+          expect(page).to have_no_css(".action-icon--remove")
         end
       end
 
       it "can visit it" do
-        within find("tr", text: translated(minors_static_page.title)) do
-          click_link "View public page"
+        within "tr", text: translated(minors_static_page.title) do
+          expect(page).to have_link("View public page", href: "/pages/#{minors_static_page.slug}")
         end
+
+        visit "/pages/#{minors_static_page.slug}"
 
         expect(page).to have_content(translated(minors_static_page.title))
         expect(page).to have_content(strip_tags(translated(minors_static_page.content)))
@@ -72,8 +74,8 @@ describe "Content pages", type: :system do
       end
 
       it "can delete it" do
-        within find("tr", text: translated(minors_static_page.title)) do
-          accept_confirm { click_link "Delete" }
+        within "tr", text: translated(minors_static_page.title) do
+          accept_confirm { click_on "Delete" }
         end
 
         expect(page).to have_admin_callout("successfully")

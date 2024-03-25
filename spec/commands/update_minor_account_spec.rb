@@ -4,18 +4,18 @@ require "spec_helper"
 
 module Decidim::Kids
   describe UpdateMinorAccount do
-    let(:organization) { create :organization }
-    let(:user) { create(:user, :confirmed, organization: organization) }
+    let(:organization) { create(:organization) }
+    let(:user) { create(:user, :confirmed, organization:) }
     let(:command) { described_class.new(form, minor) }
     let!(:minor_data) { create(:minor_data, name: "Marco", email: "marco@example.org", birthday: "01/11/2010") }
-    let!(:minor) { create(:minor, name: "Pending verification minor", tutor: user, organization: organization, minor_data: minor_data) }
+    let!(:minor) { create(:minor, name: "Pending verification minor", tutor: user, organization:, minor_data:) }
 
     let(:form) do
       MinorAccountForm.from_params(
-        name: name,
-        email: email,
-        birthday: birthday,
-        tos_agreement: tos_agreement
+        name:,
+        email:,
+        birthday:,
+        tos_agreement:
       ).with_context(
         current_organization: organization
       )
@@ -47,20 +47,20 @@ module Decidim::Kids
 
       describe "updating the email" do
         before do
-          form.email = "new@email.com"
+          form.email = "new@example.org"
         end
 
         it "broadcasts ok" do
           expect { command.call }.to broadcast(:ok)
-          expect(minor.minor_data.reload.email).to eq("new@email.com")
-          expect(minor.reload.email).to eq("new@email.com")
+          expect(minor.minor_data.reload.email).to eq("new@example.org")
+          expect(minor.reload.email).to eq("new@example.org")
         end
 
         it "sends a confirmation email" do
           expect do
             perform_enqueued_jobs { command.call }
           end.to broadcast(:ok)
-          expect(last_email.to).to include("new@email.com")
+          expect(last_email.to).to include("new@example.org")
         end
       end
     end

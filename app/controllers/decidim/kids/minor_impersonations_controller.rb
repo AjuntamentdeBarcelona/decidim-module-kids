@@ -15,13 +15,13 @@ module Decidim
       end
 
       def new
-        enforce_permission_to :impersonate, :minor_accounts, minor_user: minor_user
+        enforce_permission_to(:impersonate, :minor_accounts, minor_user:)
 
         @form = form(ImpersonateMinorForm).from_params(params)
       end
 
       def create
-        enforce_permission_to :impersonate, :minor_accounts, minor_user: minor_user
+        enforce_permission_to(:impersonate, :minor_accounts, minor_user:)
 
         @form = form(ImpersonateMinorForm).from_params(params)
 

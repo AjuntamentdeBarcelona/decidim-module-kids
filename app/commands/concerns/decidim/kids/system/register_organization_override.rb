@@ -12,7 +12,7 @@ module Decidim
           def create_organization
             organization = original_create_organization
 
-            Decidim::Kids::OrganizationConfig.find_or_create_by({ organization: organization }) do |conf|
+            Decidim::Kids::OrganizationConfig.find_or_create_by({ organization: }) do |conf|
               conf.enable_minors_participation = form.enable_minors_participation
               conf.minimum_minor_age = form.minimum_minor_age
               conf.maximum_minor_age = form.maximum_minor_age
