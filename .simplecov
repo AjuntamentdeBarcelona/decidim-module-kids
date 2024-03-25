@@ -3,6 +3,7 @@
 SimpleCov.start do
   root ENV.fetch("ENGINE_ROOT", nil)
 
+  add_filter "lib/tasks/authorization_handlers.rake"
   add_filter "lib/decidim/kids/version.rb"
   add_filter "/spec"
 end
