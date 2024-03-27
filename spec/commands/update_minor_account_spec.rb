@@ -7,7 +7,7 @@ module Decidim::Kids
     let(:organization) { create(:organization) }
     let(:user) { create(:user, :confirmed, organization:) }
     let(:command) { described_class.new(form, minor) }
-    let!(:minor_data) { create(:minor_data, name: "Marco", email: "marco@example.org", birthday: "01/11/2010") }
+    let!(:minor_data) { create(:minor_data, name: "Marco", email: "marco@example.org", birthday: "01/11/#{Time.current.year - 12}") }
     let!(:minor) { create(:minor, name: "Pending verification minor", tutor: user, organization:, minor_data:) }
 
     let(:form) do
@@ -23,7 +23,7 @@ module Decidim::Kids
 
     let(:name) { "Marco" }
     let(:email) { "marco@example.org" }
-    let(:birthday) { "01/11/2010" }
+    let(:birthday) { "01/11/#{Time.current.year - 12}" }
     let(:tos_agreement) { true }
 
     context "when valid" do

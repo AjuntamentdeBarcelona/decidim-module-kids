@@ -30,7 +30,7 @@ module Decidim::Kids
 
     let(:name) { "Marco" }
     let(:email) { "marco@example.org" }
-    let(:birthday) { "01/11/2010" }
+    let(:birthday) { "01/11/#{Time.current.year - 12}" }
     let(:password) { "password123456" }
     let(:password_confirmation) { password }
     let(:tos_agreement) { true }
