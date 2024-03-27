@@ -8,6 +8,7 @@ on:
 
 env:
   RUBY_VERSION: 3.1.1
+  NODE_VERSION: 18.17.1
 
 jobs:
   test-report:
@@ -24,10 +25,16 @@ jobs:
           --health-retries 5
         env:
           POSTGRES_PASSWORD: postgres
+
+      redis:
+        image: redis:3.2-alpine
+        ports: ["6379:6379"]
+
     env:
       DATABASE_USERNAME: postgres
       DATABASE_PASSWORD: postgres
       DATABASE_HOST: localhost
+      RAILS_ENV: test
 
     steps:
       - uses: actions/checkout@v2
@@ -39,8 +46,18 @@ jobs:
           ruby-version: ${{ env.RUBY_VERSION }}
           bundler-cache: true
 
+      - uses: nanasess/setup-chromedriver@v2
+
       - name: Setup Database
         run: bundle exec rake test_app
+
+      - name: Precompile assets
+        working-directory: ./spec/decidim_dummy_app/
+        env:
+          BUNDLE_GEMFILE: ../../Gemfile
+        run: |
+          npm install
+          bundle exec rake assets:precompile
 
       - name: Run RSpec
         run: bundle exec rspec
