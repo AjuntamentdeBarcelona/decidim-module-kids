@@ -6,7 +6,7 @@ module Decidim::Kids
   describe MinorData do
     subject { minor_data }
 
-    let(:minor_data) { build(:minor_data, user: user) }
+    let(:minor_data) { build(:minor_data, user:) }
     let(:user) { create(:minor) }
     let(:ae) { Decidim::AttributeEncryptor }
 
@@ -22,7 +22,7 @@ module Decidim::Kids
       let(:user) { create(:user, :confirmed) }
 
       it "is invalid" do
-        expect(subject).to be_invalid
+        expect(subject).not_to be_valid
       end
     end
 

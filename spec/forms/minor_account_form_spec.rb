@@ -6,20 +6,20 @@ module Decidim::Kids
   describe MinorAccountForm do
     subject { form }
 
-    let(:organization) { create :organization }
-    let(:user) { create(:user, :confirmed, organization: organization) }
+    let(:organization) { create(:organization) }
+    let(:user) { create(:user, :confirmed, organization:) }
 
     let(:name) { "Marco" }
     let(:email) { "marco@example.org" }
-    let(:birthday) { "01/11/2010" }
+    let(:birthday) { "01/11/#{Time.current.year - 12}" }
     let(:tos_agreement) { true }
 
     let(:params) do
       {
-        name: name,
-        email: email,
-        birthday: birthday,
-        tos_agreement: tos_agreement
+        name:,
+        email:,
+        birthday:,
+        tos_agreement:
       }
     end
 

@@ -16,10 +16,6 @@ def seed_db(path)
   end
 end
 
-def copy_helpers
-  FileUtils.cp "lib/decidim/kids/templates/dummy_age_authorization_handler.rb", "app/services/dummy_age_authorization_handler.rb"
-end
-
 desc "Generates a dummy app for testing"
 task test_app: "decidim:generate_external_test_app" do
   ENV["RAILS_ENV"] = "test"

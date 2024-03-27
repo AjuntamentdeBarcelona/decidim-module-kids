@@ -5,8 +5,8 @@ require "spec_helper"
 module Decidim::Kids
   describe CreateMinorAccount do
     describe "call" do
-      let(:organization) { create :organization }
-      let!(:current_user) { create(:user, :confirmed, organization: organization) }
+      let(:organization) { create(:organization) }
+      let!(:current_user) { create(:user, :confirmed, organization:) }
 
       let!(:form) do
         MinorAccountForm.from_params(form_params).with_context(

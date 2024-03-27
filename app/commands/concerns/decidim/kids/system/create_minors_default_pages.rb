@@ -6,7 +6,7 @@ module Decidim
       class CreateMinorsDefaultPages < Decidim::System::CreateDefaultPages
         def call
           Decidim::StaticPage::MINORS_DEFAULT_PAGES.map do |slug|
-            Decidim::StaticPage.find_or_create_by!(organization: organization, slug: slug) do |page|
+            Decidim::StaticPage.find_or_create_by!(organization:, slug:) do |page|
               page.title = localized_attribute(slug, :title)
               page.content = localized_attribute(slug, :content)
               page.show_in_footer = false

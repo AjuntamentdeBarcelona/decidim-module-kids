@@ -3,22 +3,22 @@
 require "spec_helper"
 require "shared/user_minor_activity_examples"
 
-describe "Test private activity of my minors", type: :system do
+describe "Test private activity of my minors" do
   let(:authorization_handler) { "dummy_authorization_handler" }
   let(:organization) { create(:organization, available_authorizations: [authorization_handler]) }
-  let(:user) { create(:user, :admin, :confirmed, organization: organization) }
-  let!(:authorization) { create(:authorization, user: user, name: authorization_handler) }
-  let(:other_user) { create(:user, :admin, :confirmed, organization: organization) }
-  let(:minor) { create(:minor, tutor: user, organization: organization) }
-  let(:other_minor) { create(:minor, tutor: other_user, organization: organization) }
+  let(:user) { create(:user, :admin, :confirmed, organization:) }
+  let!(:authorization) { create(:authorization, user:, name: authorization_handler) }
+  let(:other_user) { create(:user, :admin, :confirmed, organization:) }
+  let(:minor) { create(:minor, tutor: user, organization:) }
+  let(:other_minor) { create(:minor, tutor: other_user, organization:) }
   let(:enable_minors_participation) { false }
-  let!(:minors_organization_config) { create(:minors_organization_config, organization: organization, enable_minors_participation: enable_minors_participation) }
-  let(:component) { create(:component, :published, organization: organization) }
-  let(:commentable) { create(:dummy_resource, component: component) }
-  let(:comment) { create(:comment, commentable: commentable, author: user) }
-  let(:another_comment) { create(:comment, commentable: commentable, author: minor) }
-  let!(:action_log) { create(:action_log, created_at: 1.day.ago, action: "create", visibility: "public-only", resource: comment, organization: organization, user: comment.author) }
-  let!(:another_action_log) { create(:action_log, created_at: 2.days.ago, action: "create", visibility: "public-only", resource: another_comment, organization: organization, user: another_comment.author) }
+  let!(:minors_organization_config) { create(:minors_organization_config, organization:, enable_minors_participation:) }
+  let(:component) { create(:component, :published, organization:) }
+  let(:commentable) { create(:dummy_resource, component:) }
+  let(:comment) { create(:comment, commentable:, author: user) }
+  let(:another_comment) { create(:comment, commentable:, author: minor) }
+  let!(:action_log) { create(:action_log, created_at: 1.day.ago, action: "create", visibility: "public-only", resource: comment, organization:, user: comment.author) }
+  let!(:another_action_log) { create(:action_log, created_at: 2.days.ago, action: "create", visibility: "public-only", resource: another_comment, organization:, user: another_comment.author) }
 
   before do
     minor.confirm
@@ -47,12 +47,12 @@ describe "Test private activity of my minors", type: :system do
         end
 
         it "shows activity icon" do
-          expect(page).to have_css(".icon--book")
+          expect(page).to have_css("svg [href*='#ri-bill-line']")
         end
 
         context "when accessing my first minor activity" do
           before do
-            page.find(".icon--book").click
+            page.find(".action-icon--activity").click
           end
 
           it "renders minor activity page" do

@@ -41,12 +41,6 @@ module Decidim
 
           super
         end
-
-        def password_required?
-          return false if managed? || minor_data.present?
-
-          super
-        end
       end
     end
   end

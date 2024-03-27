@@ -1,22 +1,21 @@
-<% content_for(:subtitle) { t("menu", scope: "decidim.kids.user") } %>
-<div class="row">
-  <h3 class="flex-center"><%= t(".title") %></h3>
-  <p class="flex-center mb-s"><%= t(".subtitle") %></p>
-  <div class="columns large-6 medium-10 medium-centered">
-    <div class="card">
-      <div class="card__content">
-        <%= decidim_form_for(@form, url: user_minors_path) do |form| %>
-          <%= form_required_explanation %>
+<%= render layout: "layouts/decidim/shared/layout_center" do %>
+  <% content_for(:subtitle) { t("menu", scope: "decidim.kids.user") } %>
 
-          <%= render partial: "form_fields", locals: { form: form } %>
-
-          <%= render partial: "tos_field", locals: { form: form } %>
-
-          <div class="actions">
-            <%= form.submit t(".create"), class: "button expanded mt-s mb-none", data: { disable: true } %>
-          </div>
-        <% end %>
-      </div>
-    </div>
+  <div class="text-center py-10">
+    <h1 class="title-decorator inline-block text-left mb-12"><%= t("title", scope: "decidim.kids.user_minors.new") %></h1>
+    <p class="flex-lg text-gray-2"><%= t("subtitle", scope: "decidim.kids.user_minors.new") %></p>
   </div>
-</div>
+
+  <%= decidim_form_for(@form, url: user_minors_path) do |form| %>
+    <%= form_required_explanation %>
+
+    <div class="form__wrapper">
+      <%= render partial: "form_fields", locals: { form: form } %>
+      <%= render partial: "tos_field", locals: { form: form } %>
+    </div>
+
+    <div class="form__wrapper-block">
+      <%= form.submit t("create", scope: "decidim.kids.user_minors.new"), class: "button button__sm md:button__lg button__secondary", data: { disable: true } %>
+    </div>
+  <% end %>
+<% end %>

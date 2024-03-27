@@ -7,7 +7,7 @@ module Decidim
         @user = user
         @organization = user.organization
         subject = I18n.t("decidim.kids.minor_notifications_mailer.promote.subject")
-        mail(to: user.email, subject: subject)
+        mail(to: user.email, subject:)
       end
     end
   end

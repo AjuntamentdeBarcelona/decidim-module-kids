@@ -1,7 +1,7 @@
 <% if current_organization.minors_participation_enabled? %>
-  <div class="card" id="card__minors">
-    <div class="card__content">
-      <h3><%= t("decidim.devise.registrations.new.minors_title") %></h3>
+  <div id="card__minors" class="form__wrapper-block">
+    <h4 class="h4"><%= t("decidim.devise.registrations.new.minors_title") %></h4>
+    <div class="form__wrapper-checkbox-label">
       <p><%= raw t("decidim.devise.registrations.new.minors_description", maximum_minor_age: current_organization.maximum_minor_age, link: link_to(t("decidim.devise.registrations.new.create_an_account"), page_path("minors"), target: "_blank")) %></p>
     </div>
   </div>

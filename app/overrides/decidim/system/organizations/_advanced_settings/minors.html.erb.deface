@@ -1,2 +1,2 @@
-<!-- insert_top ".collapsible" -->
+<!-- insert_top "#advanced-settings-panel" -->
 <%= render "decidim/kids/system/organizations/minors_form", f: f %>

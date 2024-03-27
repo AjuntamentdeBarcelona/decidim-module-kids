@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-describe "Writes minor log", type: :system do
+describe "Writes minor log" do
   let(:organization) { create(:organization) }
   let(:user) { create(:user, :confirmed) }
   let(:minor_user) { create(:user, :confirmed) }

@@ -12,9 +12,9 @@ module Decidim::Kids::Admin
 
     let(:params) do
       {
-        access_type: access_type,
-        max_age: max_age,
-        authorization: authorization
+        access_type:,
+        max_age:,
+        authorization:
       }
     end
 
@@ -34,7 +34,7 @@ module Decidim::Kids::Admin
       context "when access_type is minors" do
         let(:access_type) { "minors" }
 
-        it { is_expected.to be_invalid }
+        it { is_expected.not_to be_valid }
 
         context "and max age is ok" do
           let(:max_age) { 18 }
@@ -63,7 +63,7 @@ module Decidim::Kids::Admin
         context "and authorization is not registered" do
           let(:authorization) { "not_registered" }
 
-          it { is_expected.to be_invalid }
+          it { is_expected.not_to be_valid }
         end
 
         context "and authorization is ok" do
@@ -77,13 +77,13 @@ module Decidim::Kids::Admin
     context "when access_type is blank" do
       let(:access_type) { "" }
 
-      it { is_expected.to be_invalid }
+      it { is_expected.not_to be_valid }
     end
 
     context "when access_type is nonsense" do
       let(:access_type) { "nonsense" }
 
-      it { is_expected.to be_invalid }
+      it { is_expected.not_to be_valid }
     end
   end
 end

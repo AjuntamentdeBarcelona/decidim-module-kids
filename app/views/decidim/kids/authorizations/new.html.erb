@@ -1,29 +1,26 @@
-<% add_decidim_page_title(t("menu", scope: "decidim.kids.user")) %>
-<% content_for(:subtitle) { t("menu", scope: "decidim.kids.user") } %>
+<%= render layout: "layouts/decidim/shared/layout_center" do %>
+  <% add_decidim_page_title(t("menu", scope: "decidim.kids.user")) %>
+  <% content_for(:subtitle) { t("menu", scope: "decidim.kids.user") } %>
 
-<div class="callout secondary">
-  <%= t(".authorizing_html", minor: minor_user.minor_data.name) %>
-  <%= link_to "cancel", :back, class: "button secondary small float-right" %>
-</div>
+  <div class="callout secondary mt-6">
+    <%= t("authorizing_html", scope: "decidim.kids.authorizations.new", minor: minor_user.minor_data.name) %>
+  </div>
 
-<div><%= t(".help_text") %></div>
+  <p class="flex-lg text-gray-2"><%= t("help_text", scope: "decidim.kids.authorizations.new") %></p>
 
-<div class="columns large-8 large-centered text-center page-title">
-  <h2><%= t("decidim.verifications.authorizations.new.authorize_with", authorizer: t("#{handler.handler_name}.name", scope: "decidim.authorization_handlers")) %></h2>
-</div>
+  <h2 class="h2 mt-6"><%= t("decidim.verifications.authorizations.new.authorize_with", authorizer: t("#{handler.handler_name}.name", scope: "decidim.authorization_handlers")) %></h2>
 
-<div class="card">
-  <div class="card__content">
-    <%= authorization_form_for(handler, url: authorizations_path(redirect_url: redirect_url)) do |form| %>
+  <%= authorization_form_for(handler, url: authorizations_path(redirect_url: redirect_url)) do |form| %>
+    <div class="form__wrapper">
       <% if lookup_context.exists?(handler.to_partial_path, [], true) %>
         <%= render partial: handler.to_partial_path, locals: { handler: handler, form: form } %>
       <% else %>
         <%= form.all_fields %>
       <% end %>
+    </div>
 
-      <div class="actions">
-        <%= form.submit t("decidim.verifications.authorizations.new.authorize"), class: "button expanded" %>
-      </div>
-    <% end %>
-  </div>
-</div>
+    <div class="form__wrapper-block ">
+      <%= form.submit t("decidim.verifications.authorizations.new.authorize"), class: "button button__sm md:button__lg button__secondary" %>
+    </div>
+  <% end %>
+<% end %>

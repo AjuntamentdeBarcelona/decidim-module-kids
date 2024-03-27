@@ -9,8 +9,8 @@ shared_examples "handles the minors configuration" do |spaces|
 
   context "when minors enabled" do
     it "has the minors configuration link" do
-      click_link spaces
-      click_link participatory_space.title["en"]
+      click_on spaces
+      click_on participatory_space.title["en"]
 
       expect(page).to have_link("Minors configuration")
     end
@@ -20,10 +20,10 @@ shared_examples "handles the minors configuration" do |spaces|
     let(:enable_minors_participation) { false }
 
     it "has not the minors configuration link" do
-      click_link spaces
-      click_link participatory_space.title["en"]
+      click_on spaces
+      click_on participatory_space.title["en"]
 
-      expect(page).not_to have_link("Minors configuration")
+      expect(page).to have_no_link("Minors configuration")
     end
   end
 end

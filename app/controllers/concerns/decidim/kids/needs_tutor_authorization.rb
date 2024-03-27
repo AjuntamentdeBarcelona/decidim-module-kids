@@ -42,7 +42,7 @@ module Decidim
         end
 
         def granted_authorizations(user)
-          Decidim::Verifications::Authorizations.new(organization: current_organization, user: user, granted: true).query
+          Decidim::Verifications::Authorizations.new(organization: current_organization, user:, granted: true).query
         end
 
         def minors

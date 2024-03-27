@@ -4,10 +4,10 @@ require "spec_helper"
 require "shared/controller_examples"
 
 module Decidim::Kids
-  describe UserMinorsController, type: :controller do
+  describe UserMinorsController do
     routes { Decidim::Kids::Engine.routes }
 
-    let(:organization) { create :organization }
+    let(:organization) { create(:organization) }
     let(:enable_minors_participation) { true }
     let(:minimum_minor_age) { 10 }
     let(:maximum_minor_age) { 13 }
@@ -15,34 +15,34 @@ module Decidim::Kids
     let(:minors_authorization_name) { "dummy_authorization_handler" }
     let!(:minors_organization_config) do
       create(:minors_organization_config,
-             organization: organization,
-             enable_minors_participation: enable_minors_participation,
-             minimum_minor_age: minimum_minor_age,
-             maximum_minor_age: maximum_minor_age,
+             organization:,
+             enable_minors_participation:,
+             minimum_minor_age:,
+             maximum_minor_age:,
              tutors_authorization: tutors_authorization_name,
              minors_authorization: minors_authorization_name)
     end
-    let(:user) { create(:user, :confirmed, organization: organization) }
-    let(:minor) { create(:minor, tutor: user, organization: organization) }
-    let!(:tutor_authorization) { create(:authorization, user: user, name: organization.tutors_authorization) }
+    let(:user) { create(:user, :confirmed, organization:) }
+    let(:minor) { create(:minor, tutor: user, organization:) }
+    let!(:tutor_authorization) { create(:authorization, user:, name: organization.tutors_authorization) }
     let(:return_path) { "/decidim_kids#{user_minor_authorizations_path}" }
     let(:after_create_path) { "/decidim_kids#{new_user_minor_authorization_path(user_minor_id: Decidim::User.last.id)}" }
 
     let(:name) { "Marco" }
     let(:email) { "marco@example.org" }
-    let(:birthday) { "01/11/2010" }
+    let(:birthday) { "01/11/#{Time.current.year - 12}" }
     let(:password) { "password123456" }
     let(:password_confirmation) { password }
     let(:tos_agreement) { true }
 
     let(:params) do
       {
-        name: name,
-        email: email,
-        birthday: birthday,
-        password: password,
-        password_confirmation: password_confirmation,
-        tos_agreement: tos_agreement
+        name:,
+        email:,
+        birthday:,
+        password:,
+        password_confirmation:,
+        tos_agreement:
       }
     end
 
@@ -62,7 +62,7 @@ module Decidim::Kids
     end
 
     def send_form_and_expect_rendering_the_new_template_again
-      post :create, params: params
+      post(:create, params:)
       expect(controller).to render_template "new"
     end
 
@@ -75,7 +75,7 @@ module Decidim::Kids
 
       context "when creation" do
         it "renders the empty form" do
-          get :new, params: params
+          get(:new, params:)
 
           expect(response).to have_http_status(:ok)
           expect(subject).to render_template(:new)
@@ -92,7 +92,7 @@ module Decidim::Kids
       context "when the form is valid" do
         it "creates a minor" do
           expect do
-            post :create, params: params
+            post :create, params:
           end.to change(MinorAccount, :count).by(1)
 
           expect(flash[:notice]).to eq("Minor's account has been successfully created")
@@ -113,10 +113,10 @@ module Decidim::Kids
       let(:minor_params) do
         {
           name: "Katty",
-          email: email,
-          birthday: birthday,
-          password: password,
-          password_confirmation: password_confirmation
+          email:,
+          birthday:,
+          password:,
+          password_confirmation:
         }
       end
 
@@ -134,7 +134,7 @@ module Decidim::Kids
 
       context "when the form is valid" do
         it "updates the minor" do
-          patch :update, params: params
+          patch(:update, params:)
 
           expect(flash[:notice]).not_to eq("Minor's account has been successfully updated")
         end
@@ -144,7 +144,7 @@ module Decidim::Kids
         let(:email) { nil }
 
         it "renders the edit template" do
-          patch :update, params: params
+          patch(:update, params:)
           expect(controller).to render_template "edit"
         end
       end

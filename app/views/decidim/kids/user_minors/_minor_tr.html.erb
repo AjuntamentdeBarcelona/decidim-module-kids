@@ -10,7 +10,7 @@
   <td>
     <%= confirm_email_status(user) %>
     <% if !minor_confirmed?(user) && minor_authorized?(user) %>
-      <%= icon_link_to "action-redo",
+      <%= icon_link_to "arrow-go-back-line",
                        resend_invitation_to_minor_user_minor_path(user.id),
                        t("resend_email", scope: "decidim.kids.user_minors.index"),
                        method: :post,
@@ -31,28 +31,23 @@
   </td>
 
   <td class="table-list__actions">
-    <%= icon_link_to "book", decidim.profile_activity_path(nickname: user.nickname), t("activity", scope: "decidim.kids.user_minors.index"), class: "action-icon" %>
-    <span class="action-space icon"></span>
+    <%= icon_link_to "bill-line", decidim.profile_activity_path(nickname: user.nickname), t("activity", scope: "decidim.kids.user_minors.index"), class: "action-icon--activity" %>
     <% if allowed_to? :edit, :minor_accounts, minor_user: user %>
-      <%= icon_link_to "pencil", decidim_kids.edit_user_minor_path(user.id),
-                       t("edit", scope: "decidim.kids.user_minors.index"), class: "action-icon" %>
+      <%= icon_link_to "pencil-line", decidim_kids.edit_user_minor_path(user.id),
+                       t("edit", scope: "decidim.kids.user_minors.index"), class: "action-icon--edit" %>
     <% end %>
-
-    <span class="action-space icon"></span>
-
     <% if allowed_to? :delete, :minor_accounts, minor_user: user %>
-      <%= icon_link_to "circle-x", decidim_kids.user_minor_path(user.id),
+      <%= icon_link_to "close-circle-line", decidim_kids.user_minor_path(user.id),
                        t("destroy_button", scope: "decidim.kids.user_minors.index"),
                        method: :delete,
                        data: { confirm: t("confirm", scope: "decidim.kids.user_minors.index") },
-                       class: "action-icon action-icon--remove" %>
+                       class: "action-icon--remove" %>
     <% end %>
-    <span class="action-space icon"></span>
     <% if allowed_to? :impersonate, :minor_accounts, minor_user: user %>
-      <%= icon_link_to "account-login",
+      <%= icon_link_to "login-box-line",
                        decidim_kids.new_user_minor_minor_impersonation_path(user),
                        t("impersonations.impersonate_button", scope: "decidim.kids"),
-                       class: "action-icon action-icon--impersonate" %>
+                       class: "action-icon--impersonate" %>
     <% end %>
   </td>
 </tr>

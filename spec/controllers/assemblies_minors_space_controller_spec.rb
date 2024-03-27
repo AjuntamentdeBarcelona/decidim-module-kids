@@ -14,14 +14,14 @@ def allowed_roles
 end
 
 module Decidim::Assemblies
-  describe AssembliesController, type: :controller do
+  describe AssembliesController do
     routes { Decidim::Assemblies::Engine.routes }
 
     let(:participatory_space) { assembly }
     let!(:assembly) do
       create(
         :assembly,
-        organization: organization
+        organization:
       )
     end
 

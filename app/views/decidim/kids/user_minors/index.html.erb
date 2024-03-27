@@ -1,30 +1,36 @@
-<% add_decidim_page_title(t("menu", scope: "decidim.kids.user")) %>
-<% content_for(:subtitle) { t("menu", scope: "decidim.kids.user") } %>
+<%= render layout: "layouts/decidim/shared/layout_user_profile" do %>
+  <% add_decidim_page_title(t("menu", scope: "decidim.kids.user")) %>
+  <% content_for(:subtitle) { t("menu", scope: "decidim.kids.user") } %>
 
-<h2 class="card-title flex--sbc">
-  <%= t(".title") %>
-</h2>
-<p class="help-text"><%= t(".description") %></p>
+  <span class="uppercase font-semibold text-gray-2 mb-4 block">
+    <%= t("title", scope: "decidim.kids.user_minors.index") %>
+  </span>
+  <p class="help-text mb-4"><%= t("description", scope: "decidim.kids.user_minors.index") %></p>
 
-<table class="table-list">
-  <thead>
-  <tr>
-    <th><%= t(".name") %></th>
-    <th><%= t(".age") %></th>
-    <th><%= t(".confirmed") %></th>
-    <th><%= t(".verified") %></th>
-    <th><%= t(".last_login") %></th>
-    <th><%= t(".actions") %></th>
-  </tr>
-  </thead>
-  <tbody>
-  <% minors.each do |user| %>
-    <%= render partial: "minor_tr", locals: { user: user } %>
+  <div id="user-minors-table__wrapper" class="mb-6">
+    <div class="table-scroll">
+      <table class="table-list">
+        <thead>
+        <tr>
+          <th><%= t("name", scope: "decidim.kids.user_minors.index") %></th>
+          <th><%= t("age", scope: "decidim.kids.user_minors.index") %></th>
+          <th><%= t("confirmed", scope: "decidim.kids.user_minors.index") %></th>
+          <th><%= t("verified", scope: "decidim.kids.user_minors.index") %></th>
+          <th><%= t("last_login", scope: "decidim.kids.user_minors.index") %></th>
+          <th><%= t("actions", scope: "decidim.kids.user_minors.index") %></th>
+        </tr>
+        </thead>
+        <tbody>
+        <% minors.each do |user| %>
+          <%= render partial: "minor_tr", locals: { user: user } %>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <%= button_to_add_minor_account %>
+  <% unless can_add_minor_account? %>
+    <p class="pt-6"><%= t("note", scope: "decidim.kids.user_minors.index") %></p>
   <% end %>
-  </tbody>
-</table>
-
-<%= button_to_add_minor_account %>
-<% unless can_add_minor_account? %>
-  <p><%= t(".note") %></p>
 <% end %>

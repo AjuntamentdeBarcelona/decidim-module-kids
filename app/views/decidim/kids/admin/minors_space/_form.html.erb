@@ -1,6 +1,7 @@
 <div class="row column">
   <%= form.select :access_type, access_types, prompt: "" %>
 </div>
+
 <div id="minors-extra" class="<%= "hide" unless form.object.access_type == "minors" %>">
   <div class="row column">
     <%= form.select :authorization, authorization_handlers, include_blank: true %>
@@ -20,7 +21,7 @@
     <% end %>
     </p>
     <p>
-    <% if error = authorization_method_error(handler) %>
+    <% if (error = authorization_method_error(handler)) %>
       <strong class="text-alert">&#9785;</strong> <%= t("form.handlers.errors.#{error}", scope: "decidim.kids.admin.minors_space") %>
     <% else %>
       <strong class="text-success">&#9786;</strong> <%= t("form.handlers.errors.ok", scope: "decidim.kids.admin.minors_space") %>
@@ -30,10 +31,10 @@
 <% end %>
 
 <script type="text/javascript">
-  var sel = document.getElementById("minors_space_config_access_type");
-  var auth = document.getElementById("minors_space_config_authorization");
+  const sel = document.getElementById("minors_space_config_access_type");
+  const auth = document.getElementById("minors_space_config_authorization");
   sel.addEventListener("change", function () {
-    var minorsExtra = document.getElementById("minors-extra");
+    const minorsExtra = document.getElementById("minors-extra");
     if (sel.value === "minors") {
       minorsExtra.classList.remove("hide");
     } else {
@@ -41,8 +42,8 @@
     }
   });
   auth.addEventListener("change", function () {
-    var checkFormHandlers = document.getElementsByClassName("check-form-handlers");
-    var checkForm = document.getElementById("check-form-" + auth.value);
+    const checkFormHandlers = document.getElementsByClassName("check-form-handlers");
+    const checkForm = document.getElementById("check-form-" + auth.value);
     Array.from(checkFormHandlers).forEach(function (el) {
       el.classList.add("hide");
     });

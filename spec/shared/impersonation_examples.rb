@@ -7,7 +7,7 @@ shared_examples "user impersonate" do
     include_context "when minors verified"
 
     it "the 'Impersonate' button is missing" do
-      expect(page).not_to have_css(".action-icon--impersonate")
+      expect(page).to have_no_css(".action-icon--impersonate")
     end
   end
 
@@ -15,7 +15,7 @@ shared_examples "user impersonate" do
     let(:sign_in_count) { 0 }
 
     it "the 'Impersonate' button is missing" do
-      expect(page).not_to have_css(".action-icon--impersonate")
+      expect(page).to have_no_css(".action-icon--impersonate")
     end
   end
 
@@ -34,7 +34,7 @@ shared_examples "user impersonate" do
 
         fill_in "Password", match: :first, with: "mallorca123123123"
 
-        click_button("Impersonate")
+        click_on "Impersonate"
 
         expect(page).to have_content("You are managing the participant")
         expect(page).to have_content("Close session")
@@ -45,10 +45,10 @@ shared_examples "user impersonate" do
 
         fill_in "Password", match: :first, with: "mallorca123123123"
 
-        click_button("Impersonate")
-        click_button("Close session")
+        click_on "Impersonate"
+        click_on "Close session"
 
-        expect(page).to have_content(user.name)
+        expect(page).to have_content("The current impersonation session has been successfully ended")
       end
 
       context "and session expires" do
@@ -57,12 +57,12 @@ shared_examples "user impersonate" do
 
           fill_in "Password", match: :first, with: "mallorca123123123"
 
-          click_button("Impersonate")
+          click_on "Impersonate"
 
           Decidim::Kids::ImpersonationMinorLog.last.update!(started_at: 1.hour.ago)
 
           visit decidim.account_path
-          expect(page).to have_content(user.name)
+          expect(page).to have_field("Your name", with: user.name)
         end
       end
     end
@@ -73,7 +73,7 @@ shared_examples "user impersonate" do
 
         fill_in "Password", match: :first, with: "mallorca123123"
 
-        click_button("Impersonate")
+        click_on "Impersonate"
 
         expect(page).to have_css(".alert")
       end
@@ -85,7 +85,7 @@ shared_examples "user impersonate" do
 
         fill_in "Password", match: :first, with: ""
 
-        click_button("Impersonate")
+        click_on "Impersonate"
 
         expect(page).to have_content("error in this field")
       end

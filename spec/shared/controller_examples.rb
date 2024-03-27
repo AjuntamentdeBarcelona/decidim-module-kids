@@ -51,11 +51,11 @@ shared_examples "checks tutor authorization" do
     it "redirects the user" do
       case view
       when :create
-        post view, params: params
+        post view, params:
       when :update
-        patch view, params: params
+        patch view, params:
       else
-        get view, params: params
+        get view, params:
       end
       expect(response).to redirect_to(unverified_user_minors_path)
     end
@@ -69,11 +69,11 @@ shared_examples "checks tutor authorization" do
     it "redirects the user back" do
       case view
       when :create
-        post view, params: params
+        post view, params:
       when :update
-        patch view, params: params
+        patch view, params:
       else
-        get view, params: params
+        get view, params:
       end
       expect(response).to redirect_to(Decidim::Core::Engine.routes.url_helpers.account_path)
     end
@@ -85,7 +85,7 @@ shared_examples "checks minor authorization" do
     let!(:minor_authorization) { create(:authorization, user: minor, name: minors_authorization_name) }
 
     it "redirects the user" do
-      get view, params: params
+      get(view, params:)
       expect(response).to redirect_to("/decidim_kids#{user_minors_path}")
     end
   end
@@ -94,7 +94,7 @@ shared_examples "checks minor authorization" do
     let(:minors_authorization_name) { :foo }
 
     it "redirects the user" do
-      get view, params: params
+      get(view, params:)
       expect(response).to redirect_to(return_path)
     end
   end
