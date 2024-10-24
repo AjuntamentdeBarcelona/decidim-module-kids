@@ -9,17 +9,17 @@ checksums = [
   {
     package: "decidim-admin",
     files: {
-      "/app/permissions/decidim/admin/permissions.rb" => "f5b23cb4cf2d606b2cf70d01ba2fb591"
+      "/app/permissions/decidim/admin/permissions.rb" => "6c8fbf335c2483b9e6ab4f34f489b53a"
     }
   },
   {
     package: "decidim-core",
     files: {
-      "/app/controllers/concerns/decidim/participatory_space_context.rb" => "4eb0c577edb6806684129420e0ae7bfa",
-      "/app/models/decidim/organization.rb" => "04eaf4467a1e0d891251c5cedf71f5e4",
+      "/app/controllers/concerns/decidim/participatory_space_context.rb" => "b6a6b338d92eaaaf72b7b40f3a0da097",
+      "/app/models/decidim/organization.rb" => "a72b9d9ef10aa06dbe5aef27c68d5c7a",
       "/app/models/decidim/static_page.rb" => "c7053dc82dfa2047f78573dfc1d9163d",
-      "/app/views/decidim/devise/registrations/new.html.erb" => "e09cc2d8c7b5b770a7760813e18b1e49",
-      "/app/views/layouts/decidim/_impersonation_warning.html.erb" => "b9d5fd40909a99246a9a4c09379a01a9"
+      "/app/views/decidim/devise/registrations/new.html.erb" => "b30423406afd43bb9af2c98d59d43632",
+      "/app/views/layouts/decidim/_impersonation_warning.html.erb" => "a0e345165b4c88e9ab2eed2fb349c83b"
     }
   },
   {
@@ -31,12 +31,12 @@ checksums = [
   {
     package: "decidim-system",
     files: {
-      "/app/forms/decidim/system/register_organization_form.rb" => "10667bf365ae7df36ed5d4628d1d4972",
-      "/app/forms/decidim/system/update_organization_form.rb" => "a1059e5a8745a2637703b6805deda53c",
-      "/app/commands/decidim/system/register_organization.rb" => "a641c4f869a1cf460b41a7dec507706f",
+      "/app/forms/decidim/system/register_organization_form.rb" => "7b4eab28179eb466b30383e357e2cc79",
+      "/app/forms/decidim/system/update_organization_form.rb" => "1c66820ab01b12f4d934721152e014f0",
+      "/app/commands/decidim/system/create_organization.rb" => "b7c49015ea3d682dbfd6d3c3f76e2d7a",
       "/app/commands/decidim/system/update_organization.rb" => "1fe0b3eb152fecdf63ef108743ae78e4",
       "/app/views/decidim/system/organizations/new.html.erb" => "4916cdb428d89de5afe60e279d64112f",
-      "/app/views/decidim/system/organizations/edit.html.erb" => "b3ca773290213f267c5d6f0083aca539"
+      "/app/views/decidim/system/organizations/edit.html.erb" => "01bff555e3d7680868fff210d3c393b2"
     }
   },
   {

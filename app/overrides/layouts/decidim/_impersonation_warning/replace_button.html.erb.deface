@@ -1,3 +1,3 @@
-<!-- replace ".impersonation-warning .flash__message div.mt-4" -->
+<!-- replace ".flash .flash__message div.mt-4" -->
 
 <%= render "decidim/kids/minor_impersonations/impersonation_minor_button" %>

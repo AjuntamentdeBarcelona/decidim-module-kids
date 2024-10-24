@@ -3,7 +3,7 @@
 module Decidim
   module Kids
     module System
-      module RegisterOrganizationOverride
+      module CreateOrganizationOverride
         extend ActiveSupport::Concern
 
         included do
