@@ -5,7 +5,7 @@ require "shared/system_organization_examples"
 
 describe "Updates an organization" do
   let(:admin) { create(:admin) }
-  let!(:organization) { create(:organization, name: "Citizen Corp") }
+  let!(:organization) { create(:organization, name: { en: "Citizen Group" }) }
   let!(:another_organization) { create(:organization) }
   let(:enable_minors_participation) { false }
   let(:minimum_minor_age) { 10 }
@@ -30,7 +30,7 @@ describe "Updates an organization" do
 
   it "has default properties" do
     click_on "Show advanced settings"
-    expect(page).to have_no_checked_field "organization_enable_minors_participation"
+    expect(page).to have_no_checked_field "Enable minors participation"
     expect(page).to have_field "Minimum age allowed to create a minor account", with: "10"
     expect(page).to have_field "Maximum age for a person to be considered a minor", with: "13"
   end
@@ -44,7 +44,7 @@ describe "Updates an organization" do
 
     it "has defined properties" do
       click_on "Show advanced settings"
-      expect(page).to have_no_checked_field "organization_enable_minors_participation"
+      expect(page).to have_no_checked_field "Enable minors participation"
       expect(page).to have_field "Minimum age allowed to create a minor account", with: "9"
       expect(page).to have_field "Maximum age for a person to be considered a minor", with: "12"
     end
@@ -59,7 +59,7 @@ describe "Updates an organization" do
 
     it "has defined properties" do
       click_on "Show advanced settings"
-      expect(page).to have_checked_field "organization_enable_minors_participation"
+      expect(page).to have_checked_field "Enable minors participation"
       expect(page).to have_field "Minimum age allowed to create a minor account", with: "11"
       expect(page).to have_field "Maximum age for a person to be considered a minor", with: "14"
     end

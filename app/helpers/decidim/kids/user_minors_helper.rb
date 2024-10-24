@@ -27,7 +27,7 @@ module Decidim
       end
 
       def minor_confirmed?(user)
-        return unless user.sign_in_count?
+        return false unless user.sign_in_count?
 
         true
       end

@@ -5,7 +5,7 @@ require "spec_helper"
 describe "Writes minor log" do
   let(:organization) { create(:organization) }
   let(:user) { create(:user, :confirmed) }
-  let(:minor_user) { create(:user, :confirmed) }
+  let(:minor_user) { create(:minor, :confirmed) }
 
   before do
     switch_to_host(organization.host)

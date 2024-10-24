@@ -4,7 +4,7 @@ require "spec_helper"
 require "shared/user_minor_activity_examples"
 
 describe "Test private activity of my minors" do
-  let(:authorization_handler) { "dummy_authorization_handler" }
+  let(:authorization_handler) { "dummy_age_authorization_handler" }
   let(:organization) { create(:organization, available_authorizations: [authorization_handler]) }
   let(:user) { create(:user, :admin, :confirmed, organization:) }
   let!(:authorization) { create(:authorization, user:, name: authorization_handler) }

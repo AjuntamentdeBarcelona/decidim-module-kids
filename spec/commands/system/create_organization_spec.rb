@@ -4,7 +4,7 @@ require "spec_helper"
 require "shared/command_minors_organization_examples"
 
 module Decidim::System
-  describe RegisterOrganization do
+  describe CreateOrganization do
     describe "call" do
       let(:form) do
         RegisterOrganizationForm.new(params)
