@@ -28,8 +28,6 @@ group :development do
   gem "letter_opener_web", "~> 2.0"
   gem "listen", "~> 3.1"
   gem "rubocop-faker"
-  gem "spring"
-  gem "spring-watcher-listen"
   gem "web-console"
 end
 
