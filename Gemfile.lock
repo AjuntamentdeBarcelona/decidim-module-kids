@@ -177,7 +177,7 @@ GIT
 PATH
   remote: .
   specs:
-    decidim-kids (0.2.0)
+    decidim-kids (0.3.0)
       decidim-core (>= 0.29, < 0.30)
       decidim-system (>= 0.29, < 0.30)
       decidim-verifications (>= 0.29, < 0.30)
