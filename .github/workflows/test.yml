@@ -13,7 +13,7 @@ env:
 
 jobs:
   test-report:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
 
     services:
       postgres:
@@ -52,6 +52,9 @@ jobs:
           node-version: ${{ env.NODE_VERSION }}
 
       - uses: nanasess/setup-chromedriver@v2
+
+      - run: |
+          sudo apt install wkhtmltopdf imagemagick 7zip
 
       - name: Setup Database
         run: bundle exec rake test_app
