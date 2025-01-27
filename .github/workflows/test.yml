@@ -8,6 +8,7 @@ on:
 
 env:
   RUBY_VERSION: 3.2.2
+  DISABLE_SPRING: 1
   NODE_VERSION: 18.17.1
 
 jobs:
