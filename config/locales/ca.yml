@@ -26,7 +26,7 @@ ca:
         fields:
           birthday: Data de naixement
           document_number: Número de document
-        name: Exemple d'autorització amb metadades d'aniversari
+        name: Autorització d'exemple
     devise:
       mailer:
         invitation_instructions:
