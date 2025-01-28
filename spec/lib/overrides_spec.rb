@@ -32,7 +32,7 @@ checksums = [
     package: "decidim-system",
     files: {
       "/app/forms/decidim/system/register_organization_form.rb" => "7b4eab28179eb466b30383e357e2cc79",
-      "/app/forms/decidim/system/update_organization_form.rb" => "1c66820ab01b12f4d934721152e014f0",
+      "/app/forms/decidim/system/update_organization_form.rb" => "3fe09b001d83030207a6f5faa256ac3b",
       "/app/commands/decidim/system/create_organization.rb" => "b7c49015ea3d682dbfd6d3c3f76e2d7a",
       "/app/commands/decidim/system/update_organization.rb" => "1fe0b3eb152fecdf63ef108743ae78e4",
       "/app/views/decidim/system/organizations/new.html.erb" => "4916cdb428d89de5afe60e279d64112f",
