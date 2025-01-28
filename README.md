@@ -3,7 +3,7 @@
 [![[CI] Lint](https://github.com/AjuntamentdeBarcelona/decidim-module-kids/actions/workflows/lint.yml/badge.svg)](https://github.com/AjuntamentdeBarcelona/decidim-module-kids/actions/workflows/lint.yml)
 [![[CI] Test](https://github.com/AjuntamentdeBarcelona/decidim-module-kids/actions/workflows/test.yml/badge.svg)](https://github.com/AjuntamentdeBarcelona/decidim-module-kids/actions/workflows/test.yml)
 [![Maintainability](https://api.codeclimate.com/v1/badges/82ab16cdaa0aa5d61d48/maintainability)](https://codeclimate.com/github/AjuntamentdeBarcelona/decidim-module-kids/maintainability)
-[![codecov](https://codecov.io/gh/AjuntamentdeBarcelona/decidim-module-kids/branch/main/graph/badge.svg?token=R3KYJIQJ6P)](https://codecov.io/gh/AjuntamentdeBarcelona/decidim-module-kids)
+[![Coverage Status](https://coveralls.io/repos/github/AjuntamentdeBarcelona/decidim-module-kids/badge.svg?branch=main)](https://coveralls.io/github/AjuntamentdeBarcelona/decidim-module-kids?branch=main)
 [![Gem Version](https://badge.fury.io/rb/decidim-kids.svg)](https://badge.fury.io/rb/decidim-kids)
 
 Module developed by Barcelona City Council to promote kids participation.
@@ -93,7 +93,7 @@ Decidim::Kids.configure do |config|
   config_accessor :minor_authorization_age_attributes do
     [:birthday, :date_of_birth, :birth_date, :birthdate]
   end
-  
+
   # Other, more advanced, configuration options are available.
   # Check the source code at lib/decidim/kids.rb for more information.
 end
@@ -106,10 +106,10 @@ A minor account must be promoted in order to be converted into a normal, full-fe
 There is a rake task that can be incorporated in daily cron to do just that automatically:
 
 ```
-bundle exec rake kids:promote_minor_accounts 
+bundle exec rake kids:promote_minor_accounts
 ```
 
-We recommend to incorporate this along with the other cron commands required for Decidim. 
+We recommend to incorporate this along with the other cron commands required for Decidim.
 
 ## Using authorizations
 

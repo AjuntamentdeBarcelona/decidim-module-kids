@@ -36,6 +36,7 @@ jobs:
       DATABASE_PASSWORD: postgres
       DATABASE_HOST: localhost
       RAILS_ENV: test
+      COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
 
     steps:
       - uses: actions/checkout@v2
@@ -70,8 +71,7 @@ jobs:
       - name: Run RSpec
         run: bundle exec rspec
         env:
-          SIMPLECOV: 1
-          CODECOV: 1
+          CI: 1
 
       - uses: actions/upload-artifact@v4
         if: always()
