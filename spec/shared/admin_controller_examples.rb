@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 shared_context "with a minor's organization" do
-  let(:available_authorizations) { %w(dummy_authorization_handler another_dummy_authorization_handler dummy_age_authorization_handler) }
+  let(:available_authorizations) { %w(dummy_authorization_handler another_dummy_authorization_handler) }
   let(:organization) { create(:organization, available_authorizations:) }
   let(:enable_minors_participation) { true }
   let(:minimum_minor_age) { 10 }

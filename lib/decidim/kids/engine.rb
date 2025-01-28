@@ -43,7 +43,7 @@ module Decidim
         Decidim::System::RegisterOrganizationForm.include(Decidim::Kids::System::OrganizationFormOverride)
         Decidim::System::UpdateOrganizationForm.include(Decidim::Kids::System::OrganizationFormOverride)
         Decidim::System::UpdateOrganization.include(Decidim::Kids::System::UpdateOrganizationOverride)
-        Decidim::System::RegisterOrganization.include(Decidim::Kids::System::RegisterOrganizationOverride)
+        Decidim::System::CreateOrganization.include(Decidim::Kids::System::CreateOrganizationOverride)
         Decidim::ParticipatorySpaceContext.include(Decidim::Kids::ParticipatorySpaceContextOverride)
       end
 

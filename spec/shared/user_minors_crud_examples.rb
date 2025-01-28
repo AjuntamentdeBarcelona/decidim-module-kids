@@ -8,8 +8,7 @@ shared_examples "creates minor accounts" do
       within "form.new_minor_account" do
         fill_in "Name", with: "John Tesla"
         fill_in "Email", with: "john@example.org"
-        find_by_id("minor_account_birthday").click
-        fill_in "Birthday", with: "01/11/#{Time.current.year - 12}"
+        fill_in_datepicker :minor_account_birthday_date, with: "01/11/#{Time.current.year - 12}"
         send_keys(:enter)
         find("*[type=submit]").click
 
@@ -47,8 +46,7 @@ shared_examples "updates minor accounts" do
 
     within "form.edit_minor_account" do
       fill_in "Name", with: "Nikola Tesla"
-      page.find_by_id("minor_account_birthday").click
-      fill_in "Birthday", with: "01/11/#{Time.current.year - 12}"
+      fill_in_datepicker :minor_account_birthday_date, with: "01/11/#{Time.current.year - 12}"
       page.find_by_id("minor_account_name").click # remove datepicker modal
       fill_in "Email", with: "test@example.org"
       find("*[type=submit]").click
@@ -85,7 +83,7 @@ shared_examples "authorizes minor accounts" do
 
     within "form.new_authorization_handler" do
       fill_in "Document number", with: "12345X"
-      fill_in "Birthday", with: "01/11/#{Time.current.year - 12}"
+      fill_in_datepicker :authorization_handler_birthday_date, with: "01/11/#{Time.current.year - 12}"
       find("*[type=submit]").click
     end
 

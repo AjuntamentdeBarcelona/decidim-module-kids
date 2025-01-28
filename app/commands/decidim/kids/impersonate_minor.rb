@@ -30,7 +30,7 @@ module Decidim
 
       private
 
-      attr :form, :minor_user, :current_user
+      attr_reader :form, :minor_user, :current_user
 
       def create_impersonation_log
         Decidim::Kids::ImpersonationMinorLog.create!(

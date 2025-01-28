@@ -12,7 +12,7 @@ module Decidim
             # if the admin is trying to access the minors participatory spaces configuration
             return space_minors_configuration? if permission_action.subject == :space_minors_configuration
 
-            return unless permission_action.subject == :static_page
+            return false unless permission_action.subject == :static_page
 
             static_page = context.fetch(:static_page, nil)
 

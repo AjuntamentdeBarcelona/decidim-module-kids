@@ -42,7 +42,7 @@ shared_context "when minors verified" do
     click_on "Verify"
     fill_in "Document number", with: "1224X"
     fill_in "Postal code", with: "1234X"
-    fill_in "Birthday", with: "01/11/#{Time.current.year - 12}"
+    fill_in_datepicker :authorization_handler_birthday_date, with: "01/11/#{Time.current.year - 12}"
 
     find(".form__wrapper-block *[type=submit]").click
   end

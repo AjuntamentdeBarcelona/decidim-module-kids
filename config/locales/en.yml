@@ -28,7 +28,7 @@ en:
         fields:
           birthday: Date of birth
           document_number: Document number
-        name: Example authorization with birthday metadata
+        name: Example authorization
     devise:
       mailer:
         invitation_instructions:

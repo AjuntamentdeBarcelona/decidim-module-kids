@@ -14,7 +14,7 @@ module Decidim::System
       let(:command) { described_class.new(organization.id, form) }
       let(:params) do
         {
-          name: "Gotham City",
+          name: { en: "My organization" },
           host: "decide.gotham.gov",
           users_registration_mode: "existing",
           file_upload_settings: Decidim::OrganizationSettings.default(:upload),

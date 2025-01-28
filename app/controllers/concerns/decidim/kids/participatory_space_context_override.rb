@@ -56,18 +56,18 @@ module Decidim
       end
 
       def current_user_is_a_valid_tutor?
-        return unless current_user.tutor?
-        return unless current_user.confirmed?
+        return false unless current_user.tutor?
+        return false unless current_user.confirmed?
 
         # only tutors with readonly access are allowed
-        return if request.post? || request.patch? || request.put? || request.delete?
+        return false if request.post? || request.patch? || request.put? || request.delete?
 
         # check for having at least one minor confirmed
         current_user.minors.detect(&:confirmed?)
       end
 
       def current_user_has_a_valid_authorization?
-        return unless space_authorization
+        return false unless space_authorization
 
         return true if space_minors_config.max_age.blank? || space_minors_config.max_age.zero?
 

@@ -9,7 +9,6 @@ module Decidim
             Decidim::StaticPage.find_or_create_by!(organization:, slug:) do |page|
               page.title = localized_attribute(slug, :title)
               page.content = localized_attribute(slug, :content)
-              page.show_in_footer = false
               page.allow_public_access = true
             end
           end

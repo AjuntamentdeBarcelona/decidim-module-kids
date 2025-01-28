@@ -10,6 +10,16 @@ def install_module(path)
   end
 end
 
+def change_file_content(path, file_path, old_content, new_content)
+  Dir.chdir(path) do
+    file_data = File.read(file_path)
+    file_data.gsub!(old_content, new_content)
+    File.open(file_path, "w") do |file|
+      file.puts(file_data)
+    end
+  end
+end
+
 def seed_db(path)
   Dir.chdir(path) do
     system("bundle exec rake db:seed")
@@ -20,6 +30,7 @@ desc "Generates a dummy app for testing"
 task test_app: "decidim:generate_external_test_app" do
   ENV["RAILS_ENV"] = "test"
   install_module("spec/decidim_dummy_app")
+  change_file_content("spec/decidim_dummy_app", "config/environments/test.rb", "config.cache_classes = true", "config.cache_classes = false")
 end
 
 desc "Generates a development app."

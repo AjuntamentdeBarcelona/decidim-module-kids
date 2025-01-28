@@ -2,26 +2,27 @@
 
 shared_examples "updates organization" do |uncheck_minors|
   it "edits the data" do
-    fill_in "Name", with: "Citizens Rule!"
+    fill_in :update_organization_name_en, with: "Citizens Rule!"
     fill_in "Host", with: "www.example.org"
     fill_in "Secondary hosts", with: "foobar.example.org\n\rbar.example.org"
-    choose "Do not allow participants to register, but allow existing participants to login"
-    check "Example authorization (Direct)"
+    choose "Do not allow participants to create an account, but allow existing participants to log in"
 
     click_on "Show advanced settings"
 
     if uncheck_minors
-      expect(page).to have_checked_field "organization_enable_minors_participation"
-      uncheck "organization_enable_minors_participation"
+      expect(page).to have_checked_field "Enable minors participation"
+      uncheck "Enable minors participation"
     else
-      expect(page).to have_no_checked_field "organization_enable_minors_participation"
-      check "organization_enable_minors_participation"
+      expect(page).to have_no_checked_field "Enable minors participation"
+      check "Enable minors participation"
     end
     fill_in "Minimum age allowed to create a minor account", with: "11"
     fill_in "Maximum age for a person to be considered a minor", with: "14"
     fill_in "Maximum number of minors that can be assigned to a tutor", with: "2"
 
-    select "Another example authorization (Direct)", from: "organization_minors_authorization"
+    within_fieldset("Available authorizations") do
+      check "Another example authorization (Direct)"
+    end
 
     click_on "Save"
 
@@ -38,7 +39,7 @@ shared_examples "updates organization" do |uncheck_minors|
     expect(organization.minimum_minor_age).to eq(11)
     expect(organization.maximum_minor_age).to eq(14)
     expect(organization.maximum_minor_accounts).to eq(2)
-    expect(organization.minors_authorization).to eq("another_dummy_authorization_handler")
+    expect(organization.minors_authorization).to eq("dummy_age_authorization_handler")
   end
 end
 
@@ -52,17 +53,17 @@ shared_examples "creates organization" do
     fill_in "Organization admin email", with: "mayor@example.org"
     check "organization_available_locales_en"
     choose "organization_default_locale_en"
-    choose "Allow participants to register and login"
-    check "Example authorization (Direct)"
 
     click_on "Show advanced settings"
 
-    check "organization_enable_minors_participation"
+    check "Enable minors participation"
     fill_in "Minimum age allowed to create a minor account", with: "11"
     fill_in "Maximum age for a person to be considered a minor", with: "14"
     fill_in "Maximum number of minors that can be assigned to a tutor", with: "5"
 
-    select "Another example authorization (Direct)", from: "organization_minors_authorization"
+    within_fieldset("Available authorizations") do
+      check "Another example authorization (Direct)"
+    end
 
     click_on "Create organization & invite admin"
 
@@ -74,6 +75,6 @@ shared_examples "creates organization" do
     expect(organization.minimum_minor_age).to eq(11)
     expect(organization.maximum_minor_age).to eq(14)
     expect(organization.maximum_minor_accounts).to eq(5)
-    expect(organization.minors_authorization).to eq("another_dummy_authorization_handler")
+    expect(organization.minors_authorization).to eq("dummy_age_authorization_handler")
   end
 end

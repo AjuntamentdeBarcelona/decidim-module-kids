@@ -16,7 +16,7 @@ module Decidim
       end
 
       def minor_accounts_action?
-        return unless permission_action.subject == :minor_accounts
+        return false unless permission_action.subject == :minor_accounts
 
         if !user.organization.minors_participation_enabled? || user.minor? || !user.confirmed?
           disallow!
@@ -37,7 +37,7 @@ module Decidim
       end
 
       def authorizations_action?
-        return unless permission_action.subject == :authorizations
+        return false unless permission_action.subject == :authorizations
 
         case permission_action.action
         when :all
@@ -48,9 +48,9 @@ module Decidim
       end
 
       def conversation_action?
-        return unless permission_action.subject == :conversation
-        return unless user.organization.minors_participation_enabled?
-        return unless [:create, :update].include?(permission_action.action)
+        return false unless permission_action.subject == :conversation
+        return false unless user.organization.minors_participation_enabled?
+        return false unless [:create, :update].include?(permission_action.action)
 
         conversation = context.fetch(:conversation)
         interlocutor = context.fetch(:interlocutor, user)

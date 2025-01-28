@@ -10,8 +10,8 @@ FactoryBot.define do
     enable_minors_participation { true }
     minimum_minor_age { 10 }
     maximum_minor_age { 13 }
-    minors_authorization { "dummy_authorization_handler" }
-    tutors_authorization { "dummy_authorization_handler" }
+    minors_authorization { "dummy_age_authorization_handler" }
+    tutors_authorization { "dummy_age_authorization_handler" }
   end
 
   factory :minor, parent: :user do
