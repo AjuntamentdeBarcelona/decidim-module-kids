@@ -9,3 +9,7 @@ RSpec/IndexedLet:
 RSpec/NoExpectationExample:
   Exclude:
     - "spec/controllers/user_minors_controller_spec.rb"
+
+Style/SafeNavigationChainLength:
+  Exclude:
+    - "app/controllers/decidim/kids/admin/minors_space_controller.rb"

@@ -9,7 +9,7 @@ module Decidim
         MINORS_DEFAULT_PAGES = %w(minors minors-terms).freeze
 
         def self.minors_default?(slug, organization)
-          (organization&.enable_minors_participation && MINORS_DEFAULT_PAGES.include?(slug))
+          organization&.enable_minors_participation && MINORS_DEFAULT_PAGES.include?(slug)
         end
       end
     end
