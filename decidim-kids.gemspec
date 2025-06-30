@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
     "bug_tracker_uri" => "https://github.com/AjuntamentdeBarcelona/decidim-module-kids/issues",
     "source_code_uri" => "https://github.com/AjuntamentdeBarcelona/decidim-module-kids"
   }
-  s.required_ruby_version = ">= 3.1"
+  s.required_ruby_version = ">= 3.2"
 
   s.name = "decidim-kids"
   s.summary = "A decidim for kids module"
