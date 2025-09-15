@@ -7,17 +7,17 @@ on:
   pull_request:
 
 env:
-  RUBY_VERSION: 3.2.2
+  RUBY_VERSION: 3.3.4
   DISABLE_SPRING: 1
   NODE_VERSION: 18.17.1
 
 jobs:
   test-report:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
 
     services:
       postgres:
-        image: postgres:11
+        image: postgres:14
         ports: ["5432:5432"]
         options: >-
           --health-cmd pg_isready
