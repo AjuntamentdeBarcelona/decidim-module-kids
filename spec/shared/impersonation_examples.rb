@@ -59,6 +59,8 @@ shared_examples "user impersonate" do
 
           click_on "Impersonate"
 
+          expect(page).to have_content("You are managing the participant")
+
           Decidim::Kids::ImpersonationMinorLog.last.update!(started_at: 1.hour.ago)
 
           visit decidim.account_path

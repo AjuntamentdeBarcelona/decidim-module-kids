@@ -9,7 +9,7 @@ def allowed_roles
     process_admin: :participatory_process,
     process_collaborator: :participatory_process,
     process_moderator: :participatory_process,
-    process_valuator: :participatory_process
+    process_evaluator: :participatory_process
   }
 end
 
