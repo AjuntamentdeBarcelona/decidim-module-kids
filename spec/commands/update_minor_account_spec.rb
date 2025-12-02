@@ -39,10 +39,9 @@ module Decidim::Kids
 
       it "updates the user's birthday" do
         form.birthday = 11.years.ago
-        date = form.birthday
 
         expect { command.call }.to broadcast(:ok)
-        expect(minor.minor_data.reload.birthday).to eq(date)
+        expect(minor.minor_data.reload.birthday.to_date).to eq(form.birthday.to_date)
       end
 
       describe "updating the email" do

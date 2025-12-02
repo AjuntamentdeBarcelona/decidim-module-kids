@@ -9,7 +9,7 @@ def allowed_roles
     assembly_admin: :assembly,
     assembly_collaborator: :assembly,
     assembly_moderator: :assembly,
-    assembly_valuator: :assembly
+    assembly_evaluator: :assembly
   }
 end
 

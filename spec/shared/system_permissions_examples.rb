@@ -26,10 +26,7 @@ end
 
 shared_context "when conversing to the user" do
   before do
-    page.find_by_id("start-conversation-dialog-button").click
-    page.find_by_id("add_conversation_users").set(person.name)
-    page.find_by_id("autoComplete_result_0").click
-    click_on "Next"
+    visit decidim.new_conversation_path(recipient_id: person.id)
   end
 end
 

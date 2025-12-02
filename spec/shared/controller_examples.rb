@@ -86,7 +86,7 @@ shared_examples "checks minor authorization" do
 
     it "redirects the user" do
       get(view, params:)
-      expect(response).to redirect_to("/decidim_kids#{user_minors_path}")
+      expect(response).to redirect_to(user_minors_path)
     end
   end
 
