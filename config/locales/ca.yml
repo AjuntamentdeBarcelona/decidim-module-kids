@@ -167,4 +167,4 @@ ca:
   devise:
     mailer:
       invite_minor:
-        subject: You have been invited to join %{organization}
+        subject: T'han convidat a unir-te a %{organization}
