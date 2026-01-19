@@ -40,8 +40,8 @@ module Decidim::Kids
         attributes.each do |attribute, value|
           encrypted = subject.attributes[attribute.to_s]
 
-          expect(subject.send(attribute)).to eq(value)
-          expect(ae.decrypt(encrypted)).to eq(value)
+          expect(subject.send(attribute)).to eq(value.to_s)
+          expect(ae.decrypt(encrypted)).to eq(value.to_s)
         end
       end
     end

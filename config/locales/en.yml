@@ -189,3 +189,7 @@ en:
           add: Add a minor
         minor_tos:
           tos_agreement: You accept its Terms and Conditions
+  devise:
+    mailer:
+      invite_minor:
+        subject: You have been invited to join %{organization}

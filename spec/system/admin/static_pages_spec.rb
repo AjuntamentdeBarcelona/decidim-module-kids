@@ -29,6 +29,7 @@ describe "Static pages" do
 
       it "can edit it" do
         within "tr", text: translated(minors_static_page.title) do
+          find("button[data-controller='dropdown']").click
           click_on "Edit"
         end
 
@@ -57,7 +58,8 @@ describe "Static pages" do
 
       it "can visit it" do
         within "tr", text: translated(minors_static_page.title) do
-          expect(page).to have_link("View public page", href: "/pages/#{minors_static_page.slug}")
+          find("button[data-controller='dropdown']").click
+          expect(page).to have_link("View", href: "/pages/#{minors_static_page.slug}")
         end
 
         visit "/pages/#{minors_static_page.slug}"
@@ -74,8 +76,11 @@ describe "Static pages" do
       end
 
       it "can delete it" do
-        within "tr", text: translated(minors_static_page.title) do
-          accept_confirm { click_on "Delete" }
+        accept_confirm do
+          within "tr", text: translated(minors_static_page.title) do
+            find("button[data-controller='dropdown']").click
+            click_on "Delete"
+          end
         end
 
         expect(page).to have_admin_callout("successfully")

@@ -94,14 +94,16 @@ end
 
 shared_examples "cannot GET to a component" do |flash_text|
   describe Decidim::Proposals::ProposalsController, type: :controller do
-    routes { Decidim::Proposals::Engine.routes }
+    routes { Rails.application.routes }
+
     before do
+      request.env["decidim.current_organization"] = organization
       request.env["decidim.current_participatory_space"] = participatory_space
       request.env["decidim.current_component"] = component
     end
 
     it "redirects to the participatory space admin" do
-      get :index
+      get :index, params: { use_route: component.mounted_engine }
 
       expect(flash[:alert]).to include(flash_text)
       expect(response).to redirect_to(Decidim::Core::Engine.routes.url_helpers.root_path)
@@ -111,14 +113,16 @@ end
 
 shared_examples "can GET to a component" do
   describe Decidim::Proposals::ProposalsController, type: :controller do
-    routes { Decidim::Proposals::Engine.routes }
+    routes { Rails.application.routes }
+
     before do
+      request.env["decidim.current_organization"] = organization
       request.env["decidim.current_participatory_space"] = participatory_space
       request.env["decidim.current_component"] = component
     end
 
     it "renders view" do
-      get :index
+      get :index, params: { use_route: component.mounted_engine }
 
       expect(flash[:alert]).to be_blank
       expect(subject).to render_template(:index)

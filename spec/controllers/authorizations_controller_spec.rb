@@ -25,7 +25,7 @@ module Decidim::Kids
     let(:user) { create(:user, :confirmed, organization:) }
     let(:minor) { create(:minor, tutor: user, organization:) }
     let!(:tutor_authorization) { create(:authorization, user:, name: organization.tutors_authorization) }
-    let(:return_path) { "/decidim_kids#{user_minor_authorizations_path}" }
+    let(:return_path) { user_minor_authorizations_path }
 
     before do
       request.env["decidim.current_organization"] = organization
@@ -113,13 +113,13 @@ module Decidim::Kids
 
     describe "GET index" do
       it_behaves_like "checks tutor authorization" do
-        let(:return_path) { "/decidim_kids#{user_minors_path}" }
+        let(:return_path) { user_minors_path }
         let(:view) { :index }
         let(:params) { { user_minor_id: minor.id } }
       end
 
       it_behaves_like "checks minor authorization" do
-        let(:return_path) { "/decidim_kids#{user_minors_path}" }
+        let(:return_path) { user_minors_path }
         let(:view) { :index }
         let(:params) { { user_minor_id: minor.id } }
       end
