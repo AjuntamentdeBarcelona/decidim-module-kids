@@ -167,4 +167,4 @@ es:
   devise:
     mailer:
       invite_minor:
-        subject: You have been invited to join %{organization}
+        subject: Te han invitado a unirte a %{organization}
