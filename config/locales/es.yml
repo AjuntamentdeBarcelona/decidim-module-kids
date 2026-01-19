@@ -164,3 +164,7 @@ es:
           add: Añadir menor
         minor_tos:
           tos_agreement: Aceptas sus Términos y Condiciones
+  devise:
+    mailer:
+      invite_minor:
+        subject: You have been invited to join %{organization}
