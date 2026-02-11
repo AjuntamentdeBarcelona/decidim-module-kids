@@ -55,7 +55,7 @@ jobs:
       - uses: nanasess/setup-chromedriver@v2
 
       - run: |
-          sudo apt install wkhtmltopdf imagemagick 7zip
+          sudo apt-get update; sudo apt-get install -f wkhtmltopdf imagemagick 7zip
 
       - name: Setup Database
         run: bundle exec rake test_app

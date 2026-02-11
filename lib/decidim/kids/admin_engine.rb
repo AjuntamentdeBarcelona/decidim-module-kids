@@ -29,6 +29,8 @@ module Decidim
           end
 
           Decidim.menu(admin_menu) do |menu|
+            next unless params[admin_slug].present? || params[:slug].present?
+
             menu.add_item :minors_space,
                           I18n.t("minors_space.menu", scope: "decidim.kids.admin"),
                           engine.routes.url_helpers.minors_space_index_path(admin_slug => params[admin_slug] || params[:slug]),
