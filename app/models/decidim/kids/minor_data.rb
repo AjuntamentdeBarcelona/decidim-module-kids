@@ -4,6 +4,7 @@ module Decidim
   module Kids
     class MinorData < ApplicationRecord
       include Decidim::RecordEncryptor
+
       self.table_name = "decidim_kids_minor_data"
 
       belongs_to :user,

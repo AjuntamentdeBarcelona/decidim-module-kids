@@ -47,7 +47,7 @@ describe "Static pages" do
           find("*[type=submit]").click
         end
 
-        expect(page).to have_admin_callout("successfully")
+        expect(page).to have_admin_callout("Page updated successfully.")
       end
 
       it "can't delete it" do
@@ -83,7 +83,7 @@ describe "Static pages" do
           end
         end
 
-        expect(page).to have_admin_callout("successfully")
+        expect(page).to have_admin_callout("Page successfully destroyed")
 
         within "table" do
           expect(page).to have_no_content(translated(minors_static_page.title))
