@@ -31,7 +31,7 @@ describe "Registration" do
     describe "on first sight" do
       it "shows minors url" do
         expect(page).to have_content("Are you under #{minors_organization_config.maximum_minor_age}")
-        expect(page).to have_link(href: "/pages/minors")
+        expect(page).to have_link(href: "/#{I18n.locale}/pages/minors")
       end
     end
   end

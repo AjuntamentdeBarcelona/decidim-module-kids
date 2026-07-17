@@ -49,7 +49,7 @@ module Decidim
             ).count).to eq(1)
 
             expect(flash[:notice]).to be_present
-            expect(subject).to redirect_to("/")
+            expect(subject).to redirect_to("/#{I18n.locale}")
           end
         end
 
@@ -84,7 +84,7 @@ module Decidim
           ).count).to eq(0)
 
           expect(flash[:notice]).to be_present
-          expect(subject).to redirect_to("/")
+          expect(subject).to redirect_to("/#{I18n.locale}")
         end
       end
     end

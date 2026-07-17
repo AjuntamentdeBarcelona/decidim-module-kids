@@ -14,6 +14,7 @@ module Decidim::System
       let(:params) do
         {
           name: "Gotham City",
+          short_name: "Gotham",
           host: "decide.gotham.gov",
           default_locale: "en",
           available_locales: ["en"],

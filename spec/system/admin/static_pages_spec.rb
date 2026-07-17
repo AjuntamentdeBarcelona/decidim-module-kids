@@ -59,7 +59,7 @@ describe "Static pages" do
       it "can visit it" do
         within "tr", text: translated(minors_static_page.title) do
           find("button[data-controller='dropdown']").click
-          expect(page).to have_link("View", href: "/pages/#{minors_static_page.slug}")
+          expect(page).to have_link("View", href: "/#{I18n.locale}/pages/#{minors_static_page.slug}")
         end
 
         visit "/pages/#{minors_static_page.slug}"

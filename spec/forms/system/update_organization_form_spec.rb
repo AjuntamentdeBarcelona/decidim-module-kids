@@ -7,6 +7,7 @@ module Decidim::System
     subject do
       described_class.new(
         name: { en: "Gotham City" },
+        short_name: { en: "Gotham" },
         host: "decide.gotham.gov",
         secondary_hosts: "foo.gotham.gov\r\n\r\nbar.gotham.gov",
         reference_prefix: "JKR",
