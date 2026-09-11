@@ -15,6 +15,7 @@ module Decidim::System
       let(:params) do
         {
           name: { en: "My organization" },
+          short_name: { en: "My org" },
           host: "decide.gotham.gov",
           users_registration_mode: "existing",
           file_upload_settings: Decidim::OrganizationSettings.default(:upload),

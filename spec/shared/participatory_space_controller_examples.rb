@@ -38,7 +38,7 @@ end
 
 shared_examples "cannot GET" do |action, flash_text|
   it "redirects to the participatory space admin" do
-    get(action, params:)
+    get(action, params: params.merge(locale: I18n.locale))
     expect(flash[:alert]).to include(flash_text)
     expect(response).to redirect_to(Decidim::Core::Engine.routes.url_helpers.root_path)
   end
@@ -46,7 +46,7 @@ end
 
 shared_examples "can GET" do |action|
   it "renders view" do
-    get(action, params:)
+    get(action, params: params.merge(locale: I18n.locale))
 
     expect(flash[:alert]).to be_blank
     expect(subject).to render_template(:index)
@@ -55,28 +55,28 @@ end
 
 shared_examples "cannot POST" do |action, flash_text|
   it "redirects on post" do
-    post(action, params:)
+    post(action, params: params.merge(locale: I18n.locale))
 
     expect(flash[:alert]).to include(flash_text)
     expect(response).to redirect_to(Decidim::Core::Engine.routes.url_helpers.root_path)
   end
 
   it "redirects on put" do
-    put(action, params:)
+    put(action, params: params.merge(locale: I18n.locale))
 
     expect(flash[:alert]).to include(flash_text)
     expect(response).to redirect_to(Decidim::Core::Engine.routes.url_helpers.root_path)
   end
 
   it "redirects on patch" do
-    patch(action, params:)
+    patch(action, params: params.merge(locale: I18n.locale))
 
     expect(flash[:alert]).to include(flash_text)
     expect(response).to redirect_to(Decidim::Core::Engine.routes.url_helpers.root_path)
   end
 
   it "redirects on delete" do
-    delete(action, params:)
+    delete(action, params: params.merge(locale: I18n.locale))
 
     expect(flash[:alert]).to include(flash_text)
     expect(response).to redirect_to(Decidim::Core::Engine.routes.url_helpers.root_path)
@@ -85,7 +85,7 @@ end
 
 shared_examples "can POST" do |action|
   it "renders view" do
-    post(action, params:)
+    post(action, params: params.merge(locale: I18n.locale))
 
     expect(flash[:alert]).to be_blank
     expect(subject).to render_template(:index)

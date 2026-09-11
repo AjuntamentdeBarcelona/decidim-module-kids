@@ -14,7 +14,12 @@ module Decidim
           end
         end
 
-        before_action except: [:unverified] do
+        # An in-callback guard is used instead of `except: [:unverified]` because not all the
+        # controllers including this concern define the `unverified` action, and Rails raises
+        # on missing callback actions (`raise_on_missing_callback_actions`)
+        before_action do
+          next if action_name == "unverified"
+
           enforce_permission_to :index, :minor_accounts
           redirect_to unverified_user_minors_path unless tutor_verified?
         end

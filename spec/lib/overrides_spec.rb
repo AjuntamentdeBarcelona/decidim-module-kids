@@ -15,28 +15,28 @@ checksums = [
   {
     package: "decidim-core",
     files: {
-      "/app/controllers/concerns/decidim/participatory_space_context.rb" => "fbdc2962e9167d3e2155be07ff2a1b8f",
+      "/app/controllers/concerns/decidim/participatory_space_context.rb" => "55b30d9318cb79be78a41cf60c369014",
       "/app/models/decidim/organization.rb" => "977969a742ef2ef7515395fcf6951df7",
       "/app/models/decidim/static_page.rb" => "c7053dc82dfa2047f78573dfc1d9163d",
-      "/app/views/decidim/devise/shared/_tos_fields.html.erb" => "02de107df16ac44b0f10688dbea299f6",
+      "/app/views/decidim/devise/shared/_tos_fields.html.erb" => "da1001a7139d8423228452d3ca481cef",
       "/app/views/layouts/decidim/_impersonation_warning.html.erb" => "d70885bf100da37004b2e11f77067b4e"
     }
   },
   {
     package: "decidim-verifications",
     files: {
-      "/app/controllers/decidim/verifications/authorizations_controller.rb" => "cfcb7af376bda64dbd3e2d5db87c6859"
+      "/app/controllers/decidim/verifications/authorizations_controller.rb" => "41f6899dc28e9f987a0d437e5aa25daf"
     }
   },
   {
     package: "decidim-system",
     files: {
-      "/app/forms/decidim/system/register_organization_form.rb" => "7b4eab28179eb466b30383e357e2cc79",
-      "/app/forms/decidim/system/update_organization_form.rb" => "51e2fb7773d646652231133a12fd8ff3",
-      "/app/commands/decidim/system/create_organization.rb" => "b8b20c82fbe8dd4ac412ec3f41b8f3cc",
-      "/app/commands/decidim/system/update_organization.rb" => "58f21a2eb8f6ee9570864c8e26397d5a",
-      "/app/views/decidim/system/organizations/new.html.erb" => "4916cdb428d89de5afe60e279d64112f",
-      "/app/views/decidim/system/organizations/edit.html.erb" => "6428bfb2edcdd36fa01f702f3dbc2f57"
+      "/app/forms/decidim/system/register_organization_form.rb" => "d68333a13882986bad8ffb2b2bc0aa95",
+      "/app/forms/decidim/system/update_organization_form.rb" => "631ed13dc98e4bdfd39e60157d995672",
+      "/app/commands/decidim/system/create_organization.rb" => "ad7faec3a21ced65054748dc2a4a119b",
+      "/app/commands/decidim/system/update_organization.rb" => "551cb589c40db2a07e294f5dd3f500c0",
+      "/app/views/decidim/system/organizations/new.html.erb" => "fe6aa2189e5e35d3f13bba42a02bf0f0",
+      "/app/views/decidim/system/organizations/edit.html.erb" => "ad127f2ad863115794a249253db77866"
     }
   },
   {
@@ -49,10 +49,10 @@ checksums = [
 
 describe "Overridden files", type: :view do
   checksums.each do |item|
-    spec = Gem::Specification.find_by_name(item[:package])
     item[:files].each do |file, signature|
-      it "#{spec.gem_dir}#{file} matches checksum" do
-        expect(md5("#{spec.gem_dir}#{file}")).to eq(signature)
+      it "#{item[:package]}#{file} matches checksum" do
+        gem_dir = Gem::Specification.find_by_name(item[:package]).gem_dir
+        expect(md5("#{gem_dir}#{file}")).to eq(signature)
       end
     end
   end

@@ -58,29 +58,19 @@ any of the variables listed below:
 
 Decidim::Kids.configure do |config|
   # If true, minor participation is enabled by default in any newly created organization
-  config_accessor :enable_minors_participation do
-    false
-  end
+  config.enable_minors_participation = false
 
   # Default value for the minimum age required for a minor in order to create an account
-  config_accessor :minimum_minor_age do
-    10
-  end
+  config.minimum_minor_age = 10
 
   # Default value for the maximum age of a person to be considered a minor (1 year than this number will consider the user an adult)
-  config_accessor :maximum_minor_age do
-    13
-  end
+  config.maximum_minor_age = 13
 
   # Default value maximum number of minors that can be assigned to a tutor
-  config_accessor :maximum_minor_accounts do
-    3
-  end
+  config.maximum_minor_accounts = 3
 
   # If true, the tutor can impersonate a minor
-  config_accessor :allow_impersonation do
-    true
-  end
+  config.allow_impersonation = true
 
   # Default authorization metadata attributes where the minor's birthday is stored
   # (if the authorization handler stores it)
@@ -90,14 +80,19 @@ Decidim::Kids.configure do |config|
   #                           Note that if the validation does not stores the birthday in one of these
   #                           attributes, the validation will always fail.
   # If this value is blank: No age checks will be performed (but the validation process might do it independently)
-  config_accessor :minor_authorization_age_attributes do
-    [:birthday, :date_of_birth, :birth_date, :birthdate]
-  end
+  config.minor_authorization_age_attributes = [:birthday, :date_of_birth, :birth_date, :birthdate]
 
   # Other, more advanced, configuration options are available.
   # Check the source code at lib/decidim/kids.rb for more information.
 end
 ```
+
+> **Note (upgrading to decidim 0.32 / this module ≥ 0.6):** `Decidim::Kids` no longer uses
+> `ActiveSupport::Configurable` (deprecated by Rails and slated for removal in Rails 8.2); the
+> settings above are now plain module attributes (`mattr_accessor`). The public API is unchanged:
+> `Decidim::Kids.configure`, `Decidim::Kids.<setting>` and `Decidim::Kids.config.<setting>` keep
+> working. The only unsupported usage is calling `config_accessor` inside the `configure` block to
+> define custom settings — assign values with `config.<setting> = value` as shown above instead.
 
 ## Promoting minor accounts to normal accounts
 

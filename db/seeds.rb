@@ -19,7 +19,7 @@ if !Rails.env.production? || ENV.fetch("SEED", nil)
     2.times do
       minor = Decidim::User.create!(
         name: "Minor - #{Faker::Name.name}",
-        nickname: Faker::Twitter.unique.screen_name,
+        nickname: Faker::X.unique.screen_name,
         organization: user.organization,
         email: Faker::Internet.email,
         confirmed_at: Time.current,

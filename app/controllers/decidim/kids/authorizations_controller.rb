@@ -52,12 +52,12 @@ module Decidim
 
           on(:invalid_age) do
             flash[:alert] = t("authorizations.create.invalid_age", scope: "decidim.kids")
-            render action: :new
+            render action: :new, status: :unprocessable_content
           end
 
           on(:invalid) do
             flash[:alert] = t("authorizations.authorize.error", scope: "decidim.kids")
-            render action: :new
+            render action: :new, status: :unprocessable_content
           end
         end
       end

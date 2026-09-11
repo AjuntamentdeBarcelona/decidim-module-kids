@@ -46,6 +46,7 @@ end
 shared_examples "creates organization" do
   it "creates a new organization" do
     fill_in "Name", with: "Citizen Corp"
+    fill_in "Short name", with: "Corp"
     fill_in "Host", with: "www.example.org"
     fill_in "Secondary hosts", with: "foo.example.org\n\rbar.example.org"
     fill_in "Reference prefix", with: "CCORP"
